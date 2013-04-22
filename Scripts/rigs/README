@@ -8,6 +8,7 @@ notes:
 - the sample oscillator are never preloaded with samples, they are deliberatly left blank, so you will need to set using belcanto, or workbench or stage
 - the audio units  are never preloaded with plugins, they are deliberatly left blank, so you will need to set using belcanto, or workbench or stage
 - all rigs are default names user X rig , eg. user synth rig, so as not to clash with factory ones, you can rename see comment in rig file
+- all belcanto files have .bc suffic, so that editors can determine file type
 
 files:
 createsynth.bc	-  simple synth based on sawtooth oscillator, as provided in alpha and tau setups
