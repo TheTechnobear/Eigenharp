@@ -1,0 +1,36 @@
+name
+    08 pico mix
+description
+    basic principle is to reset everything to a normal state
+
+script
+    empty join
+    player keygroup hey output 1 choose
+    simple keygroup hey output 3 choose
+    main keygroup hey tonic to notec set
+    tonic talker hey 1 to 1 from 2 colour ify
+    global scale talker hey 1 to 1 from 2 colour ify
+    main keygroup hey scale to major set
+    simple keygroup hey base note to 0 set
+    keygroup 1 hey base note to 0 set
+    keygroup 2 hey base note to 0 set
+    simple keygroup hey octave to 3 set
+    keygroup 1 hey octave to 3 set
+    keygroup 2 hey octave to 3 set
+    1 as octave step define
+    simple octave talker hey re do
+    octave talker 1 hey re do
+    octave talker 2 hey re do
+
+    empty join
+    green talker listen
+    1 called 1 cancel
+    2 called 1 cancel
+    3 called 1 cancel
+    4 called 1 cancel
+    5 called 1 cancel
+    6 called 1 cancel
+    7 called 1 cancel
+    8 called 1 cancel
+    empty join
+

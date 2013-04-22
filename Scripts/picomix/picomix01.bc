@@ -1,0 +1,25 @@
+name
+    01 pico mix
+description
+    a song that requires D Maj in part 1, then in part 2 switches to G major with a base off set on piano
+
+script
+    empty join
+    green talker listen
+    1 called 1 cancel
+    2 called 1 cancel
+    lower keygroup hey output 4 choose
+    player keygroup hey output 1 choose 
+    simple keygroup hey output 3 choose 
+    global scale talker hey 1 to 1 from 2 colour ify
+    main keygroup hey scale to major set
+    " tonic talker hey 3 to 1 from 2 colour ify
+      main keygroup hey tonic to noted set
+      simple keygroup hey base note to 0 set
+    " when 1 called 1 do
+    " main keygroup hey tonic to noteg set 
+      tonic talker hey 8 to 1 from 2 colour ify
+      simple keygroup hey base note to -1 set 
+    " when 2 called 1 do
+    empty join
+

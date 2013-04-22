@@ -1,0 +1,77 @@
+name
+	03 pico mix
+description
+	this is a more complex session, where do some recording of parts
+
+script
+	empty join
+	# first part of script, is executed on load, so we setup the basic of the piece,
+	# of course, these may change, but this gives us a known starting point.
+
+	# set scale, also do lights to avoid confusion
+	global scale talker hey 1 to 1 from 2 colour ify
+	main keygroup hey scale to major set
+
+	# set tonie, also do lights to avoid confusion
+	tonic talker hey 3 to 1 from 2 colour ify
+	main keygroup hey tonic to noted set
+
+	# 1/9 2/9 for part selection, not octave
+	lower keygroup hey output 4 choose
+
+	# we are going to use non-split mode, with a piano
+	player keygroup hey output 1 choose 
+	simple keygroup hey base note to 0 set
+	simple keygroup hey output 3 choose 
+
+	# lets setup drummer and tempo etc
+	metronome 1 hey tempo input to 80 set
+	metronome 1 hey beat input to 4 set
+
+	# now setup talkers
+        # here, we are assuming to start the piece we select P1 when read to go
+	drummer 1 hey un play
+	drummer 1 hey voice 1 play
+	drummer 1 hey voice 2  play
+        clicker 1 hey un play
+	all rig recorder hey cancel
+	all rig recorder hey un play
+
+	# now we setup each part on each of the green talker keys
+	empty  join
+	green talker listen
+     
+	#part 1, record the piano as a basic lead line, for 4 bars, it will immediatly loop after 
+	1 called 1 cancel
+	" 
+	  	metronome 1 hey start
+		simple keygroup hey output 3 choose
+		sampler rig 3 recorder hey un play
+		sampler rig 3 recorder hey 4 bar record
+	" when 1 called 1 do
+
+        #part 2, switch to sampler 1, and record a simple backing
+	2 called 1 cancel
+	"
+		simple keygroup hey output 1 choose
+		sampler rig 1 recorder hey un play
+		sampler rig 1 recorder hey 4 bar record
+	" when 2 called 1 do
+        #part 3, switch to clarinet for a lead
+	3 called 1 cancel
+	"
+		simple keygroup hey output 7 choose
+	" when 3 called 1 do
+	#part 4, back to piano, and remove initial lead line
+	4 called 1 cancel
+	"
+		simple keygroup hey output 3 choose
+		sampler rig 3 recorder hey un play
+	" when 4 called 1 do
+	#part 5, stop all play backs by stopping metronome, play out with piano.
+	5 called 1 cancel
+	"
+		metronome 1 hey stop
+	" when 5 called 1 do
+	empty join
+

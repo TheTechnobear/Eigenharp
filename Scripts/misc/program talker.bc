@@ -1,0 +1,33 @@
+name
+    program talker
+description
+    this script creates talkers actions to define setup variables
+
+script
+    empty join
+    amber talker listen
+    10 called 1 cancel
+    11 called 1 cancel
+    main keygroup hey scale to major set
+    " 
+     ' empty join amber talker hey 01 user as setup 1 define amber talker hey 1 re do ' do
+     ' empty join amber talker hey 02 user as setup 2 define amber talker hey 2 re do ' do
+     ' empty join amber talker hey 03 user as setup 3 define amber talker hey 3 re do ' do
+     ' empty join amber talker hey 04 user as setup 4 define amber talker hey 4 re do ' do
+     ' empty join amber talker hey 05 user as setup 5 define amber talker hey 5 re do ' do
+     ' empty join amber talker hey 06 user as setup 6 define amber talker hey 6 re do ' do
+     ' empty join amber talker hey 07 user as setup 7 define amber talker hey 7 re do ' do
+     ' empty join amber talker hey 08 user as setup 8 define amber talker hey 8 re do ' do
+    " when 10 called 1 do
+    " 
+     ' empty join amber talker hey 01 pico mix as setup 1 define amber talker hey 1 re do ' do
+     ' empty join amber talker hey 02 pico mix as setup 2 define amber talker hey 2 re do ' do
+     ' empty join amber talker hey 03 pico mix as setup 3 define amber talker hey 3 re do ' do
+     ' empty join amber talker hey 04 pico mix as setup 4 define amber talker hey 4 re do ' do
+     ' empty join amber talker hey 05 pico mix as setup 5 define amber talker hey 5 re do ' do
+     ' empty join amber talker hey 06 pico mix as setup 6 define amber talker hey 6 re do ' do
+     ' empty join amber talker hey 07 pico mix as setup 7 define amber talker hey 7 re do ' do
+     ' empty join amber talker hey 08 pico mix as setup 8 define amber talker hey 8 re do ' do
+    " when 11 called 1 do
+    empty join
+

@@ -1,0 +1,725 @@
+name
+    pico arranger    
+description
+    script to create arranger for pico mix 6
+
+script
+empty join
+
+# bug fix, this just links up the mode input key which was missing in PM6
+instrument keygroup keygroup output 4 key output to blank keygroup mode key input connect
+instrument keygroup keygroup output 4 pressure output to blank keygroup connect
+
+# create a player which will be used by the arranger, and connect to sampler 2
+player create 
+it to player 1 name ify 
+player 1 outputs to sampler 2 input into channel 10 connect
+
+# create the arranger, with some default settings
+empty join
+arranger create
+it to arranger 1 name ify
+arranger 1 listen
+parameters beginning to 1 set
+parameters doubletap to 0.5 set
+parameters end to 16 set
+parameters fraction to 2.0 set
+parameters step to 1.0 set
+' player 1 hey note 1 with velocity 110 play ' when 1 called 1 do 
+' player 1 hey note 2 with velocity 110 play ' when 2 called 1 do 
+' player 1 hey note 3 with velocity 110 play ' when 3 called 1 do 
+' player 1 hey note 4 with velocity 110 play ' when 4 called 1 do 
+' player 1 hey note 5 with velocity 110 play ' when 5 called 1 do 
+' player 1 hey note 6 with velocity 110 play ' when 6 called 1 do 
+' player 1 hey note 7 with velocity 110 play ' when 7 called 1 do 
+' player 1 hey note 8 with velocity 110 play ' when 8 called 1 do 
+' player 1 hey note 9 with velocity 110 play ' when 9 called 1 do 
+' player 1 hey note 10 with velocity 110 play ' when 10 called 1 do 
+' player 1 hey note 11 with velocity 110 play ' when 11 called 1 do 
+' player 1 hey note 12 with velocity 110 play ' when 12 called 1 do 
+' player 1 hey note 13 with velocity 110 play ' when 13 called 1 do 
+' player 1 hey note 14 with velocity 110 play ' when 14 called 1 do 
+' player 1 hey note 15 with velocity 110 play ' when 15 called 1 do 
+' player 1 hey note 16 with velocity 110 play ' when 16 called 1 do 
+
+# create a virtual keygroup (main arranger keygroup) that will be used by 
+# arranger, and then the sub ones, that are connected to pico 
+empty join
+keygroup create
+it to main arranger keygroup name ify
+keygroup create
+it to arranger keygroup 1 name ify
+keygroup create 
+it to arranger keygroup 2 name ify
+keygroup create 
+it to arranger keygroup 3 name ify
+keygroup create 
+it to arranger keygroup 4 name ify
+keygroup create 
+it to arranger keygroup 5 name ify
+keygroup create 
+it to arranger keygroup 6 name ify
+keygroup create 
+it to arranger keygroup 7 name ify
+keygroup create 
+it to arranger keygroup 8 name ify
+
+# connect the keygroups to the top level one, in our case blank keygroup
+# and assign some keys for access
+blank keygroup hey output 1 create
+blank keygroup hey keygroup output 1 key column to 1 set
+blank keygroup hey keygroup output 1 key row to 1 set
+blank keygroup output keygroup 1 to arranger keygroup 1 connect
+arranger keygroup 1 light output to blank keygroup output keygroup 1 light input connect
+
+blank keygroup hey output 2 create
+blank keygroup hey keygroup output 2 key column to 1 set
+blank keygroup hey keygroup output 2 key row to 2 set
+blank keygroup output keygroup 2 to arranger keygroup 2 connect
+arranger keygroup 2 light output to blank keygroup output keygroup 2 light input connect
+
+blank keygroup hey output 3 create
+blank keygroup hey keygroup output 3 key column to 1 set
+blank keygroup hey keygroup output 3 key row to 3 set
+blank keygroup output keygroup 3 to arranger keygroup 3 connect
+arranger keygroup 3 light output to blank keygroup output keygroup 3 light input connect
+
+blank keygroup hey output 4 create
+blank keygroup hey keygroup output 4 key column to 1 set
+blank keygroup hey keygroup output 4 key row to 4 set
+blank keygroup output keygroup 4 to arranger keygroup 4 connect
+arranger keygroup 4 light output to blank keygroup output keygroup 4 light input connect
+
+blank keygroup hey output 5 create
+blank keygroup hey keygroup output 5 key column to 1 set
+blank keygroup hey keygroup output 5 key row to 5 set
+blank keygroup output keygroup 5 to arranger keygroup 5 connect
+arranger keygroup 5 light output to blank keygroup output keygroup 5 light input connect
+
+blank keygroup hey output 6 create
+blank keygroup hey keygroup output 6 key column to 1 set
+blank keygroup hey keygroup output 6 key row to 6 set
+blank keygroup output keygroup 6 to arranger keygroup 6 connect
+arranger keygroup 6 light output to blank keygroup output keygroup 6 light input connect
+
+blank keygroup hey output 7 create
+blank keygroup hey keygroup output 7 key column to 1 set
+blank keygroup hey keygroup output 7 key row to 7 set
+blank keygroup output keygroup 7 to arranger keygroup 7 connect
+arranger keygroup 7 light output to blank keygroup output keygroup 7 light input connect
+
+blank keygroup hey output 8 create
+blank keygroup hey keygroup output 8 key column to 1 set
+blank keygroup hey keygroup output 8 key row to 8 set
+blank keygroup output keygroup 8 to arranger keygroup 8 connect
+arranger keygroup 8 light output to blank keygroup output keygroup 8 light input connect
+
+
+# create sub keygroups which are access by menu (blank) keygroup
+# the first one, is used as the arranger controller
+arranger keygroup 1 hey physical mapping to 
+	[
+		[[1,8],[1,1]],
+		[[1,17],[1,2]],
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[1,5]],
+		[[1,10],[1,6]],
+		[[1,2],[1,7]],
+		[[1,7],[1,8]],
+		[[1,10],[1,9]],
+		[[1,11],[1,10]]
+	] set
+arranger keygroup 1 hey musical mapping to 
+	[
+		[[1,8],[1,1]],
+		[[1,17],[1,2]],
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[1,5]],
+		[[1,10],[1,6]],
+		[[1,2],[1,7]],
+		[[1,7],[1,8]],
+		[[1,10],[1,9]],
+		[[1,11],[1,10]]
+	] set
+arranger keygroup 2 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,9],[1,3]],
+		[[2,9],[1,4]],
+		[[1,1],[2,1]],
+		[[1,2],[2,2]],
+		[[1,3],[2,3]],
+		[[1,4],[2,4]],
+		[[1,5],[2,5]],
+		[[1,6],[2,6]],
+		[[1,7],[2,7]],
+		[[1,8],[2,8]],
+		[[1,10],[2,9]],
+		[[1,11],[2,10]],
+		[[1,12],[2,11]],
+		[[1,13],[2,12]],
+		[[1,14],[2,13]],
+		[[1,15],[2,14]],
+		[[1,16],[2,15]],
+		[[1,17],[2,16]]
+	] set
+arranger keygroup 2 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[2,1]],
+		[[1,2],[2,2]],
+		[[1,3],[2,3]],
+		[[1,4],[2,4]],
+		[[1,5],[2,5]],
+		[[1,6],[2,6]],
+		[[1,7],[2,7]],
+		[[1,8],[2,8]],
+		[[1,10],[2,9]],
+		[[1,11],[2,10]],
+		[[1,12],[2,11]],
+		[[1,13],[2,12]],
+		[[1,14],[2,13]],
+		[[1,15],[2,14]],
+		[[1,16],[2,15]],
+		[[1,17],[2,16]]
+	] set
+
+arranger keygroup 3 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[3,1]],
+		[[1,2],[3,2]],
+		[[1,3],[3,3]],
+		[[1,4],[3,4]],
+		[[1,5],[3,5]],
+		[[1,6],[3,6]],
+		[[1,7],[3,7]],
+		[[1,8],[3,8]],
+		[[1,10],[3,9]],
+		[[1,11],[3,10]],
+		[[1,12],[3,11]],
+		[[1,13],[3,12]],
+		[[1,14],[3,13]],
+		[[1,15],[3,14]],
+		[[1,16],[3,15]],
+		[[1,17],[3,16]]
+	] set
+arranger keygroup 3 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[3,1]],
+		[[1,2],[3,2]],
+		[[1,3],[3,3]],
+		[[1,4],[3,4]],
+		[[1,5],[3,5]],
+		[[1,6],[3,6]],
+		[[1,7],[3,7]],
+		[[1,8],[3,8]],
+		[[1,10],[3,9]],
+		[[1,11],[3,10]],
+		[[1,12],[3,11]],
+		[[1,13],[3,12]],
+		[[1,14],[3,13]],
+		[[1,15],[3,14]],
+		[[1,16],[3,15]],
+		[[1,17],[3,16]]
+	] set
+
+arranger keygroup 4 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[4,1]],
+		[[1,2],[4,2]],
+		[[1,3],[4,3]],
+		[[1,4],[4,4]],
+		[[1,5],[4,5]],
+		[[1,6],[4,6]],
+		[[1,7],[4,7]],
+		[[1,8],[4,8]],
+		[[1,10],[4,9]],
+		[[1,11],[4,10]],
+		[[1,12],[4,11]],
+		[[1,13],[4,12]],
+		[[1,14],[4,13]],
+		[[1,15],[4,14]],
+		[[1,16],[4,15]],
+		[[1,17],[4,16]]
+	] set
+
+arranger keygroup 4 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[4,1]],
+		[[1,2],[4,2]],
+		[[1,3],[4,3]],
+		[[1,4],[4,4]],
+		[[1,5],[4,5]],
+		[[1,6],[4,6]],
+		[[1,7],[4,7]],
+		[[1,8],[4,8]],
+		[[1,10],[4,9]],
+		[[1,11],[4,10]],
+		[[1,12],[4,11]],
+		[[1,13],[4,12]],
+		[[1,14],[4,13]],
+		[[1,15],[4,14]],
+		[[1,16],[4,15]],
+		[[1,17],[4,16]]
+	] set
+
+arranger keygroup 5 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[5,1]],
+		[[1,2],[5,2]],
+		[[1,3],[5,3]],
+		[[1,4],[5,4]],
+		[[1,5],[5,5]],
+		[[1,6],[5,6]],
+		[[1,7],[5,7]],
+		[[1,8],[5,8]],
+		[[1,10],[5,9]],
+		[[1,11],[5,10]],
+		[[1,12],[5,11]],
+		[[1,13],[5,12]],
+		[[1,14],[5,13]],
+		[[1,15],[5,14]],
+		[[1,16],[5,15]],
+		[[1,17],[5,16]]
+	] set
+arranger keygroup 5 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[5,1]],
+		[[1,2],[5,2]],
+		[[1,3],[5,3]],
+		[[1,4],[5,4]],
+		[[1,5],[5,5]],
+		[[1,6],[5,6]],
+		[[1,7],[5,7]],
+		[[1,8],[5,8]],
+		[[1,10],[5,9]],
+		[[1,11],[5,10]],
+		[[1,12],[5,11]],
+		[[1,13],[5,12]],
+		[[1,14],[5,13]],
+		[[1,15],[5,14]],
+		[[1,16],[5,15]],
+		[[1,17],[5,16]]
+	] set
+
+arranger keygroup 6 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[6,1]],
+		[[1,2],[6,2]],
+		[[1,3],[6,3]],
+		[[1,4],[6,4]],
+		[[1,5],[6,5]],
+		[[1,6],[6,6]],
+		[[1,7],[6,7]],
+		[[1,8],[6,8]],
+		[[1,10],[6,9]],
+		[[1,11],[6,10]],
+		[[1,12],[6,11]],
+		[[1,13],[6,12]],
+		[[1,14],[6,13]],
+		[[1,15],[6,14]],
+		[[1,16],[6,15]],
+		[[1,17],[6,16]]
+	] set
+arranger keygroup 6 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[6,1]],
+		[[1,2],[6,2]],
+		[[1,3],[6,3]],
+		[[1,4],[6,4]],
+		[[1,5],[6,5]],
+		[[1,6],[6,6]],
+		[[1,7],[6,7]],
+		[[1,8],[6,8]],
+		[[1,10],[6,9]],
+		[[1,11],[6,10]],
+		[[1,12],[6,11]],
+		[[1,13],[6,12]],
+		[[1,14],[6,13]],
+		[[1,15],[6,14]],
+		[[1,16],[6,15]],
+		[[1,17],[6,16]]
+	] set
+arranger keygroup 7 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[7,1]],
+		[[1,2],[7,2]],
+		[[1,3],[7,3]],
+		[[1,4],[7,4]],
+		[[1,5],[7,5]],
+		[[1,6],[7,6]],
+		[[1,7],[7,7]],
+		[[1,8],[7,8]],
+		[[1,10],[7,9]],
+		[[1,11],[7,10]],
+		[[1,12],[7,11]],
+		[[1,13],[7,12]],
+		[[1,14],[7,13]],
+		[[1,15],[7,14]],
+		[[1,16],[7,15]],
+		[[1,17],[7,16]]
+	] set
+arranger keygroup 7 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[7,1]],
+		[[1,2],[7,2]],
+		[[1,3],[7,3]],
+		[[1,4],[7,4]],
+		[[1,5],[7,5]],
+		[[1,6],[7,6]],
+		[[1,7],[7,7]],
+		[[1,8],[7,8]],
+		[[1,10],[7,9]],
+		[[1,11],[7,10]],
+		[[1,12],[7,11]],
+		[[1,13],[7,12]],
+		[[1,14],[7,13]],
+		[[1,15],[7,14]],
+		[[1,16],[7,15]],
+		[[1,17],[7,16]]
+	] set
+arranger keygroup 8 hey musical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[8,1]],
+		[[1,2],[8,2]],
+		[[1,3],[8,3]],
+		[[1,4],[8,4]],
+		[[1,5],[8,5]],
+		[[1,6],[8,6]],
+		[[1,7],[8,7]],
+		[[1,8],[8,8]],
+		[[1,10],[8,9]],
+		[[1,11],[8,10]],
+		[[1,12],[8,11]],
+		[[1,13],[8,12]],
+		[[1,14],[8,13]],
+		[[1,15],[8,14]],
+		[[1,16],[8,15]],
+		[[1,17],[8,16]]
+	] set
+arranger keygroup 8 hey physical mapping to 
+	[
+		[[1,9],[1,3]],
+		[[1,18],[1,4]],
+		[[1,1],[8,1]],
+		[[1,2],[8,2]],
+		[[1,3],[8,3]],
+		[[1,4],[8,4]],
+		[[1,5],[8,5]],
+		[[1,6],[8,6]],
+		[[1,7],[8,7]],
+		[[1,8],[8,8]],
+		[[1,10],[8,9]],
+		[[1,11],[8,10]],
+		[[1,12],[8,11]],
+		[[1,13],[8,12]],
+		[[1,14],[8,13]],
+		[[1,15],[8,14]],
+		[[1,16],[8,15]],
+		[[1,17],[8,16]]
+	] set
+# create the main (virtual keygroup) that is used by arranger
+# this needs to be all the keys, that are in the sub keygroups
+main arranger keygroup hey musical mapping to 
+	[
+		[[1,1],[1,1]],
+		[[1,2],[1,2]],
+		[[1,3],[1,3]],
+		[[1,4],[1,4]],
+		[[1,5],[1,5]],
+		[[1,6],[1,6]],
+		[[1,7],[1,7]],
+		[[1,8],[1,8]],
+		[[1,9],[1,9]],
+		[[1,10],[1,10]],
+		[[2,1],[2,1]],
+		[[2,2],[2,2]],
+		[[2,3],[2,3]],
+		[[2,4],[2,4]],
+		[[2,5],[2,5]],
+		[[2,6],[2,6]],
+		[[2,7],[2,7]],
+		[[2,8],[2,8]],
+		[[2,9],[2,9]],
+		[[2,10],[2,10]],
+		[[2,11],[2,11]],
+		[[2,12],[2,12]],
+		[[2,13],[2,13]],
+		[[2,14],[2,14]],
+		[[2,15],[2,15]],
+		[[2,16],[2,16]],
+		[[3,1],[3,1]],
+		[[3,2],[3,2]],
+		[[3,3],[3,3]],
+		[[3,4],[3,4]],
+		[[3,5],[3,5]],
+		[[3,6],[3,6]],
+		[[3,7],[3,7]],
+		[[3,8],[3,8]],
+		[[3,9],[3,9]],
+		[[3,10],[3,10]],
+		[[3,11],[3,11]],
+		[[3,12],[3,12]],
+		[[3,13],[3,13]],
+		[[3,14],[3,14]],
+		[[3,15],[3,15]],
+		[[3,16],[3,16]],
+		[[4,1],[4,1]],
+		[[4,2],[4,2]],
+		[[4,3],[4,3]],
+		[[4,4],[4,4]],
+		[[4,5],[4,5]],
+		[[4,6],[4,6]],
+		[[4,7],[4,7]],
+		[[4,8],[4,8]],
+		[[4,9],[4,9]],
+		[[4,10],[4,10]],
+		[[4,11],[4,11]],
+		[[4,12],[4,12]],
+		[[4,13],[4,13]],
+		[[4,14],[4,14]],
+		[[4,15],[4,15]],
+		[[4,16],[4,16]],
+		[[5,1],[5,1]],
+		[[5,2],[5,2]],
+		[[5,3],[5,3]],
+		[[5,4],[5,4]],
+		[[5,5],[5,5]],
+		[[5,6],[5,6]],
+		[[5,7],[5,7]],
+		[[5,8],[5,8]],
+		[[5,9],[5,9]],
+		[[5,10],[5,10]],
+		[[5,11],[5,11]],
+		[[5,12],[5,12]],
+		[[5,13],[5,13]],
+		[[5,14],[5,14]],
+		[[5,15],[5,15]],
+		[[5,16],[5,16]],
+		[[6,1],[6,1]],
+		[[6,2],[6,2]],
+		[[6,3],[6,3]],
+		[[6,4],[6,4]],
+		[[6,5],[6,5]],
+		[[6,6],[6,6]],
+		[[6,7],[6,7]],
+		[[6,8],[6,8]],
+		[[6,9],[6,9]],
+		[[6,10],[6,10]],
+		[[6,11],[6,11]],
+		[[6,12],[6,12]],
+		[[6,13],[6,13]],
+		[[6,14],[6,14]],
+		[[6,15],[6,15]],
+		[[6,16],[6,16]],
+		[[7,1],[7,1]],
+		[[7,2],[7,2]],
+		[[7,3],[7,3]],
+		[[7,4],[7,4]],
+		[[7,5],[7,5]],
+		[[7,6],[7,6]],
+		[[7,7],[7,7]],
+		[[7,8],[7,8]],
+		[[7,9],[7,9]],
+		[[7,10],[7,10]],
+		[[7,11],[7,11]],
+		[[7,12],[7,12]],
+		[[7,13],[7,13]],
+		[[7,14],[7,14]],
+		[[7,15],[7,15]],
+		[[7,16],[7,16]],
+		[[8,1],[8,1]],
+		[[8,2],[8,2]],
+		[[8,3],[8,3]],
+		[[8,4],[8,4]],
+		[[8,5],[8,5]],
+		[[8,6],[8,6]],
+		[[8,7],[8,7]],
+		[[8,8],[8,8]],
+		[[8,9],[8,9]],
+		[[8,10],[8,10]],
+		[[8,11],[8,11]],
+		[[8,12],[8,12]],
+		[[8,13],[8,13]],
+		[[8,14],[8,14]],
+		[[8,15],[8,15]],
+		[[8,16],[8,16]]
+	] set
+main arranger keygroup hey physical mapping to 
+	[
+		[[1,1],[1,1]],
+		[[1,2],[1,2]],
+		[[1,3],[1,3]],
+		[[1,4],[1,4]],
+		[[1,5],[1,5]],
+		[[1,6],[1,6]],
+		[[1,7],[1,7]],
+		[[1,8],[1,8]],
+		[[1,9],[1,9]],
+		[[1,10],[1,10]],
+		[[2,1],[2,1]],
+		[[2,2],[2,2]],
+		[[2,3],[2,3]],
+		[[2,4],[2,4]],
+		[[2,5],[2,5]],
+		[[2,6],[2,6]],
+		[[2,7],[2,7]],
+		[[2,8],[2,8]],
+		[[2,9],[2,9]],
+		[[2,10],[2,10]],
+		[[2,11],[2,11]],
+		[[2,12],[2,12]],
+		[[2,13],[2,13]],
+		[[2,14],[2,14]],
+		[[2,15],[2,15]],
+		[[2,16],[2,16]],
+		[[3,1],[3,1]],
+		[[3,2],[3,2]],
+		[[3,3],[3,3]],
+		[[3,4],[3,4]],
+		[[3,5],[3,5]],
+		[[3,6],[3,6]],
+		[[3,7],[3,7]],
+		[[3,8],[3,8]],
+		[[3,9],[3,9]],
+		[[3,10],[3,10]],
+		[[3,11],[3,11]],
+		[[3,12],[3,12]],
+		[[3,13],[3,13]],
+		[[3,14],[3,14]],
+		[[3,15],[3,15]],
+		[[3,16],[3,16]],
+		[[4,1],[4,1]],
+		[[4,2],[4,2]],
+		[[4,3],[4,3]],
+		[[4,4],[4,4]],
+		[[4,5],[4,5]],
+		[[4,6],[4,6]],
+		[[4,7],[4,7]],
+		[[4,8],[4,8]],
+		[[4,9],[4,9]],
+		[[4,10],[4,10]],
+		[[4,11],[4,11]],
+		[[4,12],[4,12]],
+		[[4,13],[4,13]],
+		[[4,14],[4,14]],
+		[[4,15],[4,15]],
+		[[4,16],[4,16]],
+		[[5,1],[5,1]],
+		[[5,2],[5,2]],
+		[[5,3],[5,3]],
+		[[5,4],[5,4]],
+		[[5,5],[5,5]],
+		[[5,6],[5,6]],
+		[[5,7],[5,7]],
+		[[5,8],[5,8]],
+		[[5,9],[5,9]],
+		[[5,10],[5,10]],
+		[[5,11],[5,11]],
+		[[5,12],[5,12]],
+		[[5,13],[5,13]],
+		[[5,14],[5,14]],
+		[[5,15],[5,15]],
+		[[5,16],[5,16]],
+		[[6,1],[6,1]],
+		[[6,2],[6,2]],
+		[[6,3],[6,3]],
+		[[6,4],[6,4]],
+		[[6,5],[6,5]],
+		[[6,6],[6,6]],
+		[[6,7],[6,7]],
+		[[6,8],[6,8]],
+		[[6,9],[6,9]],
+		[[6,10],[6,10]],
+		[[6,11],[6,11]],
+		[[6,12],[6,12]],
+		[[6,13],[6,13]],
+		[[6,14],[6,14]],
+		[[6,15],[6,15]],
+		[[6,16],[6,16]],
+		[[7,1],[7,1]],
+		[[7,2],[7,2]],
+		[[7,3],[7,3]],
+		[[7,4],[7,4]],
+		[[7,5],[7,5]],
+		[[7,6],[7,6]],
+		[[7,7],[7,7]],
+		[[7,8],[7,8]],
+		[[7,9],[7,9]],
+		[[7,10],[7,10]],
+		[[7,11],[7,11]],
+		[[7,12],[7,12]],
+		[[7,13],[7,13]],
+		[[7,14],[7,14]],
+		[[7,15],[7,15]],
+		[[7,16],[7,16]],
+		[[8,1],[8,1]],
+		[[8,2],[8,2]],
+		[[8,3],[8,3]],
+		[[8,4],[8,4]],
+		[[8,5],[8,5]],
+		[[8,6],[8,6]],
+		[[8,7],[8,7]],
+		[[8,8],[8,8]],
+		[[8,9],[8,9]],
+		[[8,10],[8,10]],
+		[[8,11],[8,11]],
+		[[8,12],[8,12]],
+		[[8,13],[8,13]],
+		[[8,14],[8,14]],
+		[[8,15],[8,15]],
+		[[8,16],[8,16]]
+	] set
+
+# create keygroup outputs and connect the sub keygroups into the main
+main arranger keygroup hey output 1 create
+arranger keygroup 1 hey output 1 create
+arranger keygroup 1 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 2 hey output 1 create
+arranger keygroup 2 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 3 hey output 1 create
+arranger keygroup 3 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 4 hey output 1 create
+arranger keygroup 4 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 5 hey output 1 create
+arranger keygroup 5 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 6 hey output 1 create
+arranger keygroup 6 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 7 hey output 1 create
+arranger keygroup 7 keygroup output 1 to main arranger keygroup connect
+arranger keygroup 8 hey output 1 create
+arranger keygroup 8 keygroup output 1 to main arranger keygroup connect
+
+# connect main keygroup into arranger & also metronome
+main arranger keygroup keygroup output 1 to arranger 1 key inputs connect
+main arranger keygroup keygroup output 1 controller output to arranger 1 controller input connect
+metronome 1 to arranger metronome inputs connect
+
+empty join
+

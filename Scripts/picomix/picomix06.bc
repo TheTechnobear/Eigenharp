@@ -1,0 +1,27 @@
+name
+	06 pico mix
+description
+	an example script to change ocatave to 3rds, note we use variables as statement change is too slow for a talker
+
+script
+	empty join
+	green talker listen
+	1 called 1 cancel
+	2 called 1 cancel
+
+	"
+	empty join
+	1 as octave step define
+	simple octave talker hey re do
+	octave talker 1 hey re do
+	octave talker 2 hey re do
+	" when 1 called 1 do
+
+	"
+	empty join
+	0.33333333333333331 as octave step define
+	simple octave talker hey re do
+	octave talker 1 hey re do
+	octave talker 2 hey re do
+	" when 2 called 1 do
+

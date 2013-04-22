@@ -1,0 +1,32 @@
+name
+    synth rig 2
+description
+    script to link synth rig into pico mix 7
+
+script
+
+# this script is a demo script to show how to replace sampler with the synth rig
+#
+# adapting for factory setup
+# it can easily be adapted for the factory setup - from memory, replace simple keygroup with main keygroup, and delete keygroup 1 & 2
+#
+# changing to replace different rig
+# if you wish to replace something other than sampler 1, then you will need make the following changes:
+# a) sample rig 1 un create,
+# b) mixer channel NUM, replace NUM with appropriate, e.g. 3= sampler 3, 8=midi
+# c) output keygroup NUM, replace NUM with appropriate, e.g. 3= sampler 3, 8=midi
+
+# notes: 
+# you dont need to un create the sampler rig, i only do this to keep a setup tidy and smaller if it was saved,
+# if you wish to swich back and forth, you could leave it, just un connect it from keygroup and mixer
+# all talker re do, is required because some talkers need to know about all rigs in setup, and so need recompiling
+
+empty join
+
+metronome 1 to synth rig connect
+synth rig to console mixer 1 mixer channel 1 connect
+simple keygroup output keygroup 1 to synth rig into channel 1 connect
+keygroup 1 output keygroup 1 to synth rig into channel 2 connect
+keygroup 2 output keygroup 1 to synth rig into channel 3 connect
+sampler rig 1 un create
+all talker hey re do
