@@ -1,0 +1,7 @@
+Inside this directory you will find the following:
+(use ls -al to see them, as they are hidden!)
+
+.vimrc  - this goes into your user root directory, you can add it the end of your existing one if you have it
+.vim - this again, goes into your existing root directory
+
+note: you will also need the bash script files help in this repo in /bin , to be able to execute belcanto using F2
