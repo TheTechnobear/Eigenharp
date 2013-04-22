@@ -2,7 +2,7 @@ in this directory you will find a number of instrument rigs for use with EigenD,
 
 The create scripts just create the rigs, they do NOT wire them up into a setup, as this will be different depending upon the setup they are going to be loaded into
 them
-the link script is very much a sample to show what is needed to be connected, basically keygroup, and mixer - its for pico mix, but basically the same for other setups
+the link script is very much a sample to show what is needed to be connected, basically keygroup, and mixer - one for pico, pico mix and tau ... im sure someone will add alpha :)
 
 notes:
 - the sample oscillator are never preloaded with samples, they are deliberatly left blank, so you will need to set using belcanto, or workbench or stage
@@ -16,4 +16,7 @@ createaudiounit.bc - rig for housing audio unit and vst instruments
 createsimplesampler.bc - rig for playing samples
 createdoublesampler.bc - rig for which play 2 different samples of left and right pan, based on yaw of key
 createpanpipe.bc - a panpipe rig, created by Antonio based on STK	
-linksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix
+
+picomixlinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix setup
+picolinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico factory setup
+taulinksynthrig.bc - sample script, which shows how to link a newly created synth rig into tau factory setup
