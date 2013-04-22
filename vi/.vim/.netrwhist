@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Games/X-Plane 10 Demo/Custom Scenery/KSEA Demo Area/Earth nav data'
-let g:netrw_dirhist_2='/Users/kodiak/Library/Eigenlabs/Scripts'
-let g:netrw_dirhist_3='/usr/pi/release-2.0.74-stable/resources/Scripts/Octave Key Transposition'
