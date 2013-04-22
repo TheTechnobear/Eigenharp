@@ -53,6 +53,8 @@ simple sampler rig gateway hey output called tempo create
 simple sampler rig gateway output tempo 1 to tempo name ify
 simple sampler rig gateway hey output called yaw create 
 simple sampler rig gateway output yaw 1 to yaw name ify
+simple sampler rig gateway hey output called breath create
+simple sampler rig gateway output breath 1 to breath name ify
 simple sampler rig gateway hey output called absolute strip 1 create 
 simple sampler rig gateway hey output called strip position 1 create 
 simple sampler rig gateway hey output called pedal 1 create 
@@ -67,6 +69,7 @@ simple sampler rig recorder hey auxilliary input 3 to pedal 2 name ify
 simple sampler rig recorder hey auxilliary input 4 to pedal 3 name ify
 simple sampler rig recorder hey auxilliary input 5 to pedal 4 name ify
 simple sampler rig recorder hey auxilliary input 6 to strip position name ify
+simple sampler rig recorder hey auxilliary input 7 to breath name ify
 simple sampler rig hey gateway output to recorder inputs connect
 simple sampler rig hey gateway scheduler identifier to recorder scheduler identifier  connect
 
@@ -74,28 +77,34 @@ scaler in simple sampler rig create
 simple sampler rig hey recorder outputs to scaler inputs connect
 simple sampler rig hey scaler light output to gateway input light  connect
 
-
 shaper in simple sampler rig create
 it to breath shaper 1 name ify
+simple sampler rig hey recorder outputs breath to breath shaper input connect
+simple sampler rig breath shaper compression to 0.3 set 
 
-summer in simple sampler rig create
-it to polyphonic summer 1 name ify
+polyphonic summer in simple sampler rig create
+simple sampler rig polyphonic summer hey channel create
+simple sampler rig polyphonic summer hey channel create
+simple sampler rig hey recorder outputs pedal 1 to polyphonic summer audio channels channel 1 audio input connect 
+simple sampler rig hey breath shaper output to polyphonic summer audio channels channel 2 audio input connect 
 
 cycler in simple sampler rig create
 simple sampler rig hey scaler outputs to cycler inputs connect 
+simple sampler rig hey polyphonic summer audio output to cycler inputs damper pedal input connect 
 
 sampler oscillator in simple sampler rig create 
-#simple sampler rig hey ahdsr outputs to sawtooth oscillator connect
-#simple sampler rig hey scaler frequency output to sawtooth oscillator connect
+simple sampler rig hey cycler outputs to sampler oscillator inputs connect
 
 ahdsr in simple sampler rig create
-#simple sampler rig hey scaler yaw output to ladder filter bend input connect
-#simple sampler rig hey sawtooth oscillator audio output to ladder filter audio input connect
+simple sampler rig hey ahdsr volume output to cycler feedback input connect 
+simple sampler rig hey cycler outputs to ahdsr inputs connect
+simple sampler rig hey sampler oscillator outputs to ahdsr inputs connect
+simple sampler rig hey ahdsr activation output to sampler oscillator activation input connect
 
 gain in simple sampler rig create
 simple sampler rig gain hey channel count to 2 set
 simple sampler rig hey ahdsr outputs volume output to gain volume input connect 
-simple sampler rig hey sample oscillator outputs to gain input connect
+simple sampler rig hey sampler oscillator outputs to gain inputs connect
 
 summer in simple sampler rig create
 simple sampler rig summer hey channel count to 2 set
@@ -103,6 +112,7 @@ simple sampler rig hey gain to summer connect
 
 audio unit in simple sampler rig create
 simple sampler rig audio unit 1 to effect audio unit 1 name ify 
+simple sampler rig effect audio unit hey midi channel to 1 set
 simple sampler rig effect audio unit hey audio inputs channel count to 2 set
 simple sampler rig effect audio unit hey audio outputs channel count to 2 set
 simple sampler rig hey summer outputs to effect audio unit audio inputs connect

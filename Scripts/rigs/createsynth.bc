@@ -111,6 +111,7 @@ synth rig hey gain audio output to summer connect
 # rename the AU parameters so they can be presented nicely in the UI
 audio unit in synth rig create
 synth rig audio unit 1 to effect audio unit 1 name ify 
+synth rig effect audio unit hey midi channel to 1 set
 synth rig effect audio unit hey audio inputs channel count to 2 set
 synth rig effect audio unit hey audio outputs channel count to 2 set
 synth rig hey summer outputs to effect audio unit audio inputs connect
