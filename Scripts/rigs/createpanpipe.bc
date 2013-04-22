@@ -1,0 +1,109 @@
+name
+    pico panpipe    
+description
+    script to create panpipe,  created by Antonio Machado
+
+script
+empty join
+
+user panpipe rig un create
+
+# create a panpipe, you will need to give it a unique name, so change if necessary
+# this is my own creation based on Mark Harris "rig script"
+
+rig create
+it to user panpipe rig name ify
+user panpipe rig gateway hey output called breath create
+user panpipe rig gateway output breath 1 to breath name ify
+user panpipe rig gateway hey input called left audio create 
+user panpipe rig gateway input left audio 1 to left audio name ify
+user panpipe rig gateway hey input called right audio create 
+user panpipe rig gateway input right audio 1 to right audio name ify
+user panpipe rig gateway hey input called light create 
+user panpipe rig gateway input light 1 to light name ify
+user panpipe rig gateway hey output called bar beat create 
+user panpipe rig gateway output bar beat 1 to bar beat name ify
+user panpipe rig gateway hey output called controller create 
+user panpipe rig gateway output controller 1 to controller name ify
+user panpipe rig gateway hey output called key create 
+user panpipe rig gateway output key 1 to key name ify
+user panpipe rig gateway hey output called pressure create 
+user panpipe rig gateway output pressure 1 to pressure name ify
+user panpipe rig gateway hey output called roll create 
+user panpipe rig gateway output roll 1 to roll name ify
+user panpipe rig gateway hey output called running create 
+user panpipe rig gateway output running 1 to running name ify
+user panpipe rig gateway hey output called scheduler identifier create 
+user panpipe rig gateway output scheduler identifier 1 to scheduler identifier name ify
+user panpipe rig gateway hey output called song beat create 
+user panpipe rig gateway output song beat 1 to song beat name ify
+user panpipe rig gateway hey output called tempo create 
+user panpipe rig gateway output tempo 1 to tempo name ify
+user panpipe rig gateway hey output called yaw create 
+user panpipe rig gateway output yaw 1 to yaw name ify
+user panpipe rig gateway hey output called absolute strip 1 create 
+user panpipe rig gateway hey output called strip position 1 create 
+user panpipe rig gateway hey output called pedal 1 create 
+user panpipe rig gateway hey output called pedal 2 create 
+user panpipe rig gateway hey output called pedal 3 create 
+user panpipe rig gateway hey output called pedal 4 create 
+
+recorder in user panpipe rig create
+user panpipe rig recorder hey auxilliary input 1 to absolute strip 1 name ify
+user panpipe rig recorder hey auxilliary input 2 to pedal 1 name ify
+user panpipe rig recorder hey auxilliary input 3 to pedal 2 name ify
+user panpipe rig recorder hey auxilliary input 4 to pedal 3 name ify
+user panpipe rig recorder hey auxilliary input 5 to pedal 4 name ify
+user panpipe rig recorder hey auxilliary input 6 to strip position name ify
+user panpipe rig hey gateway output to recorder inputs connect
+
+scaler in user panpipe rig create
+user panpipe rig scaler hey curve to 3 set
+user panpipe rig scaler hey key bend range input to 0.4 set
+user panpipe rig hey recorder outputs to scaler inputs connect
+user panpipe rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+user panpipe rig hey recorder outputs strip position output to scaler inputs global pitch bend input connect
+user panpipe rig hey scaler light output to gateway input light  connect
+
+panpipe oscillator in user panpipe rig create 
+user panpipe rig hey scaler frequency output to panpipe oscillator connect
+user panpipe rig hey scaler yaw output to panpipe oscillator vibrato frequency input connect
+user panpipe rig hey scaler yaw output to panpipe oscillator vibrato gain input connect
+
+ranger in user panpipe rig create
+user panpipe rig ranger hey curve to 3.0 set
+user panpipe rig ranger hey maximum to 1792180.0 set
+user panpipe rig ranger hey minimum to 1974820.0 set
+user panpipe rig ranger hey rest to 9249840.0 set
+user panpipe rig hey scaler pressure output to ranger input connect
+user panpipe rig ranger output to panpipe oscillator pressure input connect
+
+shaper in user panpipe rig create
+user panpipe rig shaper hey compression to 0.7 set
+user panpipe rig shaper hey sharpness to 0.2 set
+user panpipe rig gateway hey output breath to shaper input connect
+user panpipe rig shaper output to panpipe oscillator pressure input connect
+
+summer in user panpipe rig create
+user panpipe rig panpipe oscillator hey audio output to panpipe rig summer input connect
+
+audio unit in user panpipe rig create
+user panpipe rig audio unit 1 to effect audio unit 1 name ify 
+user panpipe rig effect audio unit hey audio inputs channel count to 2 set
+user panpipe rig effect audio unit hey audio outputs channel count to 2 set
+user panpipe rig hey summer output to effect audio unit audio inputs connect
+user panpipe rig hey effect audio unit audio outputs to gateway input  connect
+
+user panpipe rig effect audio unit hey parameters parameter 1 to absolute strip 1 name ify
+user panpipe rig effect audio unit hey parameters parameter 2 to pedal 1 name ify
+user panpipe rig effect audio unit hey parameters parameter 3 to pedal 2 name ify
+user panpipe rig effect audio unit hey parameters parameter 4 to pedal 3 name ify
+user panpipe rig effect audio unit hey parameters parameter 5 to pedal 4 name ify
+user panpipe rig effect audio unit hey parameters parameter 6 to strip position name ify
+user panpipe rig effect audio unit hey parameters parameter 7 to breath name ify
+user panpipe rig effect audio unit hey parameters parameter 8 to pressure name ify
+user panpipe rig effect audio unit hey parameters parameter 9 to roll name ify
+user panpipe rig effect audio unit hey parameters parameter 10 to yaw name ify
+user panpipe rig hey gateway output to effect audio unit connect
+user panpipe rig hey gateway output to effect audio unit parameters connect
+
