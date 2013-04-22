@@ -1,15 +1,15 @@
 name
-    synth rig
+    user synth rig
 description
-    script to create synth rig
+    script to create user synth rig
 
 script
 empty join
 
-synth rig un create
+user synth rig un create
 
-# create a synth rig, you will need to give it a unique name, so change if necessary
-# in vi %s/synth rig/user synth rig/
+# create a user synth rig, you will need to give it a unique name, so change if necessary
+# in vi %s/user synth rig/user synth 1 rig/
 # this is based on the synth in the Tau configuration
 # see linksynthrig.bc for how to connect this up to PM7 install
 
@@ -27,106 +27,108 @@ synth rig un create
 
 # first create the rig, and all the outputs/inputs, this is basically the same for all rigs
 rig create
-it to synth rig name ify
-synth rig gateway hey input called left audio create 
-synth rig gateway input left audio 1 to left audio name ify
-synth rig gateway hey input called right audio create 
-synth rig gateway input right audio 1 to right audio name ify
-synth rig gateway hey input called light create 
-synth rig gateway input light 1 to light name ify
-synth rig gateway hey output called bar beat create 
-synth rig gateway output bar beat 1 to bar beat name ify
-synth rig gateway hey output called controller create 
-synth rig gateway output controller 1 to controller name ify
-synth rig gateway hey output called key create 
-synth rig gateway output key 1 to key name ify
-synth rig gateway hey output called pressure create 
-synth rig gateway output pressure 1 to pressure name ify
-synth rig gateway hey output called roll create 
-synth rig gateway output roll 1 to roll name ify
-synth rig gateway hey output called running create 
-synth rig gateway output running 1 to running name ify
-synth rig gateway hey output called scheduler identifier create 
-synth rig gateway output scheduler identifier 1 to scheduler identifier name ify
-synth rig gateway hey output called song beat create 
-synth rig gateway output song beat 1 to song beat name ify
-synth rig gateway hey output called tempo create 
-synth rig gateway output tempo 1 to tempo name ify
-synth rig gateway hey output called yaw create 
-synth rig gateway output yaw 1 to yaw name ify
-synth rig gateway hey output called breath create 
-synth rig gateway output breath 1 to breath name ify
-synth rig gateway hey output called absolute strip 1 create 
-synth rig gateway hey output called strip position 1 create 
-synth rig gateway hey output called pedal 1 create 
-synth rig gateway hey output called pedal 2 create 
-synth rig gateway hey output called pedal 3 create 
-synth rig gateway hey output called pedal 4 create 
+it to user synth rig name ify
+user synth rig gateway hey input called left audio create 
+user synth rig gateway input left audio 1 to left audio name ify
+user synth rig gateway hey input called right audio create 
+user synth rig gateway input right audio 1 to right audio name ify
+user synth rig gateway hey input called light create 
+user synth rig gateway input light 1 to light name ify
+user synth rig gateway hey output called bar beat create 
+user synth rig gateway output bar beat 1 to bar beat name ify
+user synth rig gateway hey output called controller create 
+user synth rig gateway output controller 1 to controller name ify
+user synth rig gateway hey output called key create 
+user synth rig gateway output key 1 to key name ify
+user synth rig gateway hey output called pressure create 
+user synth rig gateway output pressure 1 to pressure name ify
+user synth rig gateway hey output called roll create 
+user synth rig gateway output roll 1 to roll name ify
+user synth rig gateway hey output called running create 
+user synth rig gateway output running 1 to running name ify
+user synth rig gateway hey output called scheduler identifier create 
+user synth rig gateway output scheduler identifier 1 to scheduler identifier name ify
+user synth rig gateway hey output called song beat create 
+user synth rig gateway output song beat 1 to song beat name ify
+user synth rig gateway hey output called tempo create 
+user synth rig gateway output tempo 1 to tempo name ify
+user synth rig gateway hey output called yaw create 
+user synth rig gateway output yaw 1 to yaw name ify
+user synth rig gateway hey output called breath create 
+user synth rig gateway output breath 1 to breath name ify
+user synth rig gateway hey output called absolute strip 1 create 
+user synth rig gateway hey output called strip position 1 create 
+user synth rig gateway hey output called pedal 1 create 
+user synth rig gateway hey output called pedal 2 create 
+user synth rig gateway hey output called pedal 3 create 
+user synth rig gateway hey output called pedal 4 create 
 
 # first create the recorder, and copy all input of rig to recorder, this is basically the same for all rigs
-recorder in synth rig create
-synth rig recorder hey auxilliary input 1 to absolute strip 1 name ify
-synth rig recorder hey auxilliary input 2 to pedal 1 name ify
-synth rig recorder hey auxilliary input 3 to pedal 2 name ify
-synth rig recorder hey auxilliary input 4 to pedal 3 name ify
-synth rig recorder hey auxilliary input 5 to pedal 4 name ify
-synth rig recorder hey auxilliary input 6 to strip position name ify
-synth rig recorder hey auxilliary input 7 to breath name ify
-synth rig hey gateway output to recorder inputs connect
+recorder in user synth rig create
+user synth rig recorder hey auxilliary input 1 to absolute strip 1 name ify
+user synth rig recorder hey auxilliary input 2 to pedal 1 name ify
+user synth rig recorder hey auxilliary input 3 to pedal 2 name ify
+user synth rig recorder hey auxilliary input 4 to pedal 3 name ify
+user synth rig recorder hey auxilliary input 5 to pedal 4 name ify
+user synth rig recorder hey auxilliary input 6 to strip position name ify
+user synth rig recorder hey auxilliary input 7 to breath name ify
+user synth rig hey gateway output to recorder inputs connect
 simple sampler rig hey gateway scheduler identifier to recorder scheduler identifier  connect
 
 # scaler, connect it to rig and recorder
-scaler in synth rig create
-synth rig hey recorder outputs to scaler inputs connect
-synth rig hey scaler light output to gateway input light  connect
+scaler in user synth rig create
+user synth rig hey recorder outputs to scaler inputs connect
+user synth rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+user synth rig hey recorder outputs strip position output to scaler inputs global pitch bend input connect
+user synth rig hey scaler light output to gateway input light  connect
 
 
 # ahdrs many rigs have this, connect to recorder
-ahdsr in synth rig create
-synth rig hey recorder outputs to ahdsr inputs connect
-synth rig hey recorder outputs pressure output to ahdsr inputs activation input connect
+ahdsr in user synth rig create
+user synth rig hey recorder outputs to ahdsr inputs connect
+user synth rig hey recorder outputs pressure output to ahdsr inputs activation input connect
 
 # oscillator, main component of a simple  synth
-sawtooth oscillator in synth rig create 
-synth rig hey ahdsr outputs to sawtooth oscillator connect
-synth rig hey scaler frequency output to sawtooth oscillator connect
+sawtooth oscillator in user synth rig create 
+user synth rig hey ahdsr outputs to sawtooth oscillator connect
+user synth rig hey scaler frequency output to sawtooth oscillator connect
 
 # synths always need filters, placed after scaler, and produces the main output
-ladder filter in synth rig create 
-synth rig hey scaler yaw output to ladder filter bend input connect
-synth rig hey sawtooth oscillator audio output to ladder filter audio input connect
+ladder filter in user synth rig create 
+user synth rig hey scaler yaw output to ladder filter bend input connect
+user synth rig hey sawtooth oscillator audio output to ladder filter audio input connect
 
 # increase the volume, wiuth a gain agent, this is quite common in rigs, just connect the last bit of the 
 # oscillator or filter to it 
-gain in synth rig create
-synth rig gain hey volume input to 1 set
-synth rig hey ladder filter low pass output to gain audio input connect
+gain in user synth rig create
+user synth rig gain hey volume input to 1 set
+user synth rig hey ladder filter low pass output to gain audio input connect
 
 # summer, splits the output into 2 channels 
-summer in synth rig create
-synth rig summer hey channel count to 2 set
-synth rig hey gain audio output to summer connect
+summer in user synth rig create
+user synth rig summer hey channel count to 2 set
+user synth rig hey gain audio output to summer connect
 
 # effect fx unit, exists in all rigs
 # rename the AU parameters so they can be presented nicely in the UI
-audio unit in synth rig create
-synth rig audio unit 1 to effect audio unit 1 name ify 
-synth rig effect audio unit hey midi channel to 1 set
-synth rig effect audio unit hey audio inputs channel count to 2 set
-synth rig effect audio unit hey audio outputs channel count to 2 set
-synth rig hey summer outputs to effect audio unit audio inputs connect
-synth rig hey effect audio unit audio outputs to gateway input  connect
-synth rig effect audio unit hey parameters parameter 1 to absolute strip 1 name ify
-synth rig effect audio unit hey parameters parameter 2 to pedal 1 name ify
-synth rig effect audio unit hey parameters parameter 3 to pedal 2 name ify
-synth rig effect audio unit hey parameters parameter 4 to pedal 3 name ify
-synth rig effect audio unit hey parameters parameter 5 to pedal 4 name ify
-synth rig effect audio unit hey parameters parameter 6 to strip position name ify
-synth rig effect audio unit hey parameters parameter 7 to breath name ify
-synth rig effect audio unit hey parameters parameter 8 to pressure name ify
-synth rig effect audio unit hey parameters parameter 9 to roll name ify
-synth rig effect audio unit hey parameters parameter 10 to yaw name ify
-synth rig hey gateway output to effect audio unit connect
-synth rig hey gateway output to effect audio unit parameters connect
+audio unit in user synth rig create
+user synth rig audio unit 1 to effect audio unit 1 name ify 
+user synth rig effect audio unit hey midi channel to 1 set
+user synth rig effect audio unit hey audio inputs channel count to 2 set
+user synth rig effect audio unit hey audio outputs channel count to 2 set
+user synth rig hey summer outputs to effect audio unit audio inputs connect
+user synth rig hey effect audio unit audio outputs to gateway input  connect
+user synth rig effect audio unit hey parameters parameter 1 to absolute strip 1 name ify
+user synth rig effect audio unit hey parameters parameter 2 to pedal 1 name ify
+user synth rig effect audio unit hey parameters parameter 3 to pedal 2 name ify
+user synth rig effect audio unit hey parameters parameter 4 to pedal 3 name ify
+user synth rig effect audio unit hey parameters parameter 5 to pedal 4 name ify
+user synth rig effect audio unit hey parameters parameter 6 to strip position name ify
+user synth rig effect audio unit hey parameters parameter 7 to breath name ify
+user synth rig effect audio unit hey parameters parameter 8 to pressure name ify
+user synth rig effect audio unit hey parameters parameter 9 to roll name ify
+user synth rig effect audio unit hey parameters parameter 10 to yaw name ify
+user synth rig hey gateway output to effect audio unit connect
+user synth rig hey gateway output to effect audio unit parameters connect
 
 # now you will need to link this into your setup, see linksynthrig.bc for an example for PM7
