@@ -54,6 +54,8 @@ synth rig gateway hey output called tempo create
 synth rig gateway output tempo 1 to tempo name ify
 synth rig gateway hey output called yaw create 
 synth rig gateway output yaw 1 to yaw name ify
+synth rig gateway hey output called breath create 
+synth rig gateway output breath 1 to breath name ify
 synth rig gateway hey output called absolute strip 1 create 
 synth rig gateway hey output called strip position 1 create 
 synth rig gateway hey output called pedal 1 create 
@@ -69,6 +71,7 @@ synth rig recorder hey auxilliary input 3 to pedal 2 name ify
 synth rig recorder hey auxilliary input 4 to pedal 3 name ify
 synth rig recorder hey auxilliary input 5 to pedal 4 name ify
 synth rig recorder hey auxilliary input 6 to strip position name ify
+synth rig recorder hey auxilliary input 7 to breath name ify
 synth rig hey gateway output to recorder inputs connect
 simple sampler rig hey gateway scheduler identifier to recorder scheduler identifier  connect
 
