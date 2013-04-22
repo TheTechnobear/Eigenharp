@@ -1,0 +1,6 @@
+EIGEN_RELEASE=release-2.0.74-stable
+EPATH=/usr/pi/$EIGEN_RELEASE/bin
+C=`echo $1 | tr "\n\r" " " | sed "s/[	 ]\+/ /g"`
+echo brpc : "$C"
+$EPATH/brpc --verbose "[interpreter1]" exec "$C"
+

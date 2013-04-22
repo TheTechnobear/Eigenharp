@@ -1,0 +1,6 @@
+EIGEN_RELEASE=release-2.0.74-stable
+EPATH=/usr/pi/$EIGEN_RELEASE/bin
+$EPATH/brpc --verbose "[interpreter1]" identify $* >/tmp/x 2>&1
+RES=`tail -1 /tmp/x`
+COMP=`echo $RES | sed "s/.*\'\(.*\)\'.*/\1/"` 
+$EPATH/bcat $COMP
