@@ -1,0 +1,18 @@
+in this directory you will find a number of instrument rigs for use with EigenD, all ae based on the Tau rigs unless specified otherwise
+
+The create scripts just create the rigs, they do NOT wire them up into a setup, as this will be different depending upon the setup they are going to be loaded into
+them
+the link script is very much a sample to show what is needed to be connected, basically keygroup, and mixer - its for pico mix, but basically the same for other setups
+
+notes:
+- the sample oscillator are never preloaded with samples, they are deliberatly left blank, so you will need to set using belcanto, or workbench or stage
+- the audio units  are never preloaded with plugins, they are deliberatly left blank, so you will need to set using belcanto, or workbench or stage
+- all rigs are default names user X rig , eg. user synth rig, so as not to clash with factory ones, you can rename see comment in rig file
+
+files:
+createsynth.bc	-  simple synth based on sawtooth oscillator, as provided in alpha and tau setups
+createaudiounit.bc - rig for housing audio unit and vst instruments
+createsimplesampler.bc - rig for playing samples
+createdoublesampler.bc - rig for which play 2 different samples of left and right pan, based on yaw of key
+createpanpipe.bc - a panpipe rig, created by Antonio based on STK	
+linksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix
