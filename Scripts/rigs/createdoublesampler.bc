@@ -110,6 +110,7 @@ user double sampler rig hey left sampler oscillator outputs to left gain sampler
 
 ranger in user double sampler rig create
 it to left channel ranger name ify 
+user double sampler rig left channel ranger hey rest to 0.5 set
 user double sampler rig left channel ranger hey maximum to 0 set
 user double sampler rig left channel ranger hey minimum to 1 set
 user double sampler rig hey left cycler outputs yaw output to left channel ranger input connect
@@ -144,6 +145,7 @@ user double sampler rig hey right sampler oscillator outputs to right gain sampl
 
 ranger in user double sampler rig create
 it to right channel ranger name ify 
+user double sampler rig right channel ranger hey rest to 0.5 set
 user double sampler rig right channel ranger hey maximum to 1 set
 user double sampler rig right channel ranger hey minimum to 0 set
 user double sampler rig hey right cycler outputs yaw output to right channel ranger input connect
