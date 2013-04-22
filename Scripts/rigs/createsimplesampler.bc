@@ -76,7 +76,7 @@ user sampler rig hey gateway scheduler identifier to recorder scheduler identifi
 scaler in user sampler rig create
 user sampler rig hey recorder outputs to scaler inputs connect
 user sampler rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
-user sampler rig hey recorder outputs strip position output to scaler inputs global pitch bend input connect
+user sampler rig hey recorder outputs strip position to scaler inputs global pitch bend input connect
 user sampler rig hey scaler light output to gateway input light  connect
 
 shaper in user sampler rig create

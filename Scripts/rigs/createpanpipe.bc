@@ -62,7 +62,7 @@ user panpipe rig scaler hey curve to 3 set
 user panpipe rig scaler hey key bend range input to 0.4 set
 user panpipe rig hey recorder outputs to scaler inputs connect
 user panpipe rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
-user panpipe rig hey recorder outputs strip position output to scaler inputs global pitch bend input connect
+user panpipe rig hey recorder outputs strip position to scaler inputs global pitch bend input connect
 user panpipe rig hey scaler light output to gateway input light  connect
 
 panpipe oscillator in user panpipe rig create 
