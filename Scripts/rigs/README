@@ -16,6 +16,7 @@ createaudiounit.bc - rig for housing audio unit and vst instruments
 createsimplesampler.bc - rig for playing samples
 createdoublesampler.bc - rig for which play 2 different samples of left and right pan, based on yaw of key
 createpanpipe.bc - a panpipe rig, created by Antonio based on STK	
+createclarinet.bc - clarinet rig, note does NOT have stringer, as its incompatible with fingerer
 
 picomixlinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix setup
 picolinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico factory setup
