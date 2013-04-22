@@ -1,0 +1,181 @@
+name
+    user double sampler rig
+description
+    script to create user double sampler rig
+
+script
+empty join
+
+user double sampler rig un create
+
+# create a user double sampler rig , you will need to give it a unique name, so change if necessary
+# a user double sampler rig, it has 2 sampler oscillators which are faded across using yaw, this is 
+# the same as sample 3 in tau setup
+# in vi %s/user double sampler rig/user sampler 1 rig/
+
+# basic rig creation is
+# create rig, and gateway
+# create a recorder linked to gateway input
+# create a scaler linked to recorder
+# possibly create and ahdsr to allow control of vel envelope
+# some rigs specific stuff, e.g. oscillators
+# create a gain/summer pair, connect it to last agent in rig specific stuff
+# create an fx audio unit to allow specific vst/au effects on the rig, connect it to summer
+# create output of fx audio unit back to rig gateway ouput
+
+# fuller explanation is in createsynthrig.bc
+# how to link it up, is show in linksynthrig.bc
+
+rig create
+it to user double sampler rig name ify
+user double sampler rig gateway hey input called left audio create 
+user double sampler rig gateway input left audio 1 to left audio name ify
+user double sampler rig gateway hey input called right audio create 
+user double sampler rig gateway input right audio 1 to right audio name ify
+user double sampler rig gateway hey input called light create 
+user double sampler rig gateway input light 1 to light name ify
+user double sampler rig gateway hey output called bar beat create 
+user double sampler rig gateway output bar beat 1 to bar beat name ify
+user double sampler rig gateway hey output called controller create 
+user double sampler rig gateway output controller 1 to controller name ify
+user double sampler rig gateway hey output called key create 
+user double sampler rig gateway output key 1 to key name ify
+user double sampler rig gateway hey output called pressure create 
+user double sampler rig gateway output pressure 1 to pressure name ify
+user double sampler rig gateway hey output called roll create 
+user double sampler rig gateway output roll 1 to roll name ify
+user double sampler rig gateway hey output called running create 
+user double sampler rig gateway output running 1 to running name ify
+user double sampler rig gateway hey output called scheduler identifier create 
+user double sampler rig gateway output scheduler identifier 1 to scheduler identifier name ify
+user double sampler rig gateway hey output called song beat create 
+user double sampler rig gateway output song beat 1 to song beat name ify
+user double sampler rig gateway hey output called tempo create 
+user double sampler rig gateway output tempo 1 to tempo name ify
+user double sampler rig gateway hey output called yaw create 
+user double sampler rig gateway output yaw 1 to yaw name ify
+user double sampler rig gateway hey output called breath create
+user double sampler rig gateway output breath 1 to breath name ify
+user double sampler rig gateway hey output called absolute strip 1 create 
+user double sampler rig gateway hey output called strip position 1 create 
+user double sampler rig gateway hey output called pedal 1 create 
+user double sampler rig gateway hey output called pedal 2 create 
+user double sampler rig gateway hey output called pedal 3 create 
+user double sampler rig gateway hey output called pedal 4 create 
+
+recorder in user double sampler rig create
+user double sampler rig recorder hey auxilliary input 1 to absolute strip 1 name ify
+user double sampler rig recorder hey auxilliary input 2 to pedal 1 name ify
+user double sampler rig recorder hey auxilliary input 3 to pedal 2 name ify
+user double sampler rig recorder hey auxilliary input 4 to pedal 3 name ify
+user double sampler rig recorder hey auxilliary input 5 to pedal 4 name ify
+user double sampler rig recorder hey auxilliary input 6 to strip position name ify
+user double sampler rig recorder hey auxilliary input 7 to breath name ify
+user double sampler rig hey gateway output to recorder inputs connect
+user double sampler rig hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+scaler in user double sampler rig create
+user double sampler rig hey recorder outputs to scaler inputs connect
+user double sampler rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+user double sampler rig hey recorder outputs strip position to scaler inputs global pitch bend input connect
+user double sampler rig hey scaler light output to gateway input light  connect
+
+shaper in user double sampler rig create
+it to breath shaper 1 name ify
+user double sampler rig hey recorder outputs breath to breath shaper input connect
+user double sampler rig breath shaper compression to 0.3 set 
+
+cycler in user double sampler rig create
+it to left cycler name ify
+user double sampler rig hey scaler outputs to left cycler inputs connect 
+user double sampler rig hey recorder outputs pedal 1 to left cycler inputs damper pedal input connect 
+user double sampler rig hey breath shaper output to left cycler inputs damper pedal input connect 
+
+sampler oscillator in user double sampler rig create 
+it to left sampler oscillator name ify
+user double sampler rig hey left cycler outputs to left sampler oscillator inputs connect
+
+ahdsr in user double sampler rig create
+it to left ahdsr name ify
+user double sampler rig hey left ahdsr volume output to left cycler feedback input connect 
+user double sampler rig hey left cycler outputs to left ahdsr inputs connect
+user double sampler rig hey left sampler oscillator outputs to left ahdsr inputs connect
+user double sampler rig hey left ahdsr activation output to left sampler oscillator activation input connect
+
+gain in user double sampler rig create
+it to left sampler gain name ify
+user double sampler rig left sampler gain hey channel count to 2 set
+user double sampler rig hey left ahdsr outputs volume output to left gain sampler volume input connect 
+user double sampler rig hey left sampler oscillator outputs to left gain sampler inputs connect
+
+ranger in user double sampler rig create
+it to left channel ranger name ify 
+user double sampler rig left channel ranger hey maximum to 0 set
+user double sampler rig left channel ranger hey minimum to 1 set
+user double sampler rig hey left cycler outputs yaw output to left channel ranger input connect
+
+gain in user double sampler rig create
+it to left channel gain name ify
+user double sampler rig left channel gain hey channel count to 2 set
+user double sampler rig hey left sampler gain outputs to left channel gain inputs connect 
+user double sampler rig hey left channel ranger output to left channel gain volume input connect 
+
+cycler in user double sampler rig create
+it to right cycler name ify
+user double sampler rig hey scaler outputs to right cycler inputs connect 
+user double sampler rig hey recorder outputs pedal 1 to right cycler inputs damper pedal input connect 
+
+sampler oscillator in user double sampler rig create 
+it to right sampler oscillator name ify
+user double sampler rig hey right cycler outputs to right sampler oscillator inputs connect
+
+ahdsr in user double sampler rig create
+it to right ahdsr name ify
+user double sampler rig hey right ahdsr volume output to right cycler feedback input connect 
+user double sampler rig hey right cycler outputs to right ahdsr inputs connect
+user double sampler rig hey right sampler oscillator outputs to right ahdsr inputs connect
+user double sampler rig hey right ahdsr activation output to right sampler oscillator activation input connect
+
+gain in user double sampler rig create
+it to right sampler gain name ify
+user double sampler rig right sampler gain hey channel count to 2 set
+user double sampler rig hey right ahdsr outputs volume output to right gain sampler volume input connect 
+user double sampler rig hey right sampler oscillator outputs to right gain sampler inputs connect
+
+ranger in user double sampler rig create
+it to right channel ranger name ify 
+user double sampler rig right channel ranger hey maximum to 1 set
+user double sampler rig right channel ranger hey minimum to 0 set
+user double sampler rig hey right cycler outputs yaw output to right channel ranger input connect
+
+gain in user double sampler rig create
+it to right channel gain name ify
+user double sampler rig right channel gain hey channel count to 2 set
+user double sampler rig hey right sampler gain outputs to right channel gain inputs connect 
+user double sampler rig hey right channel ranger output to right channel gain volume input connect 
+
+summer in user double sampler rig create
+user double sampler rig summer hey channel count to 2 set
+user double sampler rig hey left channel gain to summer connect
+user double sampler rig hey right channel gain to summer connect
+
+audio unit in user double sampler rig create
+user double sampler rig audio unit 1 to effect audio unit 1 name ify 
+user double sampler rig effect audio unit hey midi channel to 1 set
+user double sampler rig effect audio unit hey audio inputs channel count to 2 set
+user double sampler rig effect audio unit hey audio outputs channel count to 2 set
+user double sampler rig hey summer outputs to effect audio unit audio inputs connect
+user double sampler rig hey effect audio unit audio outputs to gateway input  connect
+user double sampler rig effect audio unit hey parameters parameter 1 to absolute strip 1 name ify
+user double sampler rig effect audio unit hey parameters parameter 2 to pedal 1 name ify
+user double sampler rig effect audio unit hey parameters parameter 3 to pedal 2 name ify
+user double sampler rig effect audio unit hey parameters parameter 4 to pedal 3 name ify
+user double sampler rig effect audio unit hey parameters parameter 5 to pedal 4 name ify
+user double sampler rig effect audio unit hey parameters parameter 6 to strip position name ify
+user double sampler rig effect audio unit hey parameters parameter 7 to breath name ify
+user double sampler rig effect audio unit hey parameters parameter 8 to pressure name ify
+user double sampler rig effect audio unit hey parameters parameter 9 to roll name ify
+user double sampler rig effect audio unit hey parameters parameter 10 to yaw name ify
+user double sampler rig hey gateway output to effect audio unit connect
+user double sampler rig hey gateway output to effect audio unit parameters connect
+
