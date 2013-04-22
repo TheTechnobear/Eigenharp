@@ -1,3 +1,8 @@
+The VI files here provide 3 features:
+- ability to execute belcanto commands from with vi, see below
+- syntax colouring for belcanto words
+- word completion for belcanto words
+
 Inside this directory you will find the following:
 (use ls -al to see them, as they are hidden!)
 
@@ -5,3 +10,4 @@ Inside this directory you will find the following:
 .vim - this again, goes into your existing root directory
 
 note: you will also need the bash script files help in this repo in /bin , to be able to execute belcanto using F2
+
