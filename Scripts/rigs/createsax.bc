@@ -1,0 +1,121 @@
+name
+    user sax rig
+description
+    script to create user sax rig
+
+script
+empty join
+
+user sax rig un create
+
+# IMPORTANT NOTE: this will NOT WORK out of the box, eigenlabs have mispelt frequency on the sax oscillator so 
+# you must rename it correctly, duing the middle of this script, this cannot be automated, as freakency is not a belcanto noun
+
+#
+# create a user sax rig , you will need to give it a unique name, so change if necessary
+# a user sax rig, based on tau setup
+# in vi %s/user sax rig/user audio unit 1 rig/
+
+# basic rig creation is
+# create rig, and gateway
+# create a recorder linked to gateway input
+# create a scaler linked to recorder
+# possibly create and ahdsr to allow control of vel envelope
+# some rigs specific stuff, e.g. oscillators
+# create a gain/summer pair, connect it to last agent in rig specific stuff
+# create an fx audio unit to allow specific vst/au effects on the rig, connect it to summer
+# create output of fx audio unit back to rig gateway ouput
+
+# fuller explanation is in createsynthrig.bc
+# how to link it up, is show in linksynthrig.bc
+
+rig create
+it to user sax rig name ify
+user sax rig gateway hey input called left audio create 
+user sax rig gateway input left audio 1 to left audio name ify
+user sax rig gateway hey input called right audio create 
+user sax rig gateway input right audio 1 to right audio name ify
+user sax rig gateway hey input called light create 
+user sax rig gateway input light 1 to light name ify
+user sax rig gateway hey output called bar beat create 
+user sax rig gateway output bar beat 1 to bar beat name ify
+user sax rig gateway hey output called controller create 
+user sax rig gateway output controller 1 to controller name ify
+user sax rig gateway hey output called key create 
+user sax rig gateway output key 1 to key name ify
+user sax rig gateway hey output called pressure create 
+user sax rig gateway output pressure 1 to pressure name ify
+user sax rig gateway hey output called roll create 
+user sax rig gateway output roll 1 to roll name ify
+user sax rig gateway hey output called running create 
+user sax rig gateway output running 1 to running name ify
+user sax rig gateway hey output called scheduler identifier create 
+user sax rig gateway output scheduler identifier 1 to scheduler identifier name ify
+user sax rig gateway hey output called song beat create 
+user sax rig gateway output song beat 1 to song beat name ify
+user sax rig gateway hey output called tempo create 
+user sax rig gateway output tempo 1 to tempo name ify
+user sax rig gateway hey output called yaw create 
+user sax rig gateway output yaw 1 to yaw name ify
+user sax rig gateway hey output called breath create
+user sax rig gateway output breath 1 to breath name ify
+user sax rig gateway hey output called absolute strip 1 create 
+user sax rig gateway hey output called strip position 1 create 
+user sax rig gateway hey output called pedal 1 create 
+user sax rig gateway hey output called pedal 2 create 
+user sax rig gateway hey output called pedal 3 create 
+user sax rig gateway hey output called pedal 4 create 
+
+recorder in user sax rig create
+user sax rig recorder hey auxilliary input 1 to absolute strip 1 name ify
+user sax rig recorder hey auxilliary input 2 to pedal 1 name ify
+user sax rig recorder hey auxilliary input 3 to pedal 2 name ify
+user sax rig recorder hey auxilliary input 4 to pedal 3 name ify
+user sax rig recorder hey auxilliary input 5 to pedal 4 name ify
+user sax rig recorder hey auxilliary input 6 to strip position name ify
+user sax rig recorder hey auxilliary input 7 to breath name ify
+user sax rig hey gateway output to recorder inputs connect
+user sax rig hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+scaler in user sax rig create
+user sax rig hey recorder outputs to scaler inputs connect
+user sax rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+user sax rig hey scaler light output to gateway input light  connect
+
+
+sax oscillator in user sax rig create
+user sax rig hey scaler outputs yaw output to sax oscillator vibrato gain input connect
+user sax rig hey scaler outputs frequency output to sax oscillator frequency input connect
+
+shaper in user sax rig create
+user sax rig shaper hey compression to 0.3 set
+user sax rig hey recorder outputs breath to shaper input connect
+user sax rig shaper output to sax oscillator pressure input connect
+user sax rig shaper output to sax oscillator blow position input connect
+
+summer in user sax rig create
+user sax rig summer hey channel count to 2 set
+user sax rig hey sax oscillator to summer inputs connect
+
+audio unit in user sax rig create
+user sax rig audio unit 1 to effect audio unit 1 name ify 
+user sax rig effect audio unit hey midi channel to 1 set
+
+user sax rig effect audio unit hey parameters parameter 1 to pressure name ify
+user sax rig effect audio unit hey parameters parameter 2 to roll name ify
+user sax rig effect audio unit hey parameters parameter 3 to yaw name ify
+user sax rig effect audio unit hey parameters parameter 4 to breath name ify
+user sax rig effect audio unit hey parameters parameter 5 to strip position name ify
+user sax rig effect audio unit hey parameters parameter 6 to absolute strip 1 name ify
+user sax rig effect audio unit hey parameters parameter 7 to pedal 1 name ify
+user sax rig effect audio unit hey parameters parameter 8 to pedal 2 name ify
+user sax rig effect audio unit hey parameters parameter 9 to pedal 3 name ify
+user sax rig effect audio unit hey parameters parameter 10 to pedal 4 name ify
+
+user sax rig effect audio unit hey audio inputs channel count to 2 set
+user sax rig effect audio unit hey audio outputs channel count to 2 set
+user sax rig hey summer outputs to effect audio unit audio inputs connect
+user sax rig hey effect audio unit audio outputs to gateway input  connect
+user sax rig hey gateway output to effect audio unit connect
+user sax rig hey gateway output to effect audio unit parameters connect
+

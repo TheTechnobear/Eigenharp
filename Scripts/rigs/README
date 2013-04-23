@@ -20,6 +20,8 @@ createclarinet.bc - clarinet rig, note does NOT have stringer, as its incompatib
 createcello.bc - cello rig, note does NOT have stringer, as its incompatible with fingerer, have browser open to select impulse
 createmidi.bc - midi rig, note , need to use specific link script below
 
+createsax.bc - sax rig - WILL NOT WORK, frequency is misspelt by eigenlabs, you must in workbench alter this, for the rest of the script to work
+
 picomixlinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix setup
 picolinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico factory setup
 taulinksynthrig.bc - sample script, which shows how to link a newly created synth rig into tau factory setup

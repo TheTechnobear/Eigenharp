@@ -81,7 +81,7 @@ user panpipe rig ranger output to panpipe oscillator pressure input connect
 shaper in user panpipe rig create
 user panpipe rig shaper hey compression to 0.7 set
 user panpipe rig shaper hey sharpness to 0.2 set
-user panpipe rig gateway hey output breath to shaper input connect
+user panpipe rig hey recorder outputs breath to shaper input connect
 user panpipe rig shaper output to panpipe oscillator pressure input connect
 
 summer in user panpipe rig create
