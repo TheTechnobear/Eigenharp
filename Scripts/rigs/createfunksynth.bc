@@ -1,0 +1,144 @@
+name
+    user funk synth rig
+description
+    script to create user funk synth rig
+
+script
+empty join
+
+user funk synth rig un create
+
+# create a user funk synth rig, you will need to give it a unique name, so change if necessary
+# in vi %s/user funk synth rig/user funk synth 1 rig/
+
+
+#NOT WORKING
+# principle of this synth, is to use a sine wave to alter the frequency, this sine waves frequnce is supposed to be modified by yaw
+# and its applitude is controlled by an ahdsr
+# the issue is the ahdsr does not seem to control the oscillator volume though, as disconnecting it, and setting volume to 1 and it starts
+# to do as intended
+# in practive also the frequency ive set seem to only be partially being used, as they appear to be a bit fast
+# the synth filter Ive placed to protect the other oscillator from getting too wild as input, as this kills eigenD
+
+
+rig create
+it to user funk synth rig name ify
+user funk synth rig gateway hey input called left audio create 
+user funk synth rig gateway input left audio 1 to left audio name ify
+user funk synth rig gateway hey input called right audio create 
+user funk synth rig gateway input right audio 1 to right audio name ify
+user funk synth rig gateway hey input called light create 
+user funk synth rig gateway input light 1 to light name ify
+user funk synth rig gateway hey output called bar beat create 
+user funk synth rig gateway output bar beat 1 to bar beat name ify
+user funk synth rig gateway hey output called controller create 
+user funk synth rig gateway output controller 1 to controller name ify
+user funk synth rig gateway hey output called key create 
+user funk synth rig gateway output key 1 to key name ify
+user funk synth rig gateway hey output called pressure create 
+user funk synth rig gateway output pressure 1 to pressure name ify
+user funk synth rig gateway hey output called roll create 
+user funk synth rig gateway output roll 1 to roll name ify
+user funk synth rig gateway hey output called running create 
+user funk synth rig gateway output running 1 to running name ify
+user funk synth rig gateway hey output called scheduler identifier create 
+user funk synth rig gateway output scheduler identifier 1 to scheduler identifier name ify
+user funk synth rig gateway hey output called song beat create 
+user funk synth rig gateway output song beat 1 to song beat name ify
+user funk synth rig gateway hey output called tempo create 
+user funk synth rig gateway output tempo 1 to tempo name ify
+user funk synth rig gateway hey output called yaw create 
+user funk synth rig gateway output yaw 1 to yaw name ify
+user funk synth rig gateway hey output called breath create 
+user funk synth rig gateway output breath 1 to breath name ify
+user funk synth rig gateway hey output called absolute strip 1 create 
+user funk synth rig gateway hey output called strip position 1 create 
+user funk synth rig gateway hey output called pedal 1 create 
+user funk synth rig gateway hey output called pedal 2 create 
+user funk synth rig gateway hey output called pedal 3 create 
+user funk synth rig gateway hey output called pedal 4 create 
+
+recorder in user funk synth rig create
+user funk synth rig recorder hey auxilliary input 1 to absolute strip 1 name ify
+user funk synth rig recorder hey auxilliary input 2 to pedal 1 name ify
+user funk synth rig recorder hey auxilliary input 3 to pedal 2 name ify
+user funk synth rig recorder hey auxilliary input 4 to pedal 3 name ify
+user funk synth rig recorder hey auxilliary input 5 to pedal 4 name ify
+user funk synth rig recorder hey auxilliary input 6 to strip position name ify
+user funk synth rig recorder hey auxilliary input 7 to breath name ify
+user funk synth rig hey gateway output to recorder inputs connect
+user funk synth rig hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+scaler in user funk synth rig create
+user funk synth rig hey recorder outputs to scaler inputs connect
+user funk synth rig hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+user funk synth rig hey recorder outputs strip position to scaler inputs global pitch bend input connect
+user funk synth rig hey scaler light output to gateway input light  connect
+
+ahdsr in user funk synth rig create
+it to volume ahdsr name ify 
+user funk synth rig hey recorder outputs to volume ahdsr inputs connect
+user funk synth rig hey recorder outputs pressure output to volume ahdsr inputs activation input connect
+sawtooth oscillator in user funk synth rig create 
+it to volume oscillator name ify
+user funk synth rig hey volume ahdsr outputs to volume oscillator connect
+user funk synth rig hey scaler frequency output to volume oscillator connect
+
+ranger in user funk synth rig create
+it to frequency ranger name ify
+user funk synth rig frequency ranger hey  maximum to 10.0 set
+user funk synth rig frequency ranger hey rest to 5 set
+user funk synth rig frequency ranger hey minimum to 0 set
+user funk synth rig frequency ranger hey mono  set
+user funk synth rig hey scaler yaw output to frequency ranger input connect
+
+ahdsr in user funk synth rig create
+it to frequency ahdsr name ify 
+user funk synth rig hey recorder outputs to volume ahdsr inputs connect
+user funk synth rig hey recorder outputs pressure output to frequency ahdsr inputs activation input connect
+
+sine oscillator in user funk synth rig create 
+it to frequency oscillator name ify
+user funk synth rig hey frequency ahdsr outputs to frequency oscillator connect
+user funk synth rig hey frequency ranger output to frequency oscillator frequency input connect
+
+synth filter in user funk synth rig create
+it to frequency filter name ify 
+user funk synth rig frequency filter hey cutoff frequency input to 60 set
+user funk synth rig hey frequency oscillator audio output to frequency filter audio input connect
+
+user funk synth rig hey frequency filter low pass output to volume oscillator detune input connect
+
+ladder filter in user funk synth rig create 
+user funk synth rig hey volume oscillator audio output to ladder filter audio input connect
+
+gain in user funk synth rig create
+user funk synth rig gain hey volume input to 1 set
+user funk synth rig hey ladder filter low pass output to gain audio input connect
+
+summer in user funk synth rig create
+user funk synth rig summer hey channel count to 2 set
+user funk synth rig hey gain audio output to summer connect
+
+audio unit in user funk synth rig create
+user funk synth rig audio unit 1 to effect audio unit 1 name ify 
+user funk synth rig effect audio unit hey midi channel to 1 set
+
+user funk synth rig effect audio unit hey parameters parameter 1 to pressure name ify
+user funk synth rig effect audio unit hey parameters parameter 2 to roll name ify
+user funk synth rig effect audio unit hey parameters parameter 3 to yaw name ify
+user funk synth rig effect audio unit hey parameters parameter 4 to breath name ify
+user funk synth rig effect audio unit hey parameters parameter 5 to strip position name ify
+user funk synth rig effect audio unit hey parameters parameter 6 to absolute strip 1 name ify
+user funk synth rig effect audio unit hey parameters parameter 7 to pedal 1 name ify
+user funk synth rig effect audio unit hey parameters parameter 8 to pedal 2 name ify
+user funk synth rig effect audio unit hey parameters parameter 9 to pedal 3 name ify
+user funk synth rig effect audio unit hey parameters parameter 10 to pedal 4 name ify
+
+user funk synth rig effect audio unit hey audio inputs channel count to 2 set
+user funk synth rig effect audio unit hey audio outputs channel count to 2 set
+user funk synth rig hey summer outputs to effect audio unit audio inputs connect
+user funk synth rig hey effect audio unit audio outputs to gateway input  connect
+user funk synth rig hey gateway output to effect audio unit connect
+user funk synth rig hey gateway output to effect audio unit parameters connect
+
