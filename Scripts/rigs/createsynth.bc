@@ -73,7 +73,7 @@ user synth rig recorder hey auxilliary input 5 to pedal 4 name ify
 user synth rig recorder hey auxilliary input 6 to strip position name ify
 user synth rig recorder hey auxilliary input 7 to breath name ify
 user synth rig hey gateway output to recorder inputs connect
-simple sampler rig hey gateway scheduler identifier to recorder scheduler identifier  connect
+user synth rig hey gateway scheduler identifier to recorder scheduler identifier  connect
 
 # scaler, connect it to rig and recorder
 scaler in user synth rig create
