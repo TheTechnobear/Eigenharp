@@ -62,13 +62,18 @@ user midi rig hey midi clock midi output to gateway input midi into channel 2 co
 user midi rig hey gateway output to midi clock inputs connect
 
 midi converter in user midi rig create
+user midi rig midi converter hey midi channel to 1 set
 user midi rig midi converter hey parameters parameter 1 to pressure name ify
 user midi rig midi converter hey parameters parameter 2 to roll name ify
 user midi rig midi converter hey parameters parameter 3 to yaw name ify 
 user midi rig midi converter hey parameters parameter 4 to breath name ify
 user midi rig midi converter hey parameters parameter 5 to strip position name ify
 user midi rig midi converter hey parameters parameter 6 to absolute strip 1 name ify
-user midi rig midi converter hey midi channel to 1 set
+user midi rig midi converter hey parameters parameter 7 to pedal 1 name ify
+user midi rig midi converter hey parameters parameter 8 to pedal 2 name ify
+user midi rig midi converter hey parameters parameter 9 to pedal 3 name ify
+user midi rig midi converter hey parameters parameter 10 to pedal 4 name ify
+
 user midi rig hey scaler outputs to midi converter inputs connect    
 user midi rig hey scaler outputs pressure output to midi converter parameters pressure connect    
 user midi rig hey scaler outputs roll output to midi converter parameters roll connect 

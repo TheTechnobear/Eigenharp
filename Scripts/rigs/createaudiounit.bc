@@ -111,20 +111,22 @@ user audio unit rig hey instrument audio unit audio outputs channels to summer i
 audio unit in user audio unit rig create
 user audio unit rig audio unit 2 to effect audio unit 1 name ify 
 user audio unit rig effect audio unit hey midi channel to 1 set
+
+user audio unit rig effect audio unit hey parameters parameter 1 to pressure name ify
+user audio unit rig effect audio unit hey parameters parameter 2 to roll name ify
+user audio unit rig effect audio unit hey parameters parameter 3 to yaw name ify
+user audio unit rig effect audio unit hey parameters parameter 4 to breath name ify
+user audio unit rig effect audio unit hey parameters parameter 5 to strip position name ify
+user audio unit rig effect audio unit hey parameters parameter 6 to absolute strip 1 name ify
+user audio unit rig effect audio unit hey parameters parameter 7 to pedal 1 name ify
+user audio unit rig effect audio unit hey parameters parameter 8 to pedal 2 name ify
+user audio unit rig effect audio unit hey parameters parameter 9 to pedal 3 name ify
+user audio unit rig effect audio unit hey parameters parameter 10 to pedal 4 name ify
+
 user audio unit rig effect audio unit hey audio inputs channel count to 2 set
 user audio unit rig effect audio unit hey audio outputs channel count to 2 set
 user audio unit rig hey summer outputs to effect audio unit audio inputs connect
 user audio unit rig hey effect audio unit audio outputs to gateway input  connect
-user audio unit rig effect audio unit hey parameters parameter 1 to absolute strip 1 name ify
-user audio unit rig effect audio unit hey parameters parameter 2 to pedal 1 name ify
-user audio unit rig effect audio unit hey parameters parameter 3 to pedal 2 name ify
-user audio unit rig effect audio unit hey parameters parameter 4 to pedal 3 name ify
-user audio unit rig effect audio unit hey parameters parameter 5 to pedal 4 name ify
-user audio unit rig effect audio unit hey parameters parameter 6 to strip position name ify
-user audio unit rig effect audio unit hey parameters parameter 7 to breath name ify
-user audio unit rig effect audio unit hey parameters parameter 8 to pressure name ify
-user audio unit rig effect audio unit hey parameters parameter 9 to roll name ify
-user audio unit rig effect audio unit hey parameters parameter 10 to yaw name ify
 user audio unit rig hey gateway output to effect audio unit connect
 user audio unit rig hey gateway output to effect audio unit parameters connect
 
