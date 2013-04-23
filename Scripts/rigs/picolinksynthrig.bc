@@ -21,6 +21,7 @@ script
 
 empty join
 
+sampler rig 1 un connect
 console mixer 1 mixer channel 1 left audio un connect
 console mixer 1 mixer channel 1 right audio un connect
 
@@ -29,7 +30,6 @@ metronome 1 to user synth rig connect
 user synth rig to console mixer 1 mixer channel 1 connect
 main keygroup output keygroup 1 to user synth rig into channel 1 connect
 
-sampler 1 rig un connect
 
 all talker hey re do
 

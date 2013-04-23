@@ -24,6 +24,7 @@ empty join
 
 console mixer 1 mixer channel 1 left audio un connect
 console mixer 1 mixer channel 1 right audio un connect
+sampler rig 1 un connect
 
 scheduler identifier to user synth rig scheduler identifier connect
 metronome 1 to user synth rig connect
@@ -35,7 +36,6 @@ keygroup 4 output keygroup 1 to user synth rig into channel 4 connect
 keygroup 5 output keygroup 1 to user synth rig into channel 5 connect
 keygroup 6 output keygroup 1 to user synth rig into channel 6 connect
 
-sampler 1 rig un connect
 
 all talker hey re do
 

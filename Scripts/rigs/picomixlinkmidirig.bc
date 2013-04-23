@@ -1,0 +1,41 @@
+name
+    pico mix user midi rig 2
+description
+    script to link user midi rig into pico mix 7
+
+script
+
+# this script is a demo script to show how to replace sampler with the user midi rig
+#
+# NOTE: you need a new midi output for each new midi rig, so you will need to , this link script creates it
+#
+# changing to replace different rig
+# if you wish to replace something other than sampler 1, then you will need make the following changes:
+# a) sample rig 1 un connect
+# b) output keygroup NUM, replace NUM with appropriate, e.g. 3= sampler 3, 8=midi
+
+# notes: 
+# this example just disconnets sampler 1 rig, you could also just un create it, if you dont need it in your setup
+# in disconnection, we leave scheduler and metronome connected to sampler 1
+# to reconnect sampler 1, simply replace 'user midi rig' with 'sample 1 rig'
+
+
+empty join
+
+console mixer 1 mixer channel 1 left audio un connect
+console mixer 1 mixer channel 1 right audio un connect
+sampler rig 1 un connect
+
+midi output create
+user midi rig to it connect
+
+scheduler identifier to user midi rig scheduler identifier connect
+metronome 1 to user midi rig connect
+simple keygroup output keygroup 1 to user midi rig into channel 1 connect
+keygroup 1 output keygroup 1 to user midi rig into channel 2 connect
+keygroup 2 output keygroup 1 to user midi rig into channel 3 connect
+
+
+all talker hey re do
+
+

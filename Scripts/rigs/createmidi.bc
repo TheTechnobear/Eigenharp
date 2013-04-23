@@ -12,10 +12,6 @@ rig create
 it to user midi rig name ify
 user midi rig gateway hey input called midi create
 user midi rig gateway input midi 1 to midi name ify
-user midi rig gateway hey input called left audio create 
-user midi rig gateway input left audio 1 to left audio name ify
-user midi rig gateway hey input called right audio create 
-user midi rig gateway input right audio 1 to right audio name ify
 user midi rig gateway hey input called light create 
 user midi rig gateway input light 1 to light name ify
 user midi rig gateway hey output called bar beat create 
@@ -38,6 +34,8 @@ user midi rig gateway hey output called tempo create
 user midi rig gateway output tempo 1 to tempo name ify
 user midi rig gateway hey output called yaw create 
 user midi rig gateway output yaw 1 to yaw name ify
+user midi rig gateway hey output called breath create 
+user midi rig gateway output breath 1 to breath name ify
 user midi rig gateway hey output called absolute strip 1 create 
 user midi rig gateway hey output called strip position 1 create 
 user midi rig gateway hey output called pedal 1 create 
@@ -52,28 +50,31 @@ user midi rig recorder hey auxilliary input 3 to pedal 2 name ify
 user midi rig recorder hey auxilliary input 4 to pedal 3 name ify
 user midi rig recorder hey auxilliary input 5 to pedal 4 name ify
 user midi rig recorder hey auxilliary input 6 to strip position name ify
+user midi rig recorder hey auxilliary input 7 to breath name ify
 user midi rig hey gateway output to recorder inputs connect
 
 scaler in user midi rig create
 user midi rig hey recorder outputs to scaler inputs connect
 user midi rig hey scaler light output to gateway input light  connect
 
-
 midi clock in user midi rig create
-user midi rig hey midi clock midi output to gateway input midi into channel 1 connect
+user midi rig hey midi clock midi output to gateway input midi into channel 2 connect
 user midi rig hey gateway output to midi clock inputs connect
 
 midi converter in user midi rig create
-user midi rig midi converter hey parameters parameter 1 to absolute strip 1 name ify
-user midi rig midi converter hey parameters parameter 2 to breath name ify
-user midi rig midi converter hey parameters parameter 3 to pressure name ify
-user midi rig midi converter hey parameters parameter 4 to roll name ify
+user midi rig midi converter hey parameters parameter 1 to pressure name ify
+user midi rig midi converter hey parameters parameter 2 to roll name ify
+user midi rig midi converter hey parameters parameter 3 to yaw name ify 
+user midi rig midi converter hey parameters parameter 4 to breath name ify
 user midi rig midi converter hey parameters parameter 5 to strip position name ify
-user midi rig midi converter hey parameters parameter 6 to yaw name ify 
+user midi rig midi converter hey parameters parameter 6 to absolute strip 1 name ify
+user midi rig midi converter hey midi channel to 1 set
+user midi rig hey scaler outputs to midi converter inputs connect    
 user midi rig hey scaler outputs pressure output to midi converter parameters pressure connect    
 user midi rig hey scaler outputs roll output to midi converter parameters roll connect 
 user midi rig hey scaler outputs yaw output to midi converter parameters yaw connect 
 user midi rig hey recorder outputs strip position to midi converter parameters strip position connect
-user midi rig hey midi converter midi output to gateway input midi into channel 2 connect 
+user midi rig hey recorder outputs breath to midi converter parameters breath connect
+user midi rig hey midi converter midi output to gateway input midi into channel 1 connect 
                      
 

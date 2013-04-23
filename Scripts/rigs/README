@@ -17,7 +17,11 @@ createsimplesampler.bc - rig for playing samples
 createdoublesampler.bc - rig for which play 2 different samples of left and right pan, based on yaw of key
 createpanpipe.bc - a panpipe rig, created by Antonio based on STK	
 createclarinet.bc - clarinet rig, note does NOT have stringer, as its incompatible with fingerer
+createcello.bc - cello rig, note does NOT have stringer, as its incompatible with fingerer, have browser open to select impulse
+createmidi.bc - midi rig, note , need to use specific link script below
 
 picomixlinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico mix setup
 picolinksynthrig.bc - sample script, which shows how to link a newly created synth rig into pico factory setup
 taulinksynthrig.bc - sample script, which shows how to link a newly created synth rig into tau factory setup
+
+picomixlinkmidirig.bc - sample script, which shows how to link a newly created midi rig into pico mix setup, this is different due to midi output needed in main rig

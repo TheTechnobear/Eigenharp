@@ -1,5 +1,5 @@
 name
-    user synth rig 2
+    pico mix user synth rig 2
 description
     script to link user synth rig into pico mix 7
 
@@ -7,8 +7,6 @@ script
 
 # this script is a demo script to show how to replace sampler with the user synth rig
 #
-# adapting for factory setup
-# it can easily be adapted for the factory setup - from memory, replace simple keygroup with main keygroup, and delete keygroup 1 & 2
 #
 # changing to replace different rig
 # if you wish to replace something other than sampler 1, then you will need make the following changes:
@@ -26,6 +24,7 @@ empty join
 
 console mixer 1 mixer channel 1 left audio un connect
 console mixer 1 mixer channel 1 right audio un connect
+sampler rig 1 un connect
 
 scheduler identifier to user synth rig scheduler identifier connect
 metronome 1 to user synth rig connect
@@ -34,7 +33,6 @@ simple keygroup output keygroup 1 to user synth rig into channel 1 connect
 keygroup 1 output keygroup 1 to user synth rig into channel 2 connect
 keygroup 2 output keygroup 1 to user synth rig into channel 3 connect
 
-sampler 1 rig un connect
 
 all talker hey re do
 
