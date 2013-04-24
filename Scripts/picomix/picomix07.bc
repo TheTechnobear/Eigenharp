@@ -1,7 +1,7 @@
 name
     07 pico mix
 description
-    simply starts and stops the metronome on the preset keys
+    allows choosing of lights of illuminator for playing keys
 
 script
     empty join
@@ -9,10 +9,18 @@ script
     1 called 1 cancel
     2 called 1 cancel
 
-    " metronome 1 hey start
+    "
+	illuminator hey musical as green choose
     " when 1 called 1 do
 
-    " metronome 1 hey stop 
+    " 
+	illuminator hey musical as orange choose
     " when 2 called 1 do
+    " 
+	illuminator hey musical as red choose
+    " when 3 called 1 do
+    " 
+	illuminator hey musical clear
+    " when 8 called 1 do
     empty join
 
