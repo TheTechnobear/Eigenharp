@@ -1,0 +1,49 @@
+name
+    mix looper
+description
+    this script creates audio unit, connected to rig outputs and then linked back into the mixer, 
+    its purpose is to allow a AU/VST recording loop (like Mobius) to be connected
+
+script
+	empty join
+	audio unit create
+	it to mix looper name ify
+	mix looper hey audio inputs channel count to 16 set	
+	mix looper hey audio outputs channel count to 16 set	
+	mix looper hey midi channel to 1 set
+
+	sampler rig 1 output left audio to mix looper audio inputs audio input 1 connect
+	sampler rig 1 output right audio to mix looper audio inputs audio input 2 connect
+	sampler rig 2 output left audio to mix looper audio inputs audio input 3 connect
+	sampler rig 2 output right audio to mix looper audio inputs audio input 4 connect
+	sampler rig 3 output left audio to mix looper audio inputs audio input 5 connect
+	sampler rig 3 output right audio to mix looper audio inputs audio input 6 connect
+	audio rig 1  output left audio to mix looper audio inputs audio input 7 connect
+	audio rig 1  output right audio to mix looper audio inputs audio input 8 connect
+	audio rig 2  output left audio to mix looper audio inputs audio input 9 connect
+	audio rig 2  output right audio to mix looper audio inputs audio input 10 connect
+	cello rig output left audio to mix looper audio inputs audio input 11 connect
+	cello rig output right audio to mix looper audio inputs audio input 12 connect
+	clarinet rig output audio to mix looper audio inputs audio input 13 connect
+	clarinet rig output audio to mix looper audio inputs audio input 14 connect
+
+        mixer console create
+	it to looper mixer name ify
+	looper mixer outputs to console mixer 1 mixer channel 9 connect
+	mix looper audio output 1 to looper mixer channel 1 left connect
+	mix looper audio output 2 to looper mixer channel 1 right connect
+	mix looper audio output 3 to looper mixer channel 2 left connect
+	mix looper audio output 4 to looper mixer channel 2 right connect
+	mix looper audio output 5 to looper mixer channel 3 left connect
+	mix looper audio output 6 to looper mixer channel 3 right connect
+	mix looper audio output 7 to looper mixer channel 4 left connect
+	mix looper audio output 8 to looper mixer channel 4 right connect
+	mix looper audio output 9 to looper mixer channel 5 left connect
+	mix looper audio output 10 to looper mixer channel 5 right connect
+	mix looper audio output 11 to looper mixer channel 6 left connect
+	mix looper audio output 12 to looper mixer channel 6 right connect
+	mix looper audio output 13 to looper mixer channel 7 left connect
+	mix looper audio output 14 to looper mixer channel 7 right connect
+
+
+	eigenbrowser , mix looper plugin browse 
