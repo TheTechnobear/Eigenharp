@@ -1,5 +1,5 @@
 name
-	mix looper
+	pico mix mix looper
 description
 	this script linkes he user looper rig into pico mix 7, assigned controls into the green talker
 	for factory setups, the talker section would need to be adapted to reflect how you want to pass key control
