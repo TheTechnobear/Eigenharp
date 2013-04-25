@@ -27,3 +27,6 @@ picolinksynthrig.bc - sample script, which shows how to link a newly created syn
 taulinksynthrig.bc - sample script, which shows how to link a newly created synth rig into tau factory setup
 
 picomixlinkmidirig.bc - sample script, which shows how to link a newly created midi rig into pico mix setup, this is different due to midi output needed in main rig
+
+
+createloooper.bc - looper rig, designed to hold a loop recorder like mobius, associated link script is provided to show how to link it up
