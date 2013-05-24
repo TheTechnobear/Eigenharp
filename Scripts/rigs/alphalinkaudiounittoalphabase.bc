@@ -1,0 +1,19 @@
+description
+    script to link user audio unit rig into alpha base
+
+name
+    alpha user audio unit rig 
+
+
+script
+
+empty join
+
+metronome 1 to user audio unit rig connect
+user audio unit rig to console mixer 1 mixer channel 1 connect
+keygroup 1 hey keygroup output 1 to user audio unit rig into channel 1 connect
+
+empty join
+all talker hey re do
+
+

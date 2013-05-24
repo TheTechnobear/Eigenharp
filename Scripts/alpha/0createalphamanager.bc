@@ -1,0 +1,14 @@
+description
+   script to create manager 
+
+name
+    alpha script
+
+script
+    empty join 
+
+	# create the Alpha manager that will detect the instrument
+
+alpha manager create
+
+
