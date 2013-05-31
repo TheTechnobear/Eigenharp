@@ -1,0 +1,10 @@
+EIGEN_RELEASE=release-2.0.74-stable
+EPATH=/usr/pi/$EIGEN_RELEASE/bin
+echo executing : $1
+scriptname=`basename $0`
+tmpfile=`mktemp /tmp/${scriptname}.XXXXXX` || exit 1
+awk  'BEGIN { header=1;} { if (header==0 ) {print $0;}} /^[ ]*script[ ]*$/ { header=0; }' < $1 > $tmpfile
+$EPATH/bscript --verbose "<interpreter1>" $tmpfile
+rm $tmpfile
+
+
