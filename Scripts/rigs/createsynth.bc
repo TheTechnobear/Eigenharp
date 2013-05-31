@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user synth rig un create
+#user synth rig un create
 
 # create a user synth rig, you will need to give it a unique name, so change if necessary
 # in vi %s/user synth rig/user synth 1 rig/

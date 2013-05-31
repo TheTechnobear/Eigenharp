@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user panpipe rig un create
+#user panpipe rig un create
 
 # create a panpipe, you will need to give it a unique name, so change if necessary
 # this is my own creation based on Mark Harris "rig script"

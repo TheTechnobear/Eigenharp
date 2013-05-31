@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user cello rig un create
+#user cello rig un create
 
 # create a user cello rig, you will need to give it a unique name, so change if necessary
 # in vi %s/user cello rig/user synth 1 rig/

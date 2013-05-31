@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user clarinet rig un create
+#user clarinet rig un create
 
 # create a user clarinet rig, you will need to give it a unique name, so change if necessary
 # in vi %s/user clarinet rig/user synth 1 rig/

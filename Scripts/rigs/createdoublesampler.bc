@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user double sampler rig un create
+#user double sampler rig un create
 
 # create a user double sampler rig , you will need to give it a unique name, so change if necessary
 # a user double sampler rig, it has 2 sampler oscillators which are faded across using yaw, this is 

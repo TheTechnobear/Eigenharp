@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user sampler rig un create
+#user sampler rig un create
 
 # create a user sampler rig , you will need to give it a unique name, so change if necessary
 # a user sampler rig, is a single oscillar sampler rig, based on tau setup

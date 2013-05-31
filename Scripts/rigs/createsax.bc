@@ -6,7 +6,7 @@ description
 script
 empty join
 
-user sax rig un create
+#user sax rig un create
 
 # IMPORTANT NOTE: this will NOT WORK out of the box, eigenlabs have mispelt frequency on the sax oscillator so 
 # you must rename it correctly, duing the middle of this script, this cannot be automated, as freakency is not a belcanto noun

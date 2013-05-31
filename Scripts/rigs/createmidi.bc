@@ -1,12 +1,12 @@
 name
-    user user midi rig
+    user midi rig
 description
     script to create MIDI out rig, created by Antonio Machado
 
 script
 empty join
 
-user midi rig un create
+#user midi rig un create
 
 rig create
 it to user midi rig name ify

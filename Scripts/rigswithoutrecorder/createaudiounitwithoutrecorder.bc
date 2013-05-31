@@ -1,12 +1,12 @@
 name
-    user audio unit rig
+    user audio unit rig recorder off
 description
     script to create user audio unit rig - without recorder
 
 script
 empty join
 
-user audio unit rig un create
+#user audio unit rig un create
 
 # create a user audio unit rig , you will need to give it a unique name, so change if necessary
 # a user audio unit rig, based on tau setup
