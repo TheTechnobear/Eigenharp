@@ -17,6 +17,7 @@ keygroup create
 it to player keygroup name ify
 player keygroup hey output 1 create
 main keygroup hey output keygroup 1 to player keygroup connect
+main keygroup hey output keygroup 1 key output to player keygroup mode key input connect
 player keygroup light output to main keygroup output keygroup 1 light input connect
 
 talker create
@@ -25,6 +26,7 @@ it to player talker name ify
 keygroup create 
 it to simple keygroup name ify
 player keygroup hey output keygroup 1 to simple keygroup connect
+player keygroup hey output keygroup 1 key output to simple keygroup mode key input connect
 simple keygroup light output to player keygroup output keygroup 1 light input connect
 
 console mixer create

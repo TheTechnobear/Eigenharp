@@ -5,4 +5,6 @@
 #metronome 1 to %VAR2% connect
 %VAR2% to console mixer mixer channel %VAR3% connect
 %VAR1% hey output %VAR3% create
+%VAR1% hey keygroup output %VAR3% key column to 1 set
+%VAR1% hey keygroup output %VAR3% key row to %VAR3%  set
 %VAR1% output keygroup %VAR3% to %VAR2% into channel %VAR3% connect
