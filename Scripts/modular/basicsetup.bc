@@ -1,0 +1,35 @@
+# this is the most basic setup, on which the modular setup builds
+# the main keygroup is where the instrument should be connected
+# the player keygroup represents the playing mode, regardless of splits etc
+# the simpley keygroup is a non-split surface so is the most basic mode
+# we then have console mixer, and an audio output
+# 
+# basically this does nothing the basic process from here is to 'add features'
+# obvious first step is to create rigs, and link them into this setup, see conf files for examples
+# ALSO note: there are NO keyboard mappings in this script, it is assumed these are done in a device specific setup
+
+empty join
+keygroup create
+it to main keygroup name ify
+main keygroup hey output 1 create
+
+keygroup create 
+it to player keygroup name ify
+player keygroup hey output 1 create
+main keygroup hey output keygroup 1 to player keygroup connect
+player keygroup light output to main keygroup output keygroup 1 light input connect
+
+talker create
+it to player talker name ify
+
+keygroup create 
+it to simple keygroup name ify
+player keygroup hey output keygroup 1 to simple keygroup connect
+simple keygroup light output to player keygroup output keygroup 1 light input connect
+
+console mixer create
+
+audio create
+console mixer left audio output to audio input 1 connect
+console mixer right audio output to audio input 2 connect
+

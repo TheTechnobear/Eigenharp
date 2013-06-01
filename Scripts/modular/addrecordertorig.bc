@@ -1,0 +1,34 @@
+# VAR1=%VAR1%  is the rig to add the recorder to
+
+%VAR1% hey scaler inputs un connect
+%VAR1% hey scaler inputs key pitch bend input  un connect
+%VAR1% hey instrument audio unit parameters absolute strip  un connect
+%VAR1% hey instrument audio unit parameters pedal 1 un connect
+%VAR1% hey instrument audio unit parameters pedal 2 un connect
+%VAR1% hey instrument audio unit parameters pedal 3 un connect
+%VAR1% hey instrument audio unit parameters pedal 4 un connect
+%VAR1% hey instrument audio unit parameters strip position un connect
+%VAR1% hey instrument audio unit parameters breath  un connect
+
+recorder in %VAR1% create
+%VAR1% recorder hey auxilliary input 1 to absolute strip 1 name ify
+%VAR1% recorder hey auxilliary input 2 to pedal 1 name ify
+%VAR1% recorder hey auxilliary input 3 to pedal 2 name ify
+%VAR1% recorder hey auxilliary input 4 to pedal 3 name ify
+%VAR1% recorder hey auxilliary input 5 to pedal 4 name ify
+%VAR1% recorder hey auxilliary input 6 to strip position name ify
+%VAR1% recorder hey auxilliary input 7 to breath name ify
+%VAR1% hey gateway output to recorder inputs connect
+%VAR1% hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+%VAR1% hey recorder outputs to scaler inputs connect
+%VAR1% hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+
+
+%VAR1% hey recorder outputs strip position to instrument audio unit parameters connect
+%VAR1% hey recorder outputs breath to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 3 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 4 to instrument audio unit parameters connect
+
