@@ -153,3 +153,5 @@ simple keygroup hey physical mapping to
 	[ [4,20], [4,20]]
 	] set
 
+simple keygroup hey course offset to [0.0,4.0,4.0,4.0] set
+
