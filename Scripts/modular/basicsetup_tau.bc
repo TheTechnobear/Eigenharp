@@ -2,7 +2,7 @@
 tau keyboard to main keygroup connect
 tau keyboard hey key output to main keygroup mode key input connect
 
-# NOTE: THIS IS INCORRECT ITS FROM THE ALPHA AND NEEDS ADAPTING
+# NOTE: this is a guess at layout based on alpha, it probably is wrong
 simple keygroup hey musical mapping to [
 	[ [1,1], [1,1]],
 	[ [1,2], [1,2]],
