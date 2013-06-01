@@ -30,6 +30,9 @@ simple keygroup light output to player keygroup output keygroup 1 light input co
 console mixer create
 
 audio create
+audio hey buffer size to 512 set
+audio hey sample rate to 44100 set
+
 console mixer left audio output to audio input 1 connect
 console mixer right audio output to audio input 2 connect
 

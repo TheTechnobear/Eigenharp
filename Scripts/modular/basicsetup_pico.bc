@@ -1,6 +1,8 @@
 # this tailors the basic seutp for a pico
 pico manager create
 keyboard pico to main keygroup connect
+keyboard pico hey key output to main keygroup mode key input connect
+
 simple keygroup hey physical mapping to
         [
                 [[1,1],[1,1]],
