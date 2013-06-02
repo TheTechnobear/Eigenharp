@@ -1,3 +1,0 @@
-# VAR1=%VAR1% keygroup to activate selection on, VAR2=%VAR2% mode key col, VAR3=%VAR3% mode key row
-%VAR1% hey mode key column to %VAR2% set
-%VAR1% hey mode key row to %VAR3% set

@@ -2,6 +2,9 @@
 alpha keyboard to main keygroup connect
 alpha keyboard hey key output to main keygroup mode key input connect
 
+simple keygroup hey mode key column to 1 set
+simple keygroup hey mode key row to 24 set
+
 simple keygroup hey musical mapping to [
 	[ [1,1], [1,1]],
 	[ [1,2], [1,2]],
