@@ -8,6 +8,16 @@ GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
 echo "# Generating for:$DEVICE using:$CONF debug:${DEBUG_FILE}"
 while read LINE
 do
+
+if [[ "$LINE" =~ "#" ]]; then 
+	echo $LINE
+	continue
+fi
+
+if [[ -z "$LINE" ]]; then 
+	continue
+fi
+
 TEMPLATE=$(echo $LINE | cut -f1 -d:) 
 VAR1=$(echo $LINE | cut -f2 -d:) 
 VAR2=$(echo $LINE | cut -f3 -d:) 

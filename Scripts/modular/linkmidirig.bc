@@ -1,0 +1,4 @@
+# VAR1=%VAR1% midi rig, create a new midi output and link midi rig to it
+midi output create
+%VAR1% to it connect
+
