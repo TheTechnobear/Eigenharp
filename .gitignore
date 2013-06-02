@@ -1,1 +1,13 @@
+# compiled file
+*.o
+*.so
+*.log
+*.pyc
+
+
+# mac os files & vi
 .DS_Store
+.*.swp
+.Spotlight-V100
+.Trashes
+
