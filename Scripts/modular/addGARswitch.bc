@@ -1,0 +1,69 @@
+# this module creates a Green Amber Red control setup
+# VAR1=%VAR1% prefix VAR2=%VAR2% control number
+
+# the main keygroup that will get output when selected
+keygroup create 
+it to %VAR1% keygroup name ify
+%VAR1% keygroup hey output 1 create
+%VAR1% keygroup hey output 2 create
+%VAR1% keygroup hey output 3 create
+
+# a keygroup to controller switching behaviour
+keygroup create
+it to %VAR1% switch name ify
+%VAR1% switch hey output 1 create
+%VAR1% switch hey output 2 create
+%VAR1% switch hey output 3 create
+
+
+#states green, amber and red
+keygroup create 
+it to %VAR1% green keygroup name ify
+%VAR1% keygroup hey output keygroup 1 to %VAR1% green keygroup connect
+%VAR1% green keygroup light output to %VAR1% keygroup output keygroup 1 light input connect
+talker create 
+it to %VAR1% green talker name ify
+%VAR1% keygroup hey output keygroup 1 to %VAR1% green talker connect
+%VAR1% green talker light output to %VAR1% keygroup output keygroup 1 light input connect
+talker create 
+it to %VAR1% green switch name ify
+%VAR1% switch hey output keygroup 1 to %VAR1% green switch connect
+%VAR1% green switch light output to %VAR1% switch output keygroup 1 light input connect
+%VAR1% green switch hey " %VAR1% keygroup hey output 1 choose %VAR1% switch hey output 2 choose action light hey %VAR2% to 3 colour ify " when 1 called 1 do
+%VAR1% green switch hey key 1 key column to 1 set
+%VAR1% green switch hey key 1 key row to %VAR2% set
+
+
+keygroup create 
+it to %VAR1% amber keygroup name ify
+%VAR1% keygroup hey output keygroup 2 to %VAR1% amber keygroup connect
+%VAR1% amber keygroup light output to %VAR1% keygroup output keygroup 2 light input connect
+talker create 
+it to %VAR1% amber talker name ify
+%VAR1% keygroup hey output keygroup 2 to %VAR1% amber talker connect
+%VAR1% amber talker light output to %VAR1% keygroup output keygroup 2 light input connect
+talker create 
+it to %VAR1% amber switch name ify
+%VAR1% switch hey output keygroup 2 to %VAR1% amber switch connect
+%VAR1% amber switch light output to %VAR1% switch output keygroup 2 light input connect
+%VAR1% amber switch hey " %VAR1% keygroup hey output 2 choose %VAR1% switch hey output 3 choose action light hey %VAR2% to 2 colour ify " when 1 called 1 do
+%VAR1% amber switch hey key 1 key column to 1 set
+%VAR1% amber switch hey key 1 key row to %VAR2% set
+
+keygroup create 
+it to %VAR1% red keygroup name ify
+%VAR1% keygroup hey output keygroup 3 to %VAR1% red keygroup connect
+%VAR1% red keygroup light output to %VAR1% keygroup output keygroup 3 light input connect
+talker create 
+it to %VAR1% red talker name ify
+%VAR1% keygroup hey output keygroup 3 to %VAR1% red talker connect
+%VAR1% red talker light output to %VAR1% keygroup output keygroup 3 light input connect
+talker create 
+it to %VAR1% red switch name ify
+%VAR1% switch hey output keygroup 3 to %VAR1% red switch connect
+%VAR1% red switch light output to %VAR1% switch output keygroup 3 light input connect
+%VAR1% red switch hey " %VAR1% keygroup hey output 3 choose %VAR1% switch hey output 1 choose action light hey %VAR2% to 1 colour ify " when 1 called 1 do
+%VAR1% red switch hey key 1 key column to 1 set
+%VAR1% red switch hey key 1 key row to %VAR2% set
+
+

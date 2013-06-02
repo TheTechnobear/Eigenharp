@@ -1,0 +1,18 @@
+# link a GAR into the main structure
+# VAR1=%VAR1% prefix of GAR , VAR2=%VAR%2 GAR number
+
+main keygroup hey output %VAR2% create
+main keygroup output keygroup %VAR2% to %VAR1% switch connect
+main keygroup output keygroup %VAR2% to %VAR1% keygroup connect
+
+action light hey "" when %VAR2% do
+action light hey key %VAR2% key column to 1 set
+action light hey key %VAR2% key row to %VAR2% set
+action light hey %VAR2% to 1 colour ify
+action switch hey " main keygroup hey output %VAR2% choose action light hey 1 to 0 colour ify " when %VAR2% called 1 do
+action switch hey key %VAR2% key column to 1 set
+action switch hey key %VAR2% key row to %VAR2% set
+
+%VAR1% switch light output from main keygroup output keygroup %VAR2% light input un connect
+
+
