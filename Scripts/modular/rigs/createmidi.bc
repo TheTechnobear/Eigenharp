@@ -31,6 +31,8 @@ it to %VAR1% name ify
 %VAR1% gateway output breath 1 to breath name ify
 %VAR1% gateway hey output called absolute strip 1 create 
 %VAR1% gateway hey output called strip position 1 create 
+%VAR1% gateway hey output called absolute strip 2 create 
+%VAR1% gateway hey output called strip position 2 create 
 %VAR1% gateway hey output called pedal 1 create 
 %VAR1% gateway hey output called pedal 2 create 
 %VAR1% gateway hey output called pedal 3 create 
@@ -51,18 +53,23 @@ midi converter in %VAR1% create
 %VAR1% midi converter hey parameters parameter 2 to roll name ify
 %VAR1% midi converter hey parameters parameter 3 to yaw name ify 
 %VAR1% midi converter hey parameters parameter 4 to breath name ify
-%VAR1% midi converter hey parameters parameter 5 to strip position name ify
+%VAR1% midi converter hey parameters parameter 5 to strip position 1 name ify
 %VAR1% midi converter hey parameters parameter 6 to absolute strip 1 name ify
-%VAR1% midi converter hey parameters parameter 7 to pedal 1 name ify
-%VAR1% midi converter hey parameters parameter 8 to pedal 2 name ify
-%VAR1% midi converter hey parameters parameter 9 to pedal 3 name ify
-%VAR1% midi converter hey parameters parameter 10 to pedal 4 name ify
+%VAR1% midi converter hey parameters parameter 7 to strip position 2 name ify
+%VAR1% midi converter hey parameters parameter 8 to absolute strip 2 name ify
+%VAR1% midi converter hey parameters parameter 9 to pedal 1 name ify
+%VAR1% midi converter hey parameters parameter 10 to pedal 2 name ify
+%VAR1% midi converter hey parameters parameter 11 to pedal 3 name ify
+%VAR1% midi converter hey parameters parameter 12 to pedal 4 name ify
 
 %VAR1% hey scaler outputs to midi converter inputs connect    
 %VAR1% hey scaler outputs pressure output to midi converter parameters pressure connect    
 %VAR1% hey scaler outputs roll output to midi converter parameters roll connect 
 %VAR1% hey scaler outputs yaw output to midi converter parameters yaw connect 
-%VAR1% hey gateway output strip position to midi converter parameters strip position connect
+%VAR1% hey gateway output strip position 1 to midi converter parameters strip position 1 connect
+%VAR1% hey gateway output absolute strip 1 to midi converter parameters absolute strip 1 connect
+%VAR1% hey gateway output strip position 2 to midi converter parameters strip position 2 connect
+%VAR1% hey gateway output absolute strip 2 to midi converter parameters absolute strip 2 connect
 %VAR1% hey gateway output breath to midi converter parameters breath connect
 %VAR1% hey midi converter midi output to gateway input midi into channel 1 connect 
                      

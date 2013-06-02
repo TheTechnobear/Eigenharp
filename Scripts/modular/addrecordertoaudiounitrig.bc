@@ -1,5 +1,4 @@
-# normal link up adding a recorder to a rig, Note: its a bit different for audio units
-# VAR1=%VAR1%  is the rig to add the recorder to
+# VAR1=%VAR1%  is the rig to add the recorder to audio unit rig
 
 %VAR1% hey scaler inputs un connect
 %VAR1% hey scaler inputs key pitch bend input  un connect
@@ -28,4 +27,15 @@ recorder in %VAR1% create
 
 %VAR1% hey recorder outputs to scaler inputs connect
 %VAR1% hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+
+#this bit, is a bit different for AU rigs, since the parameters are also fed from recorder
+%VAR1% hey recorder outputs breath to instrument audio unit parameters connect
+%VAR1% hey recorder outputs strip position 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs strip position 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs absolute strip 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs absolute strip 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 3 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 4 to instrument audio unit parameters connect
 

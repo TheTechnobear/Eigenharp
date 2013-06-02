@@ -33,6 +33,8 @@ it to %VAR1% name ify
 %VAR1% gateway output breath 1 to breath name ify
 %VAR1% gateway hey output called absolute strip 1 create 
 %VAR1% gateway hey output called strip position 1 create 
+%VAR1% gateway hey output called absolute strip 2 create 
+%VAR1% gateway hey output called strip position 2 create 
 %VAR1% gateway hey output called pedal 1 create 
 %VAR1% gateway hey output called pedal 2 create 
 %VAR1% gateway hey output called pedal 3 create 
@@ -40,7 +42,7 @@ it to %VAR1% name ify
 
 scaler in %VAR1% create
 %VAR1% hey gateway output to scaler inputs connect
-%VAR1% hey gateway output strip position to scaler inputs global pitch bend input connect
+%VAR1% hey gateway output strip position 1 to scaler inputs global pitch bend input connect
 %VAR1% hey gateway output roll to scaler inputs key pitch bend input  connect
 %VAR1% hey scaler light output to gateway input light  connect
 
@@ -99,12 +101,14 @@ audio unit in %VAR1% create
 %VAR1% effect audio unit hey parameters parameter 2 to roll name ify
 %VAR1% effect audio unit hey parameters parameter 3 to yaw name ify
 %VAR1% effect audio unit hey parameters parameter 4 to breath name ify
-%VAR1% effect audio unit hey parameters parameter 5 to strip position name ify
+%VAR1% effect audio unit hey parameters parameter 5 to strip position 1 name ify
 %VAR1% effect audio unit hey parameters parameter 6 to absolute strip 1 name ify
-%VAR1% effect audio unit hey parameters parameter 7 to pedal 1 name ify
-%VAR1% effect audio unit hey parameters parameter 8 to pedal 2 name ify
-%VAR1% effect audio unit hey parameters parameter 9 to pedal 3 name ify
-%VAR1% effect audio unit hey parameters parameter 10 to pedal 4 name ify
+%VAR1% effect audio unit hey parameters parameter 7 to strip position 2 name ify
+%VAR1% effect audio unit hey parameters parameter 8 to absolute strip 2 name ify
+%VAR1% effect audio unit hey parameters parameter 9 to pedal 1 name ify
+%VAR1% effect audio unit hey parameters parameter 10 to pedal 2 name ify
+%VAR1% effect audio unit hey parameters parameter 11 to pedal 3 name ify
+%VAR1% effect audio unit hey parameters parameter 12 to pedal 4 name ify
 
 %VAR1% effect audio unit hey audio inputs channel count to 2 set
 %VAR1% effect audio unit hey audio outputs channel count to 2 set
