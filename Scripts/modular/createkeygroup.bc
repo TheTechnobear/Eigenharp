@@ -1,0 +1,9 @@
+# VAR1=%VAR1% keygroup to create, VAR2=%VAR%2 parent keygroup, %VAR3% parent keygroup output to link to
+# creates a keygroup and links it to a parent keygroup on specfied output
+
+
+keygroup create 
+it to %VAR1% name ify
+%VAR2% hey output keygroup %VAR3% to %VAR1% connect
+%VAR2% hey output keygroup %VAR3% key output to %VAR1% mode key input connect
+

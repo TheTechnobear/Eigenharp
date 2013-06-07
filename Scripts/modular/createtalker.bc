@@ -1,0 +1,5 @@
+# VAR1=%VAR1% name of talker, VAR2=%VAR2% parent keygroup, VAR3=%VAR3% parent keygroup output
+
+talker create
+it to %VAR1% name ify
+%VAR2% hey output keygroup %VAR3% to %VAR1% connect

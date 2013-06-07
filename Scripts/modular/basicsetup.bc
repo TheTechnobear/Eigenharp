@@ -20,7 +20,7 @@ action keygroup hey output 1 create
 talker create
 it to action light name ify
 action light light output to action keygroup output keygroup 1 light input connect
-action light hey "" when 1 do 
+action light hey " " when 1 do 
 action light hey key 1 key column to 1 set
 action light hey key 1 key row to 1 set
 
@@ -32,20 +32,6 @@ action switch hey key 1 key column to 1 set
 action switch hey key 1 key row to 1 set
 action light hey 1 to 1 colour ify
 
-keygroup create 
-it to player keygroup name ify
-player keygroup hey output 1 create
-main keygroup hey output keygroup 1 to player keygroup connect
-main keygroup hey output keygroup 1 key output to player keygroup mode key input connect
-
-talker create
-it to player talker name ify
-main keygroup hey output keygroup 1 to player talker connect
-
-keygroup create 
-it to simple keygroup name ify
-player keygroup hey output keygroup 1 to simple keygroup connect
-player keygroup hey output keygroup 1 key output to simple keygroup mode key input connect
 
 console mixer create
 
