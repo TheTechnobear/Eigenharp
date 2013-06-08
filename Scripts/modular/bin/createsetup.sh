@@ -1,7 +1,23 @@
+#!/bin/bash
+
+cd `dirname $0`/..
+pwd
+
 EIGEN_RELEASE=release-2.0.74-stable
 EPATH=/usr/pi/$EIGEN_RELEASE/bin
 DEVICE=$1
 CONF=$2
+
+if [[ -z $DEVICE ]]; then
+echo "Enter device pico|tau|alpha"
+read DEVICE
+fi
+
+if [[ -z $CONF ]]; then
+echo "Enter config"
+read CONF
+fi
+
 BASECONF=`basename ${CONF}`
 GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
 
