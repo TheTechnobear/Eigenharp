@@ -1,0 +1,13 @@
+# this module add a recorder record trigger to an existing talker at a given positiokn
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% rig to record VAR3=%VAR3% column to use VAR4=%VAR4% row
+
+
+%VAR1% hey " 
+%VAR2% recorder hey variable recorder bar record
+" when %VAR4% called 1 do
+%VAR1% hey " 
+%VAR1% hey %VAR4% to 1 from 3 colour ify
+" when 1 called 2 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to %VAR4% set
+
