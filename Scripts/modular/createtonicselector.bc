@@ -1,4 +1,4 @@
-# this module loads and existing talker with a tonic selection keys
+# this module loads an existing talker with a tonic selection keys
 # VAR1=%VAR1% talker to load with actions VAR2=%VAR2% target for tonic change VAR3=%VAR3% column to use
 
 %VAR1% hey " 
