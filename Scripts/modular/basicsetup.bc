@@ -32,6 +32,11 @@ action switch hey key 1 key column to 1 set
 action switch hey key 1 key row to 1 set
 action light hey 1 to 1 colour ify
 
+scale manager create
+
+metronome create
+
+scheduler create
 
 console mixer create
 

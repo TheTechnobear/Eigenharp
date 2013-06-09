@@ -78,7 +78,7 @@
 	[ [1,71], [4,19]],
 	[ [1,72], [4,20]]
 	] set
-simple keygroup hey physical mapping to 
+%VAR1% hey physical mapping to 
 	[
 	[ [1,1], [1,1]],
 	[ [1,2], [1,2]],
