@@ -1,7 +1,7 @@
 # VAR1=%VAR1% looper rig VAR2=%VAR2% talker for looper controls
 %VAR1% output to console mixer 1 mixer channel 9 connect
 
-#metronome to %VAR1% connect
+metronome to %VAR1% connect
 
 player create 
 it to looper player name ify

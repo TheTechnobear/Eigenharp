@@ -1,8 +1,8 @@
 # this script will link a rig to a keygroup and the mixer console on a given channel
 # VAR1=%VAR1% keygroup to link VAR2=%VAR2% rig to link VAR3=%VAR3% mixer channel, VAR4=%VAR4% keygroup channel
 
-#scheduler identifier to %VAR2% scheduler identifier connect
-#metronome 1 to %VAR2% connect
+scheduler identifier to %VAR2% scheduler identifier connect
+metronome 1 to %VAR2% connect
 %VAR2% to console mixer mixer channel %VAR3% connect
 %VAR1% hey output %VAR3% create
 %VAR1% hey keygroup output %VAR3% key column to 1 set
