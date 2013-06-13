@@ -1,4 +1,6 @@
 # VAR1=%VAR1% keygroup to create output on , VAR2=%VAR%2 output number to create
 
 %VAR1% hey output %VAR2% create
+%VAR1% hey keygroup output %VAR2% key column to 1 set
+%VAR1% hey keygroup output %VAR2% key row to %VAR2% set
 
