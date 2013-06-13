@@ -3,15 +3,6 @@
 
 %VAR1% hey scaler inputs un connect
 %VAR1% hey scaler inputs key pitch bend input  un connect
-%VAR1% hey instrument audio unit parameters breath  un connect
-%VAR1% hey instrument audio unit parameters strip position 1 un connect
-%VAR1% hey instrument audio unit parameters strip position 2 un connect
-%VAR1% hey instrument audio unit parameters absolute strip 1 un connect
-%VAR1% hey instrument audio unit parameters absolute strip 2 un connect
-%VAR1% hey instrument audio unit parameters pedal 1 un connect
-%VAR1% hey instrument audio unit parameters pedal 2 un connect
-%VAR1% hey instrument audio unit parameters pedal 3 un connect
-%VAR1% hey instrument audio unit parameters pedal 4 un connect
 
 recorder in %VAR1% create
 %VAR1% recorder hey auxilliary input 1 to breath name ify
