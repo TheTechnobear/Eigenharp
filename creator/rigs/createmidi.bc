@@ -40,12 +40,12 @@ it to %VAR1% name ify
 
 
 scaler in %VAR1% create
-%VAR1% gateway output to scaler inputs connect
-%VAR1% scaler light output to gateway input light  connect
+%VAR1% hey gateway output to scaler inputs connect
+%VAR1% hey scaler light output to gateway input light  connect
 
 midi clock in %VAR1% create
-%VAR1% midi clock midi output to gateway input midi into channel 2 connect
-%VAR1% gateway output to midi clock inputs connect
+%VAR1% hey midi clock midi output to gateway input midi into channel 2 connect
+%VAR1% hey gateway output to midi clock inputs connect
 
 midi converter in %VAR1% create
 %VAR1% midi converter hey midi channel to 1 set
@@ -62,19 +62,19 @@ midi converter in %VAR1% create
 %VAR1% midi converter hey parameters parameter 11 to pedal 3 name ify
 %VAR1% midi converter hey parameters parameter 12 to pedal 4 name ify
 
-%VAR1% scaler outputs to midi converter inputs connect    
-%VAR1% scaler outputs pressure output to midi converter parameters pressure connect    
-%VAR1% scaler outputs roll output to midi converter parameters roll connect 
-%VAR1% scaler outputs yaw output to midi converter parameters yaw connect 
-%VAR1% gateway output breath to midi converter parameters breath connect
-%VAR1% gateway output strip position 1 to midi converter parameters strip position 1 connect
-%VAR1% gateway output absolute strip 1 to midi converter parameters absolute strip 1 connect
-%VAR1% gateway output strip position 2 to midi converter parameters strip position 2 connect
-%VAR1% gateway output absolute strip 2 to midi converter parameters absolute strip 2 connect
-%VAR1% gateway output pedal 1 to midi converter parameters pedal 1 connect
-%VAR1% gateway output pedal 2 to midi converter parameters pedal 2 connect
-%VAR1% gateway output pedal 3 to midi converter parameters pedal 3 connect
-%VAR1% gateway output pedal 4 to midi converter parameters pedal 4 connect
-%VAR1% midi converter midi output to gateway input midi into channel 1 connect 
+%VAR1% hey scaler outputs to midi converter inputs connect    
+%VAR1% hey scaler outputs pressure output to midi converter parameters pressure connect    
+%VAR1% hey scaler outputs roll output to midi converter parameters roll connect 
+%VAR1% hey scaler outputs yaw output to midi converter parameters yaw connect 
+%VAR1% hey gateway output breath to midi converter parameters breath connect
+%VAR1% hey gateway output strip position 1 to midi converter parameters strip position 1 connect
+%VAR1% hey gateway output absolute strip 1 to midi converter parameters absolute strip 1 connect
+%VAR1% hey gateway output strip position 2 to midi converter parameters strip position 2 connect
+%VAR1% hey gateway output absolute strip 2 to midi converter parameters absolute strip 2 connect
+%VAR1% hey gateway output pedal 1 to midi converter parameters pedal 1 connect
+%VAR1% hey gateway output pedal 2 to midi converter parameters pedal 2 connect
+%VAR1% hey gateway output pedal 3 to midi converter parameters pedal 3 connect
+%VAR1% hey gateway output pedal 4 to midi converter parameters pedal 4 connect
+%VAR1% hey midi converter midi output to gateway input midi into channel 1 connect 
                      
 

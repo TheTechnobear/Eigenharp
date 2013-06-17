@@ -60,13 +60,13 @@ ranger in %VAR1% create
 %VAR1% ranger hey minimum to 1974820.0 set
 %VAR1% ranger hey rest to 9249840.0 set
 %VAR1% hey scaler pressure output to ranger input connect
-%VAR1% ranger output to panpipe oscillator pressure input connect
+%VAR1% hey ranger output to panpipe oscillator pressure input connect
 
 shaper in %VAR1% create
 %VAR1% shaper hey compression to 0.7 set
 %VAR1% shaper hey sharpness to 0.2 set
 %VAR1% hey gateway output breath to shaper input connect
-%VAR1% shaper output to panpipe oscillator pressure input connect
+%VAR1% hey shaper output to panpipe oscillator pressure input connect
 
 summer in %VAR1% create
 %VAR1% panpipe oscillator hey audio output to panpipe rig summer input connect

@@ -54,8 +54,8 @@ sax oscillator in %VAR1% create
 shaper in %VAR1% create
 %VAR1% shaper hey compression to 0.3 set
 %VAR1% hey gateway output breath to shaper input connect
-%VAR1% shaper output to sax oscillator pressure input connect
-%VAR1% shaper output to sax oscillator blow position input connect
+%VAR1% hey shaper output to sax oscillator pressure input connect
+%VAR1% hey shaper output to sax oscillator blow position input connect
 
 summer in %VAR1% create
 %VAR1% summer hey channel count to 2 set
