@@ -1,0 +1,16 @@
+name
+    midi input audio unit rig
+description
+    script to link midi input to instrument audio unit inside rig
+
+#create, connect and choose midi input (ex. midi keyboard to play notes to AU)
+# this selects midi input port in eigenbrowser
+script
+
+empty join
+
+midi input in user audio unit rig 1 create
+
+user audio unit rig 1 hey midi input 1 midi output to instrument audio unit 1 midi input connect
+eigenbrowser , user audio unit rig 1 midi input hey , midi port 1 choose 
+
