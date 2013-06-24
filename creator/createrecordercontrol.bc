@@ -5,7 +5,7 @@ empty join
 ' %VAR1% hey 4 bar as recorder bar define ' do
 
 
-%VAR1% hey " 
+%VAR1% hey "  
 1 bar as recorder bar define %VAR2% hey re do
 " when 1 called 1 do
 %VAR1% hey " 

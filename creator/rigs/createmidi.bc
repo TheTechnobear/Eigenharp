@@ -41,6 +41,7 @@ it to %VAR1% name ify
 
 scaler in %VAR1% create
 %VAR1% hey gateway output to scaler inputs connect
+%VAR1% hey gateway output roll to scaler inputs key pitch bend input connect
 %VAR1% hey scaler light output to gateway input light  connect
 
 midi clock in %VAR1% create
