@@ -1,5 +1,5 @@
 ABLETON LIVE PAD 
-RELEASE 0.2
+RELEASE 0.3
 
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
@@ -29,6 +29,11 @@ lots, main ones
 - i dont get initial status from live, i just assume its blanks,
 - recording state is a bit 'odd', you will get use to it, basically turns red  when its starts recording.
 - clip are probably upside down, basically I need to get they keyboard geometry to sort this out properly
+
+change log
+0.1 - initial release
+0.2 - improved colours, and recording behaviour, fix toggle clip
+0.3 - initial load state
 
 
 
