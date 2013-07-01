@@ -1,5 +1,5 @@
 ABLETON LIVE PAD 
-
+RELEASE 0.2
 
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
@@ -18,16 +18,16 @@ d) start EigenD, and in workbench create a new 'osc input' agent, and connect it
 
 
 press keys on your pico (etc) to record/launch clips.
-green = recording/playing
-orange = triggered
-red = available but not playing/triggered
+green = playing
+orange = availble not playing
+red = recording
 off = nothing there
 
 
 known issues :
 lots, main ones
 - i dont get initial status from live, i just assume its blanks,
-- recording state is a bit 'odd', you will get use to it, basically turns green when its starts recording.
+- recording state is a bit 'odd', you will get use to it, basically turns red  when its starts recording.
 - clip are probably upside down, basically I need to get they keyboard geometry to sort this out properly
 
 
