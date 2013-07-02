@@ -1,5 +1,5 @@
 ABLETON LIVE PAD 
-RELEASE 0.4
+RELEASE 0.5
 
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
@@ -33,7 +33,7 @@ change log
 0.2 - improved colours, and recording behaviour, fix toggle clip
 0.3 - initial load state
 0.4 - introduce moveable view port, fix mem leak, consistently call osc pad
-
+0.5 - fix bug where it would launch clips outside of view
 
 
 
