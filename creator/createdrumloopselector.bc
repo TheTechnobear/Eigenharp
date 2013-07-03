@@ -1,0 +1,77 @@
+# this module loads a talkers with a loop selector for up to 8 loops
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% target for loop  VAR3=%VAR3% column to use
+
+empty join
+
+%VAR1% hey " 
+%VAR2% hey 1 toggle play
+" when 1 called 1 do
+%VAR1% hey " 
+%VAR1% hey 1 to 1 from 3 colour ify
+" when 1 called 2 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey " 
+%VAR2% hey 2 toggle play
+" when 2 called 1 do
+%VAR1% hey " 
+%VAR1% hey 2 to 1 from 3 colour ify
+" when 2 called 2 do
+%VAR1% hey key 2 key column to %VAR3% set
+%VAR1% hey key 2 key row to 2 set
+
+%VAR1% hey " 
+%VAR2% hey 3 toggle play
+" when 3 called 1 do
+%VAR1% hey " 
+%VAR1% hey 3 to 1 from 3 colour ify
+" when 3 called 2 do
+%VAR1% hey key 3 key column to %VAR3% set
+%VAR1% hey key 3 key row to 3 set
+
+%VAR1% hey " 
+%VAR2% hey 4 toggle play
+" when 4 called 1 do
+%VAR1% hey " 
+%VAR1% hey 4 to 1 from 3 colour ify
+" when 4 called 2 do
+%VAR1% hey key 4 key column to %VAR3% set
+%VAR1% hey key 4 key row to 4 set
+
+%VAR1% hey " 
+%VAR2% hey 5 toggle play
+" when 5 called 1 do
+%VAR1% hey " 
+%VAR1% hey 5 to 1 from 3 colour ify
+" when 5 called 2 do
+%VAR1% hey key 5 key column to %VAR3% set
+%VAR1% hey key 5 key row to 5 set
+
+%VAR1% hey " 
+%VAR2% hey 6 toggle play
+" when 6 called 1 do
+%VAR1% hey " 
+%VAR1% hey 6 to 1 from 3 colour ify
+" when 6 called 2 do
+%VAR1% hey key 6 key column to %VAR3% set
+%VAR1% hey key 6 key row to 6 set
+
+%VAR1% hey " 
+%VAR2% hey 7 toggle play
+" when 7 called 1 do
+%VAR1% hey " 
+%VAR1% hey 7 to 1 from 3 colour ify
+" when 7 called 2 do
+%VAR1% hey key 7 key column to %VAR3% set
+%VAR1% hey key 7 key row to 7 set
+
+%VAR1% hey " 
+%VAR2% hey 8 toggle play
+" when 8 called 1 do
+%VAR1% hey " 
+%VAR1% hey 8 to 1 from 3 colour ify
+" when 8 called 2 do
+%VAR1% hey key 8 key column to %VAR3% set
+%VAR1% hey key 8 key row to 8 set
+
