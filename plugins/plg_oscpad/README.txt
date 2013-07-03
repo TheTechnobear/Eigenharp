@@ -24,6 +24,25 @@ red = recording
 off = nothing there
 
 
+properties:
+top, left, width, height
+e.g. 
+osc pad hey set width to 8
+osc pad hey top up
+
+arrangment
+e.g 
+osc pad arrangement to 1 set ; starts playing scene 1
+osc pad arrangement up ; move to scene 2
+osc pad arrangement ; move  back to scene 1
+
+verbs
+reset - refresh, use when new are loading a new set in live, or restarting live
+play - start playing
+stop - stop playing
+
+
+
 known issues :
 main issues fixed in 0.2-0.4
 
@@ -34,6 +53,7 @@ change log
 0.3 - initial load state
 0.4 - introduce moveable view port, fix mem leak, consistently call osc pad
 0.5 - fix bug where it would launch clips outside of view
+0.6 - reset to refresh, transport controls, added verbs play,stop and attribute arrangement = scene play
 
 
 
