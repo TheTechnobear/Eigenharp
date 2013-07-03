@@ -32,14 +32,18 @@ osc pad hey top up
 
 arrangment
 e.g 
-osc pad arrangement to 1 set ; starts playing scene 1
-osc pad arrangement up ; move to scene 2
-osc pad arrangement ; move  back to scene 1
+osc pad hey arrangement to 1 set ; starts playing scene 1
+osc pad hey arrangement up ; move to scene 2
+osc pad hey arrangement ; move  back to scene 1
 
 verbs
 reset - refresh, use when new are loading a new set in live, or restarting live
 play - start playing
 stop - stop playing
+e.g
+osc pad hey reset
+osc pad hey play
+osc pad hey stop
 
 
 
