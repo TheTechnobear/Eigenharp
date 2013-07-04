@@ -8,3 +8,4 @@ metronome 1 to %VAR2% connect
 %VAR1% hey keygroup output %VAR3% key column to 1 set
 %VAR1% hey keygroup output %VAR3% key row to %VAR3%  set
 %VAR1% output keygroup %VAR3% to %VAR2% into channel %VAR4% connect
+%VAR2% output light to %VAR1% output keygroup %VAR3% light input connect 

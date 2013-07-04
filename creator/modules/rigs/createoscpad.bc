@@ -1,3 +1,4 @@
+# OSC PAD in a rig, NOTE: this will not work propertly as the there is a bug with talkers in rigs
 # VAR1=%VAR1% and represents the rig that is needed to be created
 # %VAR1% un create
 
@@ -56,7 +57,6 @@ pad talker keygroup hey output 1 create
 
 talker in %VAR1% create 
 it to pad talker name ify
-%VAR1% hey pad talker keygroup keygroup output 1 to pad talker light output  connect
 %VAR1% hey pad talker keygroup keygroup output 1 to pad talker connect
 pad talker hey " 
 osc pad hey play

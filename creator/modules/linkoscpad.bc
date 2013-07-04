@@ -4,3 +4,4 @@
 scheduler identifier to %VAR2% scheduler identifier connect
 metronome 1 to %VAR2% connect
 %VAR1% output keygroup %VAR3% to %VAR2% into channel %VAR4% connect
+%VAR2% output light to %VAR1% output keygroup %VAR3% light input connect 
