@@ -14,6 +14,8 @@ metronome create
 
 scheduler create
 
+metronome 1 hey outputs to scheduler 1 connect
+
 console mixer create
 
 audio create
