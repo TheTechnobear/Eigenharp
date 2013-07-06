@@ -58,6 +58,7 @@ change log
 0.4 - introduce moveable view port, fix mem leak, consistently call osc pad
 0.5 - fix bug where it would launch clips outside of view
 0.6 - reset to refresh, transport controls, added verbs play,stop and attribute arrangement = scene play
+0.7 - more rugged record stop handling, startup/shudown handler for live, allow plugin to be deleted and recreated.
 
 
 
