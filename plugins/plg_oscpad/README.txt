@@ -1,5 +1,5 @@
 ABLETON LIVE PAD 
-RELEASE 0.5
+RELEASE 0.7
 
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
