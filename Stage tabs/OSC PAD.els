@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tabs about="Eigenlabs Stage Tabs File, release version 2.0.66">
+  <tab name="OSC PAD" aspectMode="1" widthAspect="4" heightAspect="3">
+    <widget name="arrangement" path="/osc_pad_1/arrangement" address="&lt;main:osc_pad1&gt;#4"
+            enabled="true" userEnabled="1" type="incDecButtons">
+      <bounds x="1.6355685" y="1.84985423" width="0.747813404" height="0.498542279"
+              textHeight="0.0918367356" textPosition="top"/>
+      <domain type="bint" min="0" max="100" userMin="0" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="height" path="/osc_pad_1/view/height" address="&lt;main:osc_pad1&gt;#3.2"
+            enabled="true" userEnabled="1" type="rotaryKnob">
+      <bounds x="0.564139903" y="1.39504373" width="0.75" height="0.75" textHeight="0.09375"
+              textPosition="top"/>
+      <domain type="bint" min="1" max="100" userMin="1" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="left" path="/osc_pad_1/view/left" address="&lt;main:osc_pad1&gt;#3.3"
+            enabled="true" userEnabled="1" type="rotaryKnob">
+      <bounds x="0.590379" y="0.122448981" width="0.75" height="0.75" textHeight="0.09375"
+              textPosition="top"/>
+      <domain type="bint" min="1" max="100" userMin="1" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="top" path="/osc_pad_1/view/top" address="&lt;main:osc_pad1&gt;#3.1"
+            enabled="true" userEnabled="1" type="rotaryKnob">
+      <bounds x="2.65014577" y="0.122448981" width="0.75" height="0.75" textHeight="0.09375"
+              textPosition="top"/>
+      <domain type="bint" min="1" max="100" userMin="1" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="width" path="/osc_pad_1/view/width" address="&lt;main:osc_pad1&gt;#3.4"
+            enabled="true" userEnabled="1" type="rotaryKnob">
+      <bounds x="2.58017492" y="1.39067054" width="0.75" height="0.75" textHeight="0.09375"
+              textPosition="top"/>
+      <domain type="bint" min="1" max="100" userMin="1" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="AB Live osc pad @Mark Harris" path="/osc_pad_1/arrangement"
+            address="&lt;main:osc_pad1&gt;#4" enabled="true" userEnabled="1"
+            type="verticalSlider">
+      <bounds x="0.590379" y="0" width="2.80757999" height="0.126822159" textHeight="0.09375"
+              textPosition="top"/>
+      <domain type="bint" min="0" max="100" userMin="0" userStep="1" userMax="100"/>
+    </widget>
+    <widget name="STOP" path="/pad_talker/key/key_7/activate" address="&lt;main:talker22&gt;#3.7.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="0.887755096" y="2.62390661" width="0.704081595" height="0.301749259"
+              textHeight="0.09375" textPosition="top"/>
+      <domain type="trigger" userStep="1e-06"/>
+    </widget>
+    <widget name="PLAY" path="/pad_talker/key/key_8/activate" address="&lt;main:talker22&gt;#3.8.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="2.4446063" y="2.61953354" width="0.704081595" height="0.301749259"
+              textHeight="0.09375" textPosition="top"/>
+      <domain type="trigger" userStep="-5.48612406e+303"/>
+    </widget>
+    <widget name="right" path="/pad_talker/key/key_1/activate" address="&lt;main:talker22&gt;#3.1.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="2.22157431" y="0.931486905" width="0.686588883" height="0.284256548"
+              textHeight="0.09375" textPosition="top"/>
+      <domain type="trigger" userStep="-100663296"/>
+    </widget>
+    <widget name="left" path="/pad_talker/key/key_2/activate" address="&lt;main:talker22&gt;#3.2.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="1.06705534" y="0.940233231" width="0.686588883" height="0.284256548"
+              textHeight="0.09375" textPosition="top"/>
+      <domain type="trigger" userStep="0"/>
+    </widget>
+    <widget name="down" path="/pad_talker/key/key_3/activate" address="&lt;main:talker22&gt;#3.3.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="1.65743434" y="1.21137023" width="0.686588883" height="0.284256548"
+              textHeight="0.09375" textPosition="bottom"/>
+      <domain type="trigger" userStep="-2.97079411e-313"/>
+    </widget>
+    <widget name="up" path="/pad_talker/key/key_4/activate" address="&lt;main:talker22&gt;#3.4.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="1.65306115" y="0.660349846" width="0.686588883" height="0.284256548"
+              textHeight="0.0830903798" textPosition="top"/>
+      <domain type="trigger" userStep="-4.36044321e+16"/>
+    </widget>
+    <widget name="activate" path="/pad_talker/key/key_5/activate" address="&lt;main:talker22&gt;#3.5.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="1.57871711" y="2.33965015" width="0.870262384" height="0.28862974"
+              textHeight="0.0174927115" textPosition="top"/>
+      <domain type="trigger"/>
+    </widget>
+    <widget name="activate" path="/pad_talker/key/key_6/activate" address="&lt;main:talker22&gt;#3.6.250"
+            enabled="true" userEnabled="1" type="triggerButton">
+      <bounds x="1.5874635" y="1.57871723" width="0.870262384" height="0.28862974"
+              textHeight="0.0174927115" textPosition="top"/>
+      <domain type="trigger"/>
+    </widget>
+  </tab>
+</tabs>
