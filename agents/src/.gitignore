@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+tmp
+.DS_Store
+tools/.sconsign.dblite
+env.cmd
+env.sh
+tags

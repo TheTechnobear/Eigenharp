@@ -1,0 +1,22 @@
+This is the technobears library for EigenD agents.
+
+The tools directory is as supplied by Eigenlabs.
+The SConscript in the top directory is a mixture of that used for contribs and eigend. it is similar in the later, so that only one package is built,
+not one per plugin. which could become a bit of a pain for release
+
+Liblo is included since it is needed to build plg_oscpad, it must be the same version as used by EigenD to avoid incompatibilities,
+unfortunately at this time Eigenlabs do not export the headers for 3rd party libraries so this has to be a manual step.
+
+
+to build, 
+go to top level directory
+make
+
+to make a release package type
+make mpkg
+
+to you can do manually with 
+sudo installer -pkg ./tmp/pkg/pkg/Technobear-2.0.stable.pkg -target /
+
+or just copy the file somewhere, and then double click on it in finder
+

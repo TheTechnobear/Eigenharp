@@ -1,0 +1,16 @@
+Import('master_env')
+env = master_env.Clone()
+
+#
+# Build a shared library called oscpad_plg.
+#
+env.PiSharedLibrary('oscpad_plg', 
+	Split('osc_pad.cpp osc_server.cpp osc_client.cpp live_osc.cpp live_model.cpp'),
+	libraries=Split('pic piw pie pia pilo'), 
+	package='Technobear', per_agent='plg_oscpad')
+
+#
+# Build a Python native module as described by oscpad_plg.pip, called oscpad_plg_native.
+# Link it against our new shared library and other base libraries
+#
+env.PiPipBinding('oscpad_plg_native', 'oscpad_plg.pip', libraries=Split('oscpad_plg pic piw pie'), package='Technobear', per_agent='plg_oscpad')

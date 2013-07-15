@@ -1,0 +1,19 @@
+
+<<<
+#include "osc_pad.h"
+>>>
+
+
+from piw[piw/piw.pip] import clockdomain_ctl,cookie
+
+class osc_pad[oscpad_plg::osc_pad_t]
+{
+    osc_pad(clockdomain_ctl *, const cookie &, const stdstr &, const stdstr &, const stdstr &)
+    cookie cookie()
+    void refresh()
+    void play()
+    void stop()
+    void set_window(unsigned, unsigned, unsigned, unsigned)
+	void play_scene(int)
+	void shutdown()
+}
