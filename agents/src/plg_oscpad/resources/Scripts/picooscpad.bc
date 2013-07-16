@@ -1,0 +1,142 @@
+name
+    pico osc pad
+description
+    a script created by creator to replace sample 1 with the osc pad
+
+script
+# Generating for:pico using:conf/pico/oscpaddemo.conf debug:
+# this is used to adapt factory setup to be used with osc pad
+# THE COMMENTED OUT LINES ARE FOR RIG SETUP WHICH IS CURRENTLY NOT WORKING DUE TO TALKER BUG, so we are creating in main until fixed
+# Generating: unlinkrig.bc  VAR1=sampler rig 1 VAR2=1 VAR3= VAR4= VAR5= VAR6= VAR7= VAR8= VAR9=      
+# this script will link a rig and the mixer console on a given channel
+# VAR1=sampler rig 1 rig to unlink VAR2=1 mixer channel
+
+sampler rig 1 un connect
+console mixer mixer channel 1 un connect
+# Generating: createoscpadinmain.bc  VAR1= VAR2= VAR3= VAR4= VAR5= VAR6= VAR7= VAR8= VAR9=      
+# OSC PAD create in main, due to bug with talkers being in rigs
+# keygroup so we can layout keys for osc pad
+
+keygroup  create 
+it to pad keygroup name ify
+pad keygroup hey output 1 create
+
+osc pad create
+pad keygroup keygroup output 1 to osc pad connect
+
+# keygroup for talker so we can layout keys for talker
+keygroup create 
+it to pad talker keygroup name ify
+pad talker keygroup hey output 1 create
+
+#add the talker actions
+talker create 
+it to pad talker name ify
+pad talker keygroup keygroup output 1 to pad talker connect
+pad talker hey " 
+osc pad hey left up 
+" when 1 called 1 do
+pad talker hey key 1 key column to 1 set
+pad talker hey key 1 key row to 1 set
+pad talker hey "
+osc pad hey left down 
+" when 2 called 1 do
+pad talker hey key 2 key column to 1 set
+pad talker hey key 2 key row to 2 set
+pad talker hey "
+osc pad hey top up
+" when 3 called 1 do
+pad talker hey key 3 key column to 1 set
+pad talker hey key 3 key row to 3 set
+pad talker hey " 
+osc pad hey top down
+" when 4 called 1 do
+pad talker hey key 4 key column to 1 set
+pad talker hey key 4 key row to 4 set
+pad talker hey " 
+osc pad hey arrangement up
+" when 5 called 1 do
+pad talker hey key 5 key column to 1 set
+pad talker hey key 5 key row to 5 set
+pad talker hey " 
+osc pad hey arrangement down
+" when 6 called 1 do
+pad talker hey key 6 key column to 1 set
+pad talker hey key 6 key row to 6 set
+pad talker hey " 
+osc pad hey stop
+" when 7 called 1 do
+pad talker hey key 7 key column to 1 set
+pad talker hey key 7 key row to 7 set
+pad talker hey " 
+osc pad hey play
+" when 8 called 1 do
+pad talker hey key 8 key column to 1 set
+pad talker hey key 8 key row to 8 set
+# Generating: linkoscpadinmain.bc  VAR1=main keygroup VAR2=keygroup 1 VAR3=1 VAR4= VAR5= VAR6= VAR7= VAR8= VAR9=      
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=main keygroup keygroup to link VAR2=keygroup 1 kg output VAR3=1 keygroup channel
+
+
+main keygroup output keygroup 1 to pad keygroup into channel 1 connect
+#pad keygroup output light to main keygroup output keygroup 1 light input connect 
+
+main keygroup output keygroup 1 to pad talker keygroup  into channel 1 connect
+#pad keygroup output light to main keygroup output keygroup 1 light input connect 
+# Generating: keymaps/oscpad.bc  VAR1=  VAR2= VAR3= VAR4= VAR5= VAR6= VAR7= VAR8= VAR9=      
+# VAR1 =   rig
+
+  pad keygroup hey physical mapping to
+        [
+                [[1,1],[2,1]],
+                [[1,2],[2,2]],
+                [[1,3],[2,3]],
+                [[1,4],[2,4]],
+                [[2,1],[1,1]],
+                [[2,2],[1,2]],
+                [[2,3],[1,3]],
+                [[2,4],[1,4]]
+        ] set
+  pad keygroup hey musical mapping to
+        [
+                [[1,1],[1,1]],
+                [[1,2],[1,2]],
+                [[1,3],[1,3]],
+                [[1,4],[1,4]],
+                [[1,5],[1,5]],
+                [[1,6],[1,6]],
+                [[1,7],[1,7]],
+                [[1,8],[1,8]]
+        ] set
+
+  pad talker keygroup hey physical mapping to
+        [
+                [[1,5],[1,1]],
+                [[2,5],[1,2]],
+                [[1,6],[1,3]],
+                [[2,6],[1,4]],
+                [[1,7],[1,5]],
+                [[2,7],[1,6]],
+                [[1,8],[1,7]],
+                [[2,8],[1,8]]
+        ] set
+  pad talker keygroup hey musical mapping to
+        [
+                [[1,9],[1,1]],
+                [[1,10],[1,2]],
+                [[1,11],[1,3]],
+                [[1,12],[1,4]],
+                [[1,13],[1,5]],
+                [[1,14],[1,6]],
+                [[1,15],[1,7]],
+                [[1,16],[1,8]]
+        ] set
+
+  osc pad hey left to 1 set
+  osc pad hey top to 1 set
+  osc pad hey height to 2 set
+  osc pad hey width to 4 set
+
+#rigs/createoscpad.bc:osc pad rig 1:
+##linkoscpad.bc:main keygroup:osc pad rig 1:keygroup 1:1:1:
+#keymaps/oscpad.bc:osc pad rig 1:

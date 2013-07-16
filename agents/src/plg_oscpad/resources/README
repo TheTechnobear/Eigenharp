@@ -1,5 +1,5 @@
 ABLETON LIVE PAD 
-RELEASE 0.7
+RELEASE 0.8
 
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
@@ -8,13 +8,20 @@ Ive played with it on a demo of Live 9, but should work on 8 too
 
 
 TO USE:
-a) first install LIVE OSC , following instructions at
-http://livecontrol.q3f.org/ableton-liveapi/liveosc/
+a) first install LIVE OSC , following instructions at http://livecontrol.q3f.org/ableton-liveapi/liveosc/
+but essentially, copy the LiveOSC directory found with this agent to:
+/Applications/Ableton\ Live\ 9.app/Contents/App-Resources/MIDI\ Remote\ Scripts 
+
 b) In ableton, setup LiveOSC as control surface in preferences
-c) Install plugin into EigenD. under /usr/pi/release-2.0.74-stable/plugins/Eigenlabs/   (or you can add to your path if you know how ;))
-cd /usr/pi/release-2.0.74-stable/plugins/Eigenlabs/
-tar xvf ~/Downloads/plg_oscpad.tar
-d) start EigenD, and in workbench create a new 'osc pad' agent, and connect it to the keyboard (or probably a keygroup too, but not tried that ;))
+
+c) install into factory setup by
+start EigenD, load factory setup
+start commander and execute the script using the following belcanto
+interpreter hey pico osc pad execute
+then save the setup
+
+OR you can manually add to your own setup
+c) start EigenD, and in workbench create a new 'osc pad' agent, and connect it to the keyboard (or probably a keygroup too, but not tried that ;))
 
 
 press keys on your pico (etc) to record/launch clips.
