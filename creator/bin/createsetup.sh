@@ -1,12 +1,41 @@
 #!/bin/bash
 
+arg0=$(basename $0 .sh)
+usage()
+{
+	echo "Usage: $arg0 [-hd] [-S script name] [-F ouput file] [-D description] [DEVICE] [CONFIG]"
+	echo "-h help"
+	echo "-d debug"
+	echo "-S create script, called name"
+	echo "-F output script or debug to file"
+	echo "-D description to be used for script file"
+	echo "device = pico|tau|alpha"
+	echo "configuration file to use"
+	exit 1
+}
+
+
 cd `dirname $0`/..
 pwd
 
-EIGEN_RELEASE=release-2.0.74-stable
-EPATH=/usr/pi/$EIGEN_RELEASE/bin
+while getopts dhF:D:S: opt
+do
+	case "$opt" in 
+	(h) usage;;
+	(d) DEBUG=y;;
+	(F) OUTFILE="$OPTARG";;
+	(D) SCRIPT_DESC="$OPTARG";;
+	(S) SCRIPT_NAME="$OPTARG";;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
 DEVICE=$1
 CONF=$2
+
+EIGEN_RELEASE=release-2.0.74-stable
+EPATH=/usr/pi/$EIGEN_RELEASE/bin
 
 if [[ -z $DEVICE ]]; then
 echo "Enter device pico|tau|alpha"
@@ -22,7 +51,26 @@ BASECONF=`basename ${CONF}`
 GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
 MODULES=`pwd`/modules
 
-echo "# Generating for:$DEVICE using:$CONF debug:${DEBUG_FILE}"
+echo "# Generating for:$DEVICE using:$CONF"
+
+if [ -n "$SCRIPT_NAME" ]; then 
+	echo "name" > $GENFILE
+	echo "$SCRIPT_NAME" >> $GENFILE
+	echo "description" >> $GENFILE
+	echo "$SCRIPT_DESC" >> $GENFILE
+	echo "script" >> $GENFILE
+	if [ -z "$OUTFILE" ] ; then
+		cat $GENFILE
+	else
+		cat $GENFILE > $OUTFILE
+	fi
+else 
+	if [ -n "$OUTFILE" ]; then 
+		echo "# Generating for:$DEVICE using:$CONF" > $OUTFILE
+	fi
+fi
+
+
 while read LINE
 do
 
@@ -58,11 +106,15 @@ if [ -f $MODULES/$TEMPLATE ]; then
 		s/%VAR8%/$VAR8/g
 		s/%VAR9%/$VAR9/g
 	" < $MODULES/$TEMPLATE > $GENFILE
-	if [ -z "$DEBUG" ]; then
+	if [ -z "$DEBUG" ] && [ -z "$OUTFILE" ] ; then
 		$EPATH/bscript --verbose "<interpreter1>" $GENFILE
 		sleep 1
 	else 
-		cat $GENFILE
+		if [ -z "$OUTFILE" ] ; then
+			cat $GENFILE
+		else
+			cat $GENFILE >> $OUTFILE
+		fi
 	fi 
 fi
 
@@ -77,11 +129,15 @@ if [ -f $MODULES/$DEVICE/$TEMPLATE ]; then
 		s/%VAR8%/$VAR8/g
 		s/%VAR9%/$VAR9/g
 	" < $MODULES/$DEVICE/$TEMPLATE > $GENFILE
-	if [ -z "$DEBUG" ]; then
+	if [ -z "$DEBUG" ] && [ -z "$OUTFILE" ] ; then
 		$EPATH/bscript --verbose "<interpreter1>" $GENFILE
 		sleep 1
 	else 
-		cat $GENFILE
+		if [ -z "$OUTFILE" ] ; then
+			cat $GENFILE
+		else
+			cat $GENFILE >> $OUTFILE
+		fi
 	fi 
 fi
 
