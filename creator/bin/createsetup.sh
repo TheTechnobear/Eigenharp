@@ -1,9 +1,8 @@
 #!/bin/bash
 
-arg0=$(basename $0 .sh)
 usage()
 {
-	echo "Usage: $arg0 [-hd] [-S script name] [-F ouput file] [-D description] [DEVICE] [CONFIG]"
+	echo "Usage: createsetup.sh [-hd] [-S script name] [-F ouput file] [-D description] [DEVICE] [CONFIG]"
 	echo "-h help"
 	echo "-d debug"
 	echo "-S create script, called name"
