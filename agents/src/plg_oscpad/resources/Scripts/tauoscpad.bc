@@ -1,7 +1,7 @@
 name
-pico osc pad
+tau osc pad
 description
-basic setup of OSC pad for the pico
+basic setup of OSC pad for the tau
 script
 # this script will link a rig and the mixer console on a given channel
 # VAR1=sampler rig 1 rig to unlink VAR2=1 mixer channel
@@ -68,14 +68,59 @@ osc pad hey play
 pad talker hey key 8 key column to 1 set
 pad talker hey key 8 key row to 8 set
 # this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
-# VAR1=main keygroup keygroup to link VAR2=keygroup 1 kg output VAR3=1 keygroup channel
+# VAR1=keygroup 1 keygroup to link VAR2=sampler 1 kg output VAR3=1 keygroup channel
 
 
-main keygroup output keygroup 1 to pad keygroup into channel 1 connect
-#pad keygroup output light to main keygroup output keygroup 1 light input connect 
+keygroup 1 output sampler 1 to pad keygroup into channel 1 connect
+#pad keygroup output light to keygroup 1 output keygroup 1 light input connect 
 
-main keygroup output keygroup 1 to pad talker keygroup  into channel 1 connect
-#pad keygroup output light to main keygroup output keygroup 1 light input connect 
+keygroup 1 output sampler 1 to pad talker keygroup  into channel 1 connect
+#pad keygroup output light to keygroup 1 output keygroup 1 light input connect 
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=keygroup 2 keygroup to link VAR2=sampler 1 kg output VAR3=2 keygroup channel
+
+
+keygroup 2 output sampler 1 to pad keygroup into channel 2 connect
+#pad keygroup output light to keygroup 2 output keygroup 2 light input connect 
+
+keygroup 2 output sampler 1 to pad talker keygroup  into channel 2 connect
+#pad keygroup output light to keygroup 2 output keygroup 2 light input connect 
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=keygroup 3 keygroup to link VAR2=sampler 1 kg output VAR3=3 keygroup channel
+
+
+keygroup 3 output sampler 1 to pad keygroup into channel 3 connect
+#pad keygroup output light to keygroup 3 output keygroup 3 light input connect 
+
+keygroup 3 output sampler 1 to pad talker keygroup  into channel 3 connect
+#pad keygroup output light to keygroup 3 output keygroup 3 light input connect 
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=keygroup 4 keygroup to link VAR2=sampler 1 kg output VAR3=4 keygroup channel
+
+
+keygroup 4 output sampler 1 to pad keygroup into channel 4 connect
+#pad keygroup output light to keygroup 4 output keygroup 4 light input connect 
+
+keygroup 4 output sampler 1 to pad talker keygroup  into channel 4 connect
+#pad keygroup output light to keygroup 4 output keygroup 4 light input connect 
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=keygroup 5 keygroup to link VAR2=sampler 1 kg output VAR3=5 keygroup channel
+
+
+keygroup 5 output sampler 1 to pad keygroup into channel 5 connect
+#pad keygroup output light to keygroup 5 output keygroup 5 light input connect 
+
+keygroup 5 output sampler 1 to pad talker keygroup  into channel 5 connect
+#pad keygroup output light to keygroup 5 output keygroup 5 light input connect 
+# this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
+# VAR1=keygroup 6 keygroup to link VAR2=sampler 1 kg output VAR3=6 keygroup channel
+
+
+keygroup 6 output sampler 1 to pad keygroup into channel 6 connect
+#pad keygroup output light to keygroup 6 output keygroup 6 light input connect 
+
+keygroup 6 output sampler 1 to pad talker keygroup  into channel 6 connect
+#pad keygroup output light to keygroup 6 output keygroup 6 light input connect 
 # VAR1 =   rig
 
   pad keygroup hey physical mapping to

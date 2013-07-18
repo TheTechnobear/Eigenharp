@@ -1,10 +1,11 @@
 ABLETON LIVE PAD 
-RELEASE 0.8
+RELEASE 0.9
 
 Contributions
 =============
 Mark Harris - OSC Pad agent & pico osc pad
-
+Randy Brown - tau osc pad
+Antonio Machado - alpha osc pad
 
 
 
@@ -27,6 +28,11 @@ c) install into factory setup by
 start EigenD, load factory setup
 start commander and execute the script using the following belcanto
 interpreter hey pico osc pad execute
+or 
+interpreter hey tau osc pad execute
+or
+interpreter hey alpha osc pad execute
+
 then save the setup
 
 OR c) use one of the other setups described in the contributions section below
@@ -83,7 +89,8 @@ change log:
 0.5 - fix bug where it would launch clips outside of view
 0.6 - reset to refresh, transport controls, added verbs play,stop and attribute arrangement = scene play
 0.7 - more rugged record stop handling, startup/shudown handler for live, allow plugin to be deleted and recreated.
-0.8 - first packaged release
+0.8 - first packaged release, includes pico setup for osc pad
+0.9 - packaged release with basic osc pad for alpha and tau
 
 
 
@@ -95,7 +102,8 @@ Below describes the setups available for use with OSC Pad
 pico osc pad  - Mark Harris
 ===========================
 Basic demo of OSC Pad to be used with the Pico Factory setup.
-It replaces Sampler 1 with OSC Pad controls
+It replaces Sampler 1 with OSC Pad clips & controls
+Simply select instrument 1 and you can use OSC Pad
 designed to be used horizontally, 
 first 4x2 block is used for clips ( 4 tracks across, 2 clips down )
 second 4x2 block is used for control
@@ -104,4 +112,15 @@ up/down
 arrangement up/down
 stop/play
 
+tau osc pad  - Randy Brown
+===========================
+Basic demo of OSC Pad to be used with the Tau Factory setup.
+It replaces Sampler 1 with OSC Pad clips & controls
+Simply select instrument 1 into 1 of the keygroups and you can use OSC Pad
+
+alpha osc pad  - Antonio Machado
+================================
+Basic demo of OSC Pad to be used with the Alpha Factory setup 3.
+It replaces Sampler 1 with OSC Pad clips & controls
+Simply select instrument 1 into 1 of the keygroups and you can use OSC Pad
 
