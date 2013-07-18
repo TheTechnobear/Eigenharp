@@ -1,19 +1,65 @@
 #!/bin/bash
 
-cd `dirname $0`/..
+usage()
+{
+	echo "Usage: dbgcmd.sh [-hd] [-S script name] [-F ouput file] [-D description] DEVICE CONFIGLINE"
+	echo "-h help"
+	echo "-d debug"
+	echo "-S create script, called name"
+	echo "-F output script or debug to file"
+	echo "-D description to be used for script file"
+	echo "device = pico|tau|alpha"
+	echo "configline = line from config to test"
+	exit 1
+}
 
-EIGEN_RELEASE=release-2.0.74-stable
-EPATH=/usr/pi/$EIGEN_RELEASE/bin
+
+cd `dirname $0`/..
+pwd
+
+while getopts dhF:D:S: opt
+do
+	case "$opt" in 
+	(h) usage;;
+	(d) DEBUG=y;;
+	(F) OUTFILE="$OPTARG";;
+	(D) SCRIPT_DESC="$OPTARG";;
+	(S) SCRIPT_NAME="$OPTARG";;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
 DEVICE=$1
 LINE=$2
 
-N=`basename $0`
-GENFILE=`mktemp /tmp/${N}.XXXXXX` || exit 1
+EIGEN_RELEASE=release-2.0.74-stable
+EPATH=/usr/pi/$EIGEN_RELEASE/bin
 
-echo "executing for:$DEVICE cmd:$LINE"
-
-
+BASECONF=`basename ${CONF}`
+GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
 MODULES=`pwd`/modules
+
+echo "# Generating for:$DEVICE using:$CONF"
+
+if [ -n "$SCRIPT_NAME" ]; then 
+	echo "name" > $GENFILE
+	echo "$SCRIPT_NAME" >> $GENFILE
+	echo "description" >> $GENFILE
+	echo "$SCRIPT_DESC" >> $GENFILE
+	echo "script" >> $GENFILE
+	if [ -z "$OUTFILE" ] ; then
+		cat $GENFILE
+	else
+		cat $GENFILE > $OUTFILE
+	fi
+else 
+	if [ -n "$OUTFILE" ]; then 
+		echo "# Generating for:$DEVICE using:$CONF" > $OUTFILE
+	fi
+fi
+
+
 TEMPLATE=$(echo $LINE | cut -f1 -d:) 
 VAR1=$(echo $LINE | cut -f2 -d:) 
 VAR2=$(echo $LINE | cut -f3 -d:) 
@@ -37,11 +83,15 @@ if [ -f $MODULES/$TEMPLATE ]; then
 		s/%VAR8%/$VAR8/g
 		s/%VAR9%/$VAR9/g
 	" < $MODULES/$TEMPLATE > $GENFILE
-	if [ -z "$DEBUG" ]; then
+	if [ -z "$DEBUG" ] && [ -z "$OUTFILE" ] ; then
 		$EPATH/bscript --verbose "<interpreter1>" $GENFILE
 		sleep 1
 	else 
-		cat $GENFILE
+		if [ -z "$OUTFILE" ] ; then
+			cat $GENFILE
+		else
+			cat $GENFILE >> $OUTFILE
+		fi
 	fi 
 fi
 
@@ -56,11 +106,15 @@ if [ -f $MODULES/$DEVICE/$TEMPLATE ]; then
 		s/%VAR8%/$VAR8/g
 		s/%VAR9%/$VAR9/g
 	" < $MODULES/$DEVICE/$TEMPLATE > $GENFILE
-	if [ -z "$DEBUG" ]; then
+	if [ -z "$DEBUG" ] && [ -z "$OUTFILE" ] ; then
 		$EPATH/bscript --verbose "<interpreter1>" $GENFILE
 		sleep 1
 	else 
-		cat $GENFILE
+		if [ -z "$OUTFILE" ] ; then
+			cat $GENFILE
+		else
+			cat $GENFILE >> $OUTFILE
+		fi
 	fi 
 fi
 
