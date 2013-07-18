@@ -36,11 +36,10 @@ LINE=$2
 EIGEN_RELEASE=release-2.0.74-stable
 EPATH=/usr/pi/$EIGEN_RELEASE/bin
 
-BASECONF=`basename ${CONF}`
-GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
+GENFILE=`mktemp /tmp/dbgcmd.XXXXXX` || exit 1
 MODULES=`pwd`/modules
 
-echo "# Generating for:$DEVICE using:$CONF"
+echo "# Generating for:$DEVICE using:$LINE"
 
 if [ -n "$SCRIPT_NAME" ]; then 
 	echo "name" > $GENFILE
