@@ -1,6 +1,15 @@
 ABLETON LIVE PAD 
 RELEASE 0.8
 
+Contributions
+=============
+Mark Harris - OSC Pad agent & pico osc pad
+
+
+
+
+Overview & Install
+==================
 THIS IS AN EXPERIMENT ONLY!!!!!
 it is not finished, and has a number of shortcomings its really just a demo to play with at this stage
 
@@ -20,18 +29,26 @@ start commander and execute the script using the following belcanto
 interpreter hey pico osc pad execute
 then save the setup
 
-OR you can manually add to your own setup
-c) start EigenD, and in workbench create a new 'osc pad' agent, and connect it to the keyboard (or probably a keygroup too, but not tried that ;))
+OR c) use one of the other setups described in the contributions section below
+
+OR c) you can manually add to your own setup
+start EigenD, and in workbench create a new 'osc pad' agent, and connect it to the keyboard / keygroup of your choice. 
 
 
-press keys on your pico (etc) to record/launch clips.
+ENJOY !!!
+
+
+
+Basics of OSC Pad
+=================
+press keys on your instrument to record/launch clips.
 green = playing
 orange = availble not playing
 red = recording
 off = nothing there
 
 
-properties:
+properties of agent:
 top, left, width, height
 e.g. 
 osc pad hey set width to 8
@@ -54,11 +71,11 @@ osc pad hey stop
 
 
 
+CHANGE HISTORY
+==============
 known issues :
-main issues fixed in 0.2-0.4
 
-
-change log
+change log:
 0.1 - initial release
 0.2 - improved colours, and recording behaviour, fix toggle clip
 0.3 - initial load state
@@ -66,6 +83,25 @@ change log
 0.5 - fix bug where it would launch clips outside of view
 0.6 - reset to refresh, transport controls, added verbs play,stop and attribute arrangement = scene play
 0.7 - more rugged record stop handling, startup/shudown handler for live, allow plugin to be deleted and recreated.
+0.8 - first packaged release
 
+
+
+SETUPS
+======
+Below describes the setups available for use with OSC Pad
+
+
+pico osc pad  - Mark Harris
+===========================
+Basic demo of OSC Pad to be used with the Pico Factory setup.
+It replaces Sampler 1 with OSC Pad controls
+designed to be used horizontally, 
+first 4x2 block is used for clips ( 4 tracks across, 2 clips down )
+second 4x2 block is used for control
+left/right
+up/down
+arrangement up/down
+stop/play
 
 
