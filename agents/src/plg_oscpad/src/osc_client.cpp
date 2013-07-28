@@ -1,11 +1,10 @@
 #include "osc_client.h"
 
-
 namespace oscpad_plg
 {
 
 osc_client_t::osc_client_t(const std::string& host, const std::string &port)
-	: host_(host), port_(port)
+	: client_(NULL), host_(host), port_(port)
 {
 }
 

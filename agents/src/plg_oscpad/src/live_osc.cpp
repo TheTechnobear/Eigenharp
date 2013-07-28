@@ -244,7 +244,7 @@ lo_message live_stop_message_t::createMessage()
 	return m;
 }
 
-// /live/play
+// /live/play/scene
 live_play_scene_message_t::live_play_scene_message_t(int scene) : scene_(scene)
 {
 }
@@ -256,6 +256,33 @@ lo_message live_play_scene_message_t::createMessage()
 	lo_message_add(m,"i",scene_);
 	return m;
 }
+
+// /live/undo
+live_undo_message_t::live_undo_message_t()
+{
+}
+const char *live_undo_message_t::topic() { return "/live/undo";}
+lo_message live_undo_message_t::createMessage()
+{
+    // pic::logmsg() << "live_undo_message_t::createMessage() " << topic() ;
+	lo_message m=lo_message_new();
+	return m;
+}
+
+
+// /live/redo
+live_redo_message_t::live_redo_message_t()
+{
+}
+const char *live_redo_message_t::topic() { return "/live/redo";}
+lo_message live_redo_message_t::createMessage()
+{
+    // pic::logmsg() << "live_redo_message_t::createMessage() " << topic() ;
+	lo_message m=lo_message_new();
+	return m;
+}
+
+
 
 
 

@@ -70,6 +70,8 @@ verbs
 reset - refresh, use when new are loading a new set in live, or restarting live
 play - start playing
 stop - stop playing
+undo - undo last action
+un undo - un undo aka redo last action
 e.g
 osc pad hey reset
 osc pad hey play
@@ -91,7 +93,7 @@ change log:
 0.7 - more rugged record stop handling, startup/shudown handler for live, allow plugin to be deleted and recreated.
 0.8 - first packaged release, includes pico setup for osc pad
 0.9 - packaged release with basic osc pad for alpha and tau
-
+0.10 - add undo and redo, also add version info to agent info
 
 
 SETUPS

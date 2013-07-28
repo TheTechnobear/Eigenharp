@@ -46,6 +46,8 @@ class Agent(agent.Agent):
         self.add_verb2(1,'reset([],None)', callback=self.__reset)
         self.add_verb2(2,'play([],None)', callback=self.__play)
         self.add_verb2(3,'stop([],None)', callback=self.__stop)
+        self.add_verb2(4,'undo([],None)', callback=self.__undo)
+        self.add_verb2(5,'undo([un],None)', callback=self.__redo)
         
         self.osc.set_window(self.top,self.height,self.left,self.width);
         
@@ -59,6 +61,12 @@ class Agent(agent.Agent):
         
     def __play(self,subj):
         self.osc.play()
+
+    def __undo(self,subj):
+        self.osc.undo()
+
+    def __redo(self,subj):
+        self.osc.redo()
 
     def __stop(self,subj):
         self[4].set_value(0)

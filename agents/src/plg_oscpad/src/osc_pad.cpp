@@ -97,6 +97,8 @@ struct osc_pad_t::impl_t :
     void stop();
     void play_scene(int scene);
     void shutdown();
+    void undo();
+    void redo();
 
     pic::lckmap_t<piw::data_t, osc_wire_t *>::lcktype children_;
     pic::ilist_t<osc_wire_t> tickers_;
@@ -434,6 +436,21 @@ void osc_pad_t::impl_t::shutdown()
 	server_->osc_shutdown();
 }
 
+void osc_pad_t::impl_t::undo()
+{
+//	pic::logmsg() << "osc_pad_t::impl_t::undo";
+	client_->send(new live_undo_message_t());
+}
+
+
+void osc_pad_t::impl_t::redo()
+{
+//	pic::logmsg() << "osc_pad_t::impl_t::redo";
+	client_->send(new live_redo_message_t());
+}
+
+
+
 
 void osc_pad_t::impl_t::clocksink_ticked(unsigned long long f, unsigned long long t)
 {
@@ -768,6 +785,20 @@ void osc_pad_t::shutdown()
 	// pic::logmsg() << "osc_pad_t::shutdown ";
 	impl_->shutdown();
 }
+
+void osc_pad_t::undo()
+{
+//	pic::logmsg() << "osc_pad_t::undo ";
+	impl_->undo();
+}
+
+void osc_pad_t::redo()
+{
+//	pic::logmsg() << "osc_pad_t::redo ";
+	impl_->redo();
+}
+
+
 
 }; //namespace oscpad_plg
 

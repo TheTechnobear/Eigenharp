@@ -4,6 +4,7 @@
 #include "osc_server.h"
 #include "osc_client.h"
 
+
 namespace oscpad_plg {
 
 struct live_handler_t : public osc_handler_t
@@ -188,6 +189,23 @@ struct live_play_scene_message_t : public live_message_t
 	virtual lo_message createMessage();
 	int scene_;
 };
+
+// /live/undo
+struct live_undo_message_t : public live_message_t
+{
+	live_undo_message_t();
+	virtual const char *topic();
+	virtual lo_message createMessage();
+};
+
+// /live/redo
+struct live_redo_message_t : public live_message_t
+{
+	live_redo_message_t();
+	virtual const char *topic();
+	virtual lo_message createMessage();
+};
+
 
 
 

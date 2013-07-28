@@ -26,6 +26,8 @@ namespace oscpad_plg
             void stop();
             void play_scene(int scene);
             void shutdown();
+            void undo();
+            void redo();
 
             class impl_t;
          private:
