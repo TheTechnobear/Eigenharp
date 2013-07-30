@@ -1,0 +1,12 @@
+# compiled file
+.project
+.classpath
+.settings
+bin
+
+# mac os files & vi
+.DS_Store
+.*.swp
+.Spotlight-V100
+.Trashes
+
