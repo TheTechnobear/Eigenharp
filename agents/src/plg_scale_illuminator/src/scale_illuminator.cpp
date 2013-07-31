@@ -454,15 +454,23 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     		unsigned char colour=BCTSTATUS_OFF;
     		int n = note(*soi,impl.playing_tonic_,impl.playing_max_note_);
     		bool is_tonic=false;
+    		bool is_missing_ref_scale=impl.reference_scale_.size()==0;
     		if(impl.root_light_)
     		{
-    			is_tonic = n== impl.reference_tonic_;
+    			if (is_missing_ref_scale)
+    			{
+    				is_tonic = n == impl.playing_tonic_;
+    			}
+    			else
+    			{
+    				is_tonic = n== impl.reference_tonic_;
+    			}
     		}
     		if(is_tonic)
     		{
     			colour= BCTSTATUS_MIXED;
     		}
-    		else
+    		else if(!is_missing_ref_scale)
     		{
     	 		is_in_scale = soi==soe ? false :
     	    				is_in_reference_scale(impl.reference_scale_,
