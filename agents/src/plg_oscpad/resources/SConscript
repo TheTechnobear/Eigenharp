@@ -3,5 +3,5 @@ Import('master_env')
 
 env = master_env.Clone()
 env.PiResources('LiveOSC','LiveOSC/*',package='Technobear')
-env.PiResources('Help','README',package='Technobear')
+env.PiResources('Help','Osc_Pad_README',package='Technobear')
 env.PiResources('Scripts','Scripts/*',package='Technobear')

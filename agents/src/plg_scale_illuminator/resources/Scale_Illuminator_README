@@ -1,0 +1,50 @@
+Scale Illuminator
+RELEASE 0.1
+
+Contributions
+=============
+Mark Harris - agent
+
+
+
+Overview & Install
+==================
+In workbench connect agent to keygroup output of choice
+change reference scale & tonic
+inverted = false, shows notes of scale in green, inverted = true, shows note not in scale in red
+root = true, show root/tonic of scale in orange.
+e.g.
+scale illuminator hey tonic to 0 set
+scale illuminator hey scale to [0,2,4,5,7,9,11,12] set
+scale illuminator hey inverted toggle set
+scale illuminator hey root toggle set
+
+
+note: you cannot yet use scale names or tonic (note) names
+
+TO USE:
+ENJOY !!!
+
+PLANNED ENHANCEMENTS
+====================
+- set scale by name
+- set tonic by name
+- workaround issue with course note over length (eigend bug)
+- base note support
+
+
+
+CHANGE HISTORY
+==============
+known issues :
+course notes cannot exceed length number of entries - due to issue in EigenD
+
+change log:
+0.1 - initial release
+
+SETUPS
+======
+Below describes the setups available 
+
+None yet
+

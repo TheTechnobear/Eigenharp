@@ -1,0 +1,16 @@
+Import('master_env')
+env = master_env.Clone()
+
+#
+# Build a shared library called scaleilluminator_plg.
+#
+env.PiSharedLibrary('scale_illuminator_plg', 
+	Split('scale_illuminator.cpp'),
+	libraries=Split('pic piw pie pia'), 
+	package='Technobear', per_agent='plg_scale_illuminator')
+
+#
+# Build a Python native module as described by scaleillumintator_plg.pip, called scaleillumintator_plg_native.
+# Link it against our new shared library and other base libraries
+#
+env.PiPipBinding('scale_illuminator_plg_native', 'scale_illuminator_plg.pip', libraries=Split('scale_illuminator_plg pic piw pie'), package='Technobear', per_agent='plg_scale_illuminator')
