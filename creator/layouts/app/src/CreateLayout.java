@@ -14,6 +14,7 @@ public class CreateLayout
 	private int _blockRows;
 	private int _blockCols;
 	private boolean _isLinear;
+	private boolean _setPhysical;
 	private int _kgStart;
 	private int _kgEnd;
 
@@ -35,7 +36,7 @@ public class CreateLayout
 		if(_args.length < 8) 
 		{
 			System.out.println("CreateLayout usage:");
-			System.out.println("CreateLayout keygroup kgstartrow kgendrow kgrow kgcol blockrow blockcol courseoffset increment linear");
+			System.out.println("CreateLayout keygroup kgstartrow kgendrow kgrow kgcol blockrow blockcol courseoffset increment linear physical");
 			System.out.println("CreateLayout \"keygroup 1\" 1 23 22 5 1 0 4.0 1 true");
 			System.out.println(_args[2]);
 			return false;
@@ -58,6 +59,7 @@ public class CreateLayout
 			_increment *= -1;
 		}
 		_isLinear = Boolean.valueOf(_args[i++]);
+		_setPhysical = Boolean.valueOf(_args[i++]);
 		_buf=new StringBuffer();
 		return true;
 	}
@@ -65,8 +67,48 @@ public class CreateLayout
 	private boolean generate()
 	{
 		if(!generateOffsets()) return false;
+		if(_setPhysical && !generatePhysicalMapping()) return false;
 		if(!generateMusicalMapping()) return false;
 		System.out.println(_buf.toString());
+		return true;
+	}
+	
+	private boolean generatePhysicalMapping() 
+	{
+		createHey();
+		_buf.append(" physical mapping to [").append(NL);
+		if (_isLinear)
+		{
+			int rowOffset = _kgStart - 1;
+			int numKeys =  _kgEnd  * _kgCols;
+			for (int keyNum=0 ;keyNum<numKeys;keyNum++)
+			{
+				int col=(keyNum / _kgEnd)+1;
+				int row=(keyNum % _kgEnd)+1 - rowOffset;
+				if(row > 0 & row<=_kgRows && col<=_kgCols)
+				{
+					generateRowCol(1,keyNum+1,col,row);
+				}
+			}
+		}
+		else
+		{
+			int rowOffset = _kgStart - 1;
+			for (int c=1;c<=_kgCols;c++)
+			{
+				for (int r=1;r<=_kgEnd;r++)
+				{
+					int row=r-rowOffset;
+					if(row > 0 & row<=_kgRows)
+					{
+						generateRowCol(c,r,c,row);
+					}
+				}
+			}
+		}
+		_buf.delete(_buf.length()-2, _buf.length());
+		_buf.append("] set").append(NL);
+		
 		return true;
 	}
 	
@@ -151,7 +193,15 @@ public class CreateLayout
 	
 	boolean generateOffsets()
 	{
-		int numCourses = ( _blockRows >0 ? _kgCols : _kgRows);
+		int numCourses = 0;
+		if( _blockRows > 0 && _blockCols > 0 )
+		{
+			numCourses = (_kgRows/_blockRows) + 1;
+		}
+		else
+		{
+			numCourses = ( _blockRows >0 ? _kgCols : _kgRows);
+		}
 		createHey();
 		_buf.append(" course offset to [0");
 		for (int i=1;i<numCourses;i++)
