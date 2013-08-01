@@ -62,6 +62,16 @@ keygroup 1 output clarinet to illuminator 1 into channel 10 connect
 
 keygroup 1 output synth to illuminator 1 into channel 11 connect
 
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 1 output midi 1 to illuminator 1 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 1 output midi 2 to illuminator 1 into channel 13 connect
+
 #VAR1=illuminator 2 create a scale illuminator, called VAR1
 scale illuminator create 
 it to illuminator 2 name ify
@@ -120,6 +130,16 @@ keygroup 2 output clarinet to illuminator 2 into channel 10 connect
 # VAR1=illuminator 2 scale illuminator, keygroup 2 keygroup to link VAR3=synth kg output VAR4=11 keygroup channel
 
 keygroup 2 output synth to illuminator 2 into channel 11 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 2 scale illuminator, keygroup 2 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 2 output midi 1 to illuminator 2 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 2 scale illuminator, keygroup 2 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 2 output midi 2 to illuminator 2 into channel 13 connect
 
 #VAR1=illuminator 3 create a scale illuminator, called VAR1
 scale illuminator create 
@@ -180,6 +200,16 @@ keygroup 3 output clarinet to illuminator 3 into channel 10 connect
 
 keygroup 3 output synth to illuminator 3 into channel 11 connect
 
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 3 scale illuminator, keygroup 3 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 3 output midi 1 to illuminator 3 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 3 scale illuminator, keygroup 3 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 3 output midi 2 to illuminator 3 into channel 13 connect
+
 #VAR1=illuminator 4 create a scale illuminator, called VAR1
 scale illuminator create 
 it to illuminator 4 name ify
@@ -238,6 +268,16 @@ keygroup 4 output clarinet to illuminator 4 into channel 10 connect
 # VAR1=illuminator 4 scale illuminator, keygroup 4 keygroup to link VAR3=synth kg output VAR4=11 keygroup channel
 
 keygroup 4 output synth to illuminator 4 into channel 11 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 4 scale illuminator, keygroup 4 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 4 output midi 1 to illuminator 4 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 4 scale illuminator, keygroup 4 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 4 output midi 2 to illuminator 4 into channel 13 connect
 
 #VAR1=illuminator 5 create a scale illuminator, called VAR1
 scale illuminator create 
@@ -298,6 +338,16 @@ keygroup 5 output clarinet to illuminator 5 into channel 10 connect
 
 keygroup 5 output synth to illuminator 5 into channel 11 connect
 
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 5 scale illuminator, keygroup 5 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 5 output midi 1 to illuminator 5 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 5 scale illuminator, keygroup 5 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 5 output midi 2 to illuminator 5 into channel 13 connect
+
 #VAR1=illuminator 6 create a scale illuminator, called VAR1
 scale illuminator create 
 it to illuminator 6 name ify
@@ -356,4 +406,14 @@ keygroup 6 output clarinet to illuminator 6 into channel 10 connect
 # VAR1=illuminator 6 scale illuminator, keygroup 6 keygroup to link VAR3=synth kg output VAR4=11 keygroup channel
 
 keygroup 6 output synth to illuminator 6 into channel 11 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 6 scale illuminator, keygroup 6 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 6 output midi 1 to illuminator 6 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=illuminator 6 scale illuminator, keygroup 6 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 6 output midi 2 to illuminator 6 into channel 13 connect
 
