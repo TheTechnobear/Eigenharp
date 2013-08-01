@@ -468,7 +468,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     		}
     		if(is_tonic)
     		{
-    			colour= BCTSTATUS_MIXED;
+    			colour= impl.inverted_ ? BCTSTATUS_ACTIVE : BCTSTATUS_INACTIVE;
     		}
     		else if(!is_missing_ref_scale)
     		{
