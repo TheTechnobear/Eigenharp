@@ -420,6 +420,8 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     pic::lckvector_t<float>::nbtype::const_iterator soi,soe;
     bool is_in_scale = false;
 
+    if(impl.playing_scale_.size() == 0) return;
+
     cli = impl.courselen_.begin();
     cle = impl.courselen_.end();
 
@@ -440,15 +442,16 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     	// go thru each row
         soi = impl.playing_scale_.begin();
         soe = impl.playing_scale_.end();
-        for(int i=0;i<course_offset % (int) impl.playing_max_note_;i++)
-        {
-        	soi++;
-        	if(soi==soe)
-        	{
-        		soi=impl.playing_scale_.begin();
-        	}
-        }
-        // MSH : needs correcting, this interval of 1, could be 1,3,5 etc.
+		for(int i=0;i<course_offset % (int) impl.playing_max_note_;i++)
+		{
+			soi++;
+			if(soi==soe)
+			{
+				soi=impl.playing_scale_.begin();
+			}
+		}
+
+		// MSH : needs correcting, this interval of 1, could be 1,3,5 etc.
     	for(int row=0;row<course_len;row++)
     	{
     		unsigned char colour=BCTSTATUS_OFF;
