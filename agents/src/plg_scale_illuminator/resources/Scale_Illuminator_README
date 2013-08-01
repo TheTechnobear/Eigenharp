@@ -9,7 +9,24 @@ Mark Harris - agent
 
 Overview & Install
 ==================
-In workbench connect agent to keygroup output of choice
+Install by double clicking package, this will install agent and also demo scripts.
+
+you can find a demo script for each device, (alpha is for factory setup 3, but works with 1 & 2)
+use commander  (or script browser to execute)
+e.g
+alpha scale illuminator execute
+
+IMPORTANT NOTE: when you initially connect agent to keygroup (manually or thru above script), you
+should see the tonics lit (no scale, as no reference scale has been set yet).
+If you do NOT see tonic, it is because the keygroup doesnt have the scale set, it appears some factory setup
+have incorrectly not set the scale (and are just defaulting to major), so set the scale explicity and you will see the
+tonic light!
+
+
+to change the reference scalei/tonic, you need to use the belcanto below (or use workbench)
+
+
+alternatively you can do manually, just use  workbench to connect agent to keygroup output of choice
 change reference scale & tonic
 inverted = false, shows notes of scale in green, inverted = true, shows note not in scale in red
 root = true, show root/tonic of scale in red = normal green = inverted.
@@ -18,7 +35,6 @@ scale illuminator hey tonic to 0 set
 scale illuminator hey scale to [0,2,4,5,7,9,11,12] set
 scale illuminator hey inverted toggle set
 scale illuminator hey root toggle set
-
 
 note: you cannot yet use scale names or tonic (note) names
 
