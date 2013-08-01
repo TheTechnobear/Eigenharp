@@ -12,7 +12,7 @@ Overview & Install
 In workbench connect agent to keygroup output of choice
 change reference scale & tonic
 inverted = false, shows notes of scale in green, inverted = true, shows note not in scale in red
-root = true, show root/tonic of scale in orange.
+root = true, show root/tonic of scale in red = normal green = inverted.
 e.g.
 scale illuminator hey tonic to 0 set
 scale illuminator hey scale to [0,2,4,5,7,9,11,12] set
@@ -42,6 +42,7 @@ course notes cannot exceed length number of entries - due to issue in EigenD
 change log:
 0.1 - initial release
 0.1.1 - if no ref scale, then use playing tonic, correct version number 
+0.1.2 - tonics are now displayed red = normal green = inverted
 
 SETUPS
 ======

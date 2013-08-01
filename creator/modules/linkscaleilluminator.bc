@@ -1,0 +1,5 @@
+# this will link a scale illuminator to a keygroup output
+# VAR1=%VAR1% scale illuminator, %VAR2% keygroup to link VAR3=%VAR3% kg output VAR4=%VAR4% keygroup channel
+
+%VAR2% output %VAR3% to %VAR1% into channel %VAR4% connect
+

@@ -1,0 +1,4 @@
+#VAR1=%VAR1% create a scale illuminator, called VAR1
+scale illuminator create 
+it to %VAR1% name ify
+
