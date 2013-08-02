@@ -18,12 +18,12 @@ alpha scale illuminator execute
 
 IMPORTANT NOTE: when you initially connect agent to keygroup (manually or thru above script), you
 should see the tonics lit (no scale, as no reference scale has been set yet).
-If you do NOT see tonic, it is because the keygroup doesnt have the scale set, it appears some factory setup
-have incorrectly not set the scale (and are just defaulting to major), so set the scale explicity and you will see the
+If you do NOT see tonic, it is because the keygroup doesn't have the scale set, it appears some factory setup
+have incorrectly not set the scale (and are just defaulting to major), so set the scale explicitly and you will see the
 tonic light!
 
 
-to change the reference scalei/tonic, you need to use the belcanto below (or use workbench)
+to change the reference scale/tonic, you need to use the belcanto below (or use workbench)
 
 
 alternatively you can do manually, just use  workbench to connect agent to keygroup output of choice
