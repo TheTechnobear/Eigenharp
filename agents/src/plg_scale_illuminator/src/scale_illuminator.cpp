@@ -334,6 +334,12 @@ void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 			pic::logmsg() << "scale "<< s ;
 			playing_max_note_=decode_scale(playing_scale_,s.as_stdstr());
 		}
+		else if (playing_scale_.size()==0)
+		{
+			pic::logmsg() << "defaulting to major scale";
+			//default input to major, just in case its not specified on KG
+			playing_max_note_=decode_scale(playing_scale_,"[0,2,4,5,7,9,11,12]");
+		}
 
 		co = d.as_dict_lookup("courseoffset");
 		if(!co.is_null())
