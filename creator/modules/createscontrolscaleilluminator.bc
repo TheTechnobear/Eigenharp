@@ -1,4 +1,4 @@
-# this module loads a talker with scale illuminator controls inverted, root and scale
+# this module loads a talker with scale illuminator controls - inverted, root and Default Eigenlabs scales
 
 # VAR1=%VAR1% talker to load with actions VAR2=%VAR2% scale illuminator target VAR3=%VAR3% column to use
 
