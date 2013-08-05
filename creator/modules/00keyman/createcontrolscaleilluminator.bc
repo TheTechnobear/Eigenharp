@@ -74,8 +74,6 @@
 %VAR1% hey key 8 key column to %VAR3% set
 %VAR1% hey key 8 key row to 8 set
 
-
-empty join
 talker create
 it to test scale illuminator 1 name ify
 
@@ -83,14 +81,16 @@ percussion keygroup keygroup output 12 to test scale illuminator 1 connect
 
 test scale illuminator 1 hey " " when 13 do
 
-test scale illuminator 1 hey " scale illuminator 1 hey inverted toggle set " when 11 called 1 do
+test scale illuminator 1 hey " %VAR2% hey inverted toggle set " when 11 called 1 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 11 key row to 0 set " when 11 called 2 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 13 key row to 11 set " when 11 called 3 do
 test scale illuminator 1 hey 11 to 2 colour ify 
 test scale illuminator 1 hey key 11 key column to 1 set
 test scale illuminator 1 hey key 11 key row to 11 set
 
-test scale illuminator 1 hey " scale illuminator 1 hey inverted toggle set " when 13 called 1 do
+test scale illuminator 1 hey 13 called 1 cancel
+
+test scale illuminator 1 hey " %VAR2% hey inverted toggle set " when 13 called 1 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 11 key row to 11 set " when 13 called 2 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 13 key row to 0 set " when 13 called 3 do
 test scale illuminator 1 hey 13 to 1 colour ify 
@@ -99,14 +99,16 @@ test scale illuminator 1 hey key 13 key row to 0 set
 
 test scale illuminator 1 hey " " when 14 do
 
-test scale illuminator 1 hey " scale illuminator 1 hey root toggle set " when 12 called 1 do
+test scale illuminator 1 hey " %VAR2% hey root toggle set " when 12 called 1 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 12 key row to 0 set " when 12 called 2 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 14 key row to 12 set " when 12 called 3 do
 test scale illuminator 1 hey 12 to 2 colour ify 
 test scale illuminator 1 hey key 12 key column to 1 set
 test scale illuminator 1 hey key 12 key row to 12 set
 
-test scale illuminator 1 hey " scale illuminator 1 hey root toggle set " when 14 called 1 do
+test scale illuminator 1 hey 14 called 1 cancel
+
+test scale illuminator 1 hey " %VAR2% hey root toggle set " when 14 called 1 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 12 key row to 12 set " when 14 called 2 do
 test scale illuminator 1 hey " test scale illuminator 1 hey key 14 key row to 0 set " when 14 called 3 do
 test scale illuminator 1 hey 14 to 1 colour ify 
