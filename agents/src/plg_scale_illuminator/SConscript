@@ -3,6 +3,6 @@ Import('master_env')
 env = master_env.Clone()
 
 env.PiPythonPackage(package='Technobear', per_agent='plg_scale_illuminator')
-env.PiAgent('scale_illuminator', 'plg_scale_illuminator','scale_illuminator_plg', cversion='0.1.6')
+env.PiAgent('scale_illuminator', 'plg_scale_illuminator','scale_illuminator_plg', cversion='0.1.7')
 if env['IS_MACOSX']:
     env.PiEtc('Technobear',Split('postflight-scale_illuminator'))

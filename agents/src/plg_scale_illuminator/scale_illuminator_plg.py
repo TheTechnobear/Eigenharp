@@ -36,7 +36,9 @@ class Agent(agent.Agent):
         self[2][3].add_verb2(1,'set([],~a,role(None,[instance(~self)]),role(to,[ideal([None,note]),singular]))',callback=self.__tune_tonic)
         self[2][4] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__change_inverted),names='inverted')
         self[2][5] = atom.Atom(domain=domain.Bool(),init=True,policy=atom.default_policy(self.__change_root_light),names='root')
-        
+
+        self.add_verb2(3,'clear([],None,role(None,[matches([scale])]))', callback=self.__clear_scale )
+         
     def __tune_scale(self,subj,dummy,arg):
         print 'tune scale',arg
         type,thing = action.crack_ideal(action.arg_objects(arg)[0])
@@ -45,6 +47,12 @@ class Agent(agent.Agent):
         self.illuminator.reference_scale(scale);
         return action.nosync_return()
 
+    def __clear_scale(self,subject,name):
+        print 'clear scale'
+        self[2][2].set_value('')
+        self.illuminator.reference_scale('');
+        return True
+        
 
     def __change_scale(self,value):
         print 'change scale',value
