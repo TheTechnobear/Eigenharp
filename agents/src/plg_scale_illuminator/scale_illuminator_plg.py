@@ -7,6 +7,7 @@ from . import scale_illuminator_version as version
 
 from .scale_illuminator_plg_native import scale_illuminator
 
+IN_CONTROL=1
 OUT_LIGHT=1
 
 class Agent(agent.Agent):
@@ -22,16 +23,13 @@ class Agent(agent.Agent):
         self[1][1] = bundles.Output(OUT_LIGHT, False, names='light output', protocols='revconnect')
         self.output = bundles.Splitter(self.domain, self[1][1])
         self.illuminator = scale_illuminator(self.domain, self.output.cookie())
-        self.ctlr_fb = piw.functor_backend(1,True)
-        self.ctlr_fb.set_functor(piw.pathnull(0),self.illuminator.control())
-        self.ctlr_input = bundles.ScalarInput(self.ctlr_fb.cookie(),self.domain,signals=(1,))
-        
         
         th=(T('stageinc',1),T('inc',1),T('biginc',1),T('control','updown'))
         sh=(T('choices','[0,2,4,5,7,9,11,12]','[0,1,2,3,4,5,6,7,8,9,10,11,12]','[0,2,4,6,8,10,12]','[0,2,3,5,7,8,10,12]','[0,3,5,6,7,10,12]', '[0,2,3,6,7,8,11,12]','[0,3,5,7,10,12]','[0,2,4,7,9,12]'), T('control','selector'))
 
-        self[2]=atom.Atom(names='inputs')
-        self[2][1] =atom.Atom(domain=domain.Aniso(),policy=self.ctlr_input.policy(1,False),names='controller input')
+        self.control_input = bundles.VectorInput(self.illuminator.cookie(), self.domain, signals=(1,))
+        self[2] = atom.Atom(names="inputs")
+        self[2][1] =atom.Atom(domain=domain.Aniso(),policy=self.control_input.vector_policy(1,False),names='controller input')
         self[2][2] = atom.Atom(domain=domain.String(hints=sh), policy=atom.default_policy(self.__change_scale), names='scale',protocols='bind set',container=(None,'scale',self.verb_container()))
         self[2][2].add_verb2(1,'set([],~a,role(None,[instance(~self)]),role(to,[ideal([None,scale]),singular]))',callback=self.__tune_scale)
         self[2][3] = atom.Atom(domain=domain.BoundedFloatOrNull(0,12,hints=th),init=None,policy=atom.default_policy(self.__change_tonic),names='tonic',protocols='bind set',container=(None,'tonic',self.verb_container()))
@@ -39,8 +37,6 @@ class Agent(agent.Agent):
         self[2][4] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__change_inverted),names='inverted')
         self[2][5] = atom.Atom(domain=domain.Bool(),init=True,policy=atom.default_policy(self.__change_root_light),names='root')
         
- 
- 
     def __tune_scale(self,subj,dummy,arg):
         print 'tune scale',arg
         type,thing = action.crack_ideal(action.arg_objects(arg)[0])

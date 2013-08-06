@@ -17,7 +17,6 @@ namespace scale_illuminator_plg
     		scale_illuminator_t(piw::clockdomain_ctl_t *, const piw::cookie_t &output);
             ~scale_illuminator_t();
             piw::cookie_t cookie();
-            piw::change_nb_t control();
             void reference_scale(const std::string &);
             void reference_tonic(float);
             void inverted(bool v);

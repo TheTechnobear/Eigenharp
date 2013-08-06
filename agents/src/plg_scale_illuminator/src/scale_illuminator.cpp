@@ -14,7 +14,7 @@
 #define OUT_LIGHT 1
 #define OUT_MASK SIG1(OUT_LIGHT)
 
-
+#define IN_CONTROL 1
 
 
 namespace scale_illuminator_plg
@@ -22,7 +22,7 @@ namespace scale_illuminator_plg
 
 //////////// scale_illuminator_t::impl_t  declaration
 // illuminator wire used for input processing
-struct illuminator_wire_t:
+struct control_wire_t:
     piw::wire_t,
     piw::wire_ctl_t,
     piw::event_data_sink_t,
@@ -30,8 +30,8 @@ struct illuminator_wire_t:
     virtual public pic::lckobject_t,
     pic::element_t<>
 {
-    illuminator_wire_t(scale_illuminator_t::impl_t *p, const piw::event_data_source_t &);
-    ~illuminator_wire_t() { invalidate(); }
+    control_wire_t(scale_illuminator_t::impl_t *p, const piw::event_data_source_t &);
+    ~control_wire_t() { invalidate(); }
 
     void wire_closed() { delete this; }
     void invalidate();
@@ -71,11 +71,11 @@ struct scale_illuminator_t::impl_t :
 	    piw::clocksink_t,
 	    virtual pic::lckobject_t
 {
-    impl_t(piw::clockdomain_ctl_t *cd, const piw::cookie_t &c);
+    impl_t(piw::clockdomain_ctl_t *cd, const piw::cookie_t &oc);
     ~impl_t();
      void clocksink_ticked(unsigned long long f, unsigned long long t);
-    void add_ticker(illuminator_wire_t *w);
-    void del_ticker(illuminator_wire_t *w);
+    void add_ticker(control_wire_t *w);
+    void del_ticker(control_wire_t *w);
     void invalidate();
     piw::wire_t *root_wire(const piw::event_data_source_t &es);
     void root_closed();
@@ -91,8 +91,8 @@ struct scale_illuminator_t::impl_t :
     void inverted (bool v);
 
 
-    pic::lckmap_t<piw::data_t, illuminator_wire_t *>::lcktype children_;
-    pic::ilist_t<illuminator_wire_t> tickers_;
+    pic::lckmap_t<piw::data_t, control_wire_t *>::lcktype children_;
+    pic::ilist_t<control_wire_t> tickers_;
     bct_clocksink_t *up_;
     pic::ref_t<light_wire_t> light_wire_;
 
@@ -114,7 +114,7 @@ struct scale_illuminator_t::impl_t :
 
 
 /// scale_illuminator_t::impl_t implementation
-scale_illuminator_t::impl_t::impl_t(piw::clockdomain_ctl_t *cd, const piw::cookie_t &c) : 
+scale_illuminator_t::impl_t::impl_t(piw::clockdomain_ctl_t *cd, const piw::cookie_t &c) :
 	root_t(0), up_(0), playing_max_note_(0.0),
 	playing_tonic_(0.0), playing_base_note_(0.0), playing_octave_(0.0),
 	reference_tonic_(0.0),
@@ -141,7 +141,7 @@ scale_illuminator_t::impl_t::~impl_t()
 
 void scale_illuminator_t::impl_t::clocksink_ticked(unsigned long long f, unsigned long long t)
 {
-	illuminator_wire_t *w;
+	control_wire_t *w;
 
 	for(w=tickers_.head(); w!=0; w=tickers_.next(w))
 	{
@@ -149,7 +149,7 @@ void scale_illuminator_t::impl_t::clocksink_ticked(unsigned long long f, unsigne
 	}
 }
 
-void scale_illuminator_t::impl_t::add_ticker(illuminator_wire_t *w)
+void scale_illuminator_t::impl_t::add_ticker(control_wire_t *w)
 {
 	if(!tickers_.head())
 	{
@@ -159,7 +159,7 @@ void scale_illuminator_t::impl_t::add_ticker(illuminator_wire_t *w)
 	tickers_.append(w);
 }
 
-void scale_illuminator_t::impl_t::del_ticker(illuminator_wire_t *w)
+void scale_illuminator_t::impl_t::del_ticker(control_wire_t *w)
 {
 	tickers_.remove(w);
 
@@ -174,7 +174,7 @@ void scale_illuminator_t::impl_t::invalidate()
 {
 	tick_disable();
 
-	pic::lckmap_t<piw::data_t,illuminator_wire_t *>::lcktype::iterator ci;
+	pic::lckmap_t<piw::data_t,control_wire_t *>::lcktype::iterator ci;
 	while((ci=children_.begin())!=children_.end())
 	{
 		delete ci->second;
@@ -183,14 +183,14 @@ void scale_illuminator_t::impl_t::invalidate()
 
 piw::wire_t *scale_illuminator_t::impl_t::root_wire(const piw::event_data_source_t &es)
 {
-   pic::lckmap_t<piw::data_t,illuminator_wire_t *>::lcktype::iterator ci;
+   pic::lckmap_t<piw::data_t,control_wire_t *>::lcktype::iterator ci;
 
 	if((ci=children_.find(es.path()))!=children_.end())
 	{
 		delete ci->second;
 	}
 
-	return new illuminator_wire_t(this, es);
+	return new control_wire_t(this, es);
 }
 
 void scale_illuminator_t::impl_t::root_closed() { invalidate(); }
@@ -231,21 +231,21 @@ void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data
 
     courses.reserve(5);
 
-    unsigned column=0;
     for(unsigned i = 0; i < dictlen; ++i)
     {
     	unsigned l=courselen.as_tuple_value(i).as_long();
         courses.push_back(l);
      }
 
-    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-    ci = courses.begin();
-    ce = courses.end();
-
-    for(; ci != ce; ++ci)
-    {
-    	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
-    }
+//    unsigned column=0;
+//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
+//    ci = courses.begin();
+//    ce = courses.end();
+//
+//    for(; ci != ce; ++ci)
+//    {
+//    	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
+//    }
 }
 
 void decode_courseoffset(pic::lckvector_t<float>::nbtype &courses, const piw::data_nb_t &courseoffset)
@@ -262,15 +262,15 @@ void decode_courseoffset(pic::lckvector_t<float>::nbtype &courses, const piw::da
         courses.push_back(courseoffset.as_tuple_value(i).as_float());
     }
 
-    pic::lckvector_t<float>::nbtype::const_iterator ci,ce;
-    ci = courses.begin();
-    ce = courses.end();
-
-    unsigned column=0;
-    for(; ci != ce; ++ci)
-    {
-    	pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
-    }
+//    pic::lckvector_t<float>::nbtype::const_iterator ci,ce;
+//    ci = courses.begin();
+//    ce = courses.end();
+//
+//    unsigned column=0;
+//    for(; ci != ce; ++ci)
+//    {
+//    	pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
+//    }
 }
 
 float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
@@ -291,7 +291,7 @@ float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
         std::istringstream(part) >> f;
         scale.push_back(f);
         if(f>max_note) max_note=f;
-    	pic::logmsg() << "decode_scale f=" << f;
+//    	pic::logmsg() << "decode_scale f=" << f;
     }
     // we remove the last entry, as it is a repeat of the first, it only exists
     // for downstream scaler to determine the interval between last entry and first  (e.g B to C)
@@ -526,7 +526,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
 
 
 
-illuminator_wire_t::illuminator_wire_t(scale_illuminator_t::impl_t  *p, const piw::event_data_source_t &es):
+control_wire_t::control_wire_t(scale_illuminator_t::impl_t  *p, const piw::event_data_source_t &es):
     piw::event_data_source_real_t(es.path()),
     root_(p),
     last_from_(0)
@@ -540,7 +540,7 @@ illuminator_wire_t::illuminator_wire_t(scale_illuminator_t::impl_t  *p, const pi
 
 static int __wire_invalidator(void *w_, void *_)
 {
-	illuminator_wire_t *w = (illuminator_wire_t *)w_;
+	control_wire_t *w = (control_wire_t *)w_;
     if(w->root_)
     {
         w->root_->del_ticker(w);
@@ -548,7 +548,7 @@ static int __wire_invalidator(void *w_, void *_)
     return 0;
 }
 
-void illuminator_wire_t::invalidate()
+void control_wire_t::invalidate()
 {
     source_shutdown();
 
@@ -563,7 +563,7 @@ void illuminator_wire_t::invalidate()
     }
 }
 
-void illuminator_wire_t::event_start(unsigned seq, const piw::data_nb_t &id, const piw::xevent_data_buffer_t &b)
+void control_wire_t::event_start(unsigned seq, const piw::data_nb_t &id, const piw::xevent_data_buffer_t &b)
 {
     output_ = piw::xevent_data_buffer_t(OUT_MASK,PIW_DATAQUEUE_SIZE_NORM);
 
@@ -573,56 +573,55 @@ void illuminator_wire_t::event_start(unsigned seq, const piw::data_nb_t &id, con
     last_from_ = t;
 
 	piw::data_nb_t d;
-//	if(input_->latest(IN_KEY,d,t))
-//	{
-//		process(IN_KEY,d,t);
-//	}
+	if(input_->latest(IN_CONTROL,d,t))
+	{
+		process(IN_CONTROL,d,t);
+	}
 
     source_start(seq,id,output_);
 
     root_->add_ticker(this);
 }
 
-void illuminator_wire_t::event_buffer_reset(unsigned s, unsigned long long t, const piw::dataqueue_t &o, const piw::dataqueue_t &n)
+void control_wire_t::event_buffer_reset(unsigned s, unsigned long long t, const piw::dataqueue_t &o, const piw::dataqueue_t &n)
 {
     input_->set_signal(s,n);
     input_->reset(s,t);
     ticked(last_from_,t);
 }
 
-bool illuminator_wire_t::event_end(unsigned long long t)
+bool control_wire_t::event_end(unsigned long long t)
 {
     ticked(last_from_,t);
     root_->del_ticker(this);
     return source_end(t);
 }
 
-void illuminator_wire_t::ticked(unsigned long long f, unsigned long long t)
+void control_wire_t::ticked(unsigned long long f, unsigned long long t)
 {
-//    last_from_ = t;
-//
-//	piw::data_nb_t d;
-//	unsigned s;
-//	while(input_->next(SIG1(IN_KEY),s,d,t))
-//	{
-//		process(s,d,t);
-//	}
+    last_from_ = t;
+
+	piw::data_nb_t d;
+	unsigned s;
+	while(input_->next(SIG1(IN_CONTROL),s,d,t))
+	{
+		process(s,d,t);
+	}
 }
 
-void illuminator_wire_t::source_ended(unsigned seq)
+void control_wire_t::source_ended(unsigned seq)
 {
     event_ended(seq);
 }
 
 
-void illuminator_wire_t::process(unsigned s, const piw::data_nb_t &d, unsigned long long t)
+void control_wire_t::process(unsigned s, const piw::data_nb_t &d, unsigned long long t)
 {
-//	  pic::logmsg() << "illuminator_wire_t::process:" << s;
-//    float column, row, course, key;
-//    piw::hardness_t hardness;
-//    if(IN_KEY==s && piw::decode_key(d,&column,&row,&course,&key,&hardness))
-//    {
-//    }
+	pic::logmsg() << "control_wire_t::process:" << s;
+    if(IN_CONTROL==s)
+    {
+    	root_->control_change(d);
+    }
 }
 
 
@@ -668,11 +667,6 @@ piw::cookie_t scale_illuminator_t::cookie()
     return piw::cookie_t(impl_);
 }
 
-
-piw::change_nb_t scale_illuminator_t::control()
-{
-    return piw::change_nb_t::method(impl_,&scale_illuminator_t::impl_t::control_change);
-}
 
 
 void scale_illuminator_t::reference_scale(const std::string &s)

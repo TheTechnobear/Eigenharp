@@ -48,10 +48,6 @@ CHANGE HISTORY
 ==============
 known issues :
 - course notes cannot exceed length number of entries - due to issue in EigenD
-- sometimes when connect a scale illuminator to a keygroup, lights will not appear this appears to 
-happend in demo scripts, where a larger number of keygroup outputs are connected to illuminators, 
-often this happens onlhy when you reload the setup.
-workaround: reconnect outputs, either manually or edit supplied script removing those connected ok, and the lines creating illuminator
 
 change log:
 0.1 - initial release
@@ -60,7 +56,7 @@ change log:
 0.1.3 - working around keygroups not having a scale set, seen in alpha factory 2 & 3
 0.1.4 - added missing midi connections to demo scripts (tau/alpha)
 0.1.5 - support setting scale and tonic by name, default KG scale to major, change demo scripts  to use scale illuminator as agent name
-0.1.6 - fix issue with offset with non-chromatic scales causing incorrect tonic, add Antonios script
+0.1.6 - fix issue with offset with non-chromatic scales causing incorrect tonic, add Antonios script, fix issue with KG not getting control by alt implementation
 
 SETUPS
 ======
