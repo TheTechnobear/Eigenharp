@@ -302,7 +302,17 @@ float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
 
 void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 {
-	pic::logmsg() << "scale_illuminator_t::impl_t::control_change";
+	if(d.is_null())
+	{
+		pic::logmsg() << "scale_illuminator_t::impl_t::control_change d=null!";
+	}
+	else
+	{
+		if(d.is_dict())
+			pic::logmsg() << "scale_illuminator_t::impl_t::control_change " << d;
+		else
+			pic::logmsg() << "scale_illuminator_t::impl_t::control_change (not dict)" << d;
+	}
     if(!d.is_null() && d.is_dict())
     {
 		piw::data_nb_t t,b,o,s,co,cl;
@@ -448,7 +458,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     	// go thru each row
         soi = impl.playing_scale_.begin();
         soe = impl.playing_scale_.end();
-		for(int i=0;i<course_offset % (int) impl.playing_max_note_;i++)
+		for(int i=0;i<course_offset % (int) impl.playing_scale_.size();i++)
 		{
 			soi++;
 			if(soi==soe)

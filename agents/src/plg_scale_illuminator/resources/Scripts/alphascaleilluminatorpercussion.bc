@@ -1,0 +1,202 @@
+name
+alpha scale illuminator percussion
+description
+scale illuminator for factory setup 2 split 1 percussion control
+script
+#VAR1=scale illuminator 1 create a scale illuminator, called VAR1
+scale illuminator create 
+it to scale illuminator 1 name ify
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=sampler 1 kg output VAR4=1 keygroup channel
+
+keygroup 1 output sampler 1 to scale illuminator 1 into channel 1 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=sampler 2 kg output VAR4=2 keygroup channel
+
+keygroup 1 output sampler 2 to scale illuminator 1 into channel 2 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=sampler 3 kg output VAR4=3 keygroup channel
+
+keygroup 1 output sampler 3 to scale illuminator 1 into channel 3 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=sampler 4 kg output VAR4=4 keygroup channel
+
+keygroup 1 output sampler 4 to scale illuminator 1 into channel 4 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=audio unit 1 kg output VAR4=5 keygroup channel
+
+keygroup 1 output audio unit 1 to scale illuminator 1 into channel 5 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=audio unit 2 kg output VAR4=6 keygroup channel
+
+keygroup 1 output audio unit 2 to scale illuminator 1 into channel 6 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=audio unit 3 kg output VAR4=7 keygroup channel
+
+keygroup 1 output audio unit 3 to scale illuminator 1 into channel 7 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=audio unit 4 kg output VAR4=8 keygroup channel
+
+keygroup 1 output audio unit 4 to scale illuminator 1 into channel 8 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=cello kg output VAR4=9 keygroup channel
+
+keygroup 1 output cello to scale illuminator 1 into channel 9 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=clarinet kg output VAR4=10 keygroup channel
+
+keygroup 1 output clarinet to scale illuminator 1 into channel 10 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=synth kg output VAR4=11 keygroup channel
+
+keygroup 1 output synth to scale illuminator 1 into channel 11 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=midi 1 kg output VAR4=12 keygroup channel
+
+keygroup 1 output midi 1 to scale illuminator 1 into channel 12 connect
+
+# this will link a scale illuminator to a keygroup output
+# VAR1=scale illuminator 1 scale illuminator, keygroup 1 keygroup to link VAR3=midi 2 kg output VAR4=13 keygroup channel
+
+keygroup 1 output midi 2 to scale illuminator 1 into channel 13 connect
+
+# VAR1=percussion keygroup keygroup to create output on , VAR2=%VAR%2 output number to create
+
+percussion keygroup hey output 12 create
+percussion keygroup hey keygroup output 12 key column to 1 set
+percussion keygroup hey keygroup output 12 key row to 12 set
+
+# VAR1=talker scale illuminator 1 name of talker, VAR2=percussion keygroup parent keygroup, VAR3=12 parent keygroup output
+
+talker create
+it to talker scale illuminator 1 name ify
+percussion keygroup hey output keygroup 12 to talker scale illuminator 1 connect
+# this module loads a talker with scale illuminator controls - 
+#inverted, root and Default Eigenlabs scales
+# VAR1=talker scale illuminator 1 talker to load with actions VAR2=scale illuminator 1 scale illuminator target VAR3=1 column to use
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to major set
+" when 1 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 1 to 1 from 3 colour ify
+" when 1 called 2 do
+talker scale illuminator 1 hey key 1 key column to 1 set
+talker scale illuminator 1 hey key 1 key row to 1 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to harmonic minor set
+" when 2 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 2 to 1 from 3 colour ify
+" when 2 called 2 do
+talker scale illuminator 1 hey key 2 key column to 1 set
+talker scale illuminator 1 hey key 2 key row to 2 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to melodic minor set
+" when 3 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 3 to 1 from 3 colour ify
+" when 3 called 2 do
+talker scale illuminator 1 hey key 3 key column to 1 set
+talker scale illuminator 1 hey key 3 key row to 3 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to chromatic set
+" when 4 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 4 to 1 from 3 colour ify
+" when 4 called 2 do
+talker scale illuminator 1 hey key 4 key column to 1 set
+talker scale illuminator 1 hey key 4 key row to 4 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to blues set
+" when 5 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 5 to 1 from 3 colour ify
+" when 5 called 2 do
+talker scale illuminator 1 hey key 5 key column to 1 set
+talker scale illuminator 1 hey key 5 key row to 5 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to pentathonic major set
+" when 6 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 6 to 1 from 3 colour ify
+" when 6 called 2 do
+talker scale illuminator 1 hey key 6 key column to 1 set
+talker scale illuminator 1 hey key 6 key row to 6 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to diminished set
+" when 7 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 7 to 1 from 3 colour ify
+" when 7 called 2 do
+talker scale illuminator 1 hey key 7 key column to 1 set
+talker scale illuminator 1 hey key 7 key row to 7 set
+
+talker scale illuminator 1 hey " 
+scale illuminator 1 hey scale to whole tone set
+" when 8 called 1 do
+talker scale illuminator 1 hey " 
+talker scale illuminator 1 hey 8 to 1 from 3 colour ify
+" when 8 called 2 do
+talker scale illuminator 1 hey key 8 key column to 1 set
+talker scale illuminator 1 hey key 8 key row to 8 set
+
+talker create
+it to test scale illuminator 1 name ify
+
+percussion keygroup keygroup output 12 to test scale illuminator 1 connect
+
+test scale illuminator 1 hey " " when 13 do
+
+test scale illuminator 1 hey " scale illuminator 1 hey inverted toggle set " when 11 called 1 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 11 key row to 0 set " when 11 called 2 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 13 key row to 11 set " when 11 called 3 do
+test scale illuminator 1 hey 11 to 2 colour ify 
+test scale illuminator 1 hey key 11 key column to 1 set
+test scale illuminator 1 hey key 11 key row to 11 set
+
+test scale illuminator 1 hey 13 called 1 cancel
+
+test scale illuminator 1 hey " scale illuminator 1 hey inverted toggle set " when 13 called 1 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 11 key row to 11 set " when 13 called 2 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 13 key row to 0 set " when 13 called 3 do
+test scale illuminator 1 hey 13 to 1 colour ify 
+test scale illuminator 1 hey key 13 key column to 1 set
+test scale illuminator 1 hey key 13 key row to 0 set
+
+test scale illuminator 1 hey " " when 14 do
+
+test scale illuminator 1 hey " scale illuminator 1 hey root toggle set " when 12 called 1 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 12 key row to 0 set " when 12 called 2 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 14 key row to 12 set " when 12 called 3 do
+test scale illuminator 1 hey 12 to 2 colour ify 
+test scale illuminator 1 hey key 12 key column to 1 set
+test scale illuminator 1 hey key 12 key row to 12 set
+
+test scale illuminator 1 hey 14 called 1 cancel
+
+test scale illuminator 1 hey " scale illuminator 1 hey root toggle set " when 14 called 1 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 12 key row to 12 set " when 14 called 2 do
+test scale illuminator 1 hey " test scale illuminator 1 hey key 14 key row to 0 set " when 14 called 3 do
+test scale illuminator 1 hey 14 to 1 colour ify 
+test scale illuminator 1 hey key 14 key column to 1 set
+test scale illuminator 1 hey key 14 key row to 0 set
+

@@ -1,9 +1,10 @@
 Scale Illuminator
-RELEASE 0.1.5
+RELEASE 0.1.6
 
 Contributions
 =============
-Mark Harris - agent
+Mark Harris - agent, and demo scripts
+António Machado -  alpha scale illuminator percussion 
 
 
 
@@ -16,17 +17,10 @@ use commander  (or script browser to execute)
 e.g
 alpha scale illuminator execute
 
-<<<<<<< HEAD
-to change the reference scalei/tonic, you need to use the belcanto below (or use workbench)
-=======
-IMPORTANT NOTE: when you initially connect agent to keygroup (manually or thru above script), you
-should see the tonics lit (no scale, as no reference scale has been set yet).
-If you do NOT see tonic, it is because the keygroup doesn't have the scale set, it appears some factory setup
-have incorrectly not set the scale (and are just defaulting to major), so set the scale explicitly and you will see the
-tonic light!
-
-
 to change the reference scale/tonic, you need to use the belcanto below (or use workbench)
+
+
+Also see at bottom a list of alternative scripts available
 
 
 alternatively you can do manually, just use  workbench to connect agent to keygroup output of choice
@@ -46,17 +40,18 @@ ENJOY !!!
 
 PLANNED ENHANCEMENTS
 ====================
-- set scale by name
-- set tonic by name
 - workaround issue with course note over length (eigend bug)
 - base note support
-
 
 
 CHANGE HISTORY
 ==============
 known issues :
-course notes cannot exceed length number of entries - due to issue in EigenD
+- course notes cannot exceed length number of entries - due to issue in EigenD
+- sometimes when connect a scale illuminator to a keygroup, lights will not appear this appears to 
+happend in demo scripts, where a larger number of keygroup outputs are connected to illuminators, 
+often this happens onlhy when you reload the setup.
+workaround: reconnect outputs, either manually or edit supplied script removing those connected ok, and the lines creating illuminator
 
 change log:
 0.1 - initial release
@@ -65,10 +60,15 @@ change log:
 0.1.3 - working around keygroups not having a scale set, seen in alpha factory 2 & 3
 0.1.4 - added missing midi connections to demo scripts (tau/alpha)
 0.1.5 - support setting scale and tonic by name, default KG scale to major, change demo scripts  to use scale illuminator as agent name
+0.1.6 - fix issue with offset with non-chromatic scales causing incorrect tonic, add Antonios script
 
 SETUPS
 ======
-Below describes the setups available 
-
-None yet
+Below describes the setups available
+ 
+alpha scale illuminator percussion
+==================================
+Contributor: António Machado
+Alpha, Factory Setup 2 - Split 1 only , with percussion keys to set reference scales 
+Commander : alpha scale illuminator percussion execute
 
