@@ -1,21 +1,36 @@
 original
 createlayout.sh "keygroup 1" 1 23 22 5 1 0 4.0 1 true false
+
 horizonal rev 4n
 createlayout.sh "keygroup 1" 1 23 22 5 0 1 4.0 -1 true false
+
 horizonal rev 3n
 createlayout.sh "keygroup 1" 1 23 22 5 0 1 3.0 -1 true false
+
 horizonal rev 2n
 createlayout.sh "keygroup 1" 1 23 22 5 0 1 2.0 -1 true false
 		
 wicki 4th
 createlayout.sh "keygroup 1" 1 23 22 5 1 0 5.0 2 true false
+
 wicki 7th
 createlayout.sh "keygroup 1" 1 23 22 5 1 0 7.0 2 true false
 
+
 4x5
 createlayout.sh "keygroup 1" 1 23 22 5 4 5 20.0 1 true false
+
 3x5
 createlayout.sh "keygroup 1" 1 23 22 5 3 5 15.0 1 true false
+
 4x3
 createlayout.sh "keygroup 1" 1 23 22 5 4 3 12.0 1 true false
+
+example of split, alpha F S 3, split 4
+notes: first number is where to start the split, then we have total size (alpha =23) then size of KG
+
+bin/createlayout.sh "keygroup 6" 1 23 10 5 0 1 4.0 -1 true false
+bin/createlayout.sh "keygroup 7" 12 23 11 5 0 1 4.0 -1 true false
+ 
+
 
