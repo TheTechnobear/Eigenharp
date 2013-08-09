@@ -5,18 +5,19 @@ public class CreateLayout
 	private static String INDENT="      ";
 	private String[] _args;
 	private String _keygroup;
-	private int _kgCols;
-	private int _kgRows;
-	private float _courseOffset;
-	private boolean _isReverse;
-	private int _increment;
-	private StringBuffer _buf;
-	private int _blockRows;
-	private int _blockCols;
-	private boolean _isLinear;
-	private boolean _setPhysical;
 	private int _kgStart;
 	private int _kgEnd;
+	private int _kgCols;
+	private int _kgRows;
+	private int _blockRows;
+	private int _blockCols;
+	private float _courseOffset;
+	private int _inc_note;
+	private boolean _isRevRow;
+	private boolean _isRevCol;
+	private StringBuffer _buf;
+	private boolean _isLinear;
+	private boolean _setPhysical;
 
 	public CreateLayout(String[] args) {
 		_args=args;
@@ -33,11 +34,11 @@ public class CreateLayout
 	
 	public boolean init()
 	{
-		if(_args.length < 8) 
+		if(_args.length < 13) 
 		{
 			System.out.println("CreateLayout usage:");
-			System.out.println("CreateLayout keygroup kgstartrow kgendrow kgrow kgcol blockrow blockcol courseoffset increment linear physical");
-			System.out.println("CreateLayout \"keygroup 1\" 1 23 22 5 1 0 4.0 1 true");
+			System.out.println("CreateLayout keygroup kgstartrow kgendrow kgrow kgcol blockrow blockcol courseoffset inc_note rev_row rev_col linear physical");
+			System.out.println("CreateLayout \"keygroup 1\" 1 23 22 5 1 0 4.0 1 false false true false");
 			System.out.println(_args[2]);
 			return false;
 		}
@@ -52,12 +53,9 @@ public class CreateLayout
 		_blockRows = Integer.valueOf(_args[i++]);
 		_blockCols = Integer.valueOf(_args[i++]);
 		_courseOffset = Float.valueOf(_args[i++]);
-		_increment = Integer.valueOf(_args[i++]);
-		if(_increment < 0 )
-		{
-			_isReverse = true;
-			_increment *= -1;
-		}
+		_inc_note = Integer.valueOf(_args[i++]);
+		_isRevRow = Boolean.valueOf(_args[i++]);
+		_isRevCol = Boolean.valueOf(_args[i++]);
 		_isLinear = Boolean.valueOf(_args[i++]);
 		_setPhysical = Boolean.valueOf(_args[i++]);
 		_buf=new StringBuffer();
@@ -159,22 +157,23 @@ public class CreateLayout
 		if(blockSize > 0 )
 		{
 			//block modes
+			int c = ! _isRevCol ? col-1 : _kgCols - col ;
 			int blockNum = (row-1) / _blockRows ;
-			int blockPos = (row-1) % _blockRows + ( col - 1 ) * _blockRows + 1; 
+			int blockPos = (row-1) % _blockRows + c * _blockRows + 1; 
 			course = blockNum +1 ;
-			note = blockPos * _increment;
+			note = blockPos * _inc_note;
 		}
 		else if (_blockRows > 0)
 		{
 			// vertical
-			course = col;
-			note = (! _isReverse ? row-1 : _kgRows - row)  * _increment + 1; 
+			course = ! _isRevCol ? col : _kgCols - ( col - 1 ) ;
+			note = (! _isRevRow ? row-1 : _kgRows - row)  * _inc_note + 1; 
 		}
 		else
 		{
 			//horizonal
-			course = (! _isReverse ? row-1 : _kgRows - row ) + 1;
-			note =  (col-1)  * _increment + 1; 
+			course = (! _isRevRow ? row-1 : _kgRows - row ) + 1;
+			note =  (! _isRevCol ? col-1 : _kgCols - col)  * _inc_note + 1; 
 		}
 		_buf.append(INDENT).append("[[");
 		_buf.append(Integer.toString(icol));
