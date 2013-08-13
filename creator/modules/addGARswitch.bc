@@ -11,65 +11,39 @@ it to amber name ify
 %VAR1% keygroup hey output 3 create
 it to red name ify
 
-# a keygroup to controller switching behaviour
-keygroup create
+# a talker controlling swiching behaviour
+keygroup create 
 it to %VAR1% switch name ify
 %VAR1% switch hey output 1 create
-it to green name ify
-%VAR1% switch hey output 2 create
-it to amber name ify
-%VAR1% switch hey output 3 create
-it to red name ify
+it to switch talker name ify
+
+talker create
+it to %VAR1% switch talker name ify
+
+%VAR1% switch hey output switch talker to %VAR1% switch talker connect
+%VAR1% switch talker light output to %VAR1% switch output switch talker input connect
 
 
-#states green, amber and red
-keygroup create 
-it to %VAR1% green keygroup name ify
-%VAR1% keygroup hey output green to %VAR1% green keygroup connect
-%VAR1% green keygroup light output to %VAR1% keygroup output green light input connect
-talker create 
-it to %VAR1% green talker name ify
-%VAR1% keygroup hey output green to %VAR1% green talker connect
-%VAR1% green talker light output to %VAR1% keygroup output green light input connect
-talker create 
-it to %VAR1% green switch name ify
-%VAR1% switch hey output green to %VAR1% green switch connect
-%VAR1% green switch light output to %VAR1% switch output green light input connect
-%VAR1% green switch hey " %VAR1% keygroup hey output 2 choose %VAR1% switch hey output 2 choose action light hey %VAR2% to 3 colour ify " when 1 called 1 do
-%VAR1% green switch hey key 1 key column to 1 set
-%VAR1% green switch hey key 1 key row to %VAR2% set
+%VAR1% switch talker hey " %VAR1% keygroup hey output 2 choose " when 1 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 3 colour ify " when 1 called 2 do
+%VAR1% switch talker hey key 1 key column to 1 set
+%VAR1% switch talker hey key 1 key row to %VAR2% set
+%VAR1% switch talker hey key 1 default colour to 1 set
+
+%VAR1% switch talker hey " %VAR1% keygroup hey output 3 choose " when 2 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 2 colour ify " when 2 called 2 do
+%VAR1% switch talker hey key 2 key column to 1 set
+%VAR1% switch talker hey key 2 key row to 0 set
+%VAR1% switch talker hey key 2 default colour to 3 set
+
+%VAR1% switch talker hey " %VAR1% keygroup hey output 1 choose " when 3 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 1 colour ify " when 3 called 2 do
+%VAR1% switch talker hey key 3 key column to 1 set
+%VAR1% switch talker hey key 3 key row to 0 set
+%VAR1% switch talker hey key 3 default colour to 2 set
 
 
-keygroup create 
-it to %VAR1% amber keygroup name ify
-%VAR1% keygroup hey output amber to %VAR1% amber keygroup connect
-%VAR1% amber keygroup light output to %VAR1% keygroup output amber light input connect
-talker create 
-it to %VAR1% amber talker name ify
-%VAR1% keygroup hey output amber to %VAR1% amber talker connect
-%VAR1% amber talker light output to %VAR1% keygroup output amber light input connect
-talker create 
-it to %VAR1% amber switch name ify
-%VAR1% switch hey output amber to %VAR1% amber switch connect
-%VAR1% amber switch light output to %VAR1% switch output amber light input connect
-%VAR1% amber switch hey " %VAR1% keygroup hey output 3 choose %VAR1% switch hey output 3 choose action light hey %VAR2% to 2 colour ify " when 1 called 1 do
-%VAR1% amber switch hey key 1 key column to 1 set
-%VAR1% amber switch hey key 1 key row to %VAR2% set
-
-keygroup create 
-it to %VAR1% red keygroup name ify
-%VAR1% keygroup hey output red to %VAR1% red keygroup connect
-%VAR1% red keygroup light output to %VAR1% keygroup output red light input connect
-talker create 
-it to %VAR1% red talker name ify
-%VAR1% keygroup hey output red to %VAR1% red talker connect
-%VAR1% red talker light output to %VAR1% keygroup output red light input connect
-talker create 
-it to %VAR1% red switch name ify
-%VAR1% switch hey output red to %VAR1% red switch connect
-%VAR1% red switch light output to %VAR1% switch output red light input connect
-%VAR1% red switch hey " %VAR1% keygroup hey output 1 choose %VAR1% switch hey output 1 choose action light hey %VAR2% to 1 colour ify " when 1 called 1 do
-%VAR1% red switch hey key 1 key column to 1 set
-%VAR1% red switch hey key 1 key row to %VAR2% set
-
-
+# can only be done when all keys exist
+%VAR1% switch talker hey " %VAR1% switch talker hey key 1 key row to 0 set %VAR1% switch talker hey key 2 key row to %VAR2% set " when 1 called 3 do
+%VAR1% switch talker hey " %VAR1% switch talker hey key 2 key row to 0 set %VAR1% switch talker hey key 3 key row to %VAR2% set " when 2 called 3 do
+%VAR1% switch talker hey " %VAR1% switch talker hey key 3 key row to 0 set %VAR1% switch talker hey key 1 key row to %VAR2% set " when 3 called 3 do
