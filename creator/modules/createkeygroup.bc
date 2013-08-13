@@ -4,6 +4,6 @@
 
 keygroup create 
 it to %VAR1% name ify
-%VAR2% hey output keygroup %VAR3% to %VAR1% connect
-%VAR2% hey output keygroup %VAR3% key output to %VAR1% mode key input connect
+%VAR2% hey output %VAR3% to %VAR1% connect
+%VAR2% hey output %VAR3% key output to %VAR1% mode key input connect
 
