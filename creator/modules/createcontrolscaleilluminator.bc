@@ -1,0 +1,117 @@
+# this module loads a talker with scale illuminator controls - 
+#inverted, root and Default Eigenlabs scales
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% scale illuminator target VAR3=%VAR3% column to use
+
+%VAR1% hey " 
+%VAR2% hey scale to major set
+" when 1 called 1 do
+%VAR1% hey " 
+%VAR1% hey 1 to 1 from 3 colour ify
+" when 1 called 2 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey " 
+%VAR2% hey scale to harmonic minor set
+" when 2 called 1 do
+%VAR1% hey " 
+%VAR1% hey 2 to 1 from 3 colour ify
+" when 2 called 2 do
+%VAR1% hey key 2 key column to %VAR3% set
+%VAR1% hey key 2 key row to 2 set
+
+%VAR1% hey " 
+%VAR2% hey scale to melodic minor set
+" when 3 called 1 do
+%VAR1% hey " 
+%VAR1% hey 3 to 1 from 3 colour ify
+" when 3 called 2 do
+%VAR1% hey key 3 key column to %VAR3% set
+%VAR1% hey key 3 key row to 3 set
+
+%VAR1% hey " 
+%VAR2% hey scale to chromatic set
+" when 4 called 1 do
+%VAR1% hey " 
+%VAR1% hey 4 to 1 from 3 colour ify
+" when 4 called 2 do
+%VAR1% hey key 4 key column to %VAR3% set
+%VAR1% hey key 4 key row to 4 set
+
+%VAR1% hey " 
+%VAR2% hey scale to blues set
+" when 5 called 1 do
+%VAR1% hey " 
+%VAR1% hey 5 to 1 from 3 colour ify
+" when 5 called 2 do
+%VAR1% hey key 5 key column to %VAR3% set
+%VAR1% hey key 5 key row to 5 set
+
+%VAR1% hey " 
+%VAR2% hey scale to pentatonic major set
+" when 6 called 1 do
+%VAR1% hey " 
+%VAR1% hey 6 to 1 from 3 colour ify
+" when 6 called 2 do
+%VAR1% hey key 6 key column to %VAR3% set
+%VAR1% hey key 6 key row to 6 set
+
+%VAR1% hey " 
+%VAR2% hey scale to diminished set
+" when 7 called 1 do
+%VAR1% hey " 
+%VAR1% hey 7 to 1 from 3 colour ify
+" when 7 called 2 do
+%VAR1% hey key 7 key column to %VAR3% set
+%VAR1% hey key 7 key row to 7 set
+
+%VAR1% hey " 
+%VAR2% hey scale to whole tone set
+" when 8 called 1 do
+%VAR1% hey " 
+%VAR1% hey 8 to 1 from 3 colour ify
+" when 8 called 2 do
+%VAR1% hey key 8 key column to %VAR3% set
+%VAR1% hey key 8 key row to 8 set
+
+talker create
+it to scale illuminator talker 1 name ify
+
+percussion keygroup keygroup output 12 to scale illuminator talker 1 connect
+
+scale illuminator talker 1 hey " " when 13 do
+
+scale illuminator talker 1 hey " %VAR2% hey inverted toggle set " when 11 called 1 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 11 key row to 0 set " when 11 called 2 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 13 key row to 11 set " when 11 called 3 do
+scale illuminator talker 1 hey 11 to 2 colour ify 
+scale illuminator talker 1 hey key 11 key column to 1 set
+scale illuminator talker 1 hey key 11 key row to 11 set
+
+scale illuminator talker 1 hey 13 called 1 cancel
+
+scale illuminator talker 1 hey " %VAR2% hey inverted toggle set " when 13 called 1 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 11 key row to 11 set " when 13 called 2 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 13 key row to 0 set " when 13 called 3 do
+scale illuminator talker 1 hey 13 to 1 colour ify 
+scale illuminator talker 1 hey key 13 key column to 1 set
+scale illuminator talker 1 hey key 13 key row to 0 set
+
+scale illuminator talker 1 hey " " when 14 do
+
+scale illuminator talker 1 hey " %VAR2% hey root toggle set " when 12 called 1 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 12 key row to 0 set " when 12 called 2 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 14 key row to 12 set " when 12 called 3 do
+scale illuminator talker 1 hey 12 to 2 colour ify 
+scale illuminator talker 1 hey key 12 key column to 1 set
+scale illuminator talker 1 hey key 12 key row to 12 set
+
+scale illuminator talker 1 hey 14 called 1 cancel
+
+scale illuminator talker 1 hey " %VAR2% hey root toggle set " when 14 called 1 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 12 key row to 12 set " when 14 called 2 do
+scale illuminator talker 1 hey " scale illuminator talker 1 hey key 14 key row to 0 set " when 14 called 3 do
+scale illuminator talker 1 hey 14 to 1 colour ify 
+scale illuminator talker 1 hey key 14 key column to 1 set
+scale illuminator talker 1 hey key 14 key row to 0 set
+
