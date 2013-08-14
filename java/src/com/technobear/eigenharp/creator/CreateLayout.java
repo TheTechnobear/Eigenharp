@@ -1,3 +1,4 @@
+package com.technobear.eigenharp.creator;
 
 public class CreateLayout
 {
@@ -23,15 +24,6 @@ public class CreateLayout
 		_args=args;
 	}
 
-	public static void main(String [] args)
-	{
-		CreateLayout app = new CreateLayout(args);
-		if(app.init())
-		{
-			app.generate();
-		}
-	}
-	
 	public boolean init()
 	{
 		if(_args.length < 13) 
@@ -62,7 +54,7 @@ public class CreateLayout
 		return true;
 	}
 
-	private boolean generate()
+	public boolean generate()
 	{
 		if(!generateOffsets()) return false;
 		if(_setPhysical && !generatePhysicalMapping()) return false;

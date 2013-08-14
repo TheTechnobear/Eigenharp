@@ -10,7 +10,10 @@ EPATH=/usr/pi/$EIGEN_RELEASE/bin
 GENFILE=`mktemp /tmp/${BASECONF}.XXXXXX` || exit 1
 MODULES=`pwd`/modules
 
-java -cp `dirname $0` CreateLayout "$@" > $GENFILE
+DIR=bin
+CP=$DIR/com.technobear.jar
+echo java -cp $CP com.technobear.eigenharp.creator.CreateLayoutApp "$@" 
+java -cp "$CP" com.technobear.eigenharp.creator.CreateLayoutApp "$@" > $GENFILE
 
 $EPATH/bscript --verbose "<interpreter1>" $GENFILE
 
