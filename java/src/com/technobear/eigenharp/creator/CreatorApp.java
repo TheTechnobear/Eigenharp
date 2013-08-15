@@ -1,10 +1,10 @@
 package com.technobear.eigenharp.creator;
 
-public class CreateSetupApp
+public class CreatorApp
 {
 	public static void main(String[] args)
 	{
-		CreateSetupApp app=new CreateSetupApp(args);
+		CreatorApp app=new CreatorApp(args);
 		app.execute();
 	}
 
@@ -22,7 +22,7 @@ public class CreateSetupApp
 	private boolean _debug;
 	private IProcessor _processor;
 
-	public CreateSetupApp(String[] args)
+	public CreatorApp(String[] args)
 	{
 		_args=args;
 		_argPos=0;
@@ -189,7 +189,7 @@ public class CreateSetupApp
 
 	private void displayUsage()
 	{
-		System.out.println("Usage: CreateSetup [-hd] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
+		System.out.println("Usage: creator.sh [-hd] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
 		System.out.println("-h help");
 		System.out.println("-d debug");
 		System.out.println("-S create script, called name");

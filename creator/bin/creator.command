@@ -16,4 +16,4 @@ echo "Enter config"
 read CONF
 fi
 
-bin/createsetup.sh "$DEVICE" "$CONF"
+bin/creator.sh "$DEVICE" "$CONF"
