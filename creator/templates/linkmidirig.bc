@@ -1,0 +1,15 @@
+
+# this script will link a midi rig to a keygroup and then to the midi output
+# VAR1=%VAR1% keygroup to link VAR2=%VAR2% rig to link VAR3=%VAR3% mixer channel, VAR4=%VAR4% keygroup channel
+
+metronome 1 to %VAR2% connect
+scheduler identifier to %VAR2% scheduler identifier connect
+%VAR1% hey output %VAR3% create
+it to %VAR2% name ify
+%VAR1% hey output %VAR2% key column to 1 set
+%VAR1% hey output %VAR2% key row to %VAR3%  set
+%VAR1% output %VAR2% to %VAR2% into channel %VAR4% connect
+%VAR2% output light to %VAR1% output %VAR2% light input connect 
+midi output create
+%VAR2% to it connect
+

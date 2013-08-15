@@ -1,0 +1,24 @@
+# setup an action switch and light
+
+
+keygroup create
+it to action keygroup name ify
+action keygroup hey output 1 create
+
+talker create
+it to action light name ify
+action light light output to action keygroup output keygroup 1 light input connect
+action light hey " " when 1 do 
+action light hey key 1 key column to 1 set
+action light hey key 1 key row to 1 set
+
+talker create
+it to action switch name ify
+action keygroup output keygroup 1 to action switch connect
+action switch hey " main keygroup hey output 1 choose action light hey 1 to 1 colour ify " when 1 called 1 do 
+action switch hey key 1 key column to 1 set
+action switch hey key 1 key row to 1 set
+action light hey 1 to 1 colour ify
+
+
+action switch light output from action keygroup output keygroup 1 light input un connect

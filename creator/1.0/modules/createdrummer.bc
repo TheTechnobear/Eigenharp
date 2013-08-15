@@ -1,0 +1,27 @@
+# VAR1=%VAR1% - user defined name of Drummer
+# VAR2=%VAR2% - name of metronome agent in setup
+# VAR3=%VAR3% - console mixer channel for Drummer
+
+drummer create
+it to %VAR1% name ify
+
+# Connect it to metronome and console mixer
+
+%VAR2% hey beat flash persistence to 100 set
+
+%VAR2% hey running output to %VAR1% running input connect
+%VAR2% hey song beat output to %VAR1% song beat input connect
+
+%VAR1% to console mixer mixer channel %VAR3% connect
+
+# Create drum voices (slots)
+
+#%VAR1% hey voice 1 create do
+%VAR1% hey 2 create
+%VAR1% hey 3 create
+%VAR1% hey 4 create
+%VAR1% hey 5 create
+%VAR1% hey 6 create
+%VAR1% hey 7 create
+%VAR1% hey 8 create
+

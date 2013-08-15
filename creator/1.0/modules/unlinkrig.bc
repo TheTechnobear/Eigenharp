@@ -1,0 +1,5 @@
+# this script will link a rig and the mixer console on a given channel
+# VAR1=%VAR1% rig to unlink VAR2=%VAR2% mixer channel
+
+%VAR1% un connect
+console mixer mixer channel %VAR2% un connect

@@ -1,0 +1,20 @@
+# VAR1 = %VAR1% AU rig to add as mixer effect VAR2 = %VAR2% mixer channel
+
+audio unit rig 1 gateway hey output called audio create
+audio unit rig 1 gateway hey output called audio create
+
+audio unit rig 1 instrument audio unit hey audio inputs channel count to 2 set
+audio unit rig 1 hey gateway output audio 1 to instrument audio unit audio inputs channels audio input 1  connect
+audio unit rig 1 hey gateway output audio 2 to instrument audio unit audio inputs channels audio input 2  connect
+
+effect audio unit 1 un create
+#vital to stop feedback loop!!!!
+console mixer 1 hey mixer channel 4 effect send effect 1 enable un set
+console mixer 1 hey effect 1 outputs left audio output to audio unit rig 1 input audio 1 connect
+console mixer 1 hey effect 1 outputs right audio output to audio unit rig 1 input audio 2 connect
+audio unit rig 1 output left audio to console mixer 1 effect 1 left audio input connect
+audio unit rig 1 output right audio to console mixer 1 effect 1 right audio input connect
+
+
+
+

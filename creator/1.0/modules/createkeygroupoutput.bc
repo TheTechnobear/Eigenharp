@@ -1,0 +1,7 @@
+# VAR1=%VAR1% keygroup to create output on , VAR2=%VAR%2 output number to create VAR3=%VAR3% name of output
+
+%VAR1% hey output %VAR2% create
+it to %VAR3% name ify
+%VAR1% hey output %VAR3% key column to 1 set
+%VAR1% hey output %VAR3% key row to %VAR2% set
+

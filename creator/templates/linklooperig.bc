@@ -1,0 +1,26 @@
+# VAR1=%VAR1% looper rig VAR2=%VAR2% talker for looper controls
+%VAR1% output to console mixer 1 mixer channel 9 connect
+
+metronome to %VAR1% connect
+
+player create 
+it to looper player name ify
+looper player to %VAR1% connect
+
+%VAR2% hey 1 called 1 cancel
+%VAR2% hey 2 called 1 cancel
+%VAR2% hey 3 called 1 cancel
+%VAR2% hey 4 called 1 cancel
+%VAR2% hey 5 called 1 cancel
+%VAR2% hey 6 called 1 cancel
+%VAR2% hey 7 called 1 cancel
+%VAR2% hey 8 called 1 cancel
+%VAR2% hey " looper player  hey note 1 with velocity 110 play " when 1 called 1 do
+%VAR2% hey " looper player  hey note 2 with velocity 110 play " when 2 called 1 do
+%VAR2% hey " looper player  hey note 3 with velocity 110 play " when 3 called 1 do
+%VAR2% hey " looper player  hey note 4 with velocity 110 play " when 4 called 1 do
+%VAR2% hey " looper player  hey note 5 with velocity 110 play " when 5 called 1 do
+%VAR2% hey " looper player  hey note 6 with velocity 110 play " when 6 called 1 do
+%VAR2% hey " looper player  hey note 7 with velocity 110 play " when 7 called 1 do
+%VAR2% hey " looper player  hey note 8 with velocity 110 play " when 8 called 1 do
+

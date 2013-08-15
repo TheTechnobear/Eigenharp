@@ -1,0 +1,79 @@
+# this module loads a talkers with a recorder bar selection and also unplay and cancel 
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% target of rig recorder talker VAR3=%VAR3% column to use
+
+empty join
+' %VAR1% hey 4 bar as recorder bar define ' do
+
+
+%VAR1% hey "  
+1 bar as recorder bar define %VAR2% hey re do
+" when 1 called 1 do
+%VAR1% hey " 
+%VAR1% hey 1 to 1 from 3 colour ify
+" when 1 called 2 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey " 
+2 bar as recorder bar define %VAR2% hey re do
+" when 2 called 1 do
+%VAR1% hey " 
+%VAR1% hey 2 to 1 from 3 colour ify
+" when 2 called 2 do
+%VAR1% hey key 2 key column to %VAR3% set
+%VAR1% hey key 2 key row to 2 set
+
+%VAR1% hey " 
+4 bar as recorder bar define %VAR2% hey re do
+" when 3 called 1 do
+%VAR1% hey " 
+%VAR1% hey 3 to 1 from 3 colour ify
+" when 3 called 2 do
+%VAR1% hey key 3 key column to %VAR3% set
+%VAR1% hey key 3 key row to 3 set
+
+%VAR1% hey " 
+8 bar as recorder bar define %VAR2% hey re do
+" when 4 called 1 do
+%VAR1% hey " 
+%VAR1% hey 4 to 1 from 3 colour ify
+" when 4 called 2 do
+%VAR1% hey key 4 key column to %VAR3% set
+%VAR1% hey key 4 key row to 4 set
+
+%VAR1% hey " 
+16 bar as recorder bar define %VAR2% hey re do
+" when 5 called 1 do
+%VAR1% hey " 
+%VAR1% hey 5 to 1 from 3 colour ify
+" when 5 called 2 do
+%VAR1% hey key 5 key column to %VAR3% set
+%VAR1% hey key 5 key row to 5 set
+
+%VAR1% hey " 
+32 bar as recorder bar define %VAR2% hey re do
+" when 6 called 1 do
+%VAR1% hey " 
+%VAR1% hey 6 to 1 from 3 colour ify
+" when 6 called 2 do
+%VAR1% hey key 6 key column to %VAR3% set
+%VAR1% hey key 6 key row to 6 set
+
+%VAR1% hey " 
+all rig recorder hey un play
+" when 7 called 1 do
+%VAR1% hey " 
+%VAR1% hey 7 to 1 from 3 colour ify
+" when 7 called 2 do
+%VAR1% hey key 7 key column to %VAR3% set
+%VAR1% hey key 7 key row to 7 set
+
+%VAR1% hey " 
+all rig recorder hey cancel
+" when 8 called 1 do
+%VAR1% hey " 
+%VAR1% hey 8 to 1 from 3 colour ify
+" when 8 called 2 do
+%VAR1% hey key 8 key column to %VAR3% set
+%VAR1% hey key 8 key row to 8 set
+

@@ -1,0 +1,119 @@
+# VAR1=%VAR1% and represents the rig that is needed to be created
+# %VAR1% un create
+
+rig create
+it to %VAR1% name ify
+%VAR1% gateway hey input called left audio create 
+%VAR1% gateway input left audio 1 to left audio name ify
+%VAR1% gateway hey input called right audio create 
+%VAR1% gateway input right audio 1 to right audio name ify
+%VAR1% gateway hey input called light create 
+%VAR1% gateway input light 1 to light name ify
+%VAR1% gateway hey output called bar beat create 
+%VAR1% gateway output bar beat 1 to bar beat name ify
+%VAR1% gateway hey output called controller create 
+%VAR1% gateway output controller 1 to controller name ify
+%VAR1% gateway hey output called key create 
+%VAR1% gateway output key 1 to key name ify
+%VAR1% gateway hey output called pressure create 
+%VAR1% gateway output pressure 1 to pressure name ify
+%VAR1% gateway hey output called roll create 
+%VAR1% gateway output roll 1 to roll name ify
+%VAR1% gateway hey output called running create 
+%VAR1% gateway output running 1 to running name ify
+%VAR1% gateway hey output called scheduler identifier create 
+%VAR1% gateway output scheduler identifier 1 to scheduler identifier name ify
+%VAR1% gateway hey output called song beat create 
+%VAR1% gateway output song beat 1 to song beat name ify
+%VAR1% gateway hey output called tempo create 
+%VAR1% gateway output tempo 1 to tempo name ify
+%VAR1% gateway hey output called yaw create 
+%VAR1% gateway output yaw 1 to yaw name ify
+%VAR1% gateway hey output called breath create 
+%VAR1% gateway output breath 1 to breath name ify
+%VAR1% gateway hey output called absolute strip 1 create 
+%VAR1% gateway hey output called strip position 1 create 
+%VAR1% gateway hey output called absolute strip 2 create 
+%VAR1% gateway hey output called strip position 2 create 
+%VAR1% gateway hey output called pedal 1 create 
+%VAR1% gateway hey output called pedal 2 create 
+%VAR1% gateway hey output called pedal 3 create 
+%VAR1% gateway hey output called pedal 4 create 
+
+scaler in %VAR1% create
+%VAR1% hey gateway output to scaler inputs connect
+%VAR1% hey gateway output strip position 1 to scaler inputs global pitch bend input connect
+%VAR1% hey gateway output roll to scaler inputs key pitch bend input  connect
+%VAR1% hey scaler light output to gateway input light  connect
+
+
+ahdsr in %VAR1% create
+it to volume ahdsr name ify 
+%VAR1% hey gateway output to volume ahdsr inputs connect
+%VAR1% hey gateway output pressure to volume ahdsr inputs activation input connect
+
+sawtooth oscillator in %VAR1% create 
+it to volume oscillator name ify
+%VAR1% hey volume ahdsr outputs to volume oscillator connect
+%VAR1% hey scaler frequency output to volume oscillator connect
+
+ranger in %VAR1% create
+it to frequency ranger name ify
+%VAR1% frequency ranger hey  maximum to 10.0 set
+%VAR1% frequency ranger hey rest to 5 set
+%VAR1% frequency ranger hey minimum to 0 set
+%VAR1% frequency ranger hey mono  set
+%VAR1% hey scaler yaw output to frequency ranger input connect
+
+ahdsr in %VAR1% create
+it to frequency ahdsr name ify 
+%VAR1% hey gateway output to volume ahdsr inputs connect
+%VAR1% hey gateway output pressure to frequency ahdsr inputs activation input connect
+
+sine oscillator in %VAR1% create 
+it to frequency oscillator name ify
+%VAR1% hey frequency ahdsr outputs to frequency oscillator connect
+%VAR1% hey frequency ranger output to frequency oscillator frequency input connect
+
+synth filter in %VAR1% create
+it to frequency filter name ify 
+%VAR1% frequency filter hey cutoff frequency input to 60 set
+%VAR1% hey frequency oscillator audio output to frequency filter audio input connect
+
+%VAR1% hey frequency filter low pass output to volume oscillator detune input connect
+
+ladder filter in %VAR1% create 
+%VAR1% hey volume oscillator audio output to ladder filter audio input connect
+
+gain in %VAR1% create
+%VAR1% gain hey volume input to 1 set
+%VAR1% hey ladder filter low pass output to gain audio input connect
+
+summer in %VAR1% create
+%VAR1% summer hey channel count to 2 set
+%VAR1% hey gain audio output to summer connect
+
+audio unit in %VAR1% create
+%VAR1% audio unit 1 to effect audio unit 1 name ify 
+%VAR1% effect audio unit hey midi channel to 1 set
+
+%VAR1% effect audio unit hey parameters parameter 1 to pressure name ify
+%VAR1% effect audio unit hey parameters parameter 2 to roll name ify
+%VAR1% effect audio unit hey parameters parameter 3 to yaw name ify
+%VAR1% effect audio unit hey parameters parameter 4 to breath name ify
+%VAR1% effect audio unit hey parameters parameter 5 to strip position 1 name ify
+%VAR1% effect audio unit hey parameters parameter 6 to absolute strip 1 name ify
+%VAR1% effect audio unit hey parameters parameter 7 to strip position 2 name ify
+%VAR1% effect audio unit hey parameters parameter 8 to absolute strip 2 name ify
+%VAR1% effect audio unit hey parameters parameter 9 to pedal 1 name ify
+%VAR1% effect audio unit hey parameters parameter 10 to pedal 2 name ify
+%VAR1% effect audio unit hey parameters parameter 11 to pedal 3 name ify
+%VAR1% effect audio unit hey parameters parameter 12 to pedal 4 name ify
+
+%VAR1% effect audio unit hey audio inputs channel count to 2 set
+%VAR1% effect audio unit hey audio outputs channel count to 2 set
+%VAR1% hey summer outputs to effect audio unit audio inputs connect
+%VAR1% hey effect audio unit audio outputs to gateway input  connect
+%VAR1% hey gateway output to effect audio unit connect
+%VAR1% hey gateway output to effect audio unit parameters connect
+

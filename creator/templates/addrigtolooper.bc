@@ -1,0 +1,4 @@
+# VAR1=%VAR1% looper rig VAR2=%VAR2% rig to add VAR3=%VAR3% left channel VAR4=%VAR4$ right channel
+%VAR2% output left audio to %VAR1%  audio input %VAR3% connect
+%VAR2% output right audio to %VAR1%  audio input %VAR4% connect
+

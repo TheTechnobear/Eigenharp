@@ -1,0 +1,26 @@
+# this is the most basic setup, on which the modular setup builds
+# the main keygroup is where the instrument should be connected
+# we then have console mixer, and an audio output
+# 
+#  note: there are NO keyboard mappings in this script, it is assumed these are done in a device specific setup
+
+empty join
+keygroup create
+it to main keygroup name ify
+
+scale manager create
+
+metronome create
+
+scheduler create
+
+metronome 1 hey outputs to scheduler 1 connect
+
+console mixer create
+
+audio create
+audio hey buffer size to 512 set
+audio hey sample rate to 44100 set
+
+console mixer left audio output to audio input 1 connect
+console mixer right audio output to audio input 2 connect

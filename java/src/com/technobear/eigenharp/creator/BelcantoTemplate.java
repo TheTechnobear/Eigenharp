@@ -10,80 +10,94 @@ import java.util.Iterator;
 
 public class BelcantoTemplate
 {
-	private String _file;
+	private String _fileOrCommand;
 	private IProcessor _processor;
 	@SuppressWarnings("unused")
 	private String _device;
 	private HashMap<String, String> _varMap;
+	private boolean _isFile;
 
-	public BelcantoTemplate(IProcessor processor, String device, String file, HashMap<String,String> varmap)
+	public BelcantoTemplate(IProcessor processor, String device, String fileOrCommand, boolean isFile, HashMap<String,String> varmap)
 	{
-		_file=file;
+		_fileOrCommand=fileOrCommand;
 		_device=device;
 		_processor=processor;
 		_varMap=varmap;
+		_isFile=isFile;
 	}
 
 	public boolean execute()
 	{
-		try
+		if(!_isFile)
 		{
-			StringBuffer cmd=new StringBuffer();
-			String line;
-			FileInputStream fis=new FileInputStream(_file);
-			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+			// this allows a line from a template file to be substituted individual i.e. a belcanto phrase with vars in it
+			if(!_processor.startBlock()) return false;
+			if(!executeLine(_fileOrCommand)) return false;
+			return _processor.endBlock();
+		}
+		else
+		{
 			try
 			{
-				while ((line = br.readLine()) != null) 
-				{
-					StringBuffer buf=new StringBuffer(line);
-					// remove leading whitespace.
-					while(buf.length()>0 && Character.isWhitespace(buf.charAt(0)))
-					{
-						buf.deleteCharAt(0);
-					}
-					// ignore comments
-					if(buf.length()==0 || buf.charAt(0)=='#')
-					{
-					}
-					else
-					{
-						String cmdline = buf.toString();
-						Iterator<String> iter=_varMap.keySet().iterator();
-						while(iter.hasNext())
-						{
-							String var=iter.next();
-							String value=_varMap.get(var);
-							if(!var.isEmpty() && value!=null)
-							{
-								cmdline=cmdline.replace(var, value);
-							}
-						}
-						cmd.append(cmdline+" ");
-					}
-				}
-				if(!_processor.process(cmd.toString())) return false;
+				String line;
+				FileInputStream fis=new FileInputStream(_fileOrCommand);
+				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 				try
 				{
-					Thread.sleep(1000);
-				} catch (InterruptedException e)
-				{
+					if(!_processor.startBlock()) return false;
+					while ((line = br.readLine()) != null) 
+					{
+						if(!executeLine(line)) return false;
+					}
+					return _processor.endBlock();
 				}
-				return true;
-			}
-			finally
+				finally
+				{
+					br.close();
+					br = null;
+					fis = null;
+				}
+			} catch (FileNotFoundException e)
 			{
-				br.close();
-				br = null;
-				fis = null;
+				System.err.println("unable to open template file:"+e.getMessage());
+			} catch (IOException e)
+			{
+				System.err.println("unable process template file:"+e.getMessage());
 			}
-		} catch (FileNotFoundException e)
-		{
-			System.err.println("unable to open template file:"+e.getMessage());
-		} catch (IOException e)
-		{
-			System.err.println("unable process template file:"+e.getMessage());
 		}
 		return false;
+	}
+	
+	private boolean executeLine(String line)
+	{
+		StringBuffer buf=new StringBuffer(line);
+		// remove leading whitespace.
+		while(buf.length()>0 && Character.isWhitespace(buf.charAt(0)))
+		{
+			buf.deleteCharAt(0);
+		}
+		// ignore comments
+		if(buf.length()==0 || buf.charAt(0)=='#')
+		{
+		}
+		else
+		{
+			String cmdline = buf.toString();
+			Iterator<String> iter=_varMap.keySet().iterator();
+			while(iter.hasNext())
+			{
+				String var=iter.next();
+				String value=_varMap.get(var);
+				if(!var.isEmpty() && value!=null)
+				{
+					cmdline=cmdline.replace(var, value);
+				}
+			}
+			if(!cmdline.isEmpty())
+			{
+				if(!_processor.process(cmdline.toString())) return false;
+			}
+		}
+		return true;
 	}
 }

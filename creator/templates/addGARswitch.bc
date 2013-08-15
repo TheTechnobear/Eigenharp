@@ -1,0 +1,49 @@
+# this module creates a Green Amber Red control setup
+# VAR1=%VAR1% prefix VAR2=%VAR2% control number
+
+# the main keygroup that will get output when selected
+keygroup create 
+it to %VAR1% keygroup name ify
+%VAR1% keygroup hey output 1 create
+it to green name ify
+%VAR1% keygroup hey output 2 create
+it to amber name ify
+%VAR1% keygroup hey output 3 create
+it to red name ify
+
+# a talker controlling swiching behaviour
+keygroup create 
+it to %VAR1% switch name ify
+%VAR1% switch hey output 1 create
+it to switch talker name ify
+
+talker create
+it to %VAR1% switch talker name ify
+
+%VAR1% switch hey output switch talker to %VAR1% switch talker connect
+%VAR1% switch talker light output to %VAR1% switch output switch talker input connect
+
+
+%VAR1% switch talker hey " %VAR1% keygroup hey output 2 choose " when 1 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 3 colour ify " when 1 called 2 do
+%VAR1% switch talker hey key 1 key column to 1 set
+%VAR1% switch talker hey key 1 key row to %VAR2% set
+%VAR1% switch talker hey key 1 default colour to 1 set
+
+%VAR1% switch talker hey " %VAR1% keygroup hey output 3 choose " when 2 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 2 colour ify " when 2 called 2 do
+%VAR1% switch talker hey key 2 key column to 1 set
+%VAR1% switch talker hey key 2 key row to 0 set
+%VAR1% switch talker hey key 2 default colour to 3 set
+
+%VAR1% switch talker hey " %VAR1% keygroup hey output 1 choose " when 3 called 1 do
+%VAR1% switch talker hey " action light hey %VAR2% to 1 colour ify " when 3 called 2 do
+%VAR1% switch talker hey key 3 key column to 1 set
+%VAR1% switch talker hey key 3 key row to 0 set
+%VAR1% switch talker hey key 3 default colour to 2 set
+
+
+# can only be done when all keys exist
+%VAR1% switch talker hey " %VAR1% switch talker hey key 1 key row to 0 set %VAR1% switch talker hey key 2 key row to %VAR2% set " when 1 called 3 do
+%VAR1% switch talker hey " %VAR1% switch talker hey key 2 key row to 0 set %VAR1% switch talker hey key 3 key row to %VAR2% set " when 2 called 3 do
+%VAR1% switch talker hey " %VAR1% switch talker hey key 3 key row to 0 set %VAR1% switch talker hey key 1 key row to %VAR2% set " when 3 called 3 do

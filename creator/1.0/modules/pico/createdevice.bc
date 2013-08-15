@@ -1,0 +1,2 @@
+# this creates the pico device
+pico manager create

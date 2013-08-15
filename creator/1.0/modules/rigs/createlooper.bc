@@ -1,0 +1,81 @@
+# VAR1=%VAR1% and represents the rig that is needed to be created
+# %VAR1% un create
+
+empty join
+rig create
+it to %VAR1% name ify
+
+%VAR1% gateway hey input called left audio create 
+%VAR1% gateway input left audio 1 to left audio name ify
+%VAR1% gateway hey input called right audio create 
+%VAR1% gateway input right audio 1 to right audio name ify
+
+%VAR1% gateway hey output called pressure create 
+%VAR1% gateway output pressure 1 to pressure name ify
+%VAR1% gateway hey output called key create 
+%VAR1% gateway output key 1 to key name ify
+%VAR1% gateway hey output called controller create 
+%VAR1% gateway output controller 1 to controller name ify
+
+%VAR1% gateway hey output called bar beat create 
+%VAR1% gateway output bar beat 1 to bar beat name ify
+%VAR1% gateway hey output called song beat create 
+%VAR1% gateway output song beat 1 to song beat name ify
+%VAR1% gateway hey output called running create 
+%VAR1% gateway output running 1 to running name ify
+%VAR1% gateway hey output called tempo create 
+%VAR1% gateway output tempo 1 to tempo name ify
+
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+%VAR1% gateway hey output called audio input create 
+
+audio unit in %VAR1% create 
+it to mix looper name ify
+%VAR1% mix looper hey audio inputs channel count to 16 set	
+%VAR1% mix looper hey audio outputs channel count to 16 set	
+%VAR1% mix looper hey tail time enable un set
+%VAR1% mix looper hey midi channel to 1 set
+%VAR1% hey gateway output to mix looper audio inputs connect
+%VAR1% hey gateway output to mix looper metronome inputs connect
+
+scaler in %VAR1% create
+it to looper scaler name ify
+%VAR1% hey looper scaler outputs to mix looper controller inputs connect
+%VAR1% hey gateway output to looper scaler connect
+
+mixer console in %VAR1% create
+it to looper mixer name ify 
+%VAR1% looper mixer hey master volume to 14 set 
+%VAR1% hey looper mixer outputs to gateway input connect
+
+%VAR1% hey mix looper audio output 1 to looper mixer channel 1 left connect
+%VAR1% hey mix looper audio output 2 to looper mixer channel 1 right connect
+%VAR1% hey mix looper audio output 3 to looper mixer channel 2 left connect
+%VAR1% hey mix looper audio output 4 to looper mixer channel 2 right connect
+%VAR1% hey mix looper audio output 5 to looper mixer channel 3 left connect
+%VAR1% hey mix looper audio output 6 to looper mixer channel 3 right connect
+%VAR1% hey mix looper audio output 7 to looper mixer channel 4 left connect
+%VAR1% hey mix looper audio output 8 to looper mixer channel 4 right connect
+%VAR1% hey mix looper audio output 9 to looper mixer channel 5 left connect
+%VAR1% hey mix looper audio output 10 to looper mixer channel 5 right connect
+%VAR1% hey mix looper audio output 11 to looper mixer channel 6 left connect
+%VAR1% hey mix looper audio output 12 to looper mixer channel 6 right connect
+%VAR1% hey mix looper audio output 13 to looper mixer channel 7 left connect
+%VAR1% hey mix looper audio output 14 to looper mixer channel 7 right connect
+
+eigenbrowser , mix looper plugin browse 
+

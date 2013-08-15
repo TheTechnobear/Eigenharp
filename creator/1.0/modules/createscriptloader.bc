@@ -1,0 +1,129 @@
+# this module creates a script loader, keys 1 to 8 are used to activate, and key 9 invokes browser and key 10 & 10 alternative between 2 setup loads
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% custom script load VAR3=%VAR%3 column to use
+
+empty join
+' %VAR1% hey 01 user as setup 1 define ' do
+' %VAR1% hey 02 user as setup 2 define ' do
+' %VAR1% hey 03 user as setup 3 define ' do
+' %VAR1% hey 04 user as setup 4 define ' do
+' %VAR1% hey 05 user as setup 5 define ' do
+' %VAR1% hey 06 user as setup 6 define ' do
+' %VAR1% hey 07 user as setup 7 define ' do
+' %VAR1% hey 08 user as setup 8 define ' do
+
+
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 1 execute
+" when 1 called 1 do
+%VAR1% hey " 
+%VAR1% hey 1 to 1 from 3 colour ify
+" when 1 called 2 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 2 execute
+" when 2 called 1 do
+%VAR1% hey " 
+%VAR1% hey 2 to 1 from 3 colour ify
+" when 2 called 2 do
+%VAR1% hey key 2 key column to %VAR3% set
+%VAR1% hey key 2 key row to 2 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 3 execute
+" when 3 called 1 do
+%VAR1% hey " 
+%VAR1% hey 3 to 1 from 3 colour ify
+" when 3 called 2 do
+%VAR1% hey key 3 key column to %VAR3% set
+%VAR1% hey key 3 key row to 3 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 4 execute
+" when 4 called 1 do
+%VAR1% hey " 
+%VAR1% hey 4 to 1 from 3 colour ify
+" when 4 called 2 do
+%VAR1% hey key 4 key column to %VAR3% set
+%VAR1% hey key 4 key row to 4 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 5 execute
+" when 5 called 1 do
+%VAR1% hey " 
+%VAR1% hey 5 to 1 from 3 colour ify
+" when 5 called 2 do
+%VAR1% hey key 5 key column to %VAR3% set
+%VAR1% hey key 5 key row to 5 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 6 execute
+" when 6 called 1 do
+%VAR1% hey " 
+%VAR1% hey 6 to 1 from 3 colour ify
+" when 6 called 2 do
+%VAR1% hey key 6 key column to %VAR3% set
+%VAR1% hey key 6 key row to 6 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 7 execute
+" when 7 called 1 do
+%VAR1% hey " 
+%VAR1% hey 7 to 1 from 3 colour ify
+" when 7 called 2 do
+%VAR1% hey key 7 key column to %VAR3% set
+%VAR1% hey key 7 key row to 7 set
+
+%VAR1% hey " 
+interpreter 1 hey variable setup 8 execute
+" when 8 called 1 do
+%VAR1% hey " 
+%VAR1% hey 8 to 1 from 3 colour ify
+" when 8 called 2 do
+%VAR1% hey key 8 key column to %VAR3% set
+%VAR1% hey key 8 key row to 8 set
+
+%VAR1% hey " 
+eigenbrowser , interpreter hey script browse 
+" when 9 called 1 do
+%VAR1% hey " 
+%VAR1% hey 9 to 1 from 3 colour ify
+" when 9 called 2 do
+%VAR1% hey key 9 key column to %VAR3% set
+%VAR1% hey key 9 key row to 9 set
+
+
+%VAR1% hey " 
+' empty join %VAR1% hey 01 user as setup 1 define %VAR1% hey 1 re do ' do
+' empty join %VAR1% hey 02 user as setup 2 define %VAR1% hey 2 re do ' do
+' empty join %VAR1% hey 03 user as setup 3 define %VAR1% hey 3 re do ' do
+' empty join %VAR1% hey 04 user as setup 4 define %VAR1% hey 4 re do ' do
+' empty join %VAR1% hey 05 user as setup 5 define %VAR1% hey 5 re do ' do
+' empty join %VAR1% hey 06 user as setup 6 define %VAR1% hey 6 re do ' do
+' empty join %VAR1% hey 07 user as setup 7 define %VAR1% hey 7 re do ' do
+' empty join %VAR1% hey 08 user as setup 8 define %VAR1% hey 8 re do ' do
+" when 10 called 1 do
+%VAR1% hey " 
+%VAR1% hey 10 to 1 from 3 colour ify
+" when 10 called 2 do
+%VAR1% hey key 10 key column to %VAR3% set
+%VAR1% hey key 10 key row to 10 set
+
+%VAR1% hey " 
+' empty join %VAR1% hey 01 %VAR2% as setup 1 define %VAR1% hey 1 re do ' do
+' empty join %VAR1% hey 02 %VAR2% as setup 2 define %VAR1% hey 2 re do ' do
+' empty join %VAR1% hey 03 %VAR2% as setup 3 define %VAR1% hey 3 re do ' do
+' empty join %VAR1% hey 04 %VAR2% as setup 4 define %VAR1% hey 4 re do ' do
+' empty join %VAR1% hey 05 %VAR2% as setup 5 define %VAR1% hey 5 re do ' do
+' empty join %VAR1% hey 06 %VAR2% as setup 6 define %VAR1% hey 6 re do ' do
+' empty join %VAR1% hey 07 %VAR2% as setup 7 define %VAR1% hey 7 re do ' do
+' empty join %VAR1% hey 08 %VAR2% as setup 8 define %VAR1% hey 8 re do ' do
+" when 11 called 1 do
+%VAR1% hey " 
+%VAR1% hey 11 to 1 from 3 colour ify
+" when 11 called 2 do
+%VAR1% hey key 11 key column to %VAR3% set
+%VAR1% hey key 11 key row to 11 set
+

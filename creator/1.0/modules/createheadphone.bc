@@ -1,0 +1,9 @@
+# this script will create and link headphone sends to Alpha/tau headphones inputs 
+# DON'T FORGET to select ENABLE specific channels 
+
+# VAR1=%VAR1% name of effect channel (send)
+
+console mixer 1 hey effect called %VAR1%  create
+
+console mixer 1 effect channels %VAR1% outputs left audio output to alpha keyboard 1 headphone left audio input 1 connect
+console mixer 1 effect channels %VAR1% outputs right audio output to alpha keyboard 1 headphone right audio input 2 connect

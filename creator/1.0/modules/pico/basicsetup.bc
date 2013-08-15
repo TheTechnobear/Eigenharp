@@ -1,0 +1,3 @@
+# this tailors the basic seutp for a pico
+keyboard pico to main keygroup connect
+keyboard pico hey key output to main keygroup mode key input connect

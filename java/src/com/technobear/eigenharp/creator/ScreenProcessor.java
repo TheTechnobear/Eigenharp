@@ -1,6 +1,6 @@
 package com.technobear.eigenharp.creator;
 
-public class ScreenProcessor implements IProcessor
+public class ScreenProcessor extends BaseProcessor
 {
 
 	@Override

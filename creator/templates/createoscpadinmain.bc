@@ -1,0 +1,59 @@
+# OSC PAD create in main, due to bug with talkers being in rigs
+# keygroup so we can layout keys for osc pad
+
+keygroup  create 
+it to pad keygroup name ify
+pad keygroup hey output 1 create
+
+osc pad create
+pad keygroup keygroup output 1 to osc pad connect
+
+# keygroup for talker so we can layout keys for talker
+keygroup create 
+it to pad talker keygroup name ify
+pad talker keygroup hey output 1 create
+
+#add the talker actions
+talker create 
+it to pad talker name ify
+pad talker keygroup keygroup output 1 to pad talker connect
+pad talker hey " 
+osc pad hey left up 
+" when 1 called 1 do
+pad talker hey key 1 key column to 1 set
+pad talker hey key 1 key row to 1 set
+pad talker hey "
+osc pad hey left down 
+" when 2 called 1 do
+pad talker hey key 2 key column to 1 set
+pad talker hey key 2 key row to 2 set
+pad talker hey "
+osc pad hey top up
+" when 3 called 1 do
+pad talker hey key 3 key column to 1 set
+pad talker hey key 3 key row to 3 set
+pad talker hey " 
+osc pad hey top down
+" when 4 called 1 do
+pad talker hey key 4 key column to 1 set
+pad talker hey key 4 key row to 4 set
+pad talker hey " 
+osc pad hey arrangement up
+" when 5 called 1 do
+pad talker hey key 5 key column to 1 set
+pad talker hey key 5 key row to 5 set
+pad talker hey " 
+osc pad hey arrangement down
+" when 6 called 1 do
+pad talker hey key 6 key column to 1 set
+pad talker hey key 6 key row to 6 set
+pad talker hey " 
+osc pad hey stop
+" when 7 called 1 do
+pad talker hey key 7 key column to 1 set
+pad talker hey key 7 key row to 7 set
+pad talker hey " 
+osc pad hey play
+" when 8 called 1 do
+pad talker hey key 8 key column to 1 set
+pad talker hey key 8 key row to 8 set

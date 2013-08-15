@@ -1,0 +1,52 @@
+# this module populates a talker with scale browser controls for 1-8 scales
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% talker changing scales VAR3=%VAR3% column to use
+
+
+%VAR1% hey ' 
+ " empty join scale manager listen cancel variable scale 1 iyot choose when activation ` " empty join scale manager activation scale as scale 1 define %VAR2% hey 1 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 1 called 1 do
+%VAR1% hey key 1 key column to %VAR3% set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 2 iyot choose when activation ` " empty join scale manager activation scale as scale 2 define %VAR2% hey 2 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 2 called 1 do
+%VAR1% hey key 2 key column to %VAR3% set
+%VAR1% hey key 2 key row to 2 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 3 iyot choose when activation ` " empty join scale manager activation scale as scale 3 define %VAR2% hey 3 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 3 called 1 do
+%VAR1% hey key 3 key column to %VAR3% set
+%VAR1% hey key 3 key row to 3 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 4 iyot choose when activation ` " empty join scale manager activation scale as scale 4 define %VAR2% hey 4 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 4 called 1 do
+%VAR1% hey key 4 key column to %VAR3% set
+%VAR1% hey key 4 key row to 4 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 5 iyot choose when activation ` " empty join scale manager activation scale as scale 5 define %VAR2% hey 5 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 5 called 1 do
+%VAR1% hey key 5 key column to %VAR3% set
+%VAR1% hey key 5 key row to 5 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 6 iyot choose when activation ` " empty join scale manager activation scale as scale 6 define %VAR2% hey 6 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 6 called 1 do
+%VAR1% hey key 6 key column to %VAR3% set
+%VAR1% hey key 6 key row to 6 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 7 iyot choose when activation ` " empty join scale manager activation scale as scale 7 define %VAR2% hey 7 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 7 called 1 do
+%VAR1% hey key 7 key column to %VAR3% set
+%VAR1% hey key 7 key row to 7 set
+
+%VAR1% hey ' 
+" empty join scale manager listen cancel variable scale 8 iyot choose when activation ` " empty join scale manager activation scale as scale 8 define %VAR8% hey 8 re do " do ` do eigenbrowser hey scale manager scale browse " do
+' when 8 called 1 do
+%VAR1% hey key 8 key column to %VAR3% set
+%VAR1% hey key 8 key row to 8 set
+

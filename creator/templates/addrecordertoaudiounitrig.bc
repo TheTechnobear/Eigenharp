@@ -1,0 +1,41 @@
+# VAR1=%VAR1%  is the rig to add the recorder to audio unit rig
+
+%VAR1% hey scaler inputs un connect
+%VAR1% hey scaler inputs key pitch bend input  un connect
+%VAR1% hey instrument audio unit parameters breath  un connect
+%VAR1% hey instrument audio unit parameters strip position 1 un connect
+%VAR1% hey instrument audio unit parameters strip position 2 un connect
+%VAR1% hey instrument audio unit parameters absolute strip 1 un connect
+%VAR1% hey instrument audio unit parameters absolute strip 2 un connect
+%VAR1% hey instrument audio unit parameters pedal 1 un connect
+%VAR1% hey instrument audio unit parameters pedal 2 un connect
+%VAR1% hey instrument audio unit parameters pedal 3 un connect
+%VAR1% hey instrument audio unit parameters pedal 4 un connect
+
+recorder in %VAR1% create
+%VAR1% recorder hey auxilliary input 1 to breath name ify
+%VAR1% recorder hey auxilliary input 2 to strip position 1 name ify
+%VAR1% recorder hey auxilliary input 3 to absolute strip 1 name ify
+%VAR1% recorder hey auxilliary input 4 to strip position 2 name ify
+%VAR1% recorder hey auxilliary input 5 to absolute strip 2 name ify
+%VAR1% recorder hey auxilliary input 6 to pedal 1 name ify
+%VAR1% recorder hey auxilliary input 7 to pedal 2 name ify
+%VAR1% recorder hey auxilliary input 8 to pedal 3 name ify
+%VAR1% recorder hey auxilliary input 9 to pedal 4 name ify
+%VAR1% hey gateway output to recorder inputs connect
+%VAR1% hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+%VAR1% hey recorder outputs to scaler inputs connect
+%VAR1% hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+
+#this bit, is a bit different for AU rigs, since the parameters are also fed from recorder
+%VAR1% hey recorder outputs breath to instrument audio unit parameters connect
+%VAR1% hey recorder outputs strip position 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs strip position 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs absolute strip 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs absolute strip 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 1 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 2 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 3 to instrument audio unit parameters connect
+%VAR1% hey recorder outputs pedal 4 to instrument audio unit parameters connect
+

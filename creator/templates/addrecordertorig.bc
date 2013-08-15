@@ -1,0 +1,22 @@
+# normal link up adding a recorder to a rig, Note: its a bit different for audio units
+# VAR1=%VAR1%  is the rig to add the recorder to
+
+%VAR1% hey scaler inputs un connect
+%VAR1% hey scaler inputs key pitch bend input  un connect
+
+recorder in %VAR1% create
+%VAR1% recorder hey auxilliary input 1 to breath name ify
+%VAR1% recorder hey auxilliary input 2 to strip position 1 name ify
+%VAR1% recorder hey auxilliary input 3 to absolute strip 1 name ify
+%VAR1% recorder hey auxilliary input 4 to strip position 2 name ify
+%VAR1% recorder hey auxilliary input 5 to absolute strip 2 name ify
+%VAR1% recorder hey auxilliary input 6 to pedal 1 name ify
+%VAR1% recorder hey auxilliary input 7 to pedal 2 name ify
+%VAR1% recorder hey auxilliary input 8 to pedal 3 name ify
+%VAR1% recorder hey auxilliary input 9 to pedal 4 name ify
+%VAR1% hey gateway output to recorder inputs connect
+%VAR1% hey gateway scheduler identifier to recorder scheduler identifier  connect
+
+%VAR1% hey recorder outputs to scaler inputs connect
+%VAR1% hey recorder outputs roll output to scaler inputs key pitch bend input  connect
+

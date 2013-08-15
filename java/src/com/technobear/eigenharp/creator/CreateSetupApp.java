@@ -8,14 +8,19 @@ public class CreateSetupApp
 		app.execute();
 	}
 
-	static final char[] _optionsWithParams= new char[] {'F'};
+	static final char[] _optionsWithParams= new char[] {'F','S','D','C'};
 	private String _device;
 	private CreatorConfig _creatorConfig;
 	private int _argPos;
 	private String[] _args;
-	private String _file;
+	private String _configFile;
+	private String _configCommand;
 	private String _url;
-	
+	private String _scriptName;
+	private String _scriptDesc;
+	private String _outputFile;
+	private boolean _debug;
+	private IProcessor _processor;
 
 	public CreateSetupApp(String[] args)
 	{
@@ -27,7 +32,12 @@ public class CreateSetupApp
 	{
 		if(processOptions() && processCommandLine())
 		{
+			init();
 			run();
+		}
+		else
+		{
+			displayUsage();
 		}
 	}
 
@@ -35,23 +45,73 @@ public class CreateSetupApp
 	{ 
 		if(_creatorConfig!=null)
 		{
+			_processor.open();
+			if(_scriptName!=null)
+			{
+				createScriptHeader();
+			}
 			_creatorConfig.execute();
+			_processor.close();
+			return;
 		}
+		displayUsage();
+	}
+
+	private void createScriptHeader()
+	{
+		_processor.process("name");
+		_processor.process("    "+_scriptName);
+		if(_scriptDesc!=null)
+		{
+			_processor.process("description");
+			_processor.process(_scriptDesc);
+		}
+		_processor.process("");
+		_processor.process("script");
 	}
 
 	private boolean processCommandLine()
 	{
-		while(_argPos<_args.length)
-		{
+		// don't need args if executing single command
+		if(_configCommand!=null) return true;
+
+		if(_argPos<_args.length) 
 			_device=_args[_argPos++];
-			_file=_args[_argPos++];
-			_url="http://localhost:55553";
-			IProcessor p = new BelcantoXmlRpcProcessor(_url);
-//			IProcessor p = new ScreenProcessor();
-			_creatorConfig=new CreatorConfig(p,_device,_file);
-	
-		}
+		else 
+			return false;
+		
+		if(_argPos<_args.length) 
+			_configFile=_args[_argPos++];
+		else 
+			return false;
+		
 		return true;
+	}
+
+	private void init()
+	{
+		if(_debug)
+		{
+			_processor = new ScreenProcessor();
+		}
+		else if (_outputFile!=null)
+		{
+			_processor = new FileOutputProcessor(_outputFile);
+		}
+		else
+		{
+			_url="http://localhost:55553";
+			_processor = new BelcantoXmlRpcProcessor(_url);
+			
+		}
+		if(_configCommand!=null)
+		{
+			_creatorConfig=new CreatorConfig(_processor,_device,_configCommand,false);
+		}
+		else
+		{
+			_creatorConfig=new CreatorConfig(_processor,_device,_configFile,true);
+		}
 	}
 
 	private boolean processOptions()
@@ -76,7 +136,6 @@ public class CreateSetupApp
 					}
 					if(!ret)
 					{
-						displayUsage();
 						return false;
 					}
 				}
@@ -104,20 +163,40 @@ public class CreateSetupApp
 
 	private boolean processOption(char ch)
 	{
-		System.out.println("option:" + ch);
-		
+		switch(ch)
+		{
+		case 'h' : return false;
+		case 'd' : _debug=true; break;
+		default:
+			return false;
+		}
 		return true;
 	}
 
 	private boolean processOption(char ch, String arg)
 	{
-		System.out.println("option:" + ch + " with "+arg);
-		
+		switch(ch)
+		{
+		case 'F' : _outputFile = arg; break;
+		case 'D' : _scriptDesc = arg; break;
+		case 'S' : _scriptName = arg; break;
+		case 'C' : _configCommand = arg; break;
+		default:
+			return false;
+		}
 		return true;
 	}
 
 	private void displayUsage()
 	{
-		System.out.println("usage:");
+		System.out.println("Usage: CreateSetup [-hd] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
+		System.out.println("-h help");
+		System.out.println("-d debug");
+		System.out.println("-S create script, called name");
+		System.out.println("-F output script or debug to file");
+		System.out.println("-D description to be used for script file");
+		System.out.println("-C config command to run, disables config file!");
+		System.out.println("device = pico|tau|alpha");
+		System.out.println("configuration file to use");
 	}
 }

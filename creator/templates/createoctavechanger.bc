@@ -1,0 +1,21 @@
+# this module loads a talker with an octave change, i.e. up and down control assumes mapping has been provide to 1/1 & 1/2
+# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% target for octave change 
+
+empty join
+' %VAR1% hey 1 as octave step define ' do
+
+
+
+%VAR1% hey " 
+%VAR2% hey octave by variable octave step down
+" when 1 called 1 do
+%VAR1% hey key 1 default colour to 2 set
+%VAR1% hey key 1 key column to 1 set
+%VAR1% hey key 1 key row to 1 set
+
+%VAR1% hey " 
+%VAR2% hey octave by variable octave step up
+" when 2 called 1 do
+%VAR1% hey key 2 default colour to 1 set
+%VAR1% hey key 2 key column to 1 set
+%VAR1% hey key 2 key row to 2 set
