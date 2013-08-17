@@ -90,11 +90,12 @@ public class KeygroupLayout
 						_buf.append(Integer.toString(r));
 						_buf.append("],[");
 						_buf.append(Integer.toString(c)).append(",").append(Integer.toString(row));
-						_buf.append("]],");					}
+						_buf.append("]],");
+					}
 				}
 			}
 		}
-		_buf.delete(_buf.length()-2, _buf.length());
+		_buf.delete(_buf.length()-1, _buf.length());
 		_buf.append("] set");
 
 		if(!_processor.process(_buf.toString()));
@@ -136,7 +137,7 @@ public class KeygroupLayout
 				}
 			}
 		}
-		_buf.delete(_buf.length()-2, _buf.length());
+		_buf.delete(_buf.length()-1, _buf.length());
 		_buf.append("] set");
 		
 		if(!_processor.process(_buf.toString()));
