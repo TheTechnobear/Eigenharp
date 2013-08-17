@@ -75,21 +75,6 @@ public class KeygroupLayout
 		if(!_processor.startBlock()) return false;
 		createHey();
 		_buf.append(" physical mapping to [");
-		if (_isLinear)
-		{
-			int rowOffset = _kgStart - 1;
-			int numKeys =  _kgEnd  * _kgCols;
-			for (int keyNum=0 ;keyNum<numKeys;keyNum++)
-			{
-				int col=(keyNum / _kgEnd)+1;
-				int row=(keyNum % _kgEnd)+1 - rowOffset;
-				if(row > 0 & row<=_kgRows && col<=_kgCols)
-				{
-					generateRowCol(1,keyNum+1,col,row);
-				}
-			}
-		}
-		else
 		{
 			int rowOffset = _kgStart - 1;
 			for (int c=1;c<=_kgCols;c++)
@@ -99,8 +84,13 @@ public class KeygroupLayout
 					int row=r-rowOffset;
 					if(row > 0 & row<=_kgRows)
 					{
-						generateRowCol(c,r,c,row);
-					}
+						_buf.append(INDENT).append("[[");
+						_buf.append(Integer.toString(c));
+						_buf.append(",");
+						_buf.append(Integer.toString(r));
+						_buf.append("],[");
+						_buf.append(Integer.toString(c)).append(",").append(Integer.toString(row));
+						_buf.append("]],");					}
 				}
 			}
 		}
@@ -201,14 +191,14 @@ public class KeygroupLayout
 		int numCourses = 0;
 		if( _blockRows > 0 && _blockCols > 0 )
 		{
-			numCourses = (_kgRows/_blockRows) + 1;
+			numCourses = (_kgRows/_blockRows);
 		}
 		else
 		{
 			numCourses = ( _blockRows >0 ? _kgCols : _kgRows);
 		}
 		createHey();
-		_buf.append(" course offset to [0");
+		_buf.append(" course offset to [0.0");
 		for (int i=1;i<numCourses;i++)
 		{
 			_buf.append(",");
