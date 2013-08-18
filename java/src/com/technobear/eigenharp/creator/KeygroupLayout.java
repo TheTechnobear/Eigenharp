@@ -45,19 +45,19 @@ public class KeygroupLayout
 			return false;
 		}
 		
-		_keygroup = _args.get("%VAR1%");
-		_kgStart = Integer.valueOf(_args.get("%VAR2%"));
-		_kgEnd = Integer.valueOf(_args.get("%VAR3%"));
-		_kgRows = Integer.valueOf(_args.get("%VAR4%"));
-		_kgCols = Integer.valueOf(_args.get("%VAR5%"));
-		_blockRows = Integer.valueOf(_args.get("%VAR6%"));
-		_blockCols = Integer.valueOf(_args.get("%VAR7%"));
-		_courseOffset = Float.valueOf(_args.get("%VAR8%"));
-		_inc_note = Integer.valueOf(_args.get("%VAR9%"));
-		_isRevRow = Boolean.valueOf(_args.get("%VAR10%"));
-		_isRevCol = Boolean.valueOf(_args.get("%VAR11%"));
-		_isLinear = Boolean.valueOf(_args.get("%VAR12%"));
-		_setPhysical = Boolean.valueOf(_args.get("%VAR13%"));
+		_keygroup = _args.get("VAR1");
+		_kgStart = Integer.valueOf(_args.get("VAR2"));
+		_kgEnd = Integer.valueOf(_args.get("VAR3"));
+		_kgRows = Integer.valueOf(_args.get("VAR4"));
+		_kgCols = Integer.valueOf(_args.get("VAR5"));
+		_blockRows = Integer.valueOf(_args.get("VAR6"));
+		_blockCols = Integer.valueOf(_args.get("VAR7"));
+		_courseOffset = Float.valueOf(_args.get("VAR8"));
+		_inc_note = Integer.valueOf(_args.get("VAR9"));
+		_isRevRow = Boolean.valueOf(_args.get("VAR10"));
+		_isRevCol = Boolean.valueOf(_args.get("VAR11"));
+		_isLinear = Boolean.valueOf(_args.get("VAR12"));
+		_setPhysical = Boolean.valueOf(_args.get("VAR13"));
 		_buf=new StringBuffer();
 		return true;
 	}
