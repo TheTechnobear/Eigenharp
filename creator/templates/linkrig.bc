@@ -11,5 +11,6 @@ it to %KG_OUTPUT_NAME% name ify
 %KEYGROUP% hey output %RIG% key row to %MIXER_INPUT%  set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative to %KG_C_END_REL% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key row to end relative to %KG_R_END_REL% set
+sleep
 %KEYGROUP% output %RIG% to %RIG% into channel %KG_CHANNEL% connect
-%RIG% output light to %KEYGROUP% output %RIG% light input connect 
+%RIG% output light to %KEYGROUP% output %KG_OUTPUT_NAME% light input connect 

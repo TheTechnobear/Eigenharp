@@ -116,7 +116,7 @@ public class BelcantoTemplate
 		int idx=line.indexOf(' ');
 		if(idx<=0)
 		{
-			return false;
+			idx=line.length();
 		}
 		String cmd=line.substring(0,idx);
 		String args=null;
@@ -126,6 +126,7 @@ public class BelcantoTemplate
 		}
 		if(cmd.equalsIgnoreCase(CMD_SLEEP))
 		{
+			_processor.endBlock();
 			int time=1000;
 			if(args!=null)
 			{
@@ -137,6 +138,7 @@ public class BelcantoTemplate
 			} catch (InterruptedException e)
 			{
 			}
+			_processor.startBlock();
 			return true;
 		}
 		else if(cmd.equalsIgnoreCase(CMD_DECLARE) && args!=null)

@@ -7,4 +7,5 @@ it to %KG_OUTPUT_NAME% name ify
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative to %KG_C_END_REL% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_OUTPUT% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key row to end relative to %KG_R_END_REL% set
+sleep
 
