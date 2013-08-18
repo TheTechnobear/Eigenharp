@@ -1,2 +1,3 @@
 # this creates the pico device
 pico manager create
+sleep 2

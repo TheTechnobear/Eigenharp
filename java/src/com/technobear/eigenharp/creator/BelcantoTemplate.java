@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 public class BelcantoTemplate
 {
+	private static final String CMD_SLEEP = "sleep";
+	private static final String CMD_DECLARE = "declare";
 	private String _fileOrCommand;
 	private IProcessor _processor;
 	@SuppressWarnings("unused")
@@ -79,25 +81,95 @@ public class BelcantoTemplate
 		// ignore comments
 		if(buf.length()==0 || buf.charAt(0)=='#')
 		{
+			
 		}
 		else
 		{
-			String cmdline = buf.toString();
-			Iterator<String> iter=_varMap.keySet().iterator();
-			while(iter.hasNext())
+			if(!processSpecial(line))
 			{
-				String var=iter.next();
-				String value=_varMap.get(var);
-				if(!var.isEmpty() && value!=null)
+				String cmdline = buf.toString();
+				Iterator<String> iter=_varMap.keySet().iterator();
+				while(iter.hasNext())
 				{
-					cmdline=cmdline.replace(var, value);
+					String var=iter.next();
+					String value=_varMap.get(var);
+					if(!var.isEmpty() && value!=null)
+					{
+						cmdline=cmdline.replace("%"+var+"%", value);
+					}
 				}
-			}
-			if(!cmdline.isEmpty())
-			{
-				if(!_processor.process(cmdline.toString())) return false;
+				if(!cmdline.isEmpty())
+				{
+					if(!_processor.process(cmdline.toString())) return false;
+				}
 			}
 		}
 		return true;
+	}
+
+	/*
+	 * process special non-belcanto commands
+	 * return : true, if was special , false if not
+	 */
+	private boolean processSpecial(String line)
+	{
+		int idx=line.indexOf(' ');
+		if(idx<=0)
+		{
+			return false;
+		}
+		String cmd=line.substring(0,idx);
+		String args=null;
+		if(idx+1<line.length())
+		{
+			args=line.substring(idx+1);
+		}
+		if(cmd.equalsIgnoreCase(CMD_SLEEP))
+		{
+			int time=1000;
+			if(args!=null)
+			{
+				time = Integer.valueOf(args)*1000;
+			}
+			try
+			{
+				Thread.sleep(time);
+			} catch (InterruptedException e)
+			{
+			}
+			return true;
+		}
+		else if(cmd.equalsIgnoreCase(CMD_DECLARE) && args!=null)
+		{
+			String[] vargs=args.split(",");
+			for (int i=0;i<vargs.length;i++)
+			{
+				String[] varparts=vargs[i].split("=");
+				String varKey="VAR"+(i+1);
+				if(_varMap.containsKey(varKey))
+				{
+					_varMap.put(varparts[0],_varMap.get(varKey));
+				}
+				else
+				{
+					if(varparts.length>1)
+					{
+						if(varparts[1].contains("%"))
+						{
+							String k=varparts[1].substring(1, varparts[1].length()-1);
+							String v=_varMap.get(k);
+							_varMap.put(varparts[0], v);
+						}
+						else
+						{
+							_varMap.put(varparts[0], varparts[1]);
+						}
+					}
+				}
+			}
+			return true;
+		}
+	
+		return false;
 	}
 }

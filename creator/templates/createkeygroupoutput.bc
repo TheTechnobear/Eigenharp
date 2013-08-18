@@ -1,7 +1,10 @@
-# VAR1=%VAR1% keygroup to create output on , VAR2=%VAR%2 output number to create VAR3=%VAR3% name of output
+# KEYGROUP=%KEYGROUP% keygroup to create output on , KG_OUTPUT=%VAR%2 output number to create KG_OUTPUT_NAME=%KG_OUTPUT_NAME% name of output
+declare KEYGROUP,KG_OUTPUT,KG_OUTPUT_NAME,KG_COL=1,KG_C_END_REL=true, KG_R_END_REL=false
 
-%VAR1% hey output %VAR2% create
-it to %VAR3% name ify
-%VAR1% hey output %VAR3% key column to 1 set
-%VAR1% hey output %VAR3% key row to %VAR2% set
+%KEYGROUP% hey output %KG_OUTPUT% create
+it to %KG_OUTPUT_NAME% name ify
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key column to %KG_COL% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative to %KG_C_END_REL% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_OUTPUT% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to end relative to %KG_R_END_REL% set
 

@@ -88,7 +88,7 @@ public class CreatorConfig
 			String module=segs[0];
 			while(i<segs.length)
 			{
-				String var="%VAR"+i+"%";
+				String var="VAR"+i;
 				String arg=segs[i++];
 				args.put(var,arg);
 			}
