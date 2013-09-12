@@ -8,6 +8,7 @@ public class CreatorApp
 		app.execute();
 	}
 
+	static final String VERSION ="2.1.1";
 	static final char[] _optionsWithParams= new char[] {'F','S','D','C'};
 	private String _device;
 	private CreatorConfig _creatorConfig;
@@ -20,6 +21,7 @@ public class CreatorApp
 	private String _scriptDesc;
 	private String _outputFile;
 	private boolean _debug;
+	private boolean _unbuffered;
 	private IProcessor _processor;
 
 	public CreatorApp(String[] args)
@@ -101,7 +103,7 @@ public class CreatorApp
 		else
 		{
 			_url="http://localhost:55553";
-			_processor = new BelcantoXmlRpcProcessor(_url);
+			_processor = new BelcantoXmlRpcProcessor(_url,!_unbuffered);
 			
 		}
 		if(_configCommand!=null)
@@ -167,6 +169,7 @@ public class CreatorApp
 		{
 		case 'h' : return false;
 		case 'd' : _debug=true; break;
+		case 'u' : _unbuffered=true; break;
 		default:
 			return false;
 		}
@@ -189,9 +192,11 @@ public class CreatorApp
 
 	private void displayUsage()
 	{
-		System.out.println("Usage: creator.sh [-hd] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
+		System.out.println("Creator, version:"+VERSION);
+		System.out.println("Usage: creator.sh [-hdu] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
 		System.out.println("-h help");
 		System.out.println("-d debug");
+		System.out.println("-u unbuffered, execute commands individually, default false");
 		System.out.println("-S create script, called name");
 		System.out.println("-F output script or debug to file");
 		System.out.println("-D description to be used for script file");
