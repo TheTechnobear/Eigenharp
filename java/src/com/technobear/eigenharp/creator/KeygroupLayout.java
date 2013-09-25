@@ -22,6 +22,8 @@ public class KeygroupLayout
 	private StringBuffer _buf;
 	private boolean _isLinear;
 	private boolean _setPhysical;
+	private boolean _isDiag;
+	
 
 	public KeygroupLayout(IProcessor processor, HashMap<String, String> args)
 	{
@@ -37,11 +39,11 @@ public class KeygroupLayout
 
 	public boolean init()
 	{
-		if(_args.keySet().size() < 13) 
+		if(_args.keySet().size() < 14) 
 		{
 			System.err.println("KeygroupLayout usage:");
-			System.err.println("KeygroupLayout:keygroup:kgstartrow:kgendrow:kgrow:kgcol:blockrow:blockcol:courseoffset:inc_note:rev_row:rev_col:linear:physical:");
-			System.err.println("KeygroupLayout:keygroup 1:1:23:22:5:1:0:4.0:1:false:false:true:false");
+			System.err.println("KeygroupLayout:keygroup:kgstartrow:kgendrow:kgrow:kgcol:blockrow:blockcol:courseoffset:inc_note:rev_row:rev_col:diag:linear:physical:");
+			System.err.println("KeygroupLayout:keygroup 1:1:23:22:5:1:0:4.0:1:false:false:true:false:false");
 			return false;
 		}
 		
@@ -56,8 +58,9 @@ public class KeygroupLayout
 		_inc_note = Integer.valueOf(_args.get("VAR9"));
 		_isRevRow = Boolean.valueOf(_args.get("VAR10"));
 		_isRevCol = Boolean.valueOf(_args.get("VAR11"));
-		_isLinear = Boolean.valueOf(_args.get("VAR12"));
-		_setPhysical = Boolean.valueOf(_args.get("VAR13"));
+		_isDiag = Boolean.valueOf(_args.get("VAR12"));
+		_isLinear = Boolean.valueOf(_args.get("VAR13"));
+		_setPhysical = Boolean.valueOf(_args.get("VAR14"));
 		_buf=new StringBuffer();
 		return true;
 	}
@@ -150,7 +153,12 @@ public class KeygroupLayout
 		int blockSize = _blockCols * _blockRows;
 		int course = 0;
 		int note = 0;
-		if(blockSize > 0 )
+		if (_isDiag)
+		{
+			note =  (! _isRevCol ? col-1 : _kgCols - col)  * _inc_note + 1; 
+			course = (! _isRevRow ? row-1 : _kgRows - row ) + (_kgCols-note) + 1;
+		}
+		else if(blockSize > 0 )
 		{
 			//block modes
 			int c = ! _isRevCol ? col-1 : _kgCols - col ;
