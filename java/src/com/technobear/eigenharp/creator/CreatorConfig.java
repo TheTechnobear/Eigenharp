@@ -77,7 +77,7 @@ public class CreatorConfig
 			buf.deleteCharAt(0);
 		}
 		// ignore comments
-		if(buf.charAt(0)=='#')
+		if(buf.length() == 0 || buf.charAt(0)=='#')
 		{
 		}
 		else
