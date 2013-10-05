@@ -20,15 +20,21 @@ public class KeygroupLayout
 	private boolean _isRevRow;
 	private boolean _isRevCol;
 	private StringBuffer _buf;
+	private String _device;
 	private boolean _isLinear;
 	private boolean _setPhysical;
 	private boolean _isDiag;
 	
+	final static String DEVICE_TAU="tau";
+	final static String DEVICE_PICO="pico";
+	final static String DEVICE_ALPHA="alpha";
+	
 
-	public KeygroupLayout(IProcessor processor, HashMap<String, String> args)
+	public KeygroupLayout(IProcessor processor, String device, HashMap<String, String> args)
 	{
 		_processor=processor;
 		_args=args;
+		_device=device;
 	}
 	
 	public boolean execute()
@@ -113,15 +119,34 @@ public class KeygroupLayout
 		_buf.append(" musical mapping to [");
 		if (_isLinear)
 		{
+			boolean isTau = _device.compareToIgnoreCase(DEVICE_TAU)==0;
 			int rowOffset = _kgStart - 1;
-			int numKeys =  _kgEnd  * _kgCols;
-			for (int keyNum=0 ;keyNum<numKeys;keyNum++)
+			if(!isTau)
 			{
-				int col=(keyNum / _kgEnd)+1;
-				int row=(keyNum % _kgEnd)+1 - rowOffset;
-				if(row > 0 & row<=_kgRows && col<=_kgCols)
+				int numKeys =  _kgEnd  * _kgCols;
+				for (int keyNum=0 ;keyNum<numKeys;keyNum++)
 				{
-					generateRowCol(1,keyNum+1,col,row);
+					int col=(keyNum / _kgEnd)+1;
+					int row=(keyNum % _kgEnd)+1 - rowOffset;
+					if(row > 0 & row<=_kgRows && col<=_kgCols)
+					{
+						generateRowCol(1,keyNum+1,col,row);
+					}
+				}
+			}
+			else
+			{
+				int keyNum=0;
+				int row,col = 0;
+				for(col=0;col<_kgCols;col++)
+				{
+					// after column 2, we also add 4 for the 'extra' keys
+					if(col>1) keyNum+=4;
+					for(row=0;row<_kgEnd;row++)
+					{
+						generateRowCol(1,keyNum+1,col+1,row+1);
+						keyNum++;
+					}
 				}
 			}
 		}

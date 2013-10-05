@@ -110,7 +110,7 @@ public class CreatorConfig
 			}
 			else if(module.equalsIgnoreCase(LAYOUT_MODULE))
 			{
-					KeygroupLayout t=new KeygroupLayout(_processor,args);
+					KeygroupLayout t=new KeygroupLayout(_processor,_device, args);
 					if(!t.execute()) return false;
 			}
 		}

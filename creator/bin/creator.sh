@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd `dirname $0`/..
-pwd
 
 DIR=bin
 DIR3=$DIR/thirdparty
