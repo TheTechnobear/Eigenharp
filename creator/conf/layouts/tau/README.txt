@@ -1,8 +1,6 @@
-unfortunately Ive an issue with keygroup layouts on the tau!
-... the issue is, the keyboard does is not rectangular, it has 2 rows with 4 more keys.
-this is a problem since all the calculations are based on it being rectangular.
-it looks like to cope with this I would need a special 'tau' mode.
+bewarned the tau is a bit wierd for keygroup layouts as it has 
+16 rows in columns 1 and 2 and 20 in 2 and 3.
+Keygroup layout takes this into account, by assuming it really has 20 keys in all columns and then, reducing this down to 16 where necessary.
 
-in practice this means you could probably use, if your created a keygroup, that didnt use the extra 8 keys, 
-and made the tau look to be rectangular... and set the linear flag to false.
+so when quoting the kgEnd, we say it has 20 rows.
 

@@ -119,33 +119,27 @@ public class KeygroupLayout
 		_buf.append(" musical mapping to [");
 		if (_isLinear)
 		{
-			boolean isTau = _device.compareToIgnoreCase(DEVICE_TAU)==0;
+			boolean isTau = _device.equalsIgnoreCase(DEVICE_TAU);
 			int rowOffset = _kgStart - 1;
-			if(!isTau)
+			for (int c=1;c<=_kgCols;c++)
 			{
-				int numKeys =  _kgEnd  * _kgCols;
-				for (int keyNum=0 ;keyNum<numKeys;keyNum++)
+				int numRows=_kgEnd;
+				if(isTau)
 				{
-					int col=(keyNum / _kgEnd)+1;
-					int row=(keyNum % _kgEnd)+1 - rowOffset;
-					if(row > 0 & row<=_kgRows && col<=_kgCols)
-					{
-						generateRowCol(1,keyNum+1,col,row);
-					}
+					if(c<3 && _kgEnd>16) numRows=16;
 				}
-			}
-			else
-			{
-				int keyNum=0;
-				int row,col = 0;
-				for(col=0;col<_kgCols;col++)
+				for (int r=1;r<=numRows;r++)
 				{
-					// after column 2, we also add 4 for the 'extra' keys
-					if(col>1) keyNum+=4;
-					for(row=0;row<_kgEnd;row++)
+					int row=r-rowOffset;
+					int keyNum = (c-1) * _kgEnd + r;
+					if (isTau && _kgEnd>16) 
 					{
-						generateRowCol(1,keyNum+1,col+1,row+1);
-						keyNum++;
+						if (c>=2) keyNum-=4;
+						if (c>2) keyNum-=4;
+					}
+					if(row > 0 & row<=_kgRows)
+					{
+						generateRowCol(1,keyNum,c,row);
 					}
 				}
 			}
