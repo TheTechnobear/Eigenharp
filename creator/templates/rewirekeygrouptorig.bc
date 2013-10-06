@@ -1,0 +1,8 @@
+declare KEYGROUP,RIG,KG_OUTPUT,KG_CHANNEL
+
+#connect up midi rig 
+scheduler identifier to %RIG% scheduler identifier connect
+metronome 1 to %RIG% connect
+%KEYGROUP% %KG_OUTPUT% to %RIG% into channel %KG_CHANNEL% connect
+%RIG% output light to %KEYGROUP% %KG_OUTPUT% light input connect 
+

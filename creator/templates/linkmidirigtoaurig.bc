@@ -1,0 +1,8 @@
+declare MIDIRIG,AURIG,MIDICHANNEL
+
+# assign midi channel 
+%MIDIRIG% hey midi converter midi channel to %MIDICHANNEL% set
+
+# now connect midi rig to AU rig
+%MIDIRIG% output midi  to %AURIG% midi connect
+
