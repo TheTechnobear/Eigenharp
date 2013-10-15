@@ -1,0 +1,6 @@
+declare KG,KGCOL,KGROW
+%KG% hey mode key column to %KGCOL% set
+%KG% hey mode key row to %KGROW% set
+
+
+
