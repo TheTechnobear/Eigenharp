@@ -1,0 +1,10 @@
+declare KEYGROUP,DEVICE
+# KEYGROUP=%KEYGROUP% keygroup to create, DEVICE=%VAR%2 parent keygroup, %VAR3% parent keygroup output to link to
+# creates a keygroup and links it to a parent keygroup on specfied output
+
+
+keygroup create 
+it to %KEYGROUP% name ify
+%DEVICE% to %KEYGROUP% connect
+%DEVICE% to %KEYGROUP% mode key input connect
+

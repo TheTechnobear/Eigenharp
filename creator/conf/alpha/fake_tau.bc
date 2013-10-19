@@ -1,0 +1,18 @@
+execBC.bc:main keygroup un connect:
+execBC.bc:main keygroup mode key un connect:
+execBC.bc:percussion keygroup un connect:
+execBC.bc:percussion keygroup mode key un connect:
+execBC.bc:metronome running talker un connect:
+execBC.bc:alpha keyboard un connect:
+createmainkeygroup.bc:fusion keygroup:alpha keyboard:
+keymaps/fake_tau.bc:
+createkeygroupoutput.bc:fusion keygroup:1:fusion:
+execBC.bc:fusion keygroup hey output fusion to main keygroup connect:
+execBC.bc:fusion keygroup hey output fusion to main keygroup mode key input connect:
+execBC.bc:fusion keygroup hey output fusion to percussion keygroup connect:
+execBC.bc:fusion keygroup hey output fusion to percussion keygroup mode key input connect:
+execBC.bc:fusion keygroup hey output fusion to metronome running talker connect:
+execBC.bc:main keygroup light output to fusion keygroup output fusion light input connect:
+execBC.bc:percussion keygroup light output to fusion keygroup output fusion light input connect:
+execBC.bc:metronome running talker light output to fusion keygroup output fusion light input connect:
+
