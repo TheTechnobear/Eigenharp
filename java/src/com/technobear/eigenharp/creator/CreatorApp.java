@@ -75,12 +75,14 @@ public class CreatorApp
 	private boolean processCommandLine()
 	{
 		// don't need args if executing single command
-		if(_configCommand!=null) return true;
 
 		if(_argPos<_args.length) 
 			_device=_args[_argPos++];
 		else 
 			return false;
+
+		if(_configCommand!=null) return true;
+
 		
 		if(_argPos<_args.length) 
 			_configFile=_args[_argPos++];
@@ -193,7 +195,7 @@ public class CreatorApp
 	private void displayUsage()
 	{
 		System.out.println("Creator, version:"+VERSION);
-		System.out.println("Usage: creator.sh [-hdu] [-S script name] [-F ouput file] [-D description] [-C config command ] DEVICE CONFIG");
+		System.out.println("Usage: creator.sh [-hdu] [-S script name] [-F ouput file] [-D description] (-C 'config command' DEVICE | DEVICE CONFIG)");
 		System.out.println("-h help");
 		System.out.println("-d debug");
 		System.out.println("-u unbuffered, execute commands individually, default false");

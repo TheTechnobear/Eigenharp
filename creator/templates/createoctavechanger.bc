@@ -1,21 +1,26 @@
 # this module loads a talker with an octave change, i.e. up and down control assumes mapping has been provide to 1/1 & 1/2
-# VAR1=%VAR1% talker to load with actions VAR2=%VAR2% target for octave change 
+# TALKER=%TALKER% talker to load with actions TARGET=%TARGET% target for octave change 
+declare TALKER,TARGET,K_DOWN_COL=1,K_UP_COL=1,K_C_END_REL=un,K_DOWN_ROW=1,K_UP_ROW=2,K_R_END_REL=un,HEY=hey
 
 empty join
-' %VAR1% hey 1 as octave step define ' do
+' %TALKER% hey 1 as octave step define ' do
 
 
 
-%VAR1% hey " 
-%VAR2% hey octave by variable octave step down
+%TALKER% hey " 
+%TARGET% %HEY% octave by variable octave step down
 " when 1 called 1 do
-%VAR1% hey key 1 default colour to 2 set
-%VAR1% hey key 1 key column to 1 set
-%VAR1% hey key 1 key row to 1 set
+%TALKER% hey key 1 default colour to 2 set
+%TALKER% hey key 1 key column to %K_DOWN_COL% set
+%TALKER% hey key 1 key row to %K_DOWN_ROW% set
+%TALKER% hey key 1 column end relative %K_C_END_REL% set
+%TALKER% hey key 1 row end relative %K_R_END_REL% set
 
-%VAR1% hey " 
-%VAR2% hey octave by variable octave step up
+%TALKER% hey " 
+%TARGET% %HEY% octave by variable octave step up
 " when 2 called 1 do
-%VAR1% hey key 2 default colour to 1 set
-%VAR1% hey key 2 key column to 1 set
-%VAR1% hey key 2 key row to 2 set
+%TALKER% hey key 2 default colour to 1 set
+%TALKER% hey key 2 key column to %K_UP_COL% set
+%TALKER% hey key 2 key row to %K_UP_ROW% set
+%TALKER% hey key 2 column end relative %K_C_END_REL% set
+%TALKER% hey key 2 row end relative %K_R_END_REL% set
