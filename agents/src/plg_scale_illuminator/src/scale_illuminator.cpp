@@ -98,7 +98,8 @@ struct scale_illuminator_t::impl_t :
 
 
     pic::lckvector_t<unsigned>::nbtype courselen_;
-    pic::lckvector_t<float>::nbtype courseoffset_;
+    pic::lckvector_t<float>::nbtype scaleoffset_;
+    pic::lckvector_t<float>::nbtype semitoneoffset_;
     pic::lckvector_t<float>::nbtype playing_scale_;
     float playing_max_note_; // last value in scale, derived from scale
     float playing_tonic_;
@@ -248,29 +249,55 @@ void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data
 //    }
 }
 
-void decode_courseoffset(pic::lckvector_t<float>::nbtype &courses, const piw::data_nb_t &courseoffset)
+void decode_courseoffset(pic::lckvector_t<float>::nbtype &scale,pic::lckvector_t<float>::nbtype &semis, const piw::data_nb_t &courseoffset)
 {
-	courses.clear();
+	scale.clear();
+	semis.clear();
     unsigned dictlen = courseoffset.as_tuplelen();
     if(0 == dictlen)
         return;
 
-    courses.reserve(5);
+    scale.reserve(5);
+    semis.reserve(5);
 
     for(unsigned i = 0; i < dictlen; ++i)
     {
-        courses.push_back(courseoffset.as_tuple_value(i).as_float());
+    	float v=courseoffset.as_tuple_value(i).as_float();
+    	float sc=0.0,sm=0.0;
+    	if(v>9999)
+    	{
+    		sc=0;
+    		sm=v-10000.0;
+    	}
+    	else
+    	{
+    		sm=0;
+    		sc=v;
+    	}
+
+    	scale.push_back(sc);
+    	semis.push_back(sm);
     }
 
-//    pic::lckvector_t<float>::nbtype::const_iterator ci,ce;
-//    ci = courses.begin();
-//    ce = courses.end();
-//
-//    unsigned column=0;
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
-//    }
+    pic::lckvector_t<float>::nbtype::const_iterator ci,ce;
+    ci = scale.begin();
+    ce = scale.end();
+
+    unsigned column=0;
+    for(; ci != ce; ++ci)
+    {
+    	pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
+    }
+
+    pic::lckvector_t<float>::nbtype::const_iterator si,se;
+    si = semis.begin();
+    se = semis.end();
+
+    column=0;
+    for(; si != se; ++si)
+    {
+    	pic::logmsg() << "decode_courseoffset column " << column++ << "semioffset=" << *si;
+    }
 }
 
 float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
@@ -355,7 +382,7 @@ void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 		if(!co.is_null())
 		{
 			pic::logmsg() << "courseoffset " << co;
-			decode_courseoffset(courseoffset_, co);
+			decode_courseoffset(scaleoffset_,semitoneoffset_, co);
 		}
 		cl = d.as_dict_lookup("courselen");
 		if(!cl.is_null())
@@ -405,19 +432,19 @@ void scale_illuminator_t::impl_t::inverted(bool v)
 // one optimisation could be
 // playing scale is repeated, so reocurences can be calculated.
 // this means you can iterate thru playing scale, check if it exists (once) in ref scale, then set for all keys. i.e do one iteration of scale.
-int note(float note, float tonic, float max_note)
+int note(float note, float tonic, float base_note, float semitone_offset, float max_note)
 {
-	return (int) (note+tonic) % (int) max_note;
+	return (int) (note+tonic+base_note+semitone_offset) % (int) max_note;
 }
 
-bool is_in_reference_scale(pic::lckvector_t<float>::nbtype& scale, float tonic, float max_note, float value)
+bool is_in_reference_scale(pic::lckvector_t<float>::nbtype& scale, float tonic, float base_note, float semitone_offset, float max_note, float value)
 {
     pic::lckvector_t<float>::nbtype::const_iterator soi,soe;
     soi = scale.begin();
     soe = scale.end();
     for(;soi!=soe;soi++)
     {
-    	if (note(*soi,tonic,max_note) == value)
+    	if (note(*soi,tonic,base_note,semitone_offset,max_note) == value)
     	{
     		return true;
     	}
@@ -433,6 +460,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
 
     pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
     pic::lckvector_t<float>::nbtype::const_iterator coi,coe;
+    pic::lckvector_t<float>::nbtype::const_iterator smi,sme;
     pic::lckvector_t<float>::nbtype::const_iterator soi,soe;
     bool is_in_scale = false;
 
@@ -441,18 +469,28 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     cli = impl.courselen_.begin();
     cle = impl.courselen_.end();
 
-    coi = impl.courseoffset_.begin();
-    coe = impl.courseoffset_.end();
+    coi = impl.scaleoffset_.begin();
+    coe = impl.scaleoffset_.end();
+
+    smi = impl.semitoneoffset_.begin();
+    sme = impl.semitoneoffset_.end();
 
     // go thru each course
     int course = 0;
 	int course_offset = 0;
+	int semitone_offset = 0;
     for(;cli!=cle;cli++)
     {
     	int course_len = *cli;
     	if(coi!=coe)
     	{
     		course_offset+=*coi;
+    	}
+
+    	if(smi!=sme)
+    	{
+    		semitone_offset+=*smi;
+    		pic::logmsg() << "semitone_offset:" << *smi << " total " << semitone_offset;
     	}
 
     	// go thru each row
@@ -467,11 +505,10 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
 			}
 		}
 
-		// MSH : needs correcting, this interval of 1, could be 1,3,5 etc.
     	for(int row=0;row<course_len;row++)
     	{
     		unsigned char colour=BCTSTATUS_OFF;
-    		int n = note(*soi,impl.playing_tonic_,impl.playing_max_note_);
+    		int n = note(*soi,impl.playing_tonic_,impl.playing_base_note_,semitone_offset,impl.playing_max_note_);
     		bool is_tonic=false;
     		bool is_missing_ref_scale=impl.reference_scale_.size()==0;
     		if(impl.root_light_)
@@ -494,6 +531,8 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     	 		is_in_scale = soi==soe ? false :
     	    				is_in_reference_scale(impl.reference_scale_,
     	    									  impl.reference_tonic_,
+    	    									  0, // base_note
+    	    									  0, // semi tone offset
     	    									  impl.playing_max_note_,
     	    									  n
     	    									);
@@ -517,6 +556,10 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     	if(coi!=coe)
     	{
     		coi++;
+    	}
+    	if(smi!=sme)
+    	{
+    		smi++;
     	}
     	course++;
 	}

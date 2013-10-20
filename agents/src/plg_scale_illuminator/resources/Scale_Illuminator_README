@@ -1,5 +1,5 @@
 Scale Illuminator
-RELEASE 0.1.7
+RELEASE 0.1.8
 
 Contributions
 =============
@@ -99,9 +99,7 @@ ENJOY !!!
 
 PLANNED ENHANCEMENTS
 ====================
-- workaround issue with course note over length (eigend bug)
-- base note support
-
+None
 
 CHANGE HISTORY
 ==============
@@ -117,6 +115,7 @@ change log:
 0.1.5 - support setting scale and tonic by name, default KG scale to major, change demo scripts  to use scale illuminator as agent name
 0.1.6 - fix issue with offset with non-chromatic scales causing incorrect tonic, add Antonios script, fix issue with KG not getting control by alt implementation
 0.1.7 - add clear scale
+0.1.8 - add base note and semitone interval support
 
 SETUPS
 ======
