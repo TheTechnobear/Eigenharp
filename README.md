@@ -10,6 +10,7 @@ If you would like to redistribute any of the contents here, that is fine, my onl
 http://github.com/TheTechnobear/Eigenharp
 
 Tree contents:
+Creator - creator tool, change into this directory for README about creator
 Bin - useful mac osx shell scripts
 Vi - useful additions for VI
 Setups - contain setups for Eigenharps, these are binary files
