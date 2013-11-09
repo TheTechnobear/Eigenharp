@@ -1,0 +1,50 @@
+declare PREFIX,CONTROLNUM
+# this module creates a Green Amber Red control setup
+# PREFIX=%PREFIX% prefix CONTROLNUM=%CONTROLNUM% control number
+
+# the main keygroup that will get output when selected
+keygroup create 
+it to %PREFIX% keygroup name ify
+%PREFIX% keygroup hey output 1 create
+it to green name ify
+%PREFIX% keygroup hey output 2 create
+it to amber name ify
+%PREFIX% keygroup hey output 3 create
+it to red name ify
+
+# a talker controlling swiching behaviour
+keygroup create 
+it to %PREFIX% switch name ify
+%PREFIX% switch hey output 1 create
+it to switch talker name ify
+
+talker create
+it to %PREFIX% switch talker name ify
+
+%PREFIX% switch hey output switch talker to %PREFIX% switch talker connect
+%PREFIX% switch talker light output to %PREFIX% switch output switch talker input connect
+
+
+%PREFIX% switch talker hey " %PREFIX% keygroup hey output 2 choose " when 1 called 1 do
+%PREFIX% switch talker hey " action light hey %CONTROLNUM% to 3 colour ify " when 1 called 2 do
+%PREFIX% switch talker hey key 1 key column to 1 set
+%PREFIX% switch talker hey key 1 key row to %CONTROLNUM% set
+%PREFIX% switch talker hey key 1 default colour to 1 set
+
+%PREFIX% switch talker hey " %PREFIX% keygroup hey output 3 choose " when 2 called 1 do
+%PREFIX% switch talker hey " action light hey %CONTROLNUM% to 2 colour ify " when 2 called 2 do
+%PREFIX% switch talker hey key 2 key column to 1 set
+%PREFIX% switch talker hey key 2 key row to 0 set
+%PREFIX% switch talker hey key 2 default colour to 3 set
+
+%PREFIX% switch talker hey " %PREFIX% keygroup hey output 1 choose " when 3 called 1 do
+%PREFIX% switch talker hey " action light hey %CONTROLNUM% to 1 colour ify " when 3 called 2 do
+%PREFIX% switch talker hey key 3 key column to 1 set
+%PREFIX% switch talker hey key 3 key row to 0 set
+%PREFIX% switch talker hey key 3 default colour to 2 set
+
+
+# can only be done when all keys exist
+%PREFIX% switch talker hey " %PREFIX% switch talker hey key 1 key row to 0 set %PREFIX% switch talker hey key 2 key row to %CONTROLNUM% set " when 1 called 3 do
+%PREFIX% switch talker hey " %PREFIX% switch talker hey key 2 key row to 0 set %PREFIX% switch talker hey key 3 key row to %CONTROLNUM% set " when 2 called 3 do
+%PREFIX% switch talker hey " %PREFIX% switch talker hey key 3 key row to 0 set %PREFIX% switch talker hey key 1 key row to %CONTROLNUM% set " when 3 called 3 do

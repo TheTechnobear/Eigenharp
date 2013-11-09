@@ -1,5 +1,5 @@
-#VAR1=%VAR1% create a scale illuminator, called VAR1
 declare NAME,INVERTED=un
+#NAME=%NAME% create a scale illuminator, called NAME
 scale illuminator create 
 it to %NAME% name ify
 %NAME% hey inverted %INVERTED% set

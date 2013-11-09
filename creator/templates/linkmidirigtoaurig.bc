@@ -1,4 +1,5 @@
 declare MIDIRIG,AURIG,MIDICHANNEL
+#connect a midi rigs output to an audio units midi input (assumes midi input has been created)
 
 # assign midi channel 
 %MIDIRIG% hey midi converter midi channel to %MIDICHANNEL% set

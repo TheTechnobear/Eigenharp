@@ -1,5 +1,5 @@
-# this module loads an existing talker with a tonic selection keys
 declare TALKER,TARGET,COL,HEY=hey
+# this module loads an existing talker with a tonic selection keys
 
 %TALKER% hey " 
 %TARGET% %HEY% tonic to notec set

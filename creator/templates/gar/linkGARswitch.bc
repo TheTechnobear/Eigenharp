@@ -1,0 +1,20 @@
+declare GAR_PREFIX,GAR_NUM
+# link a GAR into the main structure, part of GAR module
+# GAR_PREFIX=%GAR_PREFIX% prefix of GAR , GAR_NUM=%GAR_NUM% GAR number
+
+main keygroup hey output %GAR_NUM% create
+it to %GAR_PREFIX% name ify
+main keygroup output %GAR_PREFIX% to %GAR_PREFIX% switch connect
+main keygroup output %GAR_PREFIX% to %GAR_PREFIX% keygroup connect
+
+action light hey "" when %GAR_NUM% do
+action light hey key %GAR_NUM% key column to 1 set
+action light hey key %GAR_NUM% key row to %GAR_NUM% set
+action light hey %GAR_NUM% to 1 colour ify
+action switch hey " main keygroup hey output %GAR_NUM% choose action light hey 1 to 0 colour ify " when %GAR_NUM% called 1 do
+action switch hey key %GAR_NUM% key column to 1 set
+action switch hey key %GAR_NUM% key row to %GAR_NUM% set
+
+%GAR_PREFIX% switch light output from main keygroup output %GAR_PREFIX% light input un connect
+
+

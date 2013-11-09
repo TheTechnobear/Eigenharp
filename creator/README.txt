@@ -28,6 +28,14 @@ http://github.com/TheTechnobear/Eigenharp/wiki/CREATOR-DEVELOPMENT
 the obligatory FAQ is here:
 http://github.com/TheTechnobear/Eigenharp/wiki/CREATOR-FAQ
 
+
+Contents
+========
+bin - contains programs/scripts to execute
+conf - contains config files to be used with creator.sh/creator.cmd  (device subdirectories contain configs specific to device)
+templates - contains templates files to be used within config files (device subdirectories contain templates specific to device, keymaps hold keymapping files)
+
+
 IMPORTANT NOTE:
 Ive recently updated to creator 2.0, Ive updated the wiki but there may be some 'oddities'
 things to look out for are:

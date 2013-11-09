@@ -1,6 +1,7 @@
-# VAR1=%VAR1% name of illuminator agent,
-# VAR2=%VAR2% parent keygroup,
-# VAR3=%VAR3% parent keygroup output
+declare ILLUMINATOR_NAME,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT,SERVER_START= ,SERVER_PORT
+# ILLUMINATOR_NAME=%ILLUMINATOR_NAME% name of illuminator agent,
+# PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup,
+# PARENT_KEYGROUP_OUTPUT=%PARENT_KEYGROUP_OUTPUT% parent keygroup output
 
 # To use, launch a web browser and enter 'http://localhost:1024'.
 # Then make appropriate setting changes in console and click 'scroll now'.
@@ -8,8 +9,8 @@
 
 
 illuminator create
-it to %VAR1% name ify
-%VAR2% hey output keygroup %VAR3% to %VAR1% connect
-%VAR1% hey server port to 1024 set
-%VAR1% hey server start to on set
+it to %ILLUMINATOR_NAME% name ify
+%PARENT_KEYGROUP% hey output keygroup %PARENT_KEYGROUP_OUTPUT% to %ILLUMINATOR_NAME% connect
+%ILLUMINATOR_NAME% hey server port to %SERVER_PORT% set
+%ILLUMINATOR_NAME% hey server start %SERVER_START% set
 

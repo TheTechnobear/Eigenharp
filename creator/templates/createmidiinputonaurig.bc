@@ -1,4 +1,5 @@
 declare RIG,
+#create a midi input on a rig
 %RIG% gateway hey input called midi create
 %RIG% gateway midi to instrument audio unit midi input connect
 

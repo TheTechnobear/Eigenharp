@@ -1,4 +1,4 @@
-# setup an action switch and light
+# create an action switch, this is part of of the red,green,orange menu structure
 
 
 keygroup create

@@ -1,6 +1,6 @@
-# this module loads a talkers with a scale selector for up to 8 scales, vars are used so can be used with a scale browser
-# TALKER=%TALKER% talker to load with actions VAR2=%VAR2% target for scale change COL=%COL% column to use
 declare TALKER,TARGET,COL,HEY=hey
+# this module loads a talkers with a scale selector for up to 8 scales, vars are used so can be used with a scale browser
+# TALKER=%TALKER% talker to load with actions TARGET=%TARGET% target for scale change COL=%COL% column to use
 
 empty join
 ' %TALKER% hey major as scale 1 define ' do

@@ -1,11 +1,12 @@
-# KEYGROUP=%KEYGROUP% keygroup to create output on , KG_OUTPUT=%VAR%2 output number to create KG_OUTPUT_NAME=%KG_OUTPUT_NAME% name of output
-declare KEYGROUP,KG_OUTPUT,KG_OUTPUT_NAME,KG_COL=1,KG_C_END_REL=un,KG_R_END_REL=un
+declare KEYGROUP,KG_OUTPUT,KG_OUTPUT_NAME,KG_COL=1,KG_C_END_REL=un,KG_R_END_REL=un,KG_ROW=%KG_OUTPUT%
+#create a keygroup output for a given keygroup 
+# KEYGROUP=%KEYGROUP% keygroup to create output on , KG_OUTPUT=%KEYGROUP_OUTPUT% output number to create KG_OUTPUT_NAME=%KG_OUTPUT_NAME% name of output
 
 %KEYGROUP% hey output %KG_OUTPUT% create
 it to %KG_OUTPUT_NAME% name ify
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key column to %KG_COL% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative %KG_C_END_REL% set
-%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_OUTPUT% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_ROW% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key row end relative %KG_R_END_REL% set
 sleep
 

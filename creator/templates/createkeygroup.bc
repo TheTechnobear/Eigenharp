@@ -1,9 +1,11 @@
-# VAR1=%VAR1% keygroup to create, VAR2=%VAR%2 parent keygroup, %VAR3% parent keygroup output to link to
+declare KEYGROUP,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT
+
+# KEYGROUP=%KEYGROUP% keygroup to create, PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup, %PARENT_KEYGROUP_OUTPUT% parent keygroup output to link to
 # creates a keygroup and links it to a parent keygroup on specfied output
 
 
 keygroup create 
-it to %VAR1% name ify
-%VAR2% hey output %VAR3% to %VAR1% connect
-%VAR2% hey output %VAR3% key output to %VAR1% mode key input connect
+it to %KEYGROUP% name ify
+%PARENT_KEYGROUP% output %PARENT_KEYGROUP_OUTPUT% to %KEYGROUP% connect
+%PARENT_KEYGROUP% output %PARENT_KEYGROUP_OUTPUT% key output to %KEYGROUP% mode key input connect
 

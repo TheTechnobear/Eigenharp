@@ -1,27 +1,28 @@
-# VAR1=%VAR1% - user defined name of Drummer
-# VAR2=%VAR2% - name of metronome agent in setup
-# VAR3=%VAR3% - console mixer channel for Drummer
+declare DRUMMER_NAME,METRONOME,MIXER_CHANNEL,FLASH_PERSIST=100
+# DRUMMER_NAME=%DRUMMER_NAME% - user defined name of Drummer
+# METRONOME=%METRONOME% - name of metronome agent in setup
+# MIXER_CHANNEL=%MIXER_CHANNEL% - console mixer channel for Drummer
 
 drummer create
-it to %VAR1% name ify
+it to %DRUMMER_NAME% name ify
 
 # Connect it to metronome and console mixer
 
-%VAR2% hey beat flash persistence to 100 set
+%METRONOME% hey beat flash persistence to %FLASH_PERSIST% set
 
-%VAR2% hey running output to %VAR1% running input connect
-%VAR2% hey song beat output to %VAR1% song beat input connect
+%METRONOME% hey running output to %DRUMMER_NAME% running input connect
+%METRONOME% hey song beat output to %DRUMMER_NAME% song beat input connect
 
-%VAR1% to console mixer mixer channel %VAR3% connect
+%DRUMMER_NAME% to console mixer mixer channel %MIXER_CHANNEL% connect
 
 # Create drum voices (slots)
 
-#%VAR1% hey voice 1 create do
-%VAR1% hey 2 create
-%VAR1% hey 3 create
-%VAR1% hey 4 create
-%VAR1% hey 5 create
-%VAR1% hey 6 create
-%VAR1% hey 7 create
-%VAR1% hey 8 create
+#%DRUMMER_NAME% hey voice 1 create do
+%DRUMMER_NAME% hey 2 create
+%DRUMMER_NAME% hey 3 create
+%DRUMMER_NAME% hey 4 create
+%DRUMMER_NAME% hey 5 create
+%DRUMMER_NAME% hey 6 create
+%DRUMMER_NAME% hey 7 create
+%DRUMMER_NAME% hey 8 create
 

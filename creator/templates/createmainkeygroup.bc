@@ -1,7 +1,6 @@
 declare KEYGROUP,DEVICE
-# KEYGROUP=%KEYGROUP% keygroup to create, DEVICE=%VAR%2 parent keygroup, %VAR3% parent keygroup output to link to
 # creates a keygroup and links it to a parent keygroup on specfied output
-
+# KEYGROUP=%KEYGROUP% keygroup to create, DEVICE=%DEVICE% devices keyboard
 
 keygroup create 
 it to %KEYGROUP% name ify

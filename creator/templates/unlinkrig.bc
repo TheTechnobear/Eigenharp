@@ -1,5 +1,6 @@
-# this script will link a rig and the mixer console on a given channel
-# VAR1=%VAR1% rig to unlink VAR2=%VAR2% mixer channel
+declare RIG,MIXER_CHANNEL
+# this script will un link a rig and the mixer console on a given channel
+# RIG=%RIG% rig to unlink MIXER_CHANNEL=%MIXER_CHANNEL% mixer channel
 
-%VAR1% un connect
-console mixer mixer channel %VAR2% un connect
+%RIG% un connect
+console mixer mixer channel %MIXER_CHANNEL% un connect

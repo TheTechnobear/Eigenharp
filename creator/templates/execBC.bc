@@ -1,2 +1,3 @@
 declare STATEMENT
+# execute belcanto statement %STATEMENT%
 %STATEMENT%
