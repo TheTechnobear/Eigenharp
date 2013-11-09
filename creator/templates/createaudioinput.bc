@@ -1,0 +1,6 @@
+declare L_IN_CH,R_IN_CH,MIX_CH
+#this creates 2 audio input channels and links them to the mixer
+audio hey output %L_IN_CH% create
+audio hey output %R_IN_CH% create
+audio output %L_IN_CH% to console mixer channel %MIX_CH% left audio connect
+audio output %R_IN_CH% to console mixer channel %MIX_CH% right audio connect

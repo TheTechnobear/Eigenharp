@@ -7,75 +7,43 @@ empty join
 ' %TALKER% hey 4 bar as recorder bar define ' do
 
 
-%TALKER% hey "  
-1 bar as recorder bar define %TARGET_RIG% hey re do
-" when 1 called 1 do
-%TALKER% hey " 
-%TALKER% hey 1 to 1 from 3 colour ify
-" when 1 called 2 do
+%TALKER% hey "  1 bar as recorder bar define %TARGET_RIG% hey re do " when 1 called 1 do
+%TALKER% hey " %TALKER% hey 1 to 1 from 3 colour ify " when 1 called 2 do
 %TALKER% hey key 1 key column to %K_COL% set
 %TALKER% hey key 1 key row to 1 set
 
-%TALKER% hey " 
-2 bar as recorder bar define %TARGET_RIG% hey re do
-" when 2 called 1 do
-%TALKER% hey " 
-%TALKER% hey 2 to 1 from 3 colour ify
-" when 2 called 2 do
+%TALKER% hey " 2 bar as recorder bar define %TARGET_RIG% hey re do " when 2 called 1 do
+%TALKER% hey " %TALKER% hey 2 to 1 from 3 colour ify " when 2 called 2 do
 %TALKER% hey key 2 key column to %K_COL% set
 %TALKER% hey key 2 key row to 2 set
 
-%TALKER% hey " 
-4 bar as recorder bar define %TARGET_RIG% hey re do
-" when 3 called 1 do
-%TALKER% hey " 
-%TALKER% hey 3 to 1 from 3 colour ify
-" when 3 called 2 do
+%TALKER% hey " 4 bar as recorder bar define %TARGET_RIG% hey re do " when 3 called 1 do
+%TALKER% hey " %TALKER% hey 3 to 1 from 3 colour ify " when 3 called 2 do
 %TALKER% hey key 3 key column to %K_COL% set
 %TALKER% hey key 3 key row to 3 set
 
-%TALKER% hey " 
-8 bar as recorder bar define %TARGET_RIG% hey re do
-" when 4 called 1 do
-%TALKER% hey " 
-%TALKER% hey 4 to 1 from 3 colour ify
-" when 4 called 2 do
+%TALKER% hey " 8 bar as recorder bar define %TARGET_RIG% hey re do " when 4 called 1 do
+%TALKER% hey " %TALKER% hey 4 to 1 from 3 colour ify " when 4 called 2 do
 %TALKER% hey key 4 key column to %K_COL% set
 %TALKER% hey key 4 key row to 4 set
 
-%TALKER% hey " 
-16 bar as recorder bar define %TARGET_RIG% hey re do
-" when 5 called 1 do
-%TALKER% hey " 
-%TALKER% hey 5 to 1 from 3 colour ify
-" when 5 called 2 do
+%TALKER% hey " 16 bar as recorder bar define %TARGET_RIG% hey re do " when 5 called 1 do
+%TALKER% hey " %TALKER% hey 5 to 1 from 3 colour ify " when 5 called 2 do
 %TALKER% hey key 5 key column to %K_COL% set
 %TALKER% hey key 5 key row to 5 set
 
-%TALKER% hey " 
-32 bar as recorder bar define %TARGET_RIG% hey re do
-" when 6 called 1 do
-%TALKER% hey " 
-%TALKER% hey 6 to 1 from 3 colour ify
-" when 6 called 2 do
+%TALKER% hey " 32 bar as recorder bar define %TARGET_RIG% hey re do " when 6 called 1 do
+%TALKER% hey " %TALKER% hey 6 to 1 from 3 colour ify " when 6 called 2 do
 %TALKER% hey key 6 key column to %K_COL% set
 %TALKER% hey key 6 key row to 6 set
 
-%TALKER% hey " 
-all rig recorder hey un play
-" when 7 called 1 do
-%TALKER% hey " 
-%TALKER% hey 7 to 1 from 3 colour ify
-" when 7 called 2 do
+%TALKER% hey " all rig recorder hey un play " when 7 called 1 do
+%TALKER% hey " %TALKER% hey 7 to 1 from 3 colour ify " when 7 called 2 do
 %TALKER% hey key 7 key column to %K_COL% set
 %TALKER% hey key 7 key row to 7 set
 
-%TALKER% hey " 
-all rig recorder hey cancel
-" when 8 called 1 do
-%TALKER% hey " 
-%TALKER% hey 8 to 1 from 3 colour ify
-" when 8 called 2 do
+%TALKER% hey " all rig recorder hey cancel " when 8 called 1 do
+%TALKER% hey " %TALKER% hey 8 to 1 from 3 colour ify " when 8 called 2 do
 %TALKER% hey key 8 key column to %K_COL% set
 %TALKER% hey key 8 key row to 8 set
 

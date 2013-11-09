@@ -6,18 +6,14 @@ declare TALKER,TARGET,K_DOWN_COL=2,K_UP_COL=1,K_C_END_REL= ,K_DOWN_ROW=1,K_UP_RO
 empty join
 
 
-%TALKER% hey " 
-%TARGET% %HEY% midi channel down
-" when 1 called 1 do
+%TALKER% hey " %TARGET% %HEY% midi channel down " when 1 called 1 do
 %TALKER% hey key 1 default colour to 2 set
 %TALKER% hey key 1 key column to %K_DOWN_COL% set
 %TALKER% hey key 1 key row to %K_DOWN_ROW% set
 %TALKER% hey key 1 column end relative %K_C_END_REL% set
 %TALKER% hey key 1 row end relative %K_R_END_REL% set
 
-%TALKER% hey " 
-%TARGET% %HEY% midi channel up
-" when 2 called 1 do
+%TALKER% hey " %TARGET% %HEY% midi channel up " when 2 called 1 do
 %TALKER% hey key 2 default colour to 1 set
 %TALKER% hey key 2 key column to %K_UP_COL% set
 %TALKER% hey key 2 key row to %K_UP_ROW% set

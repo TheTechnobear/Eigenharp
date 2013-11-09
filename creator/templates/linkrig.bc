@@ -2,9 +2,12 @@ declare KEYGROUP,RIG,MIXER_INPUT,KG_CHANNEL,KG_COL=1,KG_C_END_REL=un,KG_R_END_RE
 # this script will link a rig to a keygroup and the mixer console on a given channel
 # KEYGROUP=%KEYGROUP% keygroup to link RIG=%RIG% rig to link MIXER_INPUT=%MIXER_INPUT% mixer channel, KEYGROUP CHANNEL=%KEYGROUP CHANNEL% keygroup channel
 
+# argubably this could go into the rig (as its one off), but useful if you want to do something different
 scheduler identifier to %RIG% scheduler identifier connect
 metronome 1 to %RIG% connect
 %RIG% to console mixer mixer channel %MIXER_INPUT% connect
+
+# setup keygroup
 %KEYGROUP% hey output %MIXER_INPUT% create
 it to %KG_OUTPUT_NAME% name ify
 %KEYGROUP% hey output %RIG% key column to %KG_COL% set

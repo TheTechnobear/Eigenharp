@@ -1,6 +1,10 @@
-declare NAME,INVERTED=un
+declare NAME,INVERTED=un,ROOT= ,SCALE=major,TONIC=notec
 #NAME=%NAME% create a scale illuminator, called NAME
 scale illuminator create 
 it to %NAME% name ify
 %NAME% hey inverted %INVERTED% set
+%NAME% hey root %ROOT% set
+%NAME% hey scale to %SCALE% set
+%NAME% hey tonic to %TONIC% set
+
 

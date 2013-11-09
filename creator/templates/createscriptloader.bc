@@ -14,117 +14,61 @@ empty join
 
 
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 1 execute
-" when 1 called 1 do
-%TALKER% hey " 
-%TALKER% hey 1 to 1 from 3 colour ify
-" when 1 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 1 execute " when 1 called 1 do
+%TALKER% hey " %TALKER% hey 1 to 1 from 3 colour ify " when 1 called 2 do
 %TALKER% hey key 1 key column to %K_COL% set
 %TALKER% hey key 1 key row to 1 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 2 execute
-" when 2 called 1 do
-%TALKER% hey " 
-%TALKER% hey 2 to 1 from 3 colour ify
-" when 2 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 2 execute " when 2 called 1 do
+%TALKER% hey " %TALKER% hey 2 to 1 from 3 colour ify " when 2 called 2 do
 %TALKER% hey key 2 key column to %K_COL% set
 %TALKER% hey key 2 key row to 2 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 3 execute
-" when 3 called 1 do
-%TALKER% hey " 
-%TALKER% hey 3 to 1 from 3 colour ify
-" when 3 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 3 execute " when 3 called 1 do
+%TALKER% hey " %TALKER% hey 3 to 1 from 3 colour ify " when 3 called 2 do
 %TALKER% hey key 3 key column to %K_COL% set
 %TALKER% hey key 3 key row to 3 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 4 execute
-" when 4 called 1 do
-%TALKER% hey " 
-%TALKER% hey 4 to 1 from 3 colour ify
-" when 4 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 4 execute " when 4 called 1 do
+%TALKER% hey " %TALKER% hey 4 to 1 from 3 colour ify " when 4 called 2 do
 %TALKER% hey key 4 key column to %K_COL% set
 %TALKER% hey key 4 key row to 4 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 5 execute
-" when 5 called 1 do
-%TALKER% hey " 
-%TALKER% hey 5 to 1 from 3 colour ify
-" when 5 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 5 execute " when 5 called 1 do
+%TALKER% hey " %TALKER% hey 5 to 1 from 3 colour ify " when 5 called 2 do
 %TALKER% hey key 5 key column to %K_COL% set
 %TALKER% hey key 5 key row to 5 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 6 execute
-" when 6 called 1 do
-%TALKER% hey " 
-%TALKER% hey 6 to 1 from 3 colour ify
-" when 6 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 6 execute " when 6 called 1 do
+%TALKER% hey " %TALKER% hey 6 to 1 from 3 colour ify " when 6 called 2 do
 %TALKER% hey key 6 key column to %K_COL% set
 %TALKER% hey key 6 key row to 6 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 7 execute
-" when 7 called 1 do
-%TALKER% hey " 
-%TALKER% hey 7 to 1 from 3 colour ify
-" when 7 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 7 execute " when 7 called 1 do
+%TALKER% hey " %TALKER% hey 7 to 1 from 3 colour ify " when 7 called 2 do
 %TALKER% hey key 7 key column to %K_COL% set
 %TALKER% hey key 7 key row to 7 set
 
-%TALKER% hey " 
-interpreter 1 hey variable setup 8 execute
-" when 8 called 1 do
-%TALKER% hey " 
-%TALKER% hey 8 to 1 from 3 colour ify
-" when 8 called 2 do
+%TALKER% hey " interpreter 1 hey variable setup 8 execute " when 8 called 1 do
+%TALKER% hey " %TALKER% hey 8 to 1 from 3 colour ify " when 8 called 2 do
 %TALKER% hey key 8 key column to %K_COL% set
 %TALKER% hey key 8 key row to 8 set
 
-%TALKER% hey " 
-eigenbrowser , interpreter hey script browse 
-" when 9 called 1 do
-%TALKER% hey " 
-%TALKER% hey 9 to 1 from 3 colour ify
-" when 9 called 2 do
+%TALKER% hey " eigenbrowser , interpreter hey script browse " when 9 called 1 do
+%TALKER% hey " %TALKER% hey 9 to 1 from 3 colour ify " when 9 called 2 do
 %TALKER% hey key 9 key column to %K_COL% set
 %TALKER% hey key 9 key row to 9 set
 
 
-%TALKER% hey " 
-' empty join %TALKER% hey 01 user as setup 1 define %TALKER% hey 1 re do ' do
-' empty join %TALKER% hey 02 user as setup 2 define %TALKER% hey 2 re do ' do
-' empty join %TALKER% hey 03 user as setup 3 define %TALKER% hey 3 re do ' do
-' empty join %TALKER% hey 04 user as setup 4 define %TALKER% hey 4 re do ' do
-' empty join %TALKER% hey 05 user as setup 5 define %TALKER% hey 5 re do ' do
-' empty join %TALKER% hey 06 user as setup 6 define %TALKER% hey 6 re do ' do
-' empty join %TALKER% hey 07 user as setup 7 define %TALKER% hey 7 re do ' do
-' empty join %TALKER% hey 08 user as setup 8 define %TALKER% hey 8 re do ' do
-" when 10 called 1 do
-%TALKER% hey " 
-%TALKER% hey 10 to 1 from 3 colour ify
-" when 10 called 2 do
+%TALKER% hey " ' empty join %TALKER% hey 01 user as setup 1 define %TALKER% hey 1 re do ' do ' empty join %TALKER% hey 02 user as setup 2 define %TALKER% hey 2 re do ' do ' empty join %TALKER% hey 03 user as setup 3 define %TALKER% hey 3 re do ' do ' empty join %TALKER% hey 04 user as setup 4 define %TALKER% hey 4 re do ' do ' empty join %TALKER% hey 05 user as setup 5 define %TALKER% hey 5 re do ' do ' empty join %TALKER% hey 06 user as setup 6 define %TALKER% hey 6 re do ' do ' empty join %TALKER% hey 07 user as setup 7 define %TALKER% hey 7 re do ' do ' empty join %TALKER% hey 08 user as setup 8 define %TALKER% hey 8 re do ' do " when 10 called 1 do
+
+%TALKER% hey " %TALKER% hey 10 to 1 from 3 colour ify " when 10 called 2 do
 %TALKER% hey key 10 key column to %K_COL% set
 %TALKER% hey key 10 key row to 10 set
 
-%TALKER% hey " 
-' empty join %TALKER% hey 01 %SCRIPT_NAME% as setup 1 define %TALKER% hey 1 re do ' do
-' empty join %TALKER% hey 02 %SCRIPT_NAME% as setup 2 define %TALKER% hey 2 re do ' do
-' empty join %TALKER% hey 03 %SCRIPT_NAME% as setup 3 define %TALKER% hey 3 re do ' do
-' empty join %TALKER% hey 04 %SCRIPT_NAME% as setup 4 define %TALKER% hey 4 re do ' do
-' empty join %TALKER% hey 05 %SCRIPT_NAME% as setup 5 define %TALKER% hey 5 re do ' do
-' empty join %TALKER% hey 06 %SCRIPT_NAME% as setup 6 define %TALKER% hey 6 re do ' do
-' empty join %TALKER% hey 07 %SCRIPT_NAME% as setup 7 define %TALKER% hey 7 re do ' do
-' empty join %TALKER% hey 08 %SCRIPT_NAME% as setup 8 define %TALKER% hey 8 re do ' do
-" when 11 called 1 do
-%TALKER% hey " 
-%TALKER% hey 11 to 1 from 3 colour ify
-" when 11 called 2 do
+%TALKER% hey " ' empty join %TALKER% hey 01 %SCRIPT_NAME% as setup 1 define %TALKER% hey 1 re do ' do ' empty join %TALKER% hey 02 %SCRIPT_NAME% as setup 2 define %TALKER% hey 2 re do ' do ' empty join %TALKER% hey 03 %SCRIPT_NAME% as setup 3 define %TALKER% hey 3 re do ' do ' empty join %TALKER% hey 04 %SCRIPT_NAME% as setup 4 define %TALKER% hey 4 re do ' do ' empty join %TALKER% hey 05 %SCRIPT_NAME% as setup 5 define %TALKER% hey 5 re do ' do ' empty join %TALKER% hey 06 %SCRIPT_NAME% as setup 6 define %TALKER% hey 6 re do ' do ' empty join %TALKER% hey 07 %SCRIPT_NAME% as setup 7 define %TALKER% hey 7 re do ' do ' empty join %TALKER% hey 08 %SCRIPT_NAME% as setup 8 define %TALKER% hey 8 re do ' do " when 11 called 1 do
+
+%TALKER% hey " %TALKER% hey 11 to 1 from 3 colour ify " when 11 called 2 do
 %TALKER% hey key 11 key column to %K_COL% set
 %TALKER% hey key 11 key row to 11 set
 

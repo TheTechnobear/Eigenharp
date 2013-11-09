@@ -3,8 +3,11 @@ declare KEYGROUP,RIG,MIXER_CHANNEL,KG_CHANNEL
 # this script will link a midi rig to a keygroup and then to the midi output
 # KEYGROUP=%KEYGROUP% keygroup to link RIG=%RIG% rig to link MIXER_CHANNEL=%MIXER_CHANNEL% mixer channel, KG_CHANNEL=%KG_CHANNEL% keygroup channel
 
+# argubably this could go into the rig (as its one off), but useful if you want to do something different
 metronome 1 to %RIG% connect
 scheduler identifier to %RIG% scheduler identifier connect
+
+# link up keygroup
 %KEYGROUP% hey output %MIXER_CHANNEL% create
 it to %RIG% name ify
 %KEYGROUP% hey output %RIG% key column to 1 set
@@ -12,6 +15,4 @@ it to %RIG% name ify
 sleep
 %KEYGROUP% output %RIG% to %RIG% into channel %KG_CHANNEL% connect
 %RIG% output light to %KEYGROUP% output %RIG% light input connect 
-midi output create
-%RIG% to it connect
 

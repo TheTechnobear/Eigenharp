@@ -3,51 +3,35 @@ declare TALKER,SCALE_TALKER,K_COL
 # TALKER=%TALKER% talker to load with actions SCALE_TALKER=%SCALE_TALKER% talker changing scales K_COL=%K_COL% column to use
 
 
-%TALKER% hey ' 
- " empty join scale manager listen cancel variable scale 1 iyot choose when activation ` " empty join scale manager activation scale as scale 1 define %SCALE_TALKER% hey 1 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 1 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 1 iyot choose when activation ` " empty join scale manager activation scale as scale 1 define %SCALE_TALKER% hey 1 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 1 called 1 do
 %TALKER% hey key 1 key column to %K_COL% set
 %TALKER% hey key 1 key row to 1 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 2 iyot choose when activation ` " empty join scale manager activation scale as scale 2 define %SCALE_TALKER% hey 2 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 2 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 2 iyot choose when activation ` " empty join scale manager activation scale as scale 2 define %SCALE_TALKER% hey 2 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 2 called 1 do
 %TALKER% hey key 2 key column to %K_COL% set
 %TALKER% hey key 2 key row to 2 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 3 iyot choose when activation ` " empty join scale manager activation scale as scale 3 define %SCALE_TALKER% hey 3 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 3 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 3 iyot choose when activation ` " empty join scale manager activation scale as scale 3 define %SCALE_TALKER% hey 3 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 3 called 1 do
 %TALKER% hey key 3 key column to %K_COL% set
 %TALKER% hey key 3 key row to 3 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 4 iyot choose when activation ` " empty join scale manager activation scale as scale 4 define %SCALE_TALKER% hey 4 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 4 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 4 iyot choose when activation ` " empty join scale manager activation scale as scale 4 define %SCALE_TALKER% hey 4 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 4 called 1 do
 %TALKER% hey key 4 key column to %K_COL% set
 %TALKER% hey key 4 key row to 4 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 5 iyot choose when activation ` " empty join scale manager activation scale as scale 5 define %SCALE_TALKER% hey 5 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 5 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 5 iyot choose when activation ` " empty join scale manager activation scale as scale 5 define %SCALE_TALKER% hey 5 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 5 called 1 do
 %TALKER% hey key 5 key column to %K_COL% set
 %TALKER% hey key 5 key row to 5 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 6 iyot choose when activation ` " empty join scale manager activation scale as scale 6 define %SCALE_TALKER% hey 6 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 6 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 6 iyot choose when activation ` " empty join scale manager activation scale as scale 6 define %SCALE_TALKER% hey 6 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 6 called 1 do
 %TALKER% hey key 6 key column to %K_COL% set
 %TALKER% hey key 6 key row to 6 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 7 iyot choose when activation ` " empty join scale manager activation scale as scale 7 define %SCALE_TALKER% hey 7 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 7 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 7 iyot choose when activation ` " empty join scale manager activation scale as scale 7 define %SCALE_TALKER% hey 7 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 7 called 1 do
 %TALKER% hey key 7 key column to %K_COL% set
 %TALKER% hey key 7 key row to 7 set
 
-%TALKER% hey ' 
-" empty join scale manager listen cancel variable scale 8 iyot choose when activation ` " empty join scale manager activation scale as scale 8 define %SCALE_TALKER% hey 8 re do " do ` do eigenbrowser hey scale manager scale browse " do
-' when 8 called 1 do
+%TALKER% hey ' " empty join scale manager listen cancel variable scale 8 iyot choose when activation ` " empty join scale manager activation scale as scale 8 define %SCALE_TALKER% hey 8 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 8 called 1 do
 %TALKER% hey key 8 key column to %K_COL% set
 %TALKER% hey key 8 key row to 8 set
 

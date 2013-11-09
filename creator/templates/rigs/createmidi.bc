@@ -1,7 +1,7 @@
-# create a midi rig
-# VAR1=%RIG% and represents the rig that is needed to be created
-# %RIG% un create
 declare RIG,MIDICHANNEL=1
+# create a midi rig
+# RIG=%RIG% and represents the rig that is needed to be created
+# %RIG% un create
 
 rig create
 it to %RIG% name ify
@@ -78,6 +78,10 @@ midi converter in %RIG% create
 %RIG% hey gateway output pedal 2 to midi converter parameters pedal 2 connect
 %RIG% hey gateway output pedal 3 to midi converter parameters pedal 3 connect
 %RIG% hey gateway output pedal 4 to midi converter parameters pedal 4 connect
-%RIG% hey midi converter midi output to gateway input midi into channel 1 connect 
-                     
+%RIG% hey midi converter midi output to gateway input midi into channel 1 connect
+
+# create an output for it, can connect it to rig
+midi output create
+%RIG% to it connect
+ 
 
