@@ -1,0 +1,9 @@
+declare KEYGROUP
+# creates a keygroup and links it to a parent keygroup on specfied output
+# KEYGROUP=%KEYGROUP% keygroup to create
+
+keygroup create 
+it to %KEYGROUP% name ify
+alpha keyboard to %KEYGROUP% connect
+alpha keyboard to %KEYGROUP% mode key input connect
+
