@@ -85,23 +85,39 @@ public class CreatorConfig
 			int i=1;
 			HashMap<String, String> args=new HashMap<String, String>();
 			String[] segs=line.split(":");
-			String module=segs[0];
+			String rmodule=segs[0];
 			while(i<segs.length)
 			{
 				String var="VAR"+i;
 				String arg=segs[i++];
 				args.put(var,arg);
 			}
+
+			String module=rmodule;
+			
 			if(module.endsWith(TEMPLATE_SUFFIX))
 			{
+				String dir=TEMPLATES_DIR;
+				String file=module;
+				
+				// config always use unix directory separators, convert to windows if applicable
+				int idx=module.lastIndexOf("/");
+				if(idx>=0)
+				{
+					String rdir=module.substring(0,idx);
+					file=module.substring(idx+1,module.length());
+					dir=dir+File.separator+rdir.replace("/", File.separator);
+					module=dir+File.separator+file;
+				}
+				
 				File f;
-				f=new File(TEMPLATES_DIR+File.separator+module);
+				f=new File(dir+File.separator+file);
 				if(f.exists())
 				{
 					BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);
 					if(!t.execute()) return false;
 				}
-				f=new File(TEMPLATES_DIR+File.separator+_device+File.separator+module);
+				f=new File(dir+File.separator+_device+File.separator+file);
 				if(f.exists())
 				{
 					BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);

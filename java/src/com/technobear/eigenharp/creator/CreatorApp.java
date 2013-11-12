@@ -8,7 +8,7 @@ public class CreatorApp
 		app.execute();
 	}
 
-	static final String VERSION ="2.1.2";
+	static final String VERSION ="2.2.0";
 	static final char[] _optionsWithParams= new char[] {'F','S','D','C'};
 	private String _device;
 	private CreatorConfig _creatorConfig;
