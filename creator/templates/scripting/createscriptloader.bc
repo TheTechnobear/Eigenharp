@@ -1,6 +1,11 @@
 declare TALKER,SCRIPT_NAME,K_COL
-# this module creates a script loader, keys 1 to 8 are used to activate, and key 9 invokes browser and key 10 & 10 alternative between 2 setup loads
-# TALKER=%TALKER% talker to load with actions SCRIPT_NAME=%SCRIPT_NAME% custom script load K_COL=%K_COL% column to use
+
+# this module creates a script loader, keys 1 to 8 are used to activate
+# key 9 invokes browser and key 10 & 10 alternative between 2 setup loads
+
+# TALKER=%TALKER% talker to load with actions
+# SCRIPT_NAME=%SCRIPT_NAME% custom script load
+# K_COL=%K_COL% column to use
 
 empty join
 ' %TALKER% hey 01 user as setup 1 define ' do

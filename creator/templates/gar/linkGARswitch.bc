@@ -1,6 +1,7 @@
 declare GAR_PREFIX,GAR_NUM
 # link a GAR into the main structure, part of GAR module
-# GAR_PREFIX=%GAR_PREFIX% prefix of GAR , GAR_NUM=%GAR_NUM% GAR number
+# GAR_PREFIX=%GAR_PREFIX% prefix of GAR ,
+# GAR_NUM=%GAR_NUM% GAR number
 
 main keygroup hey output %GAR_NUM% create
 it to %GAR_PREFIX% name ify

@@ -1,7 +1,9 @@
 declare TALKER,TARGET_RIG,K_COL
 
 # this module loads a talkers with a recorder bar selection and also unplay and cancel 
-# TALKER=%TALKER% talker to load with actions TARGET_RIG=%TARGET_RIG% target of rig recorder talker K_COL=%K_COL% column to use
+# TALKER=%TALKER% talker to load with actions
+# TARGET_RIG=%TARGET_RIG% target of rig recorder talker
+# K_COL=%K_COL% column to use
 
 empty join
 ' %TALKER% hey 4 bar as recorder bar define ' do

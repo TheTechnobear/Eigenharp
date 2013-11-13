@@ -1,4 +1,5 @@
 declare METRONOME_TALKER,KEYBOARD,METRONOME,K_COL,K_ROW,K_COL_REL= ,K_ROW_REL= ,FLASH_PERSIST=100
+
 # METRONOME_TALKER=%METRONOME_TALKER% - name of metronome talker
 # KEYBOARD=%KEYBOARD% - name of instrument keyboard agent
 # METRONOME=%METRONOME% - name of metronome

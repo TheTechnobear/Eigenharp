@@ -1,6 +1,8 @@
 declare KEYGROUP,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT,SCALE=major,TONIC=notec,OCTAVE=3
 
-# KEYGROUP=%KEYGROUP% keygroup to create, PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup, %PARENT_KEYGROUP_OUTPUT% parent keygroup output to link to
+# KEYGROUP=%KEYGROUP% keygroup to create,
+# PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup,
+# %PARENT_KEYGROUP_OUTPUT% parent keygroup output to link to
 # creates a keygroup and links it to a parent keygroup on specfied output
 
 

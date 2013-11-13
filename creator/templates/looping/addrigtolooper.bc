@@ -1,7 +1,10 @@
 declare LOOPER_RIG,RIG,LEFT_CH,RIGHT_CH
 
 # designed to be used with a looper rig
-# LOOPER_RIG=%LOOPER_RIG% looper rig RIG=%RIG% rig to add LEFT_CH=%LEFT_CH% left channel RIGHT_CH=%RIGHT_CH$ right channel
+# LOOPER_RIG=%LOOPER_RIG% looper rig
+# RIG=%RIG% rig to add
+# LEFT_CH=%LEFT_CH% left channel
+# RIGHT_CH=%RIGHT_CH$ right channel
 %RIG% output left audio to %LOOPER_RIG%  audio input %LEFT_CH% connect
 %RIG% output right audio to %LOOPER_RIG%  audio input %RIGHT_CH% connect
 

@@ -1,6 +1,10 @@
 declare TALKER,RIG,K_COL,K_ROW
+
 # this module add a recorder record trigger to an existing talker at a given positiokn
-# TALKER=%TALKER% talker to load with actions RIG=%RIG% rig to record K_COL=%K_COL% column to use K_ROW=%K_ROW% row
+# TALKER=%TALKER% talker to load with actions
+# RIG=%RIG% rig to record
+# K_COL=%K_COL% column to use
+# K_ROW=%K_ROW% row
 
 
 %TALKER% hey " 

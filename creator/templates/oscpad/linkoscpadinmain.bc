@@ -1,6 +1,9 @@
 declare KEYGROUP,KEYGROUP_OUTPUT,KEYGROUP_CHANNEL
+
 # this will add OSC pad to the main setup, this is temporary until we can put talkers in rigs
-# KEYGROUP=%KEYGROUP% keygroup to link KEYGROUP_OUTPUT=%KEYGROUP_OUTPUT% kg output KEYGROUP_CHANNEL=%KEYGROUP_CHANNEL% keygroup channel
+# KEYGROUP=%KEYGROUP% keygroup to link
+# KEYGROUP_OUTPUT=%KEYGROUP_OUTPUT% kg output
+# KEYGROUP_CHANNEL=%KEYGROUP_CHANNEL% keygroup channel
 
 
 %KEYGROUP% output %KEYGROUP_OUTPUT% to pad keygroup into channel %KEYGROUP_CHANNEL% connect

@@ -1,6 +1,9 @@
 declare TALKER,LOOP_TARGET,K_COL
+
 # this module loads a talkers with a loop selector for up to 8 loops, for use with looper rigs
-# TALKER=%TALKER% talker to load with actions LOOP_TARGET=%LOOP_TARGET% target for loop  K_COL=%K_COL% column to use
+# TALKER=%TALKER% talker to load with actions
+# LOOP_TARGET=%LOOP_TARGET% target for loop
+# K_COL=%K_COL% column to use
 
 empty join
 

@@ -1,4 +1,5 @@
 declare KEYGROUP,SCALE=major,TONIC=notec,OCTAVE=3
+
 # set scale, tonic and octave on a keygroup
 
 %KEYGROUP% hey scale to %SCALE% set

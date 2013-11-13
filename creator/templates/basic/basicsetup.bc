@@ -1,9 +1,11 @@
 declare SAMPLE_RATE=44100,BUF_SIZE=512
+
 # this is the most basic setup, on which the modular setup builds
 # the main keygroup is where the instrument should be connected
 # we then have console mixer, and an audio output
 # 
-#  note: there are NO keyboard mappings in this script, it is assumed these are done in a device specific setup
+# note: there are NO keyboard mappings in this script,
+# it is assumed these are done in a device specific setup
 
 empty join
 keygroup create

@@ -1,4 +1,5 @@
 declare RIG
+
 # normal link up adding a recorder to a rig, Note: its a bit different for audio units
 # RIG=%RIG%  is the rig to add the recorder to
 

@@ -1,6 +1,10 @@
 declare SCALE_ILLUM,KEYGROUP,KEYGROUP_OUTPUT,KEYGROUP_CHANNEL
+
 # this will link a scale illuminator to a keygroup output
-# SCALE_ILLUM=%SCALE_ILLUM% scale illuminator, %KEYGROUP% keygroup to link KEYGROUP_OUTPUT=%KEYGROUP_OUTPUT% kg output KEYGROUP_CHANNEL=%KEYGROUP_CHANNEL% keygroup channel
+# SCALE_ILLUM=%SCALE_ILLUM% scale illuminator,
+# %KEYGROUP% keygroup to link
+# KEYGROUP_OUTPUT=%KEYGROUP_OUTPUT% kg output
+# KEYGROUP_CHANNEL=%KEYGROUP_CHANNEL% keygroup channel
 
 %KEYGROUP% output %KEYGROUP_OUTPUT% to %SCALE_ILLUM% into channel %KEYGROUP_CHANNEL% connect
 

@@ -1,6 +1,9 @@
 declare TALKER,SCALE_TALKER,K_COL
+
 # this module populates a talker with scale browser controls for 1-8 scales
-# TALKER=%TALKER% talker to load with actions SCALE_TALKER=%SCALE_TALKER% talker changing scales K_COL=%K_COL% column to use
+# TALKER=%TALKER% talker to load with actions
+# SCALE_TALKER=%SCALE_TALKER% talker changing scales
+# K_COL=%K_COL% column to use
 
 
 %TALKER% hey ' " empty join scale manager listen cancel variable scale 1 iyot choose when activation ` " empty join scale manager activation scale as scale 1 define %SCALE_TALKER% hey 1 re do " do ` do eigenbrowser hey scale manager scale browse " do ' when 1 called 1 do

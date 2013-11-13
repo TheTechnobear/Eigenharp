@@ -1,4 +1,6 @@
 declare RIG
+
 # this script will link a rig and the mixer console on a given channel
 # RIG=%RIG% rig to destroy
+
 %RIG% un create

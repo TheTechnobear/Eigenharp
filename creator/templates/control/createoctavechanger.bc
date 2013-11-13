@@ -1,6 +1,9 @@
 declare TALKER,TARGET,K_DOWN_COL=1,K_UP_COL=1,K_C_END_REL=un,K_DOWN_ROW=1,K_UP_ROW=2,K_R_END_REL=un,HEY=hey,DOWN_CLR=2,UP_CLR=1
-# this module loads a talker with an octave change, i.e. up and down control assumes mapping has been provide to 1/1 & 1/2
-# TALKER=%TALKER% talker to load with actions TARGET=%TARGET% target for octave change 
+
+# this module loads a talker with an octave change,
+# i.e. up and down control assumes mapping has been provide to 1/1 & 1/2
+# TALKER=%TALKER% talker to load with actions
+# TARGET=%TARGET% target for octave change 
 
 empty join
 ' %TALKER% hey 1 as octave step define ' do

@@ -1,6 +1,8 @@
 declare PREFIX,CONTROLNUM
+
 # this module creates a Green Amber Red control setup
-# PREFIX=%PREFIX% prefix CONTROLNUM=%CONTROLNUM% control number
+# PREFIX=%PREFIX% prefix
+# CONTROLNUM=%CONTROLNUM% control number
 
 # the main keygroup that will get output when selected
 keygroup create 

@@ -1,6 +1,8 @@
 declare TALKER,TARGET,K_DOWN_COL=2,K_UP_COL=1,K_C_END_REL= ,K_DOWN_ROW=1,K_UP_ROW=1,K_R_END_REL= ,HEY=hey
+
 # this module loads a talker with an midi channel changer, which moves the midi channel up and down
-# TALKER=%TALKER% talker to load with actions TARGET=%TARGET% target for midi channel change
+# TALKER=%TALKER% talker to load with actions
+# TARGET=%TARGET% target for midi channel change
 # note END_REL shoud be set to 'un' when you do not want relative
 
 empty join

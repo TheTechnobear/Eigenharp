@@ -1,4 +1,5 @@
 declare RIG,MIDICHANNEL=1
+
 # create a midi rig
 # RIG=%RIG% and represents the rig that is needed to be created
 # %RIG% un create

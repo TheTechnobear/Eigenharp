@@ -1,6 +1,9 @@
 declare TALKER,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT
+
 # create a talker and connect it to a keygroup
-# TALKER=%TALKER% name of talker, PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup, PARENT_KEYGROUP_OUTPUT=%PARENT_KEYGROUP_OUTPUT% parent keygroup output
+# TALKER=%TALKER% name of talker,
+# PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup,
+# PARENT_KEYGROUP_OUTPUT=%PARENT_KEYGROUP_OUTPUT% parent keygroup output
 
 talker create
 it to %TALKER% name ify

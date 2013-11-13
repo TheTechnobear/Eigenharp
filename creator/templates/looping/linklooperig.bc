@@ -1,5 +1,8 @@
 declare LOOPER_RIG,LOOPER_TALKER,MIXER_CHANNEL=9
-# LOOPER_RIG=%LOOPER_RIG% looper rig LOOPER_TALKER=%LOOPER_TALKER% talker for looper controls
+
+# LOOPER_RIG=%LOOPER_RIG% looper rig
+# LOOPER_TALKER=%LOOPER_TALKER% talker for looper controls
+
 %LOOPER_RIG% output to console mixer 1 mixer channel %MIXER_CHANNEL% connect
 
 metronome to %LOOPER_RIG% connect

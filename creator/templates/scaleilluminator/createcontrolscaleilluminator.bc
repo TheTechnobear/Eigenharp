@@ -1,7 +1,11 @@
 declare TALKER,ILLUMINATOR,K_COL
+
 # this module loads a talker with scale illuminator controls - 
-#inverted, root and Default Eigenlabs scales
-# TALKER=%TALKER% talker to load with actions ILLUMINATOR=%ILLUMINATOR% scale illuminator target K_COL=%K_COL% column to use
+# inverted, root and Default Eigenlabs scales
+
+# TALKER=%TALKER% talker to load with actions
+# ILLUMINATOR=%ILLUMINATOR% scale illuminator target
+# K_COL=%K_COL% column to use
 
 %TALKER% hey " %ILLUMINATOR% hey scale to major set " when 1 called 1 do
 %TALKER% hey " %TALKER% hey 1 to 1 from 3 colour ify " when 1 called 2 do

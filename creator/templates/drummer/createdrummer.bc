@@ -1,4 +1,5 @@
 declare DRUMMER_NAME,METRONOME,MIXER_CHANNEL,FLASH_PERSIST=100
+
 # DRUMMER_NAME=%DRUMMER_NAME% - user defined name of Drummer
 # METRONOME=%METRONOME% - name of metronome agent in setup
 # MIXER_CHANNEL=%MIXER_CHANNEL% - console mixer channel for Drummer

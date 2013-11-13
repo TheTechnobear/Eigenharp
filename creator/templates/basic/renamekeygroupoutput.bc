@@ -1,3 +1,5 @@
 declare KEYGROUP,OLDNAME,NEWNAME
+
 # template to rename a keygroups output
+
 %KEYGROUP% hey output %OLDNAME% to %NEWNAME% name ify 
