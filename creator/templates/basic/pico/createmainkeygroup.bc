@@ -5,5 +5,5 @@ declare KEYGROUP
 keygroup create 
 it to %KEYGROUP% name ify
 keyboard pico to %KEYGROUP% connect
-keyboard picoto %KEYGROUP% mode key input connect
+keyboard pico to %KEYGROUP% mode key input connect
 
