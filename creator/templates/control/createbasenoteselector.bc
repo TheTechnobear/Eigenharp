@@ -1,0 +1,64 @@
+declare TALKER,TARGET,COL,HEY=hey
+
+# this module loads an existing talker with a base note selection keys
+
+%TALKER% hey " %TARGET% %HEY% base note to 0 set " when 1 called 1 do
+%TALKER% hey " %TALKER% hey 1 to 1 from 3 colour ify " when 1 called 2 do
+%TALKER% hey key 1 key column to %COL% set
+%TALKER% hey key 1 key row to 1 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 1 set " when 2 called 1 do
+%TALKER% hey " %TALKER% hey 2 to 1 from 3 colour ify " when 2 called 2 do
+%TALKER% hey key 2 key column to %COL% set
+%TALKER% hey key 2 key row to 2 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 2 set " when 3 called 1 do
+%TALKER% hey " %TALKER% hey 3 to 1 from 3 colour ify " when 3 called 2 do
+%TALKER% hey key 3 key column to %COL% set
+%TALKER% hey key 3 key row to 3 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 3 set " when 4 called 1 do
+%TALKER% hey " %TALKER% hey 4 to 1 from 3 colour ify " when 4 called 2 do
+%TALKER% hey key 4 key column to %COL% set
+%TALKER% hey key 4 key row to 4 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 4 set " when 5 called 1 do
+%TALKER% hey " %TALKER% hey 5 to 1 from 3 colour ify " when 5 called 2 do
+%TALKER% hey key 5 key column to %COL% set
+%TALKER% hey key 5 key row to 5 set
+
+%TALKER% hey " %TARGET% %HEY% base note to  5 set " when 6 called 1 do
+%TALKER% hey " %TALKER% hey 6 to 1 from 3 colour ify " when 6 called 2 do
+%TALKER% hey key 6 key column to %COL% set
+%TALKER% hey key 6 key row to 6 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 6 set " when 7 called 1 do
+%TALKER% hey " %TALKER% hey 7 to 1 from 3 colour ify " when 7 called 2 do
+%TALKER% hey key 7 key column to %COL% set
+%TALKER% hey key 7 key row to 7 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 7 set " when 8 called 1 do
+%TALKER% hey " %TALKER% hey 8 to 1 from 3 colour ify " when 8 called 2 do
+%TALKER% hey key 8 key column to %COL% set
+%TALKER% hey key 8 key row to 8 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 8 set " when 9 called 1 do
+%TALKER% hey " %TALKER% hey 9 to 1 from 3 colour ify " when 9 called 2 do
+%TALKER% hey key 9 key column to %COL% set
+%TALKER% hey key 9 key row to 9 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 9 set " when 10 called 1 do
+%TALKER% hey " %TALKER% hey 10 to 1 from 3 colour ify " when 10 called 2 do
+%TALKER% hey key 10 key column to %COL% set
+%TALKER% hey key 10 key row to 10 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 10 set " when 11 called 1 do
+%TALKER% hey " %TALKER% hey 11 to 1 from 3 colour ify " when 11 called 2 do
+%TALKER% hey key 11 key column to %COL% set
+%TALKER% hey key 11 key row to 11 set
+
+%TALKER% hey " %TARGET% %HEY% base note to 11 set " when 12 called 1 do
+%TALKER% hey " %TALKER% hey 12 to 1 from 3 colour ify " when 12 called 2 do
+%TALKER% hey key 12 key column to %COL% set
+%TALKER% hey key 12 key row to 12 set
+
