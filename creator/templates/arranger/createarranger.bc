@@ -11,8 +11,8 @@ it to %ARRANGER% name ify
 %ARRANGER% hey parameters beginning to %BEG% set
 %ARRANGER% hey parameters end to %END% set
 %ARRANGER% hey parameters step to %STEP% set
-%ARRANGER% hey parameters doubletap to %DBLTAP% set
 %ARRANGER% hey parameters fraction to %FRACTION% set
+%ARRANGER% hey parameters doubletap to %DBLTAP% set
 
 metronome 1 to %ARRANGER% metronome inputs connect
 
