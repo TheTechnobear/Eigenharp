@@ -1,0 +1,10 @@
+declare PLAYER,RIG,CHANNEL,SIZE=100
+# create a player which will be typically is used by an arranger
+# PLAYER=%PLAYER%
+# RIG=%RIG%
+# CHANNEL=%CHANNEL%
+player create 
+it to %PLAYER% name ify 
+%PLAYER% outputs to %RIG% input into channel %CHANNEL% connect
+%PLAYER% hey size to %SIZE% set
+

@@ -1,0 +1,5 @@
+declare KEYGROUP,KG_OUTPUT_NAME,ARRANGER
+#link a keygroup output to an arranger
+%KEYGROUP% output %KG_OUTPUT_NAME% to %ARRANGER% connect
+%ARRANGER% output light to %KEYGROUP% output %KG_OUTPUT_NAME% light input connect
+

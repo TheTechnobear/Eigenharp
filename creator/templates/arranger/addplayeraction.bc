@@ -1,0 +1,2 @@
+declare ARRANGER,PLAYER,ROW,NOTE=%ROW%,VEL=110,CALLED=1
+%ARRANGER% hey ' %PLAYER% hey note %NOTE% with velocity %VEL% play ' when %ROW% called %CALLED% do 
