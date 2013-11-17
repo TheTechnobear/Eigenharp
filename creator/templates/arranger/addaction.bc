@@ -1,2 +1,2 @@
-declare ARRANGER,ROW,ACTION,CALLED=1
+declare ARRANGER,ACTION,ROW,CALLED=1
 %ARRANGER% hey ' %ACTION% ' when %ROW% called %CALLED% do 
