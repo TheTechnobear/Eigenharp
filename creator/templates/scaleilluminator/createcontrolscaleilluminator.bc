@@ -48,39 +48,39 @@ declare TALKER,ILLUMINATOR,K_COL
 %TALKER% hey key 8 key row to 8 set
 
 
-%TALKER hey " " when 13 do
+%TALKER% hey " " when 13 do
 
-%TALKER hey " %ILLUMINATOR% hey inverted toggle set " when 11 called 1 do
-%TALKER hey " %TALKER hey key 11 key row to 0 set " when 11 called 2 do
-%TALKER hey " %TALKER hey key 13 key row to 11 set " when 11 called 3 do
-%TALKER hey 11 to 2 colour ify 
-%TALKER hey key 11 key column to 1 set
-%TALKER hey key 11 key row to 11 set
+%TALKER% hey " %ILLUMINATOR% hey inverted toggle set " when 11 called 1 do
+%TALKER% hey " %TALKER% hey key 11 key row to 0 set " when 11 called 2 do
+%TALKER% hey " %TALKER% hey key 13 key row to 11 set " when 11 called 3 do
+%TALKER% hey 11 to 2 colour ify 
+%TALKER% hey key 11 key column to 1 set
+%TALKER% hey key 11 key row to 11 set
 
-%TALKER hey 13 called 1 cancel
+%TALKER% hey 13 called 1 cancel
 
-%TALKER hey " %ILLUMINATOR% hey inverted toggle set " when 13 called 1 do
-%TALKER hey " %TALKER hey key 11 key row to 11 set " when 13 called 2 do
-%TALKER hey " %TALKER hey key 13 key row to 0 set " when 13 called 3 do
-%TALKER hey 13 to 1 colour ify 
-%TALKER hey key 13 key column to 1 set
-%TALKER hey key 13 key row to 0 set
+%TALKER% hey " %ILLUMINATOR% hey inverted toggle set " when 13 called 1 do
+%TALKER% hey " %TALKER% hey key 11 key row to 11 set " when 13 called 2 do
+%TALKER% hey " %TALKER% hey key 13 key row to 0 set " when 13 called 3 do
+%TALKER% hey 13 to 1 colour ify 
+%TALKER% hey key 13 key column to 1 set
+%TALKER% hey key 13 key row to 0 set
 
-%TALKER hey " " when 14 do
+%TALKER% hey " " when 14 do
 
-%TALKER hey " %ILLUMINATOR% hey root toggle set " when 12 called 1 do
-%TALKER hey " %TALKER hey key 12 key row to 0 set " when 12 called 2 do
-%TALKER hey " %TALKER hey key 14 key row to 12 set " when 12 called 3 do
-%TALKER hey 12 to 2 colour ify 
-%TALKER hey key 12 key column to 1 set
-%TALKER hey key 12 key row to 12 set
+%TALKER% hey " %ILLUMINATOR% hey root toggle set " when 12 called 1 do
+%TALKER% hey " %TALKER% hey key 12 key row to 0 set " when 12 called 2 do
+%TALKER% hey " %TALKER% hey key 14 key row to 12 set " when 12 called 3 do
+%TALKER% hey 12 to 2 colour ify 
+%TALKER% hey key 12 key column to 1 set
+%TALKER% hey key 12 key row to 12 set
 
-%TALKER hey 14 called 1 cancel
+%TALKER% hey 14 called 1 cancel
 
-%TALKER hey " %ILLUMINATOR% hey root toggle set " when 14 called 1 do
-%TALKER hey " %TALKER hey key 12 key row to 12 set " when 14 called 2 do
-%TALKER hey " %TALKER hey key 14 key row to 0 set " when 14 called 3 do
-%TALKER hey 14 to 1 colour ify 
-%TALKER hey key 14 key column to 1 set
-%TALKER hey key 14 key row to 0 set
+%TALKER% hey " %ILLUMINATOR% hey root toggle set " when 14 called 1 do
+%TALKER% hey " %TALKER% hey key 12 key row to 12 set " when 14 called 2 do
+%TALKER% hey " %TALKER% hey key 14 key row to 0 set " when 14 called 3 do
+%TALKER% hey 14 to 1 colour ify 
+%TALKER% hey key 14 key column to 1 set
+%TALKER% hey key 14 key row to 0 set
 
