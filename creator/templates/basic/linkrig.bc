@@ -1,4 +1,4 @@
-declare KEYGROUP,RIG,MIXER_INPUT,KG_CHANNEL,KG_COL=1,KG_C_END_REL=un,KG_R_END_REL=un,KG_OUTPUT_NAME=%RIG%
+declare KEYGROUP,RIG,MIXER_INPUT,KG_CHANNEL,KG_COL=1,KG_ROW=%MIXER_INPUT%,KG_C_END_REL=un,KG_R_END_REL=un,KG_OUTPUT_NAME=%RIG%
 
 # this script will link a rig to a keygroup and the mixer console on a given channel
 # KEYGROUP=%KEYGROUP% keygroup to link
@@ -14,8 +14,8 @@ metronome 1 to %RIG% connect
 # setup keygroup
 %KEYGROUP% hey output %MIXER_INPUT% create
 it to %KG_OUTPUT_NAME% name ify
-%KEYGROUP% hey output %RIG% key column to %KG_COL% set
-%KEYGROUP% hey output %RIG% key row to %MIXER_INPUT%  set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key column to %KG_COL% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_ROW%  set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative %KG_C_END_REL% set
 %KEYGROUP% hey output %KG_OUTPUT_NAME% key row end relative %KG_R_END_REL% set
 sleep

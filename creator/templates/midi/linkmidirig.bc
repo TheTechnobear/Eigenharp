@@ -1,4 +1,4 @@
-declare KEYGROUP,RIG,MIXER_CHANNEL,KG_CHANNEL
+declare KEYGROUP,RIG,MIXER_CHANNEL,KG_CHANNEL,KG_COL=1,KG_ROW=%MIXER_INPUT%,KG_C_END_REL=un,KG_R_END_REL=un,KG_OUTPUT_NAME=%RIG%
 
 # this script will link a midi rig to a keygroup and then to the midi output
 # KEYGROUP=%KEYGROUP% keygroup to link
@@ -12,9 +12,11 @@ scheduler identifier to %RIG% scheduler identifier connect
 
 # link up keygroup
 %KEYGROUP% hey output %MIXER_CHANNEL% create
-it to %RIG% name ify
-%KEYGROUP% hey output %RIG% key column to 1 set
-%KEYGROUP% hey output %RIG% key row to %MIXER_CHANNEL%  set
+it to %KG_OUTPUT_NAME% name ify
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key column to %KG_COL% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row to %KG_ROW%  set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key column end relative %KG_C_END_REL% set
+%KEYGROUP% hey output %KG_OUTPUT_NAME% key row end relative %KG_R_END_REL% set
 sleep
 %KEYGROUP% output %RIG% to %RIG% into channel %KG_CHANNEL% connect
 %RIG% output light to %KEYGROUP% output %RIG% light input connect 

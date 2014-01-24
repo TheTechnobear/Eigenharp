@@ -1,9 +1,12 @@
-declare KEYGROUP
+declare KEYGROUP,SCALE=major,TONIC=notec,OCTAVE=3
 # creates a keygroup and links it to a parent keygroup on specfied output
 # KEYGROUP=%KEYGROUP% keygroup to create
 
 keygroup create 
 it to %KEYGROUP% name ify
+%KEYGROUP% hey scale to %SCALE% set
+%KEYGROUP% hey tonic to %TONIC% set
+%KEYGROUP% hey octave to %OCTAVE% set
 alpha keyboard to %KEYGROUP% connect
 alpha keyboard to %KEYGROUP% mode key input connect
 
