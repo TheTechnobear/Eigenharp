@@ -127,18 +127,30 @@ public class CreatorConfig
 			for (int z=0;z<args.size()-3;z++)
 			{
 				String v=args.get("VAR"+(z+4));
-				if(v.equalsIgnoreCase(varName))
+				boolean replace=false;
+				do 
 				{
-					v=varList[i];
+					replace=false;
+					if(v.contains(varName))
+					{
+						String nv=v.replace(varName,varList[i]);
+						v=nv;
+						replace=true;
+					}
+					if(v.contains("%IDX%"))
+					{
+						String nv=v.replace("%IDX%",Integer.toString(i+1));
+						v=nv;
+						replace=true;
+					}
+					if(v.contains("%IDX-OFFSET%"))
+					{
+						String nv=v.replace("%IDX-OFFSET%",Integer.toString(i+varOffset));
+						v=nv;
+						replace=true;
+					}
 				}
-				else if(v.equalsIgnoreCase("%IDX%"))
-				{
-					v=Integer.toString(i+1);
-				}
-				else if(v.equalsIgnoreCase("%IDX-OFFSET%"))
-				{
-					v=Integer.toString(i+varOffset);
-				}
+				while(replace);	
 				String vn="VAR"+(z+1);
 				newArgs.put(vn,v);
 			}
