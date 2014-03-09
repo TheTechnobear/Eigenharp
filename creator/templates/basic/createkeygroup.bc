@@ -1,4 +1,4 @@
-declare KEYGROUP,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT,SCALE=major,TONIC=notec,OCTAVE=3
+declare KEYGROUP,PARENT_KEYGROUP,PARENT_KEYGROUP_OUTPUT,SCALE=major,TONIC=notec,OCTAVE=3,BASE=0
 
 # KEYGROUP=%KEYGROUP% keygroup to create,
 # PARENT_KEYGROUP=%PARENT_KEYGROUP% parent keygroup,
@@ -13,3 +13,4 @@ it to %KEYGROUP% name ify
 %KEYGROUP% hey scale to %SCALE% set
 %KEYGROUP% hey tonic to %TONIC% set
 %KEYGROUP% hey octave to %OCTAVE% set
+%KEYGROUP% hey base note to %BASE% set

@@ -41,3 +41,6 @@ pad talker hey key 7 key row to 7 set
 pad talker hey " osc pad hey play " when 8 called 1 do
 pad talker hey key 8 key column to 1 set
 pad talker hey key 8 key row to 8 set
+pad talker hey " osc pad hey undo " when 12 called 1 do
+pad talker hey key 12 key column to 1 set
+pad talker hey key 12 key row to 12 set
