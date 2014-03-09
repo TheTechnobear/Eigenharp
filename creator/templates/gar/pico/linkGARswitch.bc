@@ -1,17 +1,5 @@
 declare GAR_PREFIX
 # link a GAR into the main structure
 # GAR_PREFIX=%GAR_PREFIX% prefix of GAR
-%GAR_PREFIX% switch hey musical mapping to
-	[
-		[[3,1],[1,1]],
-		[[3,2],[1,2]],
-		[[3,3],[1,3]],
-		[[3,4],[1,4]]
-	] set
-%GAR_PREFIX% switch hey physical mapping to
-	[
-		[[3,1],[1,1]],
-		[[3,2],[1,2]],
-		[[3,3],[1,3]],
-		[[3,4],[1,4]]
-	] set
+%GAR_PREFIX% switch hey musical mapping to [[[3,1],[1,1]],[[3,2],[1,2]],[[3,3],[1,3]],[[3,4],[1,4]]] set
+%GAR_PREFIX% switch hey physical mapping to [[[3,1],[1,1]],[[3,2],[1,2]],[[3,3],[1,3]],[[3,4],[1,4]]] set

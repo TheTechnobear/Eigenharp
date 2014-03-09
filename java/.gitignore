@@ -3,6 +3,7 @@
 .classpath
 .settings
 bin
+*.iml
 
 # mac os files & vi
 .DS_Store

@@ -19,6 +19,8 @@ public class CreatorConfig
 	private static final String TEMPLATE_SUFFIX = ".bc";
 	private static final String TEMPLATES_DIR="templates";
 	private static final String LAYOUT_MODULE = "KeygroupLayout";
+	private static final String ITERATOR_MODULE = "Iterate";
+	
 
 	public CreatorConfig(IProcessor processor, String device,String fileOrCommand, boolean isFile)
 	{
@@ -95,41 +97,111 @@ public class CreatorConfig
 
 			String module=rmodule;
 			
-			if(module.endsWith(TEMPLATE_SUFFIX))
+			return executeModule(module, args);
+		}
+		return true;
+	}
+
+	private boolean iterateModule(HashMap<String, String> args)
+	{
+		String varName;
+		int varOffset=1;
+		String var=args.get("VAR1");
+		if(var.contains("="))
+		{
+			String[] v=var.split("=");
+			varName=v[0];
+			varOffset=Integer.parseInt(v[1]);
+		}
+		else 
+		{
+			varName=var;
+			varOffset=1;
+		}
+		String[] varList=args.get("VAR2").split(",");
+		String module = args.get("VAR3");
+
+		for(int i=0;i<varList.length;i++)
+		{
+			HashMap<String, String> newArgs=new HashMap<String, String>();
+			for (int z=0;z<args.size()-3;z++)
 			{
-				String dir=TEMPLATES_DIR;
-				String file=module;
-				
-				// config always use unix directory separators, convert to windows if applicable
-				int idx=module.lastIndexOf("/");
-				if(idx>=0)
+				String v=args.get("VAR"+(z+4));
+				boolean replace=false;
+				do 
 				{
-					String rdir=module.substring(0,idx);
-					file=module.substring(idx+1,module.length());
-					dir=dir+File.separator+rdir.replace("/", File.separator);
-					module=dir+File.separator+file;
+					replace=false;
+					if(v.contains(varName))
+					{
+						String nv=v.replace(varName,varList[i]);
+						v=nv;
+						replace=true;
+					}
+					if(v.contains("%IDX%"))
+					{
+						String nv=v.replace("%IDX%",Integer.toString(i+1));
+						v=nv;
+						replace=true;
+					}
+					if(v.contains("%IDX-OFFSET%"))
+					{
+						String nv=v.replace("%IDX-OFFSET%",Integer.toString(i+varOffset));
+						v=nv;
+						replace=true;
+					}
 				}
-				
-				File f;
-				f=new File(dir+File.separator+file);
-				if(f.exists())
-				{
-					BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);
-					if(!t.execute()) return false;
-				}
-				f=new File(dir+File.separator+_device+File.separator+file);
-				if(f.exists())
-				{
-					BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);
-					if(!t.execute()) return false;
-				}
+				while(replace);	
+				String vn="VAR"+(z+1);
+				newArgs.put(vn,v);
 			}
-			else if(module.equalsIgnoreCase(LAYOUT_MODULE))
+			boolean r=executeModule(module, newArgs);
+			if(!r) return false;
+		}
+			
+		return true;
+	}
+
+	private boolean executeModule(String module, HashMap<String, String> args)
+	{
+		if(module.endsWith(TEMPLATE_SUFFIX))
+		{
+			String dir=TEMPLATES_DIR;
+			String file=module;
+			
+			// config always use unix directory separators, convert to windows if applicable
+			int idx=module.lastIndexOf("/");
+			if(idx>=0)
 			{
-					KeygroupLayout t=new KeygroupLayout(_processor,_device, args);
-					if(!t.execute()) return false;
+				String rdir=module.substring(0,idx);
+				file=module.substring(idx+1,module.length());
+				dir=dir+File.separator+rdir.replace("/", File.separator);
+				module=dir+File.separator+file;
+			}
+			
+			File f;
+			f=new File(dir+File.separator+file);
+			if(f.exists())
+			{
+				BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);
+				if(!t.execute()) return false;
+			}
+			f=new File(dir+File.separator+_device+File.separator+file);
+			if(f.exists())
+			{
+				BelcantoTemplate t=new BelcantoTemplate(_processor,_device,f.getPath(),true,args);
+				if(!t.execute()) return false;
 			}
 		}
+		else if(module.equalsIgnoreCase(LAYOUT_MODULE))
+		{
+			KeygroupLayout t=new KeygroupLayout(_processor,_device, args);
+			if(!t.execute()) return false;
+		}
+		else if (module.equalsIgnoreCase(ITERATOR_MODULE))
+		{
+			return iterateModule(args);
+		}
+		
 		return true;
 	}
 }
