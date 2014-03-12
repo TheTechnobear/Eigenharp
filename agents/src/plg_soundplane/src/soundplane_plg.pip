@@ -1,0 +1,17 @@
+
+<<<
+#include "soundplane.h"
+>>>
+
+
+from piw[piw/piw.pip] import clockdomain_ctl,cookie
+
+class soundplane[soundplane_plg::soundplane_server_t]
+{
+    soundplane(clockdomain_ctl *, const stdstr &, const stdstr &)
+    cookie create_output(const stdstr &,bool,unsigned)
+    void set_max_voice_count(unsigned)
+    void set_data_freq(unsigned)
+    void set_pitch_bend(float)
+    
+}
