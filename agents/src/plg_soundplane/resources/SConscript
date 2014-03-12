@@ -1,0 +1,6 @@
+
+Import('master_env')
+
+env = master_env.Clone()
+env.PiResources('Help','Soundplane_README',package='Technobear')
+env.PiResources('Scripts','Scripts/*',package='Technobear')
