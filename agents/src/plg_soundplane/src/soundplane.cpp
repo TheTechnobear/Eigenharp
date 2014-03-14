@@ -495,7 +495,7 @@ void soundplane_plg::soundplane_server_t::impl_t::activate_wire_fast(soundplane_
     unsigned long long oldestTime = UINT64_MAX;
 
     //find an empty slot, up to maxium... increase vector if needed, or reallocate voices if necessary
-    for(i=0;i<voices_.size() && i < soundplane_->getMaxTouches() ;i++)
+    for(i=0;i<voices_.size() && i < (unsigned) soundplane_->getMaxTouches() ;i++)
     {
         if(!voices_[i])
         {
@@ -507,7 +507,7 @@ void soundplane_plg::soundplane_server_t::impl_t::activate_wire_fast(soundplane_
         	oldestTime = voices_[i]->voiceTime();
         }
     }
-    if(i < soundplane_->getMaxTouches() )
+    if(i < (unsigned) soundplane_->getMaxTouches() )
     {
     	voices_.resize(i+1);
     	voices_[i] = 0;

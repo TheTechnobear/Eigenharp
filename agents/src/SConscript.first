@@ -23,8 +23,8 @@ Import('master_env')
 
 import os.path
 
-release = '2.0.76'
-compatible = '2.0.M'
+release = '2.0.74'
+compatible = '2.0'
 
 status = {
     'windows': 'stable',
