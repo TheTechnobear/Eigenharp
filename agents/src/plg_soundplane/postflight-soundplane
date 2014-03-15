@@ -1,3 +1,4 @@
 #!/bin/sh
 su $USER -c "ln -s $PI_PREFIX/resources ~/Desktop/README"
 su $USER -c "cp $PI_PREFIX/resources/Scripts/*.bc ~/Library/Eigenlabs/Scripts/" 
+cp $PI_PREFIX/bin/libpiop.dylib $PI_LIBPATH 
