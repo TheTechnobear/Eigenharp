@@ -556,7 +556,7 @@ void lightPhysicalColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t&
 {
 //	pic::logmsg() <<  "E:lightPhysicalColumn n=" << col << "v=" << value;
 
-	if (col>impl.columnlen_.size()) return;
+	if (col> (int) impl.columnlen_.size()) return;
 
 	pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
 
