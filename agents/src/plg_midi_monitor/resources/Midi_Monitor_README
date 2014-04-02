@@ -1,0 +1,100 @@
+Midi Monitor
+RELEASE 0.0.1
+
+Warning: this is a 'testing' release, things probably will change, so dont get upset if they do...
+but id like to get it out there asap. (also the code needs a bit of cleaning)
+
+
+Contributions
+=============
+Mark Harris - agent
+
+Overview 
+=========
+An agent that uses lights to monitor various midi messages,
+may be used for education (e.g. learning pieces), information 
+or for creative uses
+One of my primary purpoes for this agent is 'DAW integration and feedback, but think creatively.
+
+
+most of all ENJOY !!!
+
+
+Using
+=========
+
+a) connect midi monitor agent to a keygroup which you wish to use for scale and layout information.
+this could be an existing 'playing' keygroup, or could be one created for this purpose alone
+
+b) then connect it to a keygroup output, again... it could be an existing one (connected to a rig) or a new one.
+connec this to  : controller input, light ouput 
+
+c) now you need to connect a midi source, in eigenD the choices are from Midi Input agent (for external sources), Midi Converter (for internal)
+
+d) configure midi monitor to either CC or notes mode, using the enable functions
+
+
+inputs/outputs on agent:
+======================
+controller input - connect to keygroup, used for layout, scale, octave, tonic, base note etc.
+light output - used to light the LEDs
+midi input - used for midi messages
+
+channel - 0 all channels, N = only this channel
+
+enable notes - use musical mapping to light LEDS according to midi notes
+velocity for status - velocity of notes, determines colour
+channel for status - channel determines colours
+(note: orange if neither of above options active)
+close note - used in non chromatic, if in C maj, receives C# with light D
+first note - only light the first note, not repetitions in other courses
+
+enable polyphonic pressure - on poly pressure, change LED colour
+
+enable control with key - individual keys (of musical mapping) are used to represent a CC, coloured according to value
+enable control with course - a column (of physical layout) is used for CC
+
+
+Think creatively!!!
+===================
+for  CC mapping, remember you create create custom keygroups, with custom musical and physical mappings...
+this means you dont have to display all CCs, or layout in strict numerical order
+Also for the CC as column, it knowns the length of the column, and will adjust value and colour distribution accordingly
+e.g. if you create only 4 rows high, then this will be 0,31,63,127 and each coloured differently)
+
+In particular, the easy was to get specfic lighting, is to create a custom keygroup (or more than one) off the keyboard agent,
+and then add specfic mappings to it to get what you want.    (my simple demo, just had the default mapping of all keys in one course)
+
+
+Recommendations
+===============
+you can have as many midi monitors as you wish, all connected to the same inputs if you wish.
+Id recommend the modes
+enable notes (+ optionally enable poly pressure)
+enable poly pressure
+enable control with key
+enable control with course
+
+other combinations may have side effects ;) 
+
+
+
+PLANNED ENHANCEMENTS
+====================
+Too many to list at this stage :) 
+
+
+
+
+CHANGE HISTORY
+==============
+known issues :
+
+change log:
+0.0.1 - initial release... a testing release
+
+SETUPS
+======
+Below describes the setups available
+ 
+
