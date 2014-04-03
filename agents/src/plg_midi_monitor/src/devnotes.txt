@@ -14,6 +14,16 @@ a. agent implementation
 ================================================================================
 
 
+ASSUMPTIONS
+there is a course length for every course
+courselen(i) equates to semioffset(i) equates to scaleoffset(i)
+exceptions
+there can be less offsets than courselen, in which case offset = 0
+there can be both a semitoneoffset and scaleoffset (though in practice eigenD doesnt support this)
+courses are continous i.e. [1,1] [1,2] [1,3] NOT [1,1] [1,3]
+
+
+
 ================================================================================
 b. workaround and issues
 ================================================================================

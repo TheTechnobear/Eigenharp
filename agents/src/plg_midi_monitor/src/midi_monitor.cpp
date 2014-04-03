@@ -244,93 +244,35 @@ void midi_monitor_t::impl_t::root_latency()
 }
 
 
-void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data_nb_t &courselen)
+void decode_unsigned(pic::lckvector_t<unsigned>::nbtype &vec, const piw::data_nb_t &inp)
 {
-    courses.clear();
+    vec.clear();
 
-	pic::logmsg() << "decode_courses " << courselen;
+	pic::logmsg() << "decode_unsigned " << inp;
 
-	unsigned dictlen = courselen.as_tuplelen();
+	unsigned dictlen = inp.as_tuplelen();
     if(0 == dictlen)
         return;
 
-    courses.reserve(5);
+    vec.reserve(5);
 
     for(unsigned i = 0; i < dictlen; ++i)
     {
-    	unsigned l=courselen.as_tuple_value(i).as_long();
-        courses.push_back(l);
+    	unsigned l=inp.as_tuple_value(i).as_long();
+        vec.push_back(l);
      }
 
-//    unsigned column=0;
+//    unsigned c=0;
 //    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = courses.begin();
-//    ce = courses.end();
+//    ci = vec.begin();
+//    ce = vec.end();
 //
 //    for(; ci != ce; ++ci)
 //    {
-//    	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
+//    	pic::logmsg() << "decode_unsigned c " << c++ << "v= " << *ci;
 //    }
 }
 
-void decode_columns(pic::lckvector_t<unsigned>::nbtype &columns, const piw::data_nb_t &columnlen)
-{
-	columns.clear();
-
-	pic::logmsg() << "decode_columns " << columnlen;
-
-	unsigned dictlen = columnlen.as_tuplelen();
-    if(0 == dictlen)
-        return;
-
-    columns.reserve(5);
-
-    for(unsigned i = 0; i < dictlen; ++i)
-    {
-    	unsigned l=columnlen.as_tuple_value(i).as_long();
-    	columns.push_back(l);
-     }
-
-//    unsigned column=0;
-//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = columns.begin();
-//    ce = columns.end();
-//
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_columns column " << column++ << "value= " << *ci;
-//    }
-}
-
-
-void decode_columnoffset(pic::lckvector_t<unsigned>::nbtype &columns, const piw::data_nb_t &columnoffset)
-{
-	columns.clear();
-
-	pic::logmsg() << "decode_columnoffset " << columnoffset;
-
-	unsigned dictlen = columnoffset.as_tuplelen();
-    if(0 == dictlen)
-        return;
-
-    columns.reserve(5);
-
-    for(unsigned i = 0; i < dictlen; ++i)
-    {
-    	unsigned l=columnoffset.as_tuple_value(i).as_long();
-    	columns.push_back(l);
-     }
-
-//    unsigned column=0;
-//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = columns.begin();
-//    ce = columns.end();
-//
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_columnoffset column " << column++ << "value= " << *ci;
-//    }
-}
 
 
 
@@ -458,15 +400,10 @@ void midi_monitor_t::impl_t::decoder_polypressure(unsigned channel, unsigned num
 
 void midi_monitor_t::impl_t::decoder_cc(unsigned channel, unsigned number, unsigned value)
 {
-//	pic::logmsg() <<  " midi_monitor_t::impl_t::decoder_cc c=" << channel << " cc=" << number << " v=" << value
-//			<< " enable_cc_per_key " << enable_cc_per_key << " enable_cc_as_course: " << enable_cc_as_course;
-
 	if (! (enable_cc_as_course || enable_cc_per_key) ) return;
 	light_wire_->midiCC(channel+1,number,value);
 }
 
-
-// get the decoder to process input
 void midi_monitor_t::impl_t::decode_midi(const piw::data_nb_t &d, unsigned long long t)
 {
 	unsigned length = d.as_bloblen();
@@ -535,19 +472,19 @@ void midi_monitor_t::impl_t::control_change(const piw::data_nb_t &d)
 		if(!cl.is_null())
 		{
 			pic::logmsg() << "courselen " << cl;
-			decode_courses(courselen_,cl);
+			decode_unsigned(courselen_,cl);
 		}
 		columns = d.as_dict_lookup("columnlen");
 		if(!columns.is_null())
 		{
 			pic::logmsg() << "columnlen " << columns;
-			decode_columns(columnlen_,columns);
+			decode_unsigned(columnlen_,columns);
 		}
 		columnsoffset = d.as_dict_lookup("columnsoffset");
 		if(!columns.is_null())
 		{
 			pic::logmsg() << "columnsoffset " << columns;
-			decode_columnoffset(columnsoffset_,columnsoffset);
+			decode_unsigned(columnsoffset_,columnsoffset);
 		}
     }
 }
@@ -599,37 +536,6 @@ void lightPhysicalColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t&
 // given a midi note, update all LEDs representing that value using the musical layout
 void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int note, int state)
 {
-//	pic::logmsg() <<  "E:lightMidiKey n=" << note << "s=" << state;
-
-	// basic algo
-	// base = playing_octave * 12  (starting point)
-	// base+= playing tonic ( as C = 0)
-	// base+= playing base note (offset from tonic)
-	// course[0]=base
-	// for i = 1 to # courses
-	// 		course[i]=course[i-1]+courseoffset(i-1) // see above re scaleoffset
-
-	// for any given midi note we now just have to go thru each course
-	// for c = 0 to # courses
-	// 		if midinote < course[c] continue; // its below this course
-	//      midioffset= midinote-course[c];
-	//
-	//      if courselen[c] * max_in_scale  < midioffset  continue;  //  midinote > course length
-	//
-	//      scalemuliple = midioffset / max_in_scale  (usually 12, so octave, but might not be)
-	//      inscaleoffset = midioffset % max_in_scale
-	//      for p = 0 to scale.length
-	//          inscaleoffset-scale(p)
-	//          if inscaleoffset==0
-	//                  n=p + scalemuliple*scale.length
-	//		            light (c,n)
-	//                  break;
-	//          if inscaleoffset < 0
-	//					break;  // note did not exist, e.g. C# on C Major scale
-	//
-	//      --  next p
-	//  --  next c
-	//
     pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
     pic::lckvector_t<float>::nbtype::const_iterator coi,coe;
     pic::lckvector_t<float>::nbtype::const_iterator smi,sme;
@@ -665,13 +571,11 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
     int course = 0;
 	int semitone_offset = 0;
 
-//   	pic::logmsg() <<  "0:lightMidiKey base=" << base;
    	bool quitCourseSearch=false;
  	// for each course
 	for(;cli!=cle && quitCourseSearch==false;cli++)
     {
     	int course_len = *cli;  // max length of course
-//    	pic::logmsg() <<  "1:lightMidiKey course="<< course << " courselen=" << course_len;
     	if(coi!=coe)
     	{
     		int scale_offset=*coi;
@@ -685,17 +589,14 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
     			soi++;
     		}
     		semitone_offset+=*soi+scale_semi;
-//    		pic::logmsg() << "2:lightMidiKey scale_semi" << scale_semi << " scale_offset:" << *soi << " total " << semitone_offset;
     	}
 
     	if(smi!=sme)
     	{
     		semitone_offset+=*smi;
-//    		pic::logmsg() << "2:lightMidiKey semitone_offset:" << *smi << " total " << semitone_offset;
     	}
 
     	int coursebase=base+semitone_offset;
-//    	pic::logmsg() <<  "lightMidiKey cb=" << coursebase;
 
     	if(note >= coursebase)
     	{
@@ -710,16 +611,12 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 
 			int scalemuliple = midioffset / impl.playing_max_note_ ; // number of full octaves (12)
 
-//		   	pic::logmsg() <<  "3:lightMidiKey scalemuliple=" << scalemuliple << " pln" << impl.playing_max_note_;
-
 			if (midioffset < ( (scalemuliple + 1) * impl.playing_max_note_ ))
 			{
 				// determine the number of semitones over the scales
 				int partialsemitones = midioffset % (int) impl.playing_max_note_;
 
 				int pos = scalemuliple * impl.playing_scale_.size();
-
-//				pic::logmsg() <<  "4:lightMidiKey partialsemitones=" << partialsemitones << " pos" << pos;
 
 				soi = impl.playing_scale_.begin();
 				soe = impl.playing_scale_.end();
@@ -728,7 +625,6 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 
 				for(;soi!=soe && pos < course_len && !found;soi++)
 				{
-//					pic::logmsg() <<  "4.2:lightMidiKey soi" <<  *soi << " partial" << partialsemitones << " pos" << pos;
 					if(partialsemitones - *soi == 0 )
 					{
 						piw::statusdata_t s(true,piw::coordinate_t(course+1,pos+1),state);
@@ -738,7 +634,6 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 							status.erase(i);
 						}
 						status.insert(s);
-//						pic::logmsg() <<  "6:lightMidiKey found" << course+1 << "," << pos+1;
 						found=true;
 					}
 					else if(partialsemitones - *soi < 0 )
@@ -746,7 +641,6 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 						// over shoot, e.g. C# in C Maj, we hit here at D
 						if(impl.nearestMatch_)
 						{
-//							pic::logmsg() <<  "6:lightMidiKey overshoot, nearmatch" << course+1 << "," << pos+1;
 							piw::statusdata_t s(true,piw::coordinate_t(course+1,pos+1),state);
 							pic::lckset_t<piw::statusdata_t>::nbtype::iterator i=status.find(s);
 							if(i!=status.end())
@@ -757,7 +651,7 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 						}
 						else
 						{
-//							pic::logmsg() <<  "6:lightMidiKey overshoot, no nearmatch" << course+1 << "," << pos+1;
+							// else we are only using exact matches
 						}
 						found=true;
 					}
@@ -773,19 +667,16 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 				else
 				{
 					//else ps > 0, meaning we ran out of notes... due to not a full 'octave'
-//					pic::logmsg() << "6:lightMidiKey not found, course=" << course+1 << " partialsemitones" << partialsemitones;
 				}
 			}
 			else
 			{
 				// else note is above range of course
-//				pic::logmsg() << "7:lightMidiKey  note above range of course" << course;
 			}
     	}
     	else
     	{
         	// else note is below the base of the course, i.e. out of range
-//			pic::logmsg() << "7:lightMidiKey  note below range of course" << course;
     	}
 
     	if(coi!=coe)
@@ -955,19 +846,16 @@ light_wire_t::light_wire_t(	midi_monitor_t::impl_t *impl) : event_data_source_re
 
 light_wire_t::~light_wire_t()
 {
-	// pic::logmsg() << "light_wire_t::~light_wire_t";
 	source_shutdown();
 }
 
 void light_wire_t::source_ended(unsigned seq)
 {
-//	pic::logmsg() << "light_wire_t::source_ended";
 	source_end(piw::tsd_time());
 }
 
 void  light_wire_t::midiNote(int channel, int note, int velocity)
 {
-//	pic::logmsg() <<  "light_wire_t::midiNote c=" << channel << " n=" << note << " v=" << velocity ;
 	lightMidiNote(*root_,output_, status_, channel,note,velocity);
 }
 
