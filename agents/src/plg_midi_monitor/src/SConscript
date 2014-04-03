@@ -6,11 +6,11 @@ env = master_env.Clone()
 #
 env.PiSharedLibrary('midi_monitor_plg', 
 	Split('midi_monitor.cpp libmidi/midi_decoder.cpp'),
-	libraries=Split('pic piw pie pia'), 
+	libraries=Split('pic piw pia'), 
 	package='Technobear', per_agent='plg_midi_monitor')
 
 #
 # Build a Python native module as described by midi_monitor_plg.pip, called midi_monitor_plg_native.
 # Link it against our new shared library and other base libraries
 #
-env.PiPipBinding('midi_monitor_plg_native', 'midi_monitor_plg.pip', libraries=Split('midi_monitor_plg pic piw pie'), package='Technobear', per_agent='plg_midi_monitor')
+env.PiPipBinding('midi_monitor_plg_native', 'midi_monitor_plg.pip', libraries=Split('midi_monitor_plg pic piw'), package='Technobear', per_agent='plg_midi_monitor')
