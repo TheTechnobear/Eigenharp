@@ -8,6 +8,10 @@
 
 #include "Madrona/SoundplaneOSCOutput.h"
 
+#ifndef UINT64_MAX
+#define UINT64_MAX  (18446744073709551615ULL)
+#endif
+
 #define IN_FREQ 1
 #define IN_PRESSURE 2
 #define IN_ROLL 3
