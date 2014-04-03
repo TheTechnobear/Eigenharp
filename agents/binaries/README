@@ -1,0 +1,21 @@
+LOCATION OF AGENTS INSTALLER
+============================
+
+
+There are 3 versions of EigenD that need to be supported, and each needs a different version of the agents.
+It is important you install the correct version, below lists the correct download location for each 
+
+*****************   If in doubt, then you should be using 2.0.74   **************************
+
+EigenD    Comment
+=================================================================================================================================
+2.0.74    The latest release, supported by EigenLabs, all releases of 2.0.x released by Eigenlabs, should be compatible with this
+2.0.76    This is a development build, that you have to build from open source
+2.1.0     An experimental release of 2.1, that you have to build from open source.
+
+EigenD    Location
+=================================================================================================================================
+2.0.74    https://github.com/TheTechnobear/Eigenharp/tree/2.0/agents/binaries          *** most likely what you need !!! *****
+2.0.76	  https://github.com/TheTechnobear/Eigenharp/tree/2.0-m/agents/binaries
+2.1.0     https://github.com/TheTechnobear/Eigenharp/tree/2.1/agents/binaries
+
