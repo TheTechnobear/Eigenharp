@@ -6,11 +6,11 @@ env = master_env.Clone()
 #
 env.PiSharedLibrary('soundplane_plg', 
 	Split('soundplane.cpp Madrona/SoundplaneOSCOutput.cpp'),
-	libraries=Split('pic piw pie pia pilo piop'), 
+	libraries=Split('pic piw pia piop'), 
 	package='Technobear', per_agent='plg_soundplane')
 
 #
 # Build a Python native module as described by soundplane_plg.pip, called soundplane_plg_native.
 # Link it against our new shared library and other base libraries
 #
-env.PiPipBinding('soundplane_plg_native', 'soundplane_plg.pip', libraries=Split('soundplane_plg pic piw pie'), package='Technobear', per_agent='plg_soundplane')
+env.PiPipBinding('soundplane_plg_native', 'soundplane_plg.pip', libraries=Split('soundplane_plg pic piw'), package='Technobear', per_agent='plg_soundplane')
