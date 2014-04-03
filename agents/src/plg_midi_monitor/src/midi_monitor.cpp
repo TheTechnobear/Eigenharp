@@ -122,16 +122,18 @@ struct midi_monitor_t::impl_t :
     float playing_base_note_;
     float playing_octave_;
 
-    bool enable_notes;
-    bool enable_cc_per_key;
-    bool enable_cc_as_course;
-    bool enable_poly_pressure;
+    bool enable_notes_;
+    bool enable_cc_per_key_;
+    bool enable_cc_as_course_;
+    bool enable_poly_pressure_;
 
     int  channel_;
     bool nearestMatch_;
     bool firstMatchOnly_;
-    bool use_velocity_as_state;
-    bool use_channel_as_state;
+    bool use_velocity_as_state_;
+    bool use_channel_as_state_;
+    bool use_physical_mapping_;
+    int control_offset_;
 };
 
 
@@ -141,9 +143,12 @@ midi_monitor_t::impl_t::impl_t(piw::clockdomain_ctl_t *cd, const piw::cookie_t &
 	root_t(0), up_(0),
 	playing_max_note_(0.0),
 	playing_tonic_(0.0), playing_base_note_(0.0), playing_octave_(0.0),
-	enable_notes(true), enable_cc_per_key(false), enable_cc_as_course(false), enable_poly_pressure(false),
+	enable_notes_(true), enable_cc_per_key_(false), enable_cc_as_course_(false), enable_poly_pressure_(false),
 	channel_(0), nearestMatch_(false), firstMatchOnly_(false),
-	use_velocity_as_state(true), use_channel_as_state(false)
+	use_velocity_as_state_(true), use_channel_as_state_(false),
+	use_physical_mapping_(false),
+	control_offset_(0)
+
 {
 	connect(c);
 	cd->sink(this,"monitorinput");
@@ -244,93 +249,35 @@ void midi_monitor_t::impl_t::root_latency()
 }
 
 
-void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data_nb_t &courselen)
+void decode_unsigned(pic::lckvector_t<unsigned>::nbtype &vec, const piw::data_nb_t &inp)
 {
-    courses.clear();
+    vec.clear();
 
-	pic::logmsg() << "decode_courses " << courselen;
+	pic::logmsg() << "decode_unsigned " << inp;
 
-	unsigned dictlen = courselen.as_tuplelen();
+	unsigned dictlen = inp.as_tuplelen();
     if(0 == dictlen)
         return;
 
-    courses.reserve(5);
+    vec.reserve(5);
 
     for(unsigned i = 0; i < dictlen; ++i)
     {
-    	unsigned l=courselen.as_tuple_value(i).as_long();
-        courses.push_back(l);
+    	unsigned l=inp.as_tuple_value(i).as_long();
+        vec.push_back(l);
      }
 
-//    unsigned column=0;
+//    unsigned c=0;
 //    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = courses.begin();
-//    ce = courses.end();
+//    ci = vec.begin();
+//    ce = vec.end();
 //
 //    for(; ci != ce; ++ci)
 //    {
-//    	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
+//    	pic::logmsg() << "decode_unsigned c " << c++ << "v= " << *ci;
 //    }
 }
 
-void decode_columns(pic::lckvector_t<unsigned>::nbtype &columns, const piw::data_nb_t &columnlen)
-{
-	columns.clear();
-
-	pic::logmsg() << "decode_columns " << columnlen;
-
-	unsigned dictlen = columnlen.as_tuplelen();
-    if(0 == dictlen)
-        return;
-
-    columns.reserve(5);
-
-    for(unsigned i = 0; i < dictlen; ++i)
-    {
-    	unsigned l=columnlen.as_tuple_value(i).as_long();
-    	columns.push_back(l);
-     }
-
-//    unsigned column=0;
-//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = columns.begin();
-//    ce = columns.end();
-//
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_columns column " << column++ << "value= " << *ci;
-//    }
-}
-
-
-void decode_columnoffset(pic::lckvector_t<unsigned>::nbtype &columns, const piw::data_nb_t &columnoffset)
-{
-	columns.clear();
-
-	pic::logmsg() << "decode_columnoffset " << columnoffset;
-
-	unsigned dictlen = columnoffset.as_tuplelen();
-    if(0 == dictlen)
-        return;
-
-    columns.reserve(5);
-
-    for(unsigned i = 0; i < dictlen; ++i)
-    {
-    	unsigned l=columnoffset.as_tuple_value(i).as_long();
-    	columns.push_back(l);
-     }
-
-//    unsigned column=0;
-//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = columns.begin();
-//    ce = columns.end();
-//
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_columnoffset column " << column++ << "value= " << *ci;
-//    }
-}
 
 
 
@@ -414,10 +361,10 @@ float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
 // helpers
 int midiVelocityToStatus(int velocity)
 {
-	if (velocity<32) return BCTSTATUS_OFF;
-	if (velocity<64) return BCTSTATUS_INACTIVE;
-	if (velocity<96) return BCTSTATUS_ACTIVE;
-	return BCTSTATUS_MIXED;
+	if (velocity==0) return BCTSTATUS_OFF;
+	if (velocity<43) return BCTSTATUS_ACTIVE;
+	if (velocity<86) return BCTSTATUS_INACTIVE;
+	return BCTSTATUS_UNKNOWN;
 }
 
 int midiCCToStatus(int ccvalue)
@@ -430,43 +377,39 @@ int midiPressureToStatus(int pressure)
 	return midiVelocityToStatus(pressure);
 }
 
-int midiChannelToStatus(int channel)
+int midiChannelToStatus(int channel,int velocity)
 {
-	return (channel % BCTSTATUS_MIXED) + 1;
+	if (velocity==0) return BCTSTATUS_OFF;
+	return ((channel-1) % (BCTSTATUS_MIXED - 1)) + 1;
 }
 
 
 // callbacks from decoder
 void midi_monitor_t::impl_t::decoder_noteoff(unsigned channel, unsigned number, unsigned velocity)
 {
-	if (!enable_notes) return;
+	if (!enable_notes_) return;
 	light_wire_->midiNote(channel+1,number,0); // for the moment, treat noteoff, as midi note on, with velocity zero (pretty common practice)
 }
 
 void midi_monitor_t::impl_t::decoder_noteon(unsigned channel, unsigned number, unsigned velocity)
 {
-	if (!enable_notes) return;
+	if (!enable_notes_) return;
 	light_wire_->midiNote(channel+1,number,velocity);
 }
 
 
 void midi_monitor_t::impl_t::decoder_polypressure(unsigned channel, unsigned number, unsigned value)
 {
-	if (!enable_poly_pressure) return;
+	if (!enable_poly_pressure_) return;
 	light_wire_->midiPolyPressure(channel+1,number,value);
 }
 
 void midi_monitor_t::impl_t::decoder_cc(unsigned channel, unsigned number, unsigned value)
 {
-//	pic::logmsg() <<  " midi_monitor_t::impl_t::decoder_cc c=" << channel << " cc=" << number << " v=" << value
-//			<< " enable_cc_per_key " << enable_cc_per_key << " enable_cc_as_course: " << enable_cc_as_course;
-
-	if (! (enable_cc_as_course || enable_cc_per_key) ) return;
+	if (! (enable_cc_as_course_ || enable_cc_per_key_) ) return;
 	light_wire_->midiCC(channel+1,number,value);
 }
 
-
-// get the decoder to process input
 void midi_monitor_t::impl_t::decode_midi(const piw::data_nb_t &d, unsigned long long t)
 {
 	unsigned length = d.as_bloblen();
@@ -535,28 +478,28 @@ void midi_monitor_t::impl_t::control_change(const piw::data_nb_t &d)
 		if(!cl.is_null())
 		{
 			pic::logmsg() << "courselen " << cl;
-			decode_courses(courselen_,cl);
+			decode_unsigned(courselen_,cl);
 		}
 		columns = d.as_dict_lookup("columnlen");
 		if(!columns.is_null())
 		{
 			pic::logmsg() << "columnlen " << columns;
-			decode_columns(columnlen_,columns);
+			decode_unsigned(columnlen_,columns);
 		}
 		columnsoffset = d.as_dict_lookup("columnsoffset");
 		if(!columns.is_null())
 		{
 			pic::logmsg() << "columnsoffset " << columns;
-			decode_columnoffset(columnsoffset_,columnsoffset);
+			decode_unsigned(columnsoffset_,columnsoffset);
 		}
     }
 }
 
-void lightPhysicalColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int col, int value)
+void lightColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int col, int value)
 {
 //	pic::logmsg() <<  "E:lightPhysicalColumn n=" << col << "v=" << value;
 
-	if (col> (int) impl.columnlen_.size()) return;
+	if (col<0 || col> (int) impl.columnlen_.size()) return;
 
 	pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
 
@@ -574,16 +517,12 @@ void lightPhysicalColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t&
 
    	float step=127/column_len;
 
-   	for(int i=0; i<column_len;i++)
+   	if (column_len<1) return;
+   	if (column_len==1)
    	{
-   		int state = BCTSTATUS_OFF;
-   		if(value>i*step)
-   		{
-   			state= i / (column_len/3) + 1;
-   		}
-
-//   	   	pic::logmsg() <<  "2:lightPhysicalColumn c=" << col << " i " << i << " state " << state;
-		piw::statusdata_t s(false,piw::coordinate_t(col+1,i+1),state);
+   		// if only one key, then use the normal 'cc per key' behaviour
+   		int state = midiCCToStatus(value);
+		piw::statusdata_t s(!impl.use_physical_mapping_,piw::coordinate_t(col+1,1),state);
 		pic::lckset_t<piw::statusdata_t>::nbtype::iterator si=status.find(s);
 		if(si!=status.end())
 		{
@@ -591,51 +530,40 @@ void lightPhysicalColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t&
 		}
 		status.insert(s);
    	}
+   	else
+   	{
+   		// real column behaviour of a bar
+		for(int i=0; i<column_len;i++)
+		{
+			int state = BCTSTATUS_OFF;
+			if(value>i*step)
+			{
+				state= i / (column_len/3) + 1;
+			}
+
+			piw::statusdata_t s(!impl.use_physical_mapping_,piw::coordinate_t(col+1,i+1),state);
+			pic::lckset_t<piw::statusdata_t>::nbtype::iterator si=status.find(s);
+			if(si!=status.end())
+			{
+				status.erase(si);
+			}
+			status.insert(s);
+		}
+   	}
 
     piw::data_nb_t buffer = piw::statusbuffer_t::make_statusbuffer(status);
     outputbuffer.add_value(OUT_LIGHT,buffer);
 }
 
 // given a midi note, update all LEDs representing that value using the musical layout
-void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int note, int state)
+void lightKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int note, int state)
 {
-//	pic::logmsg() <<  "E:lightMidiKey n=" << note << "s=" << state;
-
-	// basic algo
-	// base = playing_octave * 12  (starting point)
-	// base+= playing tonic ( as C = 0)
-	// base+= playing base note (offset from tonic)
-	// course[0]=base
-	// for i = 1 to # courses
-	// 		course[i]=course[i-1]+courseoffset(i-1) // see above re scaleoffset
-
-	// for any given midi note we now just have to go thru each course
-	// for c = 0 to # courses
-	// 		if midinote < course[c] continue; // its below this course
-	//      midioffset= midinote-course[c];
-	//
-	//      if courselen[c] * max_in_scale  < midioffset  continue;  //  midinote > course length
-	//
-	//      scalemuliple = midioffset / max_in_scale  (usually 12, so octave, but might not be)
-	//      inscaleoffset = midioffset % max_in_scale
-	//      for p = 0 to scale.length
-	//          inscaleoffset-scale(p)
-	//          if inscaleoffset==0
-	//                  n=p + scalemuliple*scale.length
-	//		            light (c,n)
-	//                  break;
-	//          if inscaleoffset < 0
-	//					break;  // note did not exist, e.g. C# on C Major scale
-	//
-	//      --  next p
-	//  --  next c
-	//
     pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
     pic::lckvector_t<float>::nbtype::const_iterator coi,coe;
     pic::lckvector_t<float>::nbtype::const_iterator smi,sme;
     pic::lckvector_t<float>::nbtype::const_iterator soi,soe;
 
-    if(impl.playing_scale_.size() == 0) return;
+    if(note < 0 || impl.playing_scale_.size() == 0) return;
 
     // what is the midi note of the top of keygroup?
     int base = (impl.playing_octave_ + 1) * 12; // midi octaves go -2 to 8, whereas eigenD goes -1 to 9 !!
@@ -665,13 +593,11 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
     int course = 0;
 	int semitone_offset = 0;
 
-//   	pic::logmsg() <<  "0:lightMidiKey base=" << base;
    	bool quitCourseSearch=false;
  	// for each course
 	for(;cli!=cle && quitCourseSearch==false;cli++)
     {
     	int course_len = *cli;  // max length of course
-//    	pic::logmsg() <<  "1:lightMidiKey course="<< course << " courselen=" << course_len;
     	if(coi!=coe)
     	{
     		int scale_offset=*coi;
@@ -685,17 +611,14 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
     			soi++;
     		}
     		semitone_offset+=*soi+scale_semi;
-//    		pic::logmsg() << "2:lightMidiKey scale_semi" << scale_semi << " scale_offset:" << *soi << " total " << semitone_offset;
     	}
 
     	if(smi!=sme)
     	{
     		semitone_offset+=*smi;
-//    		pic::logmsg() << "2:lightMidiKey semitone_offset:" << *smi << " total " << semitone_offset;
     	}
 
     	int coursebase=base+semitone_offset;
-//    	pic::logmsg() <<  "lightMidiKey cb=" << coursebase;
 
     	if(note >= coursebase)
     	{
@@ -710,16 +633,12 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 
 			int scalemuliple = midioffset / impl.playing_max_note_ ; // number of full octaves (12)
 
-//		   	pic::logmsg() <<  "3:lightMidiKey scalemuliple=" << scalemuliple << " pln" << impl.playing_max_note_;
-
 			if (midioffset < ( (scalemuliple + 1) * impl.playing_max_note_ ))
 			{
 				// determine the number of semitones over the scales
 				int partialsemitones = midioffset % (int) impl.playing_max_note_;
 
 				int pos = scalemuliple * impl.playing_scale_.size();
-
-//				pic::logmsg() <<  "4:lightMidiKey partialsemitones=" << partialsemitones << " pos" << pos;
 
 				soi = impl.playing_scale_.begin();
 				soe = impl.playing_scale_.end();
@@ -728,17 +647,15 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 
 				for(;soi!=soe && pos < course_len && !found;soi++)
 				{
-//					pic::logmsg() <<  "4.2:lightMidiKey soi" <<  *soi << " partial" << partialsemitones << " pos" << pos;
 					if(partialsemitones - *soi == 0 )
 					{
-						piw::statusdata_t s(true,piw::coordinate_t(course+1,pos+1),state);
+						piw::statusdata_t s(!impl.use_physical_mapping_,piw::coordinate_t(course+1,pos+1),state);
 						pic::lckset_t<piw::statusdata_t>::nbtype::iterator i=status.find(s);
 						if(i!=status.end())
 						{
 							status.erase(i);
 						}
 						status.insert(s);
-//						pic::logmsg() <<  "6:lightMidiKey found" << course+1 << "," << pos+1;
 						found=true;
 					}
 					else if(partialsemitones - *soi < 0 )
@@ -746,8 +663,7 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 						// over shoot, e.g. C# in C Maj, we hit here at D
 						if(impl.nearestMatch_)
 						{
-//							pic::logmsg() <<  "6:lightMidiKey overshoot, nearmatch" << course+1 << "," << pos+1;
-							piw::statusdata_t s(true,piw::coordinate_t(course+1,pos+1),state);
+							piw::statusdata_t s(!impl.use_physical_mapping_,piw::coordinate_t(course+1,pos+1),state);
 							pic::lckset_t<piw::statusdata_t>::nbtype::iterator i=status.find(s);
 							if(i!=status.end())
 							{
@@ -757,7 +673,7 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 						}
 						else
 						{
-//							pic::logmsg() <<  "6:lightMidiKey overshoot, no nearmatch" << course+1 << "," << pos+1;
+							// else we are only using exact matches
 						}
 						found=true;
 					}
@@ -773,19 +689,16 @@ void lightMusicalKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& out
 				else
 				{
 					//else ps > 0, meaning we ran out of notes... due to not a full 'octave'
-//					pic::logmsg() << "6:lightMidiKey not found, course=" << course+1 << " partialsemitones" << partialsemitones;
 				}
 			}
 			else
 			{
 				// else note is above range of course
-//				pic::logmsg() << "7:lightMidiKey  note above range of course" << course;
 			}
     	}
     	else
     	{
         	// else note is below the base of the course, i.e. out of range
-//			pic::logmsg() << "7:lightMidiKey  note below range of course" << course;
     	}
 
     	if(coi!=coe)
@@ -807,11 +720,11 @@ void lightMidiNote(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outpu
 	if (impl.channel_ == 0 || impl.channel_==channel)
 	{
 		int state = 0;
-		if (! (impl.use_channel_as_state || impl.use_velocity_as_state) && velocity > 0) state=BCTSTATUS_MIXED; 
-		if (impl.use_channel_as_state) state+=midiChannelToStatus(channel);
-		if (impl.use_velocity_as_state) state+=midiVelocityToStatus(velocity);
-		state = state % (BCTSTATUS_MIXED + 1);
-		lightMusicalKey(impl,outputbuffer,status, note,state);
+		if (! (impl.use_channel_as_state_ || impl.use_velocity_as_state_) && velocity > 0) state=BCTSTATUS_UNKNOWN;
+		if (impl.use_channel_as_state_) state+=midiChannelToStatus(channel,velocity);
+		if (impl.use_velocity_as_state_) state+=midiVelocityToStatus(velocity);
+		state = state % BCTSTATUS_MIXED;
+		lightKey(impl,outputbuffer,status, note,state);
 		return;
 	}
 }
@@ -820,7 +733,7 @@ void lightMidiPolyPressure(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_
 {
 	if (impl.channel_ == 0 || impl.channel_==channel)
 	{
-		lightMusicalKey(impl,outputbuffer,status,note,midiPressureToStatus(pressure));
+		lightKey(impl,outputbuffer,status,note,midiPressureToStatus(pressure));
 		return;
 	}
 }
@@ -830,17 +743,17 @@ void lightMidiCC(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputb
 {
 	if (impl.channel_ == 0 || impl.channel_==channel)
 	{
-		if(impl.enable_cc_per_key)
+		if(impl.enable_cc_per_key_)
 		{
 			// light individuals keys based on CC value... currently using CC num as note number for layout
-			lightMusicalKey(impl,outputbuffer,status,cc,midiCCToStatus(value));
+			lightKey(impl,outputbuffer,status,cc-impl.control_offset_,midiCCToStatus(value));
 			return;
 		}
 
-		if(impl.enable_cc_as_course)
+		if(impl.enable_cc_as_course_)
 		{
 			// this will use a course, and put the CC value as a 'bar' on this course.
-			lightPhysicalColumn(impl,outputbuffer,status,cc,value);
+			lightColumn(impl,outputbuffer,status,cc-impl.control_offset_,value);
 		}
 	}
 }
@@ -955,19 +868,16 @@ light_wire_t::light_wire_t(	midi_monitor_t::impl_t *impl) : event_data_source_re
 
 light_wire_t::~light_wire_t()
 {
-	// pic::logmsg() << "light_wire_t::~light_wire_t";
 	source_shutdown();
 }
 
 void light_wire_t::source_ended(unsigned seq)
 {
-//	pic::logmsg() << "light_wire_t::source_ended";
 	source_end(piw::tsd_time());
 }
 
 void  light_wire_t::midiNote(int channel, int note, int velocity)
 {
-//	pic::logmsg() <<  "light_wire_t::midiNote c=" << channel << " n=" << note << " v=" << velocity ;
 	lightMidiNote(*root_,output_, status_, channel,note,velocity);
 }
 
@@ -1007,22 +917,22 @@ piw::change_nb_t midi_monitor_t::control()
 
 void midi_monitor_t::enable_notes(bool v)
 {
-	if(impl_) impl_->enable_notes=v;
+	if(impl_) impl_->enable_notes_=v;
 }
 
 void midi_monitor_t::enable_poly_pressure(bool v)
 {
-	if(impl_) impl_->enable_poly_pressure=v;
+	if(impl_) impl_->enable_poly_pressure_=v;
 }
 
 void midi_monitor_t::enable_cc_as_key(bool v)
 {
-	if(impl_) impl_->enable_cc_per_key=v;
+	if(impl_) impl_->enable_cc_per_key_=v;
 }
 
 void midi_monitor_t::enable_cc_as_course(bool v)
 {
-	if(impl_) impl_->enable_cc_as_course=v;
+	if(impl_) impl_->enable_cc_as_course_=v;
 }
 
 void midi_monitor_t::channel(unsigned v)
@@ -1042,13 +952,24 @@ void midi_monitor_t::first_match(bool v)
 
 void midi_monitor_t::use_velocity_as_state(bool v)
 {
-	if(impl_) impl_->use_velocity_as_state=v;
+	if(impl_) impl_->use_velocity_as_state_=v;
 }
 
 void midi_monitor_t::use_channel_as_state(bool v)
 {
-	if(impl_) impl_->use_channel_as_state=v;
+	if(impl_) impl_->use_channel_as_state_=v;
 }
+
+void  midi_monitor_t::use_physical_mapping(bool v)
+{
+	if(impl_) impl_->use_physical_mapping_=v;
+}
+
+void  midi_monitor_t::control_offset(unsigned v)
+{
+	if(impl_) impl_->control_offset_=v;
+}
+
 
 
 }; //namespace midi_monitor_plg
