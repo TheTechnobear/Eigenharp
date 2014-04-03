@@ -27,6 +27,8 @@ namespace midi_monitor_plg
             void first_match(bool);
             void use_velocity_as_state(bool);
             void use_channel_as_state(bool);
+            void use_physical_mapping(bool);
+            void control_offset(unsigned);
 
             class impl_t;
          private:

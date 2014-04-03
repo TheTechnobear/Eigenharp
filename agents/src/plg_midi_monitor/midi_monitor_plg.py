@@ -49,6 +49,10 @@ class Agent(agent.Agent):
         self[4][8] = atom.Atom(domain=domain.Bool(),init=True,policy=atom.default_policy(self.__use_velocity_as_state),names='velocity for status')
         self[4][9] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__use_channel_as_state),names='channel for status')
         
+        self[4][10] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__use_physical_mapping),names='use physical mapping')
+        
+        self[4][11] = atom.Atom(domain=domain.BoundedInt(0,127),init=0,policy=atom.default_policy(self.__control_offset),names='control offset')
+        
     def __enable_notes(self,value):
         self[4][1].set_value(value)
         self.monitor.enable_notes(value);
@@ -92,6 +96,16 @@ class Agent(agent.Agent):
     def __use_channel_as_state(self,value):
         self[4][9].set_value(value)
         self.monitor.use_channel_as_state(value);
+        return True
+
+    def __use_physical_mapping(self,value):
+        self[4][10].set_value(value)
+        self.monitor.use_physical_mapping(value);
+        return True
+
+    def __control_offset(self,value):
+        self[4][11].set_value(value)
+        self.monitor.control_offset(value);
         return True
 
 #
