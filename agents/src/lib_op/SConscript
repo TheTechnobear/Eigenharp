@@ -21,8 +21,8 @@ if env['IS_MACOSX']:
 if env['IS_WINDOWS']:
     op_dirs=op_dirs+Split('ip/win32')
     op_files=op_files+Split('ip/win32/NetworkingUtils.cpp ip/win32/UdpSocket.cpp')
-    #op_env.Append(LINKFLAGS=' WS2_32.Lib ')
+    op_env.Append(LINKFLAGS=' WS2_32.Lib Winmm.lib')
 
 #op_env.PiProgram('oscsend','oscsend.c',libraries=Split('piop'))
 #op_env.PiProgram('oscdump','oscdump.c',libraries=Split('piop'))
-op_env.PiSharedLibrary('piop',op_files,package='Technobear',hidden=False)
+op_env.PiSharedLibrary('piop',op_files,package='Technobear',hidden=False,deffile='piop.def')

@@ -7,6 +7,8 @@
 
 #include <stdexcept>
 
+#include "c99compat.h"
+
 const char* kDefaultHostnameString = "localhost";
 
 OSCVoice::OSCVoice() :
@@ -306,7 +308,7 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
                     {
                         osc::int32 touchID = i + 1; // 1-based for OSC
                         std::string address("/t3d/tch");
-                        int maxSize = 4;
+                        const int maxSize = 4;
                         char idBuf[maxSize];
                         snprintf(idBuf, maxSize, "%d", touchID);                                 
                         address += std::string(idBuf);
