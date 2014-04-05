@@ -43,8 +43,8 @@ class Agent(agent.Agent):
         self[4][4] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__enable_cc_as_course),names='enable control with course')
         
         self[4][5] = atom.Atom(domain=domain.BoundedInt(0,16),init=0,policy=atom.default_policy(self.__channel),names='channel')
-        self[4][6] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__nearest_match),names='close note')
-        self[4][7] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__first_match),names='first note')
+        self[4][6] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__nearest_match),names='altered note')
+        self[4][7] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__first_match),names='base note')
         
         self[4][8] = atom.Atom(domain=domain.Bool(),init=True,policy=atom.default_policy(self.__use_velocity_as_state),names='velocity for status')
         self[4][9] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__use_channel_as_state),names='channel for status')

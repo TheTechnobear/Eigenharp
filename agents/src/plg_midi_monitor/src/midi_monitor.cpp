@@ -388,12 +388,14 @@ int midiChannelToStatus(int channel,int velocity)
 void midi_monitor_t::impl_t::decoder_noteoff(unsigned channel, unsigned number, unsigned velocity)
 {
 	if (!enable_notes_) return;
+	//pic::logmsg() << "note off " << channel << " n " << number << " v " << velocity ;
 	light_wire_->midiNote(channel+1,number,0); // for the moment, treat noteoff, as midi note on, with velocity zero (pretty common practice)
 }
 
 void midi_monitor_t::impl_t::decoder_noteon(unsigned channel, unsigned number, unsigned velocity)
 {
 	if (!enable_notes_) return;
+	//pic::logmsg() << "noteon " << channel << " n " << number << " v " << velocity ;
 	light_wire_->midiNote(channel+1,number,velocity);
 }
 
@@ -558,6 +560,7 @@ void lightColumn(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputb
 // given a midi note, update all LEDs representing that value using the musical layout
 void lightKey(midi_monitor_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer,piw::statusset_t& status, int note, int state)
 {
+	//pic::logmsg() << "lightkey " << note << " s " << state;
     pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
     pic::lckvector_t<float>::nbtype::const_iterator coi,coe;
     pic::lckvector_t<float>::nbtype::const_iterator smi,sme;
