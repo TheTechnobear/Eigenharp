@@ -82,18 +82,22 @@ void midi::mididecoder_t::decode3(unsigned char b1,unsigned char b2,unsigned cha
     switch(hi)
     {
         case 0:
+			//pic::logmsg() << "decoder_input : decode3 noteoff" << hi << " " << lo << " " << (int) b1 << " " << (int) b2 << " " << (int) b3;;
             decoder_noteoff(lo,b2,b3);
             h = true;
             break;
 
         case 1:
+			//pic::logmsg() << "decoder_input : decode3 noteon" << hi << " " << lo << " " << (int) b1 << " " << (int) b2 << " " << (int) b3;;
             if(b3>0)
             {
                 decoder_noteon(lo,b2,b3);
                 h=true;
                 break;
             }
+			//pic::logmsg() << "decoder_input : decode3 noteon odd" << hi << " " << lo << " " << (int) b1 << " " << (int) b2 << " " << (int) b3;;
             b3 = 0x7f;
+            decoder_noteoff(lo,b2,b3);
 
         case 2:
             decoder_polypressure(lo,b2,b3);
@@ -112,6 +116,7 @@ void midi::mididecoder_t::decode3(unsigned char b1,unsigned char b2,unsigned cha
             break;
     }
 
+	//pic::logmsg() << "decoder_input : decode3 generic" << hi << " " << lo << " " << (int) b1 << " " << (int) b2 << " " << (int) b3;;
     decoder_generic3(h,b1,b2,b3);
 }
 
@@ -126,6 +131,7 @@ void midi::mididecoder_t::decoder_input(const unsigned char *buffer, unsigned le
 void midi::mididecoder_t::decoder_input(unsigned char octet)
 {
     bool cmd = (octet&0x80)!=0;
+ 	//pic::logmsg() << "decoder_input " << (int) octet;
 
 restart:
 
@@ -133,12 +139,14 @@ restart:
     {
         case STATUS:
 
+ 			//pic::logmsg() << "decoder_input : status";
             _state = START;
             if(!cmd) decoder_input(_buffer[0]);
             goto restart;
 
         case START:
 
+ 			//pic::logmsg() << "decoder_input : start";
             if(!cmd) { return; }
             start_state(octet);
             _buffer[0] = octet;
@@ -147,6 +155,7 @@ restart:
 
         case GET1OF1:
 
+ 			//pic::logmsg() << "decoder_input : get1of1";
             if(cmd) { _state = START; goto restart; }
             _state = STATUS;
             decode2(_buffer[0],octet);
@@ -154,6 +163,7 @@ restart:
 
         case GET1OF2:
 
+ 			//pic::logmsg() << "decoder_input : get1of2";
             if(cmd) { _state = START; goto restart; }
             _buffer[1] = octet;
             _state = GET2OF2;
@@ -161,6 +171,7 @@ restart:
 
         case GET2OF2:
 
+ 			//pic::logmsg() << "decoder_input : get2of2";
             if(cmd) { _state = START; goto restart; }
             _state = STATUS;
             decode3(_buffer[0],_buffer[1],octet);
@@ -168,6 +179,7 @@ restart:
 
         case GETSYSEX:
 
+ 			//pic::logmsg() << "decoder_input : sysex";
             if((octet&0xf8) == 0xf8) { decode1(octet); return; }
             if(octet == 0xf7) { _state = START; return; }
             if(cmd) { _state = START; goto restart; }
