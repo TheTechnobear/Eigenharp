@@ -56,8 +56,8 @@ options, to change behaviour:
 velocity for status(true), use velocity of notes, determines colour
 channel for status(false), use midi channel determines colours
 (note: orange if neither of above options active)
-close note(false) - used in non chromatic, if in C maj, receives C# with light D
-first note(true) - only light the first note, not repetitions in other courses
+altered note(false) - used in non chromatic, if in C maj, receives C# with light D
+base note(true) - only light the first note, not repetitions in other courses
 
 b) CC display, one key per CC
 options required/recommended:
@@ -65,7 +65,7 @@ enable control with key(false) = true - individual keys (of musical mapping) are
 use physical mapping(false) = false, use the musical mapping for CC placement
 
 options, to change behaviour:
-close note(false) - used in non chromatic, if CC is not in musical scale, then use next key
+base note(true) - only light the first note, not repetitions in other courses
 control offset(0) - offset the CC number by this amount * see below
 
 c) CC display using column
@@ -155,6 +155,7 @@ CHANGE HISTORY
 change log:
 0.0.1 - initial release... a testing release
 0.0.2 - useability release, make things a bit more meaningful in places
+0.0.3 - fixed properties which belcanto cannot address properly
 
 
 SETUPS
@@ -172,4 +173,6 @@ Change Log
 0.0.2 - allow user to offset CC number, default 0
 0.0.2 - cc per course, when column length =1, then use 1 key CC colour mapping (e.g. as cc per key)
 0.0.2 - fixed, channel as status
-
+0.0.3 - close note changed to altered note
+0.0.3 - first note changed to base note
+0.0.3 - fix issue with midi decoder, which doesnt recognise noteon vel 0 as noteoff
