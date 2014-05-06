@@ -98,6 +98,7 @@ void midi::mididecoder_t::decode3(unsigned char b1,unsigned char b2,unsigned cha
 			//pic::logmsg() << "decoder_input : decode3 noteon odd" << hi << " " << lo << " " << (int) b1 << " " << (int) b2 << " " << (int) b3;;
             b3 = 0x7f;
             decoder_noteoff(lo,b2,b3);
+			break;
 
         case 2:
             decoder_polypressure(lo,b2,b3);
