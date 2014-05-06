@@ -1,5 +1,5 @@
 Midi Monitor
-RELEASE 0.0.1
+RELEASE 0.0.4
 
 Warning: this is a 'testing' release, things probably will change, so dont get upset if they do...
 but id like to get it out there asap. (also the code needs a bit of cleaning)
@@ -176,3 +176,4 @@ Change Log
 0.0.3 - close note changed to altered note
 0.0.3 - first note changed to base note
 0.0.3 - fix issue with midi decoder, which doesnt recognise noteon vel 0 as noteoff
+0.0.4 - add monitor to lexicon, so that eigencommander can create agent
