@@ -1,0 +1,6 @@
+declare NAME
+#this will create a midi input agent name %NAME%
+#its not connected to anything initially ... e.g. talkers/controllers
+midi input create
+it to %NAME% name ify
+
