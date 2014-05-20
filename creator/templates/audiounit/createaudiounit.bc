@@ -63,7 +63,7 @@ audio unit in %RIG% create
 %RIG% instrument audio unit hey parameters parameter 10 to pedal 2 name ify
 %RIG% instrument audio unit hey parameters parameter 11 to pedal 3 name ify
 %RIG% instrument audio unit hey parameters parameter 12 to pedal 4 name ify
-%RIG% hey scaler outputs to instrument audio unit controller inputs  connect
+%RIG% hey scaler outputs to instrument audio unit musical inputs  connect
 %RIG% hey scaler outputs to instrument audio unit parameters connect
 %RIG% hey gateway output strip position 1 to instrument audio unit parameters strip position 1 connect
 %RIG% hey gateway output strip position 2 to instrument audio unit parameters strip position 2 connect

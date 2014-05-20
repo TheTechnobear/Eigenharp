@@ -1,0 +1,19 @@
+name
+    tau midi monitor
+description
+script to create midi monitor for tau factory setup 1 on 4/7 split 1 only
+
+script
+keygroup 1 hey output 40 create
+it to midi monitor name ify
+keygroup 1 hey output midi monitor key column to 4 set
+keygroup 1 hey output midi monitor key column end relative un set
+keygroup 1 hey output midi monitor key row to 7 set
+keygroup 1 hey output midi monitor key row end relative   set
+midi input create
+it to monitor input name ify
+midi monitor create
+it to midi monitor name ify
+keygroup 1 output midi monitor to midi monitor connect
+midi monitor outputs light output to keygroup 1 output midi monitor light input connect
+monitor input to midi monitor connect
