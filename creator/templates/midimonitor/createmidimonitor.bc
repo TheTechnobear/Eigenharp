@@ -1,0 +1,13 @@
+declare MONITOR_NAME,KEYGROUP,KEYGROUP_OUTPUT,MIDI_INPUT
+# MONITOR_NAME=%MONITOR_NAME% name of midi monitor
+# KEYGROUP=%KEYGROUP% key group to link to
+# KEYGROUP_OUTPUT=%KEYGROUP_OUTPUT% keygroup output to link to
+# MIDI_INPUT=%MIDI_INPUT% midi input agent to receive incoming messages
+
+
+midi monitor create
+it to %MONITOR_NAME% name ify
+%KEYGROUP% output %KEYGROUP_OUTPUT% to %MONITOR_NAME% connect
+%MONITOR_NAME% outputs light output to %KEYGROUP% output %KEYGROUP_OUTPUT% light input connect
+%MIDI_INPUT% to %MONITOR_NAME% connect
+
