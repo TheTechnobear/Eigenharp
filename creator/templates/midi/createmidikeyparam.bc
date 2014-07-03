@@ -1,0 +1,18 @@
+declare KEY,RIG,NAME,KEYGROUP,KG_OUTPUT_NAME%,%KG_CHANNEL%,INPUT,AGENT,PARAMETER
+# this template add a specific key mapping to a particular agent and rig
+# e.g. we want key 5 pressure to map to audio unit agent parameter pressure 5
+# e.g. 1:midi rig 1:pressure 1:keygroup 1:pressure:midi rig 1:midi converter:
+
+#UNTESTED AS DECIDED ON A NEW APPROACH!
+
+# add key to agent
+%RIG% gateway hey input called %NAME% create
+
+# link key input into rig input
+%KEYGROUP% output %KG_OUTPUT_NAME% %INPUT% to %RIG% %NAME% into channel %KG_CHANNEL% from channel %KEY% connect
+
+#rename parameter
+%RIG% %AGENT% hey parameters parameter %PARAMETER% to %NAME% name ify
+
+#connect
+%RIG% hey gateway output %NAME% to %AGENT% parameters %NAME% connect
