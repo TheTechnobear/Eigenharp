@@ -1,0 +1,3 @@
+declare RIG,X,Y,UN= ,AU=instrument audio unit
+%RIG% %AU% hey enable from %X% for %Y% %VAL%  set
+

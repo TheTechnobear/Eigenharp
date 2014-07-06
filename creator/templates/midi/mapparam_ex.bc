@@ -1,0 +1,9 @@
+declare RIG,X,Y,LOW,BASE,HIGH,SCALE=1.0,AU=instrument audio unit
+
+%RIG% %AU% hey %X% for %Y%  map
+%RIG% %AU% hey scale from %X% for %Y%  to %SCALE% set
+%RIG% %AU% hey low   from %X% for %Y%  to %LOW% set
+%RIG% %AU% hey high  from %X% for %Y%  to %BASE% set
+%RIG% %AU% hey base  from %X% for %Y%  to %HIGH% set
+
+

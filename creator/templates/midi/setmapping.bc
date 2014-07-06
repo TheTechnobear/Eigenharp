@@ -1,0 +1,3 @@
+declare RIG,PARAM,X,Y,VAL,TYPE= ,AU=instrument audio unit
+%RIG% %AU% hey %PARAM% from %X% for %TYPE% %Y%  to %VAL% set
+
