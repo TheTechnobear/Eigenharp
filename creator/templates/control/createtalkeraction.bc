@@ -1,0 +1,13 @@
+declare TALKER,KEY,ACTION,K_COL,K_ROW,K_COL_REL= ,K_ROW_REL=  
+
+# TALKER=%TALKER% - name of talker
+# KEY = %KEY% - key number
+# ACTION = %ACTION% - action to be performed
+# K_COL=%K_COL% - column
+# K_ROW=%K_ROW% - row 
+
+%TALKER% hey " %ACTION% " when %KEY% called %KEY% do
+%TALKER% hey key %KEY% key column to %K_COL% set
+%TALKER% hey key %KEY% column end relative %K_COL_REL% set
+%TALKER% hey key %KEY% key row to %K_ROW% set
+%TALKER% hey key %KEY% row end relative %K_ROW_REL% set
