@@ -142,7 +142,7 @@ bool sendSoundplaneMessage( SoundplaneOSCOutput *pOut,
 	msg.mData[SDM_X] = x;
 	msg.mData[SDM_Y] = y;
 	msg.mData[SDM_Z] = z;
-	msg.mData[SDM_DZ] = 0.0f;
+	msg.mData[SDM_DZ] = z;
 	msg.mZoneName=NULL;
 
 //	pic::logmsg() << "sendSoundplaneMsg"
@@ -438,6 +438,7 @@ soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, c
 
 //    tick_enable(true);
     tick_enable(false); // dont suppress ticks
+	last_tick_=piw::tsd_time();
 }
 
 soundplane_plg::soundplane_server_t::impl_t::~impl_t()
@@ -549,7 +550,7 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 {
     const unsigned long long dataTime = 1000*1000 / (unsigned long long) soundplane_->getDataFreq();
 
-    if (t > last_tick_ + dataTime)
+    if (t > (last_tick_ + dataTime))
 	{
 		static const long retryTime = 15*1000*1000; // try to reconnect every 15 seconds
 		if (!soundplane_->isActive())
@@ -585,9 +586,9 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 	//    {
 	//        tick_suppress(true);
 	//    }
+		last_tick_=t;
 	}
 
-	last_tick_=t;
 }
 
 /*

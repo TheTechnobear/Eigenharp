@@ -1,0 +1,7 @@
+declare MIDI_DEVICE,MIDI_OUTPUT_NAME
+#this will create a midi output agent name %MIDI_OUTPUT_NAME% and connect it to midi device called %MIDI_DEVICE%
+
+midi output create
+it to %MIDI_OUTPUT_NAME% name ify
+%MIDI_DEVICE% to %MIDI_OUTPUT_NAME% connect
+
