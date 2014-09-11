@@ -3,6 +3,6 @@ Import('master_env')
 env = master_env.Clone()
 
 env.PiPythonPackage(package='Technobear', per_agent='plg_soundplane')
-env.PiAgent('soundplane', 'plg_soundplane','soundplane_plg', cversion='0.0.2', lexicon='lexicon.txt')
+env.PiAgent('soundplane', 'plg_soundplane','soundplane_plg', cversion='0.0.3', lexicon='lexicon.txt')
 if env['IS_MACOSX']:
     env.PiEtc('Technobear',Split('postflight-soundplane'))

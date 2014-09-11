@@ -330,7 +330,6 @@ class PiDarwinEnvironment(unix_tools.PiUnixEnvironment):
             f.write('export PI_PREFIX=%s\n' % env.subst('$INSTALLDIR'))
             f.write('export PI_ROOT=%s\n' % env.subst('$INSTALLROOTDIR'))
             f.write('export PI_RELEASE=%s\n' % env.subst('$PI_RELEASE'))
-            f.write('export PI_LIBPATH=%s\n' % env.subst('$LIBPATH'))
             f.write('export USER=`basename $HOME`\n')
             f.write('for script in %s/postflight-*\n' % (etc))
             f.write('do\n')
