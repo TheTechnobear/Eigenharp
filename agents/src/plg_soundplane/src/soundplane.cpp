@@ -17,6 +17,9 @@
 #define IN_ROLL 3
 #define IN_YAW 4
 
+// hardcode in soundplane to be once a second
+#define INFREQUENT_TIME 1000*1000
+
 static std::string nullZone;
 namespace
 {
@@ -84,10 +87,6 @@ namespace
         int voiceId_;
         unsigned long long voiceTime_;
     };
-
-
-
-
 };
 
 
@@ -117,6 +116,7 @@ struct soundplane_plg::soundplane_server_t::impl_t:
 	int port_;
 	unsigned long long int last_connect_time_;
 	unsigned long long int last_tick_;
+	unsigned long long int last_infreq_;
 };
 
 #define SDM_VOICE 0
@@ -432,13 +432,15 @@ soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, c
 		soundplane_->setActive(false);
 		pic::logmsg() << "soundplane unable to connect :" << host_ << ":" << port_;
 	}
-	last_connect_time_=pic_microtime();
+
+	last_connect_time_=piw::tsd_time();
+	last_tick_=piw::tsd_time();
+	last_infreq_=piw::tsd_time();
 
     d->sink(this,"soundplane server");
 
-//    tick_enable(true);
     tick_enable(false); // dont suppress ticks
-	last_tick_=piw::tsd_time();
+
 }
 
 soundplane_plg::soundplane_server_t::impl_t::~impl_t()
@@ -568,7 +570,12 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 				{
 					soundplane_->setActive(false);
 					pic::logmsg() << "soundplane unable to connect :" << host_ << ":" << port_;
+					return;
 				}
+			}
+			else
+			{
+				return;
 			}
 		}
 
@@ -582,13 +589,14 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 		}
 		sendSoundplaneMessage(soundplane_, MLS_endFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f,nullZone);
 
-	//    if(!active_wires_.head())
-	//    {
-	//        tick_suppress(true);
-	//    }
+	    if (t > (last_infreq_ + (INFREQUENT_TIME) ))
+	    {
+	    	soundplane_->doInfrequentTasks();
+	    	last_infreq_ = t;
+	    }
+
 		last_tick_=t;
 	}
-
 }
 
 /*
@@ -618,6 +626,14 @@ static int __set_max_voice_count(void *i_, void *d_)
     return 0;
 }
 
+static int __set_kyma_mode(void *i_, void *d_)
+{
+    soundplane_plg::soundplane_server_t::impl_t *i = (soundplane_plg::soundplane_server_t::impl_t *)i_;
+    bool d = *(bool *)d_;
+    i->soundplane_->setKymaMode(d);
+    return 0;
+}
+
 
 soundplane_plg::soundplane_server_t::soundplane_server_t(piw::clockdomain_ctl_t *d, const std::string &a, const std::string &p): impl_(new impl_t(d,a,p))
 {
@@ -644,10 +660,13 @@ void soundplane_plg::soundplane_server_t::set_data_freq(unsigned dataFreq)
     piw::tsd_fastcall(__set_data_freq,impl_,&dataFreq);
 }
 
-
-
 void soundplane_plg::soundplane_server_t::set_pitch_bend(float pitchBend)
 {
     piw::tsd_fastcall(__set_pitch_bend,impl_,&pitchBend);
+}
+
+void soundplane_plg::soundplane_server_t::set_kyma_mode(bool kyma_mode)
+{
+    piw::tsd_fastcall(__set_kyma_mode,impl_,&kyma_mode);
 }
 

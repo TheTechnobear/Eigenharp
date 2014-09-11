@@ -51,9 +51,10 @@ class Agent(agent.Agent):
 #        self.absstrip2_input = bundles.VectorInput(self.absstrip2_output, self.domain,signals=(1,))
 #        self[1][9] = atom.Atom(domain=domain.BoundedFloat(-1,1), policy=self.absstrip2_input.vector_policy(1,False), names='absolute strip input', ordinal=2)
 
-        self[3] = atom.Atom(domain=domain.BoundedInt(1,500), policy=atom.default_policy(self.__set_data_freq), names='data frequency')
-        self[4] = atom.Atom(domain=domain.BoundedFloat(0,24), policy=atom.default_policy(self.__set_pitch_bend), names='pitch bend range')
-        self[5] = atom.Atom(domain=domain.BoundedInt(1,16), policy=atom.default_policy(self.__set_max_voice_count), names='max voice count')
+        self[3] = atom.Atom(domain=domain.BoundedInt(1,1000), init=250, policy=atom.default_policy(self.__set_data_freq), names='data frequency')
+        self[4] = atom.Atom(domain=domain.BoundedFloat(0,24), init=0, policy=atom.default_policy(self.__set_pitch_bend), names='pitch bend range')
+        self[5] = atom.Atom(domain=domain.BoundedInt(1,16), init=16, policy=atom.default_policy(self.__set_max_voice_count), names='max voice count')
+        self[6] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__set_kyma_mode),names='kyma')
 
     def __set_data_freq(self,value):
         self[3].set_value(value)
@@ -70,6 +71,10 @@ class Agent(agent.Agent):
         self.soundplane.set_max_voice_count(value)
         return True
 
+    def __set_kyma_mode(self,value):
+        self[6].set_value(value)
+        self.soundplane.set_kyma_mode(value)
+        return True
 
 #
 # Define Agent as this agents top level class

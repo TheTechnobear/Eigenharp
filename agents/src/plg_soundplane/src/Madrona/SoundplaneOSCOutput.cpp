@@ -111,13 +111,19 @@ void SoundplaneOSCOutput::doInfrequentTasks()
 		p << osc::BeginMessage( "/osc/notify/midi/Soundplane" );	
 		p << (osc::int32)1;
 		p << osc::EndMessage;
+
+		p << osc::BeginMessage( "/t3d/dr" );
+		p << (osc::int32)mDataFreq;
+		p << osc::EndMessage;
+
 		p << osc::EndBundle;
 		mpUDPSocket->Send( p.Data(), p.Size() );
+		return;
 	}
 	
 	// send data rate to receiver
 	p << osc::BeginBundleImmediate;
-	p << osc::BeginMessage( "/t3d/dr" );	
+	p << osc::BeginMessage( "/t3d/dr" );
 	p << (osc::int32)mDataFreq;
 	p << osc::EndMessage;
 	p << osc::EndBundle;

@@ -21,6 +21,7 @@ namespace soundplane_plg
             void set_max_voice_count(unsigned);
             void set_data_freq(unsigned);
             void set_pitch_bend(float);
+            void set_kyma_mode(bool);
 
             class impl_t;
             
