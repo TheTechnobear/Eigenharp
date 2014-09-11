@@ -20,6 +20,11 @@ pitch_bend (0) - use roll to induce pitch bend, this is the range in semitones, 
 max_voices (16) - maximum number of active keys at a time, above this value the agent will steal voices, usually can be left as 16 like soundplane, and let client steal voices if appropriate
 kyma (false)- enable kyma mode, send kyma mode, this is completely UNTESTED and experimental as I have no means of testings
 
+breath = /x1
+abs_strip 1 = /x2
+abs_strip 1 = /x3
+abs_strip 1 = /x4
+abs_strip 1 = /x5
 
 
 CHANGE HISTORY
@@ -32,6 +37,7 @@ change log:
 0.0.3 - fix timing isssue with data freq
 0.0.3 - implement infrequent tasks every seconds
 0.0.3 - add support for kyma mode
+0.0.3 - add zone support for strip and breath
 
 
 KYMA

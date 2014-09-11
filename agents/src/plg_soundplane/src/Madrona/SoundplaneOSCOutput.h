@@ -84,6 +84,7 @@ private:
 	bool mKymaMode;
     bool mGotNoteChangesThisFrame;
     bool mGotMatrixThisFrame;
+    bool mGotControlThisFrame;
     SoundplaneDataMessage mMatrixMessage;
 };
 

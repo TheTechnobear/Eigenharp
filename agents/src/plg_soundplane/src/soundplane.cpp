@@ -12,15 +12,18 @@
 #define UINT64_MAX  (18446744073709551615ULL)
 #endif
 
+
 #define IN_FREQ 1
 #define IN_PRESSURE 2
 #define IN_ROLL 3
 #define IN_YAW 4
 
+#define IN_MASK SIG4(IN_FREQ,IN_PRESSURE,IN_ROLL,IN_YAW)
+
+
 // hardcode in soundplane to be once a second
 #define INFREQUENT_TIME 1000*1000
 
-static std::string nullZone;
 namespace
 {
 
@@ -28,7 +31,7 @@ namespace
 
     struct soundplane_t: piw::root_t
     {
-        soundplane_t(soundplane_plg::soundplane_server_t::impl_t *server, const std::string &prefix, bool fake_key, unsigned signals);
+        soundplane_t(soundplane_plg::soundplane_server_t::impl_t *server, const std::string &prefix, bool key_, unsigned ident);
         ~soundplane_t();
         piw::wire_t *root_wire(const piw::event_data_source_t &);
 
@@ -42,9 +45,9 @@ namespace
 
         soundplane_plg::soundplane_server_t::impl_t *server_;
 
-        std::string prefix_; // osc prefix
-        bool fake_key_;
-        unsigned signals_;
+        std::string prefix_;
+        bool key_;
+        unsigned ident_;
         bct_clocksink_t *upstream_;
 
         std::vector<soundplane_wire_t *> wires_;
@@ -72,8 +75,8 @@ namespace
         bool event_end(unsigned long long);
         void event_buffer_reset(unsigned,unsigned long long, const piw::dataqueue_t &,const piw::dataqueue_t &);
 
-        void send(unsigned long long time, bool isStart);
-        bool sendSoundplaneMessage(MLSymbol type, MLSymbol subtype,int voice, float note,float x, float y, float z,const std::string& zoneName = nullZone);
+        void send(unsigned long long time, unsigned signal, bool isStart);
+        SoundplaneOSCOutput * soundplane();
 
         soundplane_t *output_;
 
@@ -98,7 +101,7 @@ struct soundplane_plg::soundplane_server_t::impl_t:
 
     void clocksink_ticked(unsigned long long f, unsigned long long t);
 
-    piw::cookie_t create_output(const std::string &prefix, bool fake_key, unsigned signals);
+    piw::cookie_t create_output(const std::string &prefix, bool key, unsigned signals);
 
     float pitchBend() { return pitchBend_;}
     void pitchBend(float f) { pitchBend_=f;}
@@ -119,33 +122,53 @@ struct soundplane_plg::soundplane_server_t::impl_t:
 	unsigned long long int last_infreq_;
 };
 
-#define SDM_VOICE 0
-#define SDM_X 1
-#define SDM_Y 2
-#define SDM_Z 3
-#define SDM_DZ 4
-#define SDM_NOTE 5
+#define SDM_T_VOICE 0
+#define SDM_T_X 1
+#define SDM_T_Y 2
+#define SDM_T_Z 3
+#define SDM_T_DZ 4
+#define SDM_T_NOTE 5
 
-bool sendSoundplaneMessage( SoundplaneOSCOutput *pOut,
+#define SDM_C_ZONEID 0
+#define SDM_C_X 5
+#define SDM_C_Y 6
+#define SDM_C_Z 7
+
+
+
+bool sendSoundplaneMessage( SoundplaneOSCOutput *pOut,MLSymbol type)
+{
+	if(! pOut->isActive()) return false;
+
+	SoundplaneDataMessage msg;
+	msg.mType = type;
+	msg.mZoneName=nullZone.c_str();
+
+	pOut->processMessage(&msg);
+	return true;
+}
+
+
+
+bool sendSoundplaneTouchMessage( SoundplaneOSCOutput *pOut,
 							MLSymbol type, MLSymbol subtype,
 							int voice,
-							float note, float x, float y, float z,
-							const std::string& zoneName)
+							float note, float x, float y, float z)
 {
 	if(! pOut->isActive()) return false;
 
 	SoundplaneDataMessage msg;
 	msg.mType = type;
 	msg.mSubtype = subtype;
-	msg.mData[SDM_VOICE] = voice;
-	msg.mData[SDM_NOTE] = note;
-	msg.mData[SDM_X] = x;
-	msg.mData[SDM_Y] = y;
-	msg.mData[SDM_Z] = z;
-	msg.mData[SDM_DZ] = z;
-	msg.mZoneName=NULL;
+	msg.mData[SDM_T_VOICE] = voice;
+	msg.mData[SDM_T_NOTE] = note;
+	msg.mData[SDM_T_X] = x;
+	msg.mData[SDM_T_Y] = y;
+	msg.mData[SDM_T_Z] = z;
+	msg.mData[SDM_T_DZ] = z;
+	msg.mZoneName=nullZone.c_str();
 
-//	pic::logmsg() << "sendSoundplaneMsg"
+//	pic::logmsg() << "sendSoundplaneTouchMessage"
 //					<< " type:" << type
 //					<< " subtype:" << subtype
 //					<< " voice:" << voice
@@ -157,6 +180,36 @@ bool sendSoundplaneMessage( SoundplaneOSCOutput *pOut,
 	pOut->processMessage(&msg);
 	return true;
 }
+
+bool sendSoundplaneControlMessage( SoundplaneOSCOutput *pOut,
+							MLSymbol type, MLSymbol subtype,int zoneId, float x, float y, float z, const char* zone)
+{
+	if(! pOut->isActive()) return false;
+
+//	pic::logmsg() << "sendSoundplaneControlMessage"
+//					<< " type:" << type
+//					<< " zoneId:" << zoneId
+//					<< " subtype:" << subtype
+//					<< " x:" << x
+//					<< " y:" << y
+//					<< " z:" << z
+//					<< " zone:" << zone;
+
+
+	SoundplaneDataMessage msg;
+	msg.mType = type;
+	msg.mSubtype = subtype;
+	msg.mData[SDM_C_ZONEID]= zoneId;
+	msg.mData[SDM_C_X] = x;
+	msg.mData[SDM_C_Y] = y;
+	msg.mData[SDM_C_Z] = z;
+	msg.mZoneName=zone;
+
+
+	pOut->processMessage(&msg);
+	return true;
+}
+
 
 
 soundplane_wire_t::soundplane_wire_t(soundplane_t *output, unsigned index, const piw::event_data_source_t &es):
@@ -191,16 +244,17 @@ void soundplane_wire_t::event_start(unsigned seq, const piw::data_nb_t &id, cons
     pic::msg_t msg;
     msg << id;
     id_string_.set_nb(piw::makestring_nb(msg.str().c_str(),id.time()));
-    sendSoundplaneMessage(MLS_startFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f);
-    send(id.time(),true);
-    sendSoundplaneMessage(MLS_endFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f);
+
+    ::sendSoundplaneMessage(soundplane(),MLS_startFrameSym);
+    send(id.time(),1,true);
+    ::sendSoundplaneMessage(soundplane(),MLS_endFrameSym);
+
 }
 
 void soundplane_wire_t::ticked(unsigned long long from, unsigned long long to)
 {
     piw::data_nb_t d;
-    unsigned s;
-    unsigned long long mask = (1ULL<<(output_->signals_))-1ULL;
+    unsigned s=1;
 
 	if(voiceId()<0)
 	{
@@ -209,107 +263,104 @@ void soundplane_wire_t::ticked(unsigned long long from, unsigned long long to)
 		return;
 	}
 
-    while(iterator_->next(mask,s,d,to))
-    {
-        send(d.time(),false);
-    }
+    send(to,s,false);
+}
+
+SoundplaneOSCOutput * soundplane_wire_t::soundplane()
+{
+	return output_->server_->soundplane_;
 }
 
 
-void soundplane_wire_t::send(unsigned long long t, bool isStart)
+void soundplane_wire_t::send(unsigned long long t,unsigned s, bool isStart)
 {
 
     piw::data_nb_t d;
-    MLSymbol type =MLS_nullSym, subtype = MLS_nullSym;
-    int voice = 0;
-    float note = 0.0f;
-    float x=0.0f,y=0.0f,z=0.0f;
-
-    float pb_range=output_->server_->pitchBend();
-
-    if(iterator_->latest(IN_PRESSURE,d,t))
+	MLSymbol type =MLS_nullSym, subtype = MLS_nullSym;
+    if(output_->key_)
     {
-//    	pic::logmsg() << "p" << d;
-      	z= d.as_denorm_float();
-    }
-    if(iterator_->latest(IN_ROLL,d,t))
-    {
-//    	pic::logmsg() << "y" << d;
-      	y = d.as_denorm_float();
-    }
-    if(iterator_->latest(IN_YAW,d,t))
-    {
-//    	pic::logmsg() << "x" << d;
-      	x = d.as_denorm_float();
-    }
+    	int voice = 0;
+		float note = 0.0f;
+		float x=0.0f,y=0.0f,z=0.0f;
 
+		float pb_range=output_->server_->pitchBend();
 
-    if(iterator_->latest(IN_FREQ,d,t))
-    {
-    	voice=voiceId_;
-    	float freq = d.as_denorm_float();
-    	note = 12.0f * pic_log2(freq/440.0f) + 69.0f + (pb_range * y);
-		type=MLS_touchSym;
-		if(isStart)
+		if(iterator_->latest(IN_PRESSURE,d,t))
 		{
-			subtype = MLS_onSym;
+//	    	pic::logmsg() << "p" << d;
+			z= d.as_denorm_float();
 		}
-		else
+		if(iterator_->latest(IN_ROLL,d,t))
 		{
-			subtype = MLS_continueSym;
+//	    	pic::logmsg() << "y" << d;
+			y = d.as_denorm_float();
+		}
+		if(iterator_->latest(IN_YAW,d,t))
+		{
+//	    	pic::logmsg() << "x" << d;
+			x = d.as_denorm_float();
 		}
 
-    	//    	pic::logmsg() << "freq" << freq << " note" << note;
+		if(iterator_->latest(IN_FREQ,d,t))
+		{
+			voice=voiceId_;
+			float freq = d.as_denorm_float();
+			note = 12.0f * pic_log2(freq/440.0f) + 69.0f + (pb_range * y);
+			type=MLS_touchSym;
+			if(isStart)
+			{
+				subtype = MLS_onSym;
+			}
+			else
+			{
+				subtype = MLS_continueSym;
+			}
+//	    	pic::logmsg() << "freq" << freq << " note" << note;
+		}
 
+		iterator_->reset(IN_FREQ,t+1);
+		iterator_->reset(IN_PRESSURE,t+1);
+		iterator_->reset(IN_ROLL,t+1);
+		iterator_->reset(IN_YAW,t+1);
 
-//        else // TODO, add controllers
-//        {
-        // this will need redoing, as x,y,z are store as 5,6,7 not 1,2,3 !
-//        	// strip_position_1, strip_position_2, breath etc... map to different zones
-//        	voice= 1; //TODO
-//          type = MLS_controllerSym;
-//          subtype = MLS_xSym;
-//          x = d.as_denorm_float();
-//        	zonename = id_string_.get().as_string();
-//        }
+		::sendSoundplaneTouchMessage(soundplane(),type,subtype,voice,note,x,y,z);
     }
+	else
+	{
+		type = MLS_controllerSym;
+		subtype = MLS_xSym;
+		float x=0.0f,y=0.0f,z=0.0f;
+		int zoneId=output_->ident_;
+		const char* zone =  output_->prefix_.c_str();
 
-    iterator_->reset(IN_FREQ,t+1);
-    iterator_->reset(IN_PRESSURE,t+1);
-    iterator_->reset(IN_ROLL,t+1);
-    iterator_->reset(IN_YAW,t+1);
+		if(iterator_->latest(1,d,t))
+		{
+			x = d.as_denorm_float();
+		}
 
-    sendSoundplaneMessage(type,subtype,voice,note,x,y,z);
+		::sendSoundplaneControlMessage(soundplane(),type,subtype,zoneId,x,y,z,zone);
+		if(s>0) iterator_->reset(s,t+1);
+	}
+
     
     // store the last processing time for each wire
     last_processed_ = t;
 }
 
-bool soundplane_wire_t::sendSoundplaneMessage(
-							MLSymbol type, MLSymbol subtype,
-							int voice,
-							float note, float x, float y, float z,
-							const std::string& zoneName)
-{
-	return ::sendSoundplaneMessage(output_->server_->soundplane_,type,subtype,voice,note,x,y,z,zoneName);
-}
-
-
-
 
 bool soundplane_wire_t::event_end(unsigned long long t)
 {
 	// turn off, if the voice has not already been deallocated
-	if(voiceId()>=0)
+	if(voiceId()>=0 && output_->key_)
 	{
-		sendSoundplaneMessage(MLS_startFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f);
-	    send(t, false);
-	    if (output_->fake_key_)
+		::sendSoundplaneMessage(soundplane(),MLS_startFrameSym);
+	    send(t,1,false);
+	    if (output_->key_)
 	    {
-	        sendSoundplaneMessage(MLS_touchSym,MLS_offSym,voiceId_,0,0.0f,0.0f,0.0f);
+	        ::sendSoundplaneTouchMessage(soundplane(),MLS_touchSym,MLS_offSym,voiceId_,0,0.0f,0.0f,0.0f);
 	    }
 
-	    sendSoundplaneMessage(MLS_endFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f);
+	    ::sendSoundplaneMessage(soundplane(),MLS_endFrameSym);
 	}
 
     id_string_.clear_nb();
@@ -324,7 +375,7 @@ void soundplane_wire_t::event_buffer_reset(unsigned s,unsigned long long t, cons
 {
     iterator_->set_signal(s,nq);
     iterator_->reset(s,t);
-    send(t,false);
+    send(t,s,false);
 }
 
 void soundplane_wire_t::wire_closed()
@@ -332,8 +383,8 @@ void soundplane_wire_t::wire_closed()
     delete this;
 }
 
-soundplane_t::soundplane_t(soundplane_plg::soundplane_server_t::impl_t *server, const std::string &prefix, bool fake_key, unsigned signals):
-  piw::root_t(0), server_(server), prefix_(prefix), fake_key_(fake_key), signals_(signals), upstream_(0)
+soundplane_t::soundplane_t(soundplane_plg::soundplane_server_t::impl_t *server, const std::string &prefix, bool key, unsigned ident):
+  piw::root_t(0), server_(server), prefix_(prefix), key_(key), ident_(ident), upstream_(0)
 {
     // add ourself to the list of outputs in the server.
     server_->outputs_.insert(std::make_pair(prefix_,this));
@@ -462,7 +513,7 @@ soundplane_plg::soundplane_server_t::impl_t::~impl_t()
     }
 }
 
-piw::cookie_t soundplane_plg::soundplane_server_t::impl_t::create_output(const std::string &prefix, bool fake_key, unsigned signals)
+piw::cookie_t soundplane_plg::soundplane_server_t::impl_t::create_output(const std::string &prefix, bool key, unsigned ident)
 {
     std::map<std::string,soundplane_t *>::iterator i;
 
@@ -473,7 +524,7 @@ piw::cookie_t soundplane_plg::soundplane_server_t::impl_t::create_output(const s
         return piw::cookie_t();
     }
 
-    soundplane_t *o = new soundplane_t(this,prefix,fake_key,signals);
+    soundplane_t *o = new soundplane_t(this,prefix,key,ident);
     return o->cookie();
 }
 
@@ -493,13 +544,19 @@ void soundplane_plg::soundplane_server_t::impl_t::deactivate_wire_slow(soundplan
 
 void soundplane_plg::soundplane_server_t::impl_t::activate_wire_fast(soundplane_wire_t *w)
 {
-//    if(!active_wires_.head())
-//    {
-//        tick_suppress(false);
-//    }
     unsigned i = 0;
     unsigned oldestVoice = 0;
     unsigned long long oldestTime = UINT64_MAX;
+
+    // dont need voice allocation on non-keys
+    if(w->output_->key_ == false)
+    {
+    	w->voiceId(1000);
+    	w->voiceTime(0);
+        active_wires_.append(w);
+        return;
+    }
+
 
     //find an empty slot, up to maxium... increase vector if needed, or reallocate voices if necessary
     for(i=0;i<voices_.size() && i < (unsigned) soundplane_->getMaxTouches() ;i++)
@@ -523,9 +580,9 @@ void soundplane_plg::soundplane_server_t::impl_t::activate_wire_fast(soundplane_
     {
     	// hit max voice so reallocate
     	i=oldestVoice;
-	    sendSoundplaneMessage(soundplane_,MLS_startFrameSym,MLS_nullSym,0,0.0f,0.0f,0.0f,0.0f,nullZone);
-        sendSoundplaneMessage(soundplane_,MLS_touchSym,MLS_offSym,i,0.0f,0.0f,0.0f,0.0f,nullZone);
-	    sendSoundplaneMessage(soundplane_,MLS_endFrameSym,MLS_nullSym,0.0f,0,0.0f,0.0f,0.0f,nullZone);
+	    sendSoundplaneMessage(soundplane_,MLS_startFrameSym);
+        sendSoundplaneTouchMessage(soundplane_,MLS_touchSym,MLS_offSym,i,0.0f,0.0f,0.0f,0.0f);
+	    sendSoundplaneMessage(soundplane_,MLS_endFrameSym);
 		voices_[i]->voiceId(-1);
     }
 
@@ -537,8 +594,18 @@ found_slot:
 //	pic::logmsg() << "allocate voice:" << i;
     active_wires_.append(w);
 }
+
 void soundplane_plg::soundplane_server_t::impl_t::deactivate_wire_fast(soundplane_wire_t *w)
 {
+    if(w->output_->key_ == false)
+    {
+    	w->voiceId(0);
+    	w->voiceTime(0);
+        active_wires_.remove(w);
+    	return;
+    }
+
+
 	int v=w->voiceId();
 	voices_[v]=0;
 	w->voiceId(0);
@@ -580,14 +647,14 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 		}
 
 
-		sendSoundplaneMessage(soundplane_, MLS_startFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f,nullZone);
+		sendSoundplaneMessage(soundplane_, MLS_startFrameSym);
 
 		soundplane_wire_t *w;
 		for(w=active_wires_.head(); w!=0; w=active_wires_.next(w))
 		{
 			w->ticked(f,t);
 		}
-		sendSoundplaneMessage(soundplane_, MLS_endFrameSym,MLS_nullSym,0,0,0.0f,0.0f,0.0f,nullZone);
+		sendSoundplaneMessage(soundplane_, MLS_endFrameSym);
 
 	    if (t > (last_infreq_ + (INFREQUENT_TIME) ))
 	    {
@@ -644,9 +711,9 @@ soundplane_plg::soundplane_server_t::~soundplane_server_t()
     delete impl_;
 }
 
-piw::cookie_t soundplane_plg::soundplane_server_t::create_output(const std::string &prefix,bool fake_key,unsigned signals)
+piw::cookie_t soundplane_plg::soundplane_server_t::create_output(const std::string &prefix,bool key,unsigned ident)
 {
-    return impl_->create_output(prefix,fake_key,signals);
+    return impl_->create_output(prefix,key,ident);
 }
 
 

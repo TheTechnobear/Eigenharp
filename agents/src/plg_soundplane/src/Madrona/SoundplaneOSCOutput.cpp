@@ -185,6 +185,8 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
         }        
         mGotNoteChangesThisFrame = false;
         mGotMatrixThisFrame = false;
+        mGotControlThisFrame = false;
+
     }
     else if(type == touchSym)
     {
@@ -228,6 +230,7 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
         // when a controller message comes in, make a local copy of the message and store by zone ID.
         int zoneID = msg->mData[0];
         mMessagesByZone[zoneID] = *msg;
+        mGotControlThisFrame = true;
     }
     else if(type == matrixSym)
     {
@@ -237,7 +240,7 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
     }
     else if(type == endFrameSym)
     {
-        if(mGotNoteChangesThisFrame || mTimeToSendNewFrame)
+        if(mGotNoteChangesThisFrame || mGotControlThisFrame || mGotMatrixThisFrame|| mTimeToSendNewFrame)
         {
             // begin OSC bundle for this frame
             osc::OutboundPacketStream p( mpOSCBuf, kUDPOutputBufferSize );
@@ -268,7 +271,7 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
                     x = pMsg->mData[5];
                     y = pMsg->mData[6];
                     z = pMsg->mData[7];
-                    std::string ctrlStr("/");
+                    std::string ctrlStr("/t3d/");
                     ctrlStr += (pMsg->mZoneName);
                     
                     p << osc::BeginMessage( ctrlStr.c_str() );
