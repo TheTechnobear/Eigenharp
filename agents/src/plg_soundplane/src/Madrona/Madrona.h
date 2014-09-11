@@ -12,7 +12,7 @@ const int kSoundplaneHeight = 8;
 
 
 const int kSoundplaneMaxTouches = 16;
-const int kSoundplaneAMaxZones = 150;
+const int kSoundplaneAMaxZones = 10;
 const int kSoundplaneMaxControllerNumber = 127;
 
 inline osc::uint64 getMicroseconds() { return pic_microtime();}
@@ -35,6 +35,8 @@ static const MLSymbol MLS_toggleSym=10;
 static const MLSymbol MLS_endFrameSym=11;
 static const MLSymbol MLS_matrixSym=12;
 
+static const std::string nullZone;
+
 
 
 template <class c>
@@ -56,9 +58,12 @@ struct SoundplaneDataMessage
 {
     MLSymbol mType;
     MLSymbol mSubtype;
-    char* mZoneName;
+    const char* mZoneName;
     float mData[8];
     float mMatrix[kSoundplaneWidth*kSoundplaneHeight];
+    SoundplaneDataMessage() : mType(MLS_nullSym),mSubtype(MLS_nullSym),mZoneName(nullZone.c_str())
+    {
+    }
 };
 
 class SoundplaneDataListener 

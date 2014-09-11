@@ -16,6 +16,9 @@
 
 #define IN_CONTROL 1
 
+// SET LOG_SINGLE to x and LOG_MULTI to 1 for logging
+#define LOG_SINGLE(x) 
+#define LOG_MULTI 0
 
 namespace scale_illuminator_plg
 {
@@ -132,7 +135,7 @@ scale_illuminator_t::impl_t::impl_t(piw::clockdomain_ctl_t *cd, const piw::cooki
 
 scale_illuminator_t::impl_t::~impl_t()
 {
-	// pic::logmsg() << "scale_illuminator_t::impl_t::~impl_t";
+	LOG_SINGLE( pic::logmsg() << "scale_illuminator_t::impl_t::~impl_t";)
 	tracked_invalidate();
 	invalidate();
 	delete light_wire_.ptr();
@@ -224,7 +227,7 @@ void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data
 {
     courses.clear();
 
-	pic::logmsg() << "decode_courses " << courselen;
+    LOG_SINGLE( pic::logmsg() << "decode_courses " << courselen;)
 
 	unsigned dictlen = courselen.as_tuplelen();
     if(0 == dictlen)
@@ -236,17 +239,18 @@ void decode_courses(pic::lckvector_t<unsigned>::nbtype &courses, const piw::data
     {
     	unsigned l=courselen.as_tuple_value(i).as_long();
         courses.push_back(l);
-     }
+    }
 
-//    unsigned column=0;
-//    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
-//    ci = courses.begin();
-//    ce = courses.end();
-//
-//    for(; ci != ce; ++ci)
-//    {
-//    	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
-//    }
+	#if LOG_MULTI > 0 
+    unsigned column=0;
+    pic::lckvector_t<unsigned>::nbtype::const_iterator ci,ce;
+    ci = courses.begin();
+    ce = courses.end();
+    for(; ci != ce; ++ci)
+	{
+	 	pic::logmsg() << "decode_courses column " << column++ << "value= " << *ci;
+	}
+	#endif
 }
 
 void decode_courseoffset(pic::lckvector_t<float>::nbtype &scale,pic::lckvector_t<float>::nbtype &semis, const piw::data_nb_t &courseoffset)
@@ -283,26 +287,28 @@ void decode_courseoffset(pic::lckvector_t<float>::nbtype &scale,pic::lckvector_t
     ci = scale.begin();
     ce = scale.end();
 
-    unsigned column=0;
-    for(; ci != ce; ++ci)
-    {
-    	pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
-    }
-
-    pic::lckvector_t<float>::nbtype::const_iterator si,se;
-    si = semis.begin();
-    se = semis.end();
-
-    column=0;
-    for(; si != se; ++si)
-    {
-    	pic::logmsg() << "decode_courseoffset column " << column++ << "semioffset=" << *si;
-    }
+	#if LOG_MULTI > 0 
+	unsigned column=0;
+	for(; ci != ce; ++ci)
+	{
+		pic::logmsg() << "decode_courseoffset column " << column++ << "courseoffset=" << *ci;
+	}
+	pic::lckvector_t<float>::nbtype::const_iterator si,se;
+	si = semis.begin();
+	se = semis.end();
+	column=0;
+	for(; si != se; ++si)
+	{
+		pic::logmsg() << "decode_courseoffset column " << column++ << "semioffset=" << *si;
+	}
+	#endif 
 }
 
 float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
 {
-    scale.clear();
+	LOG_SINGLE(    	pic::logmsg() << "decode_scale scale=" << s;)
+
+	scale.clear();
     float max_note = 0;
 
     if(s.size()<=2)
@@ -318,7 +324,7 @@ float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
         std::istringstream(part) >> f;
         scale.push_back(f);
         if(f>max_note) max_note=f;
-//    	pic::logmsg() << "decode_scale f=" << f;
+        LOG_SINGLE(    	pic::logmsg() << "decode_scale f=" << f;)
     }
     // we remove the last entry, as it is a repeat of the first, it only exists
     // for downstream scaler to determine the interval between last entry and first  (e.g B to C)
@@ -329,6 +335,7 @@ float decode_scale(pic::lckvector_t<float>::nbtype &scale, const std::string &s)
 
 void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 {
+	#if LOG_MULTI > 0 
 	if(d.is_null())
 	{
 		pic::logmsg() << "scale_illuminator_t::impl_t::control_change d=null!";
@@ -340,6 +347,8 @@ void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 		else
 			pic::logmsg() << "scale_illuminator_t::impl_t::control_change (not dict)" << d;
 	}
+	#endif 
+
     if(!d.is_null() && d.is_dict())
     {
 		piw::data_nb_t t,b,o,s,co,cl;
@@ -347,33 +356,33 @@ void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 		t = d.as_dict_lookup("tonic");
 		if(!t.is_null())
 		{
-			pic::logmsg() << "tonic " << t;
+			LOG_SINGLE(	pic::logmsg() << "tonic " << t;)
 			playing_tonic_ = t.as_renorm_float(0,12,0);
 		}
 
 		b = d.as_dict_lookup("base");
 		if(!b.is_null())
 		{
-			pic::logmsg() << "base " << b;
+			LOG_SINGLE(	pic::logmsg() << "base " << b;)
 			playing_base_note_ = b.as_renorm_float(-20,20,0);
 		}
 
 		o = d.as_dict_lookup("octave");
 		if(!o.is_null())
 		{
-			pic::logmsg() << "octave " << o;
+			LOG_SINGLE(	pic::logmsg() << "octave " << o;)
 			playing_octave_ = o.as_renorm_float(-1,9,0);
 		}
 
 		s = d.as_dict_lookup("scale");
 		if(s.is_string())
 		{
-			pic::logmsg() << "scale "<< s ;
+			LOG_SINGLE(	pic::logmsg() << "scale "<< s ;)
 			playing_max_note_=decode_scale(playing_scale_,s.as_stdstr());
 		}
 		else if (playing_scale_.size()==0)
 		{
-			pic::logmsg() << "defaulting to major scale";
+			LOG_SINGLE( pic::logmsg() << "defaulting to major scale";)
 			//default input to major, just in case its not specified on KG
 			playing_max_note_=decode_scale(playing_scale_,"[0,2,4,5,7,9,11,12]");
 		}
@@ -381,13 +390,13 @@ void scale_illuminator_t::impl_t::control_change(const piw::data_nb_t &d)
 		co = d.as_dict_lookup("courseoffset");
 		if(!co.is_null())
 		{
-			pic::logmsg() << "courseoffset " << co;
+			LOG_SINGLE(	pic::logmsg() << "courseoffset " << co;)
 			decode_courseoffset(scaleoffset_,semitoneoffset_, co);
 		}
 		cl = d.as_dict_lookup("courselen");
 		if(!cl.is_null())
 		{
-			pic::logmsg() << "courselen " << cl;
+			LOG_SINGLE( pic::logmsg() << "courselen " << cl;)
 			decode_courses(courselen_,cl);
 		}
 		light_wire_->updateLights();
@@ -456,6 +465,7 @@ bool is_in_reference_scale(pic::lckvector_t<float>::nbtype& scale, float tonic, 
 
 void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer_t& outputbuffer)
 {
+    LOG_SINGLE( pic::logmsg() << "updateLightBuffer (start)";)
     piw::statusset_t status;
 
     pic::lckvector_t<unsigned>::nbtype::const_iterator cli,cle;
@@ -464,7 +474,11 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     pic::lckvector_t<float>::nbtype::const_iterator soi,soe;
     bool is_in_scale = false;
 
-    if(impl.playing_scale_.size() == 0) return;
+    if(impl.playing_scale_.size() == 0)
+    {
+    	LOG_SINGLE( pic::logmsg() << "updateLightBuffer (failed) - no playing scale";)
+    	return;
+    }
 
     cli = impl.courselen_.begin();
     cle = impl.courselen_.end();
@@ -490,7 +504,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
     	if(smi!=sme)
     	{
     		semitone_offset+=*smi;
-    		pic::logmsg() << "semitone_offset:" << *smi << " total " << semitone_offset;
+    		LOG_SINGLE( 		pic::logmsg() << "semitone_offset:" << *smi << " total " << semitone_offset;)
     	}
 
     	// go thru each row
@@ -565,6 +579,7 @@ void updateLightBuffer(scale_illuminator_t::impl_t& impl,piw::xevent_data_buffer
 	}
     piw::data_nb_t buffer = piw::statusbuffer_t::make_statusbuffer(status);
     outputbuffer.add_value(OUT_LIGHT,buffer);
+    LOG_SINGLE( pic::logmsg() << "updateLightBuffer d= "<< buffer;)
 }
 
 
@@ -660,7 +675,7 @@ void control_wire_t::source_ended(unsigned seq)
 
 void control_wire_t::process(unsigned s, const piw::data_nb_t &d, unsigned long long t)
 {
-	pic::logmsg() << "control_wire_t::process:" << s;
+	LOG_SINGLE(	pic::logmsg() << "control_wire_t::process:" << s;)
     if(IN_CONTROL==s)
     {
     	root_->control_change(d);
@@ -677,18 +692,19 @@ light_wire_t::light_wire_t(	scale_illuminator_t::impl_t *impl) : event_data_sour
 
 light_wire_t::~light_wire_t()
 {
-	// pic::logmsg() << "light_wire_t::~light_wire_t";
+	LOG_SINGLE( pic::logmsg() << "light_wire_t::~light_wire_t";)
 	source_shutdown();
 }
 
 void light_wire_t::source_ended(unsigned seq)
 {
-//	pic::logmsg() << "light_wire_t::source_ended";
+	LOG_SINGLE(	pic::logmsg() << "light_wire_t::source_ended";)
 	source_end(piw::tsd_time());
 }
 
 void light_wire_t::updateLights()
 {
+	LOG_SINGLE(	pic::logmsg() << "light_wire_t::updateLights";)
 	updateLightBuffer(*root_,output_);
 }
 

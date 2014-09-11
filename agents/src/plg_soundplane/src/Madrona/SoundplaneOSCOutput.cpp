@@ -111,13 +111,19 @@ void SoundplaneOSCOutput::doInfrequentTasks()
 		p << osc::BeginMessage( "/osc/notify/midi/Soundplane" );	
 		p << (osc::int32)1;
 		p << osc::EndMessage;
+
+		p << osc::BeginMessage( "/t3d/dr" );
+		p << (osc::int32)mDataFreq;
+		p << osc::EndMessage;
+
 		p << osc::EndBundle;
 		mpUDPSocket->Send( p.Data(), p.Size() );
+		return;
 	}
 	
 	// send data rate to receiver
 	p << osc::BeginBundleImmediate;
-	p << osc::BeginMessage( "/t3d/dr" );	
+	p << osc::BeginMessage( "/t3d/dr" );
 	p << (osc::int32)mDataFreq;
 	p << osc::EndMessage;
 	p << osc::EndBundle;
@@ -262,11 +268,11 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
                     x = pMsg->mData[5];
                     y = pMsg->mData[6];
                     z = pMsg->mData[7];
-                    std::string ctrlStr("/");
+                    std::string ctrlStr("/t3d/");
                     ctrlStr += (pMsg->mZoneName);
-                    
+
                     p << osc::BeginMessage( ctrlStr.c_str() );
-                    
+
                     // get control data by type and add to message
                     if(pMsg->mSubtype == xSym)
                     {
@@ -290,7 +296,7 @@ void SoundplaneOSCOutput::processMessage(const SoundplaneDataMessage* msg)
                         p << t;
                     }
                     p << osc::EndMessage;
-                    
+
                     // clear
                     mMessagesByZone[i].mType = nullSym;
                 }
