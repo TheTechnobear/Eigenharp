@@ -75,7 +75,7 @@ private:
 	osc::uint64 mLastFrameStartTime;
     bool mTimeToSendNewFrame;
 
-	UdpTransmitSocket* mpUDPSocket;		
+	UdpSocket* mpUDPSocket;
     char* mpOSCBuf;
 	osc::int32 mFrameId;
 	int mSerialNumber;

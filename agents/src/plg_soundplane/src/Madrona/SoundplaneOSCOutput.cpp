@@ -50,7 +50,7 @@ SoundplaneOSCOutput::~SoundplaneOSCOutput()
 
 void SoundplaneOSCOutput::initialize()
 {
-    mpUDPSocket = new UdpTransmitSocket( IpEndpointName( kDefaultHostnameString, kDefaultUDPPort ) );
+    mpUDPSocket = new UdpSocket();
 	mpOSCBuf = new char[kUDPOutputBufferSize];
 }
 
@@ -60,7 +60,11 @@ bool SoundplaneOSCOutput::connect(const char* name, int port)
 	{
 		try
 		{
-			mpUDPSocket->Connect(IpEndpointName(name, port));
+			// this will disconnect socket
+			delete mpUDPSocket;
+		    mpUDPSocket = new UdpSocket();
+
+		    mpUDPSocket->Connect(IpEndpointName(name, port));
 			return true;
 		}
 		catch(std::runtime_error& err)

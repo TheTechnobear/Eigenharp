@@ -4,6 +4,10 @@
 #include <picross/pic_stdint.h>
 
 #include <lib_lo/lo/lo.h>
+#include <lib_op/osc/OscReceivedElements.h>
+#include <lib_op/osc/OscPacketListener.h>
+#include <lib_op/ip/UdpSocket.h>
+
 #include <map>
 
 #include "Madrona/SoundplaneOSCOutput.h"
@@ -93,10 +97,130 @@ namespace
 };
 
 
+class kyma_listener_t: public osc::OscPacketListener
+{
+	virtual void ProcessMessage( const osc::ReceivedMessage& m,  const IpEndpointName& remoteEndpoint );
+};
+
+class kyma_server_t: public pic::thread_t
+{
+public:
+	kyma_server_t();
+	virtual ~kyma_server_t();
+
+	// thread functions
+	void thread_main();
+	void thread_init();
+	void thread_term();
+
+	// start and stop the server
+	void start();
+	void stop();
+	void port(unsigned port);
+
+private:
+	unsigned port_;
+	UdpListeningReceiveSocket *socket_;
+	kyma_listener_t listener_;
+};
+
+kyma_server_t::kyma_server_t() : port_(0),socket_(NULL)
+{
+}
+
+kyma_server_t::~kyma_server_t()
+{
+	if(socket_) delete socket_;
+}
+
+void kyma_server_t::thread_main()
+{
+//	pic::logmsg() << "kyma server main()";
+	socket_=new UdpListeningReceiveSocket (
+            IpEndpointName( IpEndpointName::ANY_ADDRESS, port_),
+            &listener_);
+	socket_->Run();
+}
+void kyma_server_t::thread_init()
+{
+}
+
+void kyma_server_t::thread_term()
+{
+//	pic::logmsg() << "kyma server terminated";
+	if(socket_) delete socket_;
+//	socket_=NULL;
+}
+
+
+void kyma_server_t::port(unsigned p)
+{
+	port_=p;
+}
+
+void kyma_server_t::start()
+{
+//	pic::logmsg() << "kyma server start()";
+	run();
+}
+
+void kyma_server_t::stop()
+{
+//	pic::logmsg() << "kyma server stop()";
+	socket_->AsynchronousBreak();
+	wait();
+//	pic::logmsg() << "kyma server stopped";
+}
+
+
+void kyma_listener_t::ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint)
+{
+	pic::logmsg() << "received kyma msg: " << m.AddressPattern();
+	osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
+	osc::int32 a1;
+	try
+	{
+		if( std::strcmp( m.AddressPattern(), "/osc/response_from" ) == 0 )
+		{
+			args >> a1 >> osc::EndMessage;
+			// set Kyma mode
+			pic::logmsg() << "kyma response " << a1;
+//			if (mOSCOutput.getKymaMode())
+//			{
+//				mKymaIsConnected = true;
+//			}
+		}
+		else if (std::strcmp( m.AddressPattern(), "/osc/notify/midi/Soundplane" ) == 0 )
+		{
+			args >> a1 >> osc::EndMessage;
+			// set voice count to a1
+			pic::logmsg() << "max touches to (ignoring!) " << a1;
+//			int newTouches = clamp((int)a1, 0, kSoundplaneMaxTouches);
+//			if(mKymaIsConnected)
+//			{
+//				// Kyma is sending 0 sometimes, which there is probably
+//				// no reason to respond to
+//				if(newTouches > 0)
+//				{
+//					setProperty("max_touches", newTouches);
+//				}
+//			}
+		}
+	}
+	catch( osc::Exception& e )
+	{
+		pic::logmsg() << "oscpack error while parsing message: "
+			<< m.AddressPattern() << ": " << e.what() << "\n";
+	}
+}
+
+
+
+
 struct soundplane_plg::soundplane_server_t::impl_t:
     piw::clocksink_t
 {
-    impl_t(piw::clockdomain_ctl_t *d, const std::string &a, const std::string &p);
+    impl_t(piw::clockdomain_ctl_t *d, const std::string &a, unsigned p);
     ~impl_t();
 
     void clocksink_ticked(unsigned long long f, unsigned long long t);
@@ -109,7 +233,10 @@ struct soundplane_plg::soundplane_server_t::impl_t:
     void deactivate_wire_slow(soundplane_wire_t *w);
     void activate_wire_fast(soundplane_wire_t *w);
     void deactivate_wire_fast(soundplane_wire_t *w);
+    bool connect(const std::string &a, unsigned p,unsigned long long t);
+    void kyma(bool);
 
+    kyma_server_t kyma_server_;
     std::map<std::string,soundplane_t *> outputs_;
     SoundplaneOSCOutput * soundplane_;
     pic::ilist_t<soundplane_wire_t> active_wires_;
@@ -459,7 +586,7 @@ void soundplane_t::root_latency()
 {
 }
 
-soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, const std::string &a, const std::string &p) :
+soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, const std::string &a, unsigned p) :
 		pitchBend_(0)
 {
 	soundplane_ = new SoundplaneOSCOutput();
@@ -470,28 +597,15 @@ soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, c
 	soundplane_->setMaxTouches(kSoundplaneMaxTouches);
 
 	soundplane_->initialize();
-	host_=a;
-	port_=atoi(p.c_str());
-	if(soundplane_->connect(host_.c_str(),port_))
-	{
-		soundplane_->setActive(true);
-		pic::logmsg() << "soundplane connected :" << host_ << ":" << port_;
-		soundplane_->notify(true);
-	}
-	else
-	{
-		soundplane_->setActive(false);
-		pic::logmsg() << "soundplane unable to connect :" << host_ << ":" << port_;
-	}
-
-	last_connect_time_=piw::tsd_time();
+	soundplane_->setActive(false);
+	last_connect_time_=0;
+//	connect(a,p,piw::tsd_time());
 	last_tick_=piw::tsd_time();
 	last_infreq_=piw::tsd_time();
 
     d->sink(this,"soundplane server");
 
     tick_enable(false); // dont suppress ticks
-
 }
 
 soundplane_plg::soundplane_server_t::impl_t::~impl_t()
@@ -511,6 +625,43 @@ soundplane_plg::soundplane_server_t::impl_t::~impl_t()
     {
         delete i->second;
     }
+}
+
+bool soundplane_plg::soundplane_server_t::impl_t::connect(const std::string &a, unsigned p,unsigned long long t)
+{
+	host_=a;
+	port_=p;
+	last_connect_time_=t;
+
+	if(soundplane_->connect(host_.c_str(),port_))
+	{
+		soundplane_->setActive(true);
+		pic::logmsg() << "soundplane connected :" << host_ << ":" << port_;
+		soundplane_->notify(true);
+		return true;
+	}
+	soundplane_->setActive(false);
+	pic::logmsg() << "soundplane unable to connect :" << host_ << ":" << port_;
+	return false;
+}
+
+
+void soundplane_plg::soundplane_server_t::impl_t::kyma(bool a)
+{
+	bool wasActive=soundplane_->getKymaMode();
+	if(a==wasActive) return;
+	soundplane_->setKymaMode(a);
+	if(wasActive)
+	{
+		pic::logmsg() << "stopping kyma reciever";
+		kyma_server_.stop();
+	}
+	else
+	{
+		pic::logmsg() << "starting kyma reciever";
+		kyma_server_.port(3124);
+		kyma_server_.start();
+	}
 }
 
 piw::cookie_t soundplane_plg::soundplane_server_t::impl_t::create_output(const std::string &prefix, bool key, unsigned ident)
@@ -626,17 +777,10 @@ void soundplane_plg::soundplane_server_t::impl_t::clocksink_ticked(unsigned long
 		{
 			if(t > last_connect_time_+retryTime)
 			{
+				;
 				last_connect_time_=t;
-				if(soundplane_->connect(host_.c_str(),port_))
+				if(!connect(host_.c_str(),port_,t))
 				{
-					soundplane_->setActive(true);
-					pic::logmsg() << "soundplane connected :" << host_ << ":" << port_;
-					soundplane_->notify(true);
-				}
-				else
-				{
-					soundplane_->setActive(false);
-					pic::logmsg() << "soundplane unable to connect :" << host_ << ":" << port_;
 					return;
 				}
 			}
@@ -697,12 +841,12 @@ static int __set_kyma_mode(void *i_, void *d_)
 {
     soundplane_plg::soundplane_server_t::impl_t *i = (soundplane_plg::soundplane_server_t::impl_t *)i_;
     bool d = *(bool *)d_;
-    i->soundplane_->setKymaMode(d);
+    i->kyma(d);
     return 0;
 }
 
 
-soundplane_plg::soundplane_server_t::soundplane_server_t(piw::clockdomain_ctl_t *d, const std::string &a, const std::string &p): impl_(new impl_t(d,a,p))
+soundplane_plg::soundplane_server_t::soundplane_server_t(piw::clockdomain_ctl_t *d, const std::string &a, unsigned p): impl_(new impl_t(d,a,p))
 {
 }
 
@@ -735,5 +879,10 @@ void soundplane_plg::soundplane_server_t::set_pitch_bend(float pitchBend)
 void soundplane_plg::soundplane_server_t::set_kyma_mode(bool kyma_mode)
 {
     piw::tsd_fastcall(__set_kyma_mode,impl_,&kyma_mode);
+}
+
+void soundplane_plg::soundplane_server_t::connect(const std::string &a, unsigned p)
+{
+	impl_->connect(a,p,piw::tsd_time());
 }
 
