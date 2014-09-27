@@ -16,7 +16,7 @@ class Agent(agent.Agent):
 
         self.domain.set_source(piw.makestring('*',0))
 
-        self.soundplane = soundplane(self.domain, "localhost", "3123");
+        self.soundplane = soundplane(self.domain, "localhost", 3123);
         self.output = self.soundplane.create_output("", True, 0)
         self.input = bundles.VectorInput(self.output, self.domain, signals=(1,2,3,4))
 
@@ -48,11 +48,18 @@ class Agent(agent.Agent):
         self.strippos2_output = self.soundplane.create_output("x4",False,3)
         self.strippos2_input = bundles.VectorInput(self.strippos2_output, self.domain,signals=(1,))
         self[1][9] = atom.Atom(domain=domain.BoundedFloat(-1,1), policy=self.strippos2_input.vector_policy(1,False), names='strip position input', ordinal=2)
+        
+        self[2] = atom.Atom(names="host")
+        self[2][1] = atom.Atom(domain=domain.String(), init='localhost', names='name', policy=atom.default_policy(self.__set_host));
+        self[2][2] = atom.Atom(domain=domain.BoundedInt(1,9999), init=3123, names='port', policy=atom.default_policy(self.__set_port), )
 
         self[3] = atom.Atom(domain=domain.BoundedInt(1,1000), init=250, policy=atom.default_policy(self.__set_data_freq), names='data frequency')
         self[4] = atom.Atom(domain=domain.BoundedFloat(0,24), init=0, policy=atom.default_policy(self.__set_pitch_bend), names='pitch bend range')
         self[5] = atom.Atom(domain=domain.BoundedInt(1,16), init=16, policy=atom.default_policy(self.__set_max_voice_count), names='max voice count')
         self[6] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__set_kyma_mode),names='kyma')
+        print "connect ", self[2][1].get_value(), " port ", self[2][2].get_value()
+        self.soundplane.connect(self[2][1].get_value(), self[2][2].get_value())
+        
 
     def __set_data_freq(self,value):
         self[3].set_value(value)
@@ -72,6 +79,16 @@ class Agent(agent.Agent):
     def __set_kyma_mode(self,value):
         self[6].set_value(value)
         self.soundplane.set_kyma_mode(value)
+        return True
+
+    def __set_host(self,value):
+        self[2][1].set_value(value)
+        self.soundplane.connect(self[2][1].get_value(), self[2][2].get_value())
+        return True
+
+    def __set_port(self,value):
+        self[2][2].set_value(value)
+        self.soundplane.connect(self[2][1].get_value(), self[2][2].get_value())
         return True
 
 #

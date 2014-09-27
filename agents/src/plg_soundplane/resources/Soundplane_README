@@ -2,7 +2,7 @@ Soundplane integration agent
 ========================
 
 
-RELEASE 0.0.3
+RELEASE 0.0.4
 
 Contributions
 =============
@@ -19,6 +19,8 @@ e.g. for SR = 48000 BUFFER=192, max data freq= 48000/192= 250
 pitch_bend (0) - use roll to induce pitch bend, this is the range in semitones, usually zero, as you use scaler to do the pitch bend
 max_voices (16) - maximum number of active keys at a time, above this value the agent will steal voices, usually can be left as 16 like soundplane, and let client steal voices if appropriate
 kyma (false)- enable kyma mode, send kyma mode, this is completely UNTESTED and experimental as I have no means of testings
+host port (3123) - port to connect to
+host name (localhost) - host to connect to
 
 breath = /x1
 abs_strip 1 = /x2
@@ -38,6 +40,7 @@ change log:
 0.0.3 - implement infrequent tasks every seconds
 0.0.3 - add support for kyma mode
 0.0.3 - add zone support for strip and breath
+0.0.4 - kyma mode now listens on port 3124 and can connect on any port
 
 
 KYMA
@@ -47,25 +50,8 @@ looking at the soundplane code, I can tell the following
 basically, the message is slightly different, and kyma will respond to the soundplane to tell it when its connected, and how many touches it wants.
 it connects back on port 3124
 
-so theoretically, my agent should listen on port 3124, and perhaps will it the future, but the truth is, even the soundplane does little of interest with this data,
-so it all seems a little pointless (you'll note t3d doesnt usually have bi directonal communiation, if it did then this would indeed be useful to others)
-
-SO...
-my guess is if you run kyma, you will need to have something (else!) listen on port 3124, 
-(id recommend oscdump) just so that kyma doesn't get upset that it cannot open a port back.
-I think it should then just work, as there is no ack required from the soundplane agent... the kyma messages are just 'information'
-(just make sure max touches is confifured the same in kyma and the soundplane agent)
-
-Testing,
-k, so i did some rudimentry testing... and basically it seem to work (in that it sent kyma messages)
-
-BUT I noticed on the periodic messages, oscdump did not like the fact that 2 bundles were being sent at the same time
-and I was getting the error message : liblo server error 9911 in path (null): Invalid bundle
-
-now this error, might be oscdump, but generally it is correct, there is no point in sending two bundles at the same time, 
-(bundles are to make things more efficient!), so Ive changed the soundplane code, to send the dr message with the rest of the kyma message
-(emailed randy, to tell him... to see if he thinks its ok, and to consider change for soundplane)
-
+in 0.0.4, i now have a listening thread on 3124, and it will display messages from kyma on in the log (but will ignore them, e.g. not setting max touches yet etc)
+also you can set the port to connect to, for kyma this should be 8000, (it defaults to 3123 which is for t3d)
 
 
 SETUPS
