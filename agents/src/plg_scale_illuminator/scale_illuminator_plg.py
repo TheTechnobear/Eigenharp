@@ -69,7 +69,7 @@ class Agent(agent.Agent):
         return action.nosync_return()
 
     def __change_tonic(self,value):
-        print 'change tonic',arg
+        print 'change tonic',value
         self[2][3].set_value(value)
         self.illuminator.reference_tonic(value);
         return True
