@@ -1,8 +1,10 @@
 Soundplane integration agent
-========================
+============================
+
+RELEASE 0.0.5
 
 
-RELEASE 0.0.4
+Note: this is likely to be the last release of this agent, it will be replaced by a new t3d agent which will be a better implemenation of t3d :)
 
 Contributions
 =============
@@ -10,7 +12,8 @@ Mark Harris - agent
 
 Overview & Install
 ==================
-
+installing the package will install the agent.
+to use in a setup connect this agent to a scaler.
 
 attribute
 =========
@@ -41,6 +44,7 @@ change log:
 0.0.3 - add support for kyma mode
 0.0.3 - add zone support for strip and breath
 0.0.4 - kyma mode now listens on port 3124 and can connect on any port
+0.0.5 - improve soundplane compatiblity, and t3d compliance - remove pitchbend, and reverse x/y, make x/y unipolar
 
 
 KYMA

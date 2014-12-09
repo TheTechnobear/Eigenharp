@@ -227,9 +227,6 @@ struct soundplane_plg::soundplane_server_t::impl_t:
 
     piw::cookie_t create_output(const std::string &prefix, bool key, unsigned signals);
 
-    float pitchBend() { return pitchBend_;}
-    void pitchBend(float f) { pitchBend_=f;}
-
     void deactivate_wire_slow(soundplane_wire_t *w);
     void activate_wire_fast(soundplane_wire_t *w);
     void deactivate_wire_fast(soundplane_wire_t *w);
@@ -241,7 +238,6 @@ struct soundplane_plg::soundplane_server_t::impl_t:
     SoundplaneOSCOutput * soundplane_;
     pic::ilist_t<soundplane_wire_t> active_wires_;
     std::vector<soundplane_wire_t *> voices_;
-    float pitchBend_;
 	std::string host_;
 	int port_;
 	unsigned long long int last_connect_time_;
@@ -410,8 +406,6 @@ void soundplane_wire_t::send(unsigned long long t,unsigned s, bool isStart)
 		float note = 0.0f;
 		float x=0.0f,y=0.0f,z=0.0f;
 
-		float pb_range=output_->server_->pitchBend();
-
 		if(iterator_->latest(IN_PRESSURE,d,t))
 		{
 //	    	pic::logmsg() << "p" << d;
@@ -420,19 +414,19 @@ void soundplane_wire_t::send(unsigned long long t,unsigned s, bool isStart)
 		if(iterator_->latest(IN_ROLL,d,t))
 		{
 //	    	pic::logmsg() << "y" << d;
-			y = d.as_denorm_float();
+			x = (d.as_denorm_float()+1.0)/2.0;
 		}
 		if(iterator_->latest(IN_YAW,d,t))
 		{
 //	    	pic::logmsg() << "x" << d;
-			x = d.as_denorm_float();
+			y = (d.as_denorm_float()+1.0)/2.0;
 		}
 
 		if(iterator_->latest(IN_FREQ,d,t))
 		{
 			voice=voiceId_;
 			float freq = d.as_denorm_float();
-			note = 12.0f * pic_log2(freq/440.0f) + 69.0f + (pb_range * y);
+			note = 12.0f * pic_log2(freq/440.0f) + 69.0f;
 			type=MLS_touchSym;
 			if(isStart)
 			{
@@ -586,8 +580,7 @@ void soundplane_t::root_latency()
 {
 }
 
-soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, const std::string &a, unsigned p) :
-		pitchBend_(0)
+soundplane_plg::soundplane_server_t::impl_t::impl_t(piw::clockdomain_ctl_t *d, const std::string &a, unsigned p)
 {
 	soundplane_ = new SoundplaneOSCOutput();
 
@@ -821,13 +814,6 @@ static int __set_data_freq(void *i_, void *d_)
     i->soundplane_->setDataFreq(d);
     return 0;
 }
-static int __set_pitch_bend(void *i_, void *d_)
-{
-    soundplane_plg::soundplane_server_t::impl_t *i = (soundplane_plg::soundplane_server_t::impl_t *)i_;
-    float d = *(float *)d_;
-    i->pitchBend(d);
-    return 0;
-}
 
 static int __set_max_voice_count(void *i_, void *d_)
 {
@@ -871,10 +857,6 @@ void soundplane_plg::soundplane_server_t::set_data_freq(unsigned dataFreq)
     piw::tsd_fastcall(__set_data_freq,impl_,&dataFreq);
 }
 
-void soundplane_plg::soundplane_server_t::set_pitch_bend(float pitchBend)
-{
-    piw::tsd_fastcall(__set_pitch_bend,impl_,&pitchBend);
-}
 
 void soundplane_plg::soundplane_server_t::set_kyma_mode(bool kyma_mode)
 {

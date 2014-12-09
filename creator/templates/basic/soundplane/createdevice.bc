@@ -1,0 +1,4 @@
+# this creates the manager required for tau and alpha  devices
+t3d device create
+sleep 5
+
