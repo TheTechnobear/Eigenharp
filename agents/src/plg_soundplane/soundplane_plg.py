@@ -54,7 +54,6 @@ class Agent(agent.Agent):
         self[2][2] = atom.Atom(domain=domain.BoundedInt(1,9999), init=3123, names='port', policy=atom.default_policy(self.__set_port), )
 
         self[3] = atom.Atom(domain=domain.BoundedInt(1,1000), init=250, policy=atom.default_policy(self.__set_data_freq), names='data frequency')
-        self[4] = atom.Atom(domain=domain.BoundedFloat(0,24), init=0, policy=atom.default_policy(self.__set_pitch_bend), names='pitch bend range')
         self[5] = atom.Atom(domain=domain.BoundedInt(1,16), init=16, policy=atom.default_policy(self.__set_max_voice_count), names='max voice count')
         self[6] = atom.Atom(domain=domain.Bool(),init=False,policy=atom.default_policy(self.__set_kyma_mode),names='kyma')
         print "connect ", self[2][1].get_value(), " port ", self[2][2].get_value()
@@ -64,11 +63,6 @@ class Agent(agent.Agent):
     def __set_data_freq(self,value):
         self[3].set_value(value)
         self.soundplane.set_data_freq(value)
-        return True
-
-    def __set_pitch_bend(self,value):
-        self[4].set_value(value)
-        self.soundplane.set_pitch_bend(value)
         return True
 
     def __set_max_voice_count(self,value):
