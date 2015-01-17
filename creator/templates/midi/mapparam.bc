@@ -1,0 +1,3 @@
+declare RIG,X,Y,UN= ,AU=instrument audio unit
+%RIG% %AU% hey %X% for %Y% %UN% map
+
