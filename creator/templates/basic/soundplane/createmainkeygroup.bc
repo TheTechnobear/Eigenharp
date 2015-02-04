@@ -1,5 +1,5 @@
-declare KEYGROUP,SCALE=major,TONIC=notec,OCTAVE=3
-# creates a keygroup and links it to a parent keygroup on specfied output
+declare KEYGROUP,SCALE=major,TONIC=noted,OCTAVE=3,DEVICE=t3d device
+# creates a keygroup and links it to device
 # KEYGROUP=%KEYGROUP% keygroup to create
 
 keygroup create 
@@ -7,6 +7,7 @@ it to %KEYGROUP% name ify
 %KEYGROUP% hey scale to %SCALE% set
 %KEYGROUP% hey tonic to %TONIC% set
 %KEYGROUP% hey octave to %OCTAVE% set
-t3d device to %KEYGROUP% connect
-t3d device to %KEYGROUP% mode key input connect
+%DEVICE% to %KEYGROUP% connect
+%DEVICE% to %KEYGROUP% mode key input connect
+
 

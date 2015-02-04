@@ -1,0 +1,10 @@
+# this creates the midi device
+declare INPUT=push midi input,OUTPUT=push midi output,DEVICE=ableton push
+midi input create
+it to %INPUT% name ify
+ableton push create
+it to %DEVICE% name ify
+%INPUT% to %DEVICE% connect
+midi output create
+it to %OUTPUT% name ify
+%DEVICE% to %OUTPUT% connect

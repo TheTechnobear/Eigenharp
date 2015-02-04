@@ -1,0 +1,7 @@
+# this creates the midi device
+declare INPUT=continuum midi input,DEVICE=continuum midi device
+midi input create
+it to %INPUT% name ify
+continuum create
+it to %DEVICE% name ify
+%INPUT% to %DEVICE% connect

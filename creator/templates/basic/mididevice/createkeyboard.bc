@@ -1,0 +1,7 @@
+# this creates the midi device
+declare INPUT=keyboard midi input,DEVICE=keyboard controller
+midi input create
+it to %INPUT% name ify
+keyboard controller create
+it to %DEVICE% name ify
+%INPUT% to %DEVICE% connect

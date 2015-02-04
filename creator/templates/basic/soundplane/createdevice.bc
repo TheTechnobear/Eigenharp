@@ -1,4 +1,10 @@
-# this creates the manager required for tau and alpha  devices
-t3d device create
+# this creates the t3d device
+declare DEVICE=t3d device,PORT=4000,COLS=5,ROWS=30,QUANT=un
+soundplane create
 sleep 5
+it to %DEVICE% name ify
+%DEVICE% hey server port to %PORT% set
+%DEVICE% hey quantize %QUANT% set
+%DEVICE% hey column size %COLS% set
+%DEVICE% hey row size %ROW% set
 

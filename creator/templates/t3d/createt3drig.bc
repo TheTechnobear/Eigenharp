@@ -1,0 +1,60 @@
+declare RIG,DR=250,VOICES=16,CONTINUOUS=un
+# RIG=%RIG% and represents the rig that is needed to be created
+# %RIG% un create
+
+rig create
+it to %RIG% name ify
+%RIG% gateway hey input called left audio create 
+%RIG% gateway input left audio 1 to left audio name ify
+%RIG% gateway hey input called right audio create 
+%RIG% gateway input right audio 1 to right audio name ify
+%RIG% gateway hey input called light create 
+%RIG% gateway input light 1 to light name ify
+%RIG% gateway hey output called bar beat create 
+%RIG% gateway output bar beat 1 to bar beat name ify
+%RIG% gateway hey output called controller create 
+%RIG% gateway output controller 1 to controller name ify
+%RIG% gateway hey output called key create 
+%RIG% gateway output key 1 to key name ify
+%RIG% gateway hey output called pressure create 
+%RIG% gateway output pressure 1 to pressure name ify
+%RIG% gateway hey output called roll create 
+%RIG% gateway output roll 1 to roll name ify
+%RIG% gateway hey output called running create 
+%RIG% gateway output running 1 to running name ify
+%RIG% gateway hey output called scheduler identifier create 
+%RIG% gateway output scheduler identifier 1 to scheduler identifier name ify
+%RIG% gateway hey output called song beat create 
+%RIG% gateway output song beat 1 to song beat name ify
+%RIG% gateway hey output called tempo create 
+%RIG% gateway output tempo 1 to tempo name ify
+%RIG% gateway hey output called yaw create 
+%RIG% gateway output yaw 1 to yaw name ify
+%RIG% gateway hey output called breath create
+%RIG% gateway output breath 1 to breath name ify
+%RIG% gateway hey output called absolute strip 1 create 
+%RIG% gateway hey output called strip position 1 create 
+%RIG% gateway hey output called absolute strip 2 create 
+%RIG% gateway hey output called strip position 2 create 
+%RIG% gateway hey output called pedal 1 create 
+%RIG% gateway hey output called pedal 2 create 
+%RIG% gateway hey output called pedal 3 create 
+%RIG% gateway hey output called pedal 4 create 
+
+
+scaler in %RIG% create
+%RIG% hey gateway output to scaler inputs connect
+%RIG% hey gateway output strip position 1 to scaler inputs global pitch bend input connect
+%RIG% hey gateway output roll to scaler inputs key pitch bend input  connect
+%RIG% hey scaler light output to gateway input light  connect
+
+t3d output in %RIG% create
+%RIG% hey t3d output data frequency to %DR% set
+%RIG% hey t3d output max voice count to %VOICES% set
+%RIG% hey t3d output continuous %CONTINUOUS% set
+%RIG% hey gateway output to t3d output connect
+%RIG% hey scaler outputs frequency output to t3d output  frequency input connect
+
+
+
+
