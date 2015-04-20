@@ -1,0 +1,18 @@
+# this is the most basic setup, on which the modular setup builds
+# the main keygroup is where the instrument should be connected
+# we then have console mixer, and an audio output
+# 
+# note: there are NO keyboard mappings in this script,
+# it is assumed these are done in a device specific setup
+
+empty join
+
+scale manager create
+
+metronome create
+
+scheduler create
+
+metronome 1 hey outputs to scheduler 1 connect
+
+
