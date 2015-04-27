@@ -1,0 +1,9 @@
+declare TALKER,DEVICE
+
+# create a talker directly to a device
+# TALKER=%TALKER% name of talker,
+# DEVICE=%DEVICE%
+
+talker create
+it to %TALKER% name ify
+%DEVICE% to %TALKER% connect

@@ -29,6 +29,39 @@ the obligatory FAQ is here:
 http://github.com/TheTechnobear/Eigenharp/wiki/CREATOR-FAQ
 
 
+Iterators:
+
+Lets say we have a config lines like:
+midi/linkmidirig.bc:percussion keygroup:midi rig 1:1:11:1:1:
+midi/linkmidirig.bc:percussion keygroup:midi rig 2:2:11:1:2:
+midi/linkmidirig.bc:percussion keygroup:midi rig 3:3:11:1:3:
+
+we can now replace this with:
+Iterate:%X%:midi rig 1,midi rig 2,midi rig 3:midi/linkmidirig.bc:percussion keygroup:%X%:%IDX%:11:1:%IDX:
+
+so whats going on here...
+generally the format is:
+Iterate:VAR(=offset):LIST:existing config line to iterate 
+VAR is the variable name %X% in my example above
+optionally = offset can be used to create an offset index value, see below.
+LIST is the list of values to use (comma separated)
+in the existing config lines, you then just use VAR where you would have used the value before.
+there are two special variables:
+%IDX% which runs from 1 to list length.
+%IDX-OFFSET%, this is an offset index value
+e.g. 
+Iterate:%X%=9:midi rig 1,midi rig 2,midi rig 3:midi/linkmidirig.bc:percussion keygroup:%X%%IDX%:11:1:%IDX:
+
+linkmidirig.bc will be called three times, substituting as follows:  
+first time %X% with midi rig 1 %IDX% with 1 %IDX-OFFSET% with 9
+next time %X% with midi rig 2 %IDX% with 2 %IDX-OFFSET% with 10
+next time %X% with midi rig 3 %IDX% with 3 %IDX-OFFSET% with 11
+
+(IDX-OFFSET is used mainly if you have to split iterations over multiple lines due needing to call different templates)
+
+
+
+
 Contents
 ========
 bin - contains programs/scripts to execute
