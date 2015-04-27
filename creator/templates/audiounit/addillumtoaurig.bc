@@ -1,0 +1,7 @@
+declare RIG
+
+empty join
+illuminator in %RIG% create
+%RIG% hey gateway key to illuminator key input connect
+%RIG% hey illuminator light output to gateway input light connect
+#%RIG% hey scaler light output to gateway input light un connect

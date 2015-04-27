@@ -1,0 +1,4 @@
+declare ILLUM
+
+empty join
+%ILLUM% hey musical light mapping to [[[1,43],green],[[1,34],green],[[1,33],green],[[1,44],green],[[1,24],green],[[1,7],green],[[1,8],green],[[1,17],green],[[1,18],green],[[1,27],green],[[1,1],green],[[1,2],green],[[1,11],green],[[1,12],green],[[1,21],green],[[1,41],red],[[1,42],red],[[1,31],red],[[1,32],red],[[1,22],red],[[1,5],red],[[1,6],red],[[1,15],red],[[1,16],red],[[1,25],red],[[1,47],red],[[1,48],red],[[1,37],red],[[1,38],red],[[1,28],red],[[1,3],orange],[[1,4],orange],[[1,13],orange],[[1,14],orange],[[1,23],orange],[[1,45],orange],[[1,46],orange],[[1,35],orange],[[1,36],orange],[[1,26],orange],[[1,9],orange],[[1,10],orange],[[1,19],orange],[[1,20],orange],[[1,29],orange]] set
